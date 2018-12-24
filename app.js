@@ -5,7 +5,7 @@ const path = require('path');
 
 var app = express();
 var server = app.listen(8080, function(){
-    // console.log("server started port 5200");
+    console.log("server started port 8080");
 })
 
 const user = require('./routes/user');
@@ -36,6 +36,10 @@ app.use('/user', user);
 app.use(function(req, res, next){
     errors = [];
     next();
+});
+
+app.get('/', function (req, res){
+    res.render('index');
 });
 
 
