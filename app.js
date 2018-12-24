@@ -42,6 +42,9 @@ app.get('/', function (req, res){
     res.render('index');
 });
 
+app.get('/logon', function (req, res){
+    res.render('logon');
+});
 
 app.use(function(req, res) {
     res.send("what are you trying to do" + req.url);
