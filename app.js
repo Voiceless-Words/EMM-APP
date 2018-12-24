@@ -42,6 +42,21 @@ app.get('/', function (req, res){
     res.render('index');
 });
 
+app.get('/dashboarda', function(req, res) {
+	res.render('dashboarda', {
+			title : 'emmapp',
+			details : {'first_name':'Anist', 'rights' : 'admin'}
+		});
+});
+
+
+app.get('/dashboardb', function(req, res) {
+	res.render('dashboardb', {
+			title : 'emmapp',
+			details : {'first_name':'Anist', 'rights' : 'user'}
+		});
+});
+
 
 app.use(function(req, res) {
     res.send("what are you trying to do" + req.url);
