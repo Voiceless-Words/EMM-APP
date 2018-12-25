@@ -42,6 +42,7 @@ app.get('/', function (req, res){
     res.render('index');
 });
 
+<<<<<<< HEAD
 app.get('/dashboarda', function(req, res) {
 	res.render('dashboarda', {
 			title : 'emmapp',
@@ -57,11 +58,11 @@ app.get('/dashboardb', function(req, res) {
 		});
 });
 
-
+=======
 app.get('/logon', function (req, res){
     res.render('logon');
 });
-// 19214f6194f4e9354673b844ba5496a30616c4d6
+>>>>>>> 19214f6194f4e9354673b844ba5496a30616c4d6
 
 app.use(function(req, res) {
     res.send("what are you trying to do" + req.url);
