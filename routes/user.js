@@ -13,10 +13,14 @@ router.post('/login', function(req, res){
     var status = 0;
     
     //testing
-    errors.push("<strong>Password</strong> Dont match");
+    // errors.push("<strong>Password</strong> Dont match");
 
     if (errors.length == 0)
+    {
+        req.session.user = 2222222; //current user id
         status = 1;
+    }
+
     res.send(JSON.stringify({
         error : errors,
         status : status

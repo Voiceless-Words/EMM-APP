@@ -43,12 +43,16 @@ app.get('/', function (req, res){
     res.render('index');
 });
 
+app.get('/logout', function(req, res){
+    req.session.user = null;
+	res.render('index')
+});
 
 app.get('/dashboarda', function(req, res) {
 	res.render('dashboarda', {
-			title : 'emmapp',
-			details : {'first_name':'Anist', 'rights' : 'admin'}
-		});
+		title : 'emmapp',
+		details : {'first_name':'Anist', 'rights' : 'admin'}
+	});
 });
 
 
