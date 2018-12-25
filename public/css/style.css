@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body{background: #eee url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnUY1BO4Gf6xTYCVIE0tOB83sHTQTifqoLTajya7RPIn_ayhDQdg);}
 html,body{
     position: relative;
@@ -134,3 +135,16 @@ html,body{
   -webkit-animation-name: fadeInUp;
   animation-name: fadeInUp;
 }
+=======
+.no-padding {
+    padding: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.vh-100 {
+    height: 100vh;
+}
+>>>>>>> 8f84932d8cea3e67882bcfc2d4c612dc9d534354
