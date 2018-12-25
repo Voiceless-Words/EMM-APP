@@ -60,6 +60,17 @@ app.get('/dashboardb', function(req, res) {
 });
 
 
+app.get('/createjobcard', function(req, res) {
+	//access prevention here if req.session.rights != admin
+
+	res.render('templates/createjobcardform', {
+			title : 'emmapp',
+			details : {'first_name':'Anist', 'rights' : 'admin'}
+		});
+
+});
+
+
 app.get('/logon', function (req, res){
     res.render('logon');
 });

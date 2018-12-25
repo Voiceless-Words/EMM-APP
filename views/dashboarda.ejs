@@ -1,6 +1,20 @@
 <% include templates/head%>
 <% include templates/nav%>
-<br><br>
-<br><br>
-<% include templates/sidenav%>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+    	<br><br>
+		<br><br>
+		<% include templates/sidenav%>
+	</div>
+
+    <div class="col-md-8">
+    <div id="workspace">
+    	<% include templates/createjobcardform%>
+    </div>
+	</div>
+  </div>
+</div>
+
 <%include templates/footer%>
