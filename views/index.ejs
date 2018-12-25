@@ -4,11 +4,12 @@
             <div id="output"></div>
             <div class="avatar"></div>
             <div class="form-box">
-                <form action="/login" method="POST">
-                    <input name="user" type="text" placeholder="Employee Id">
-                    <input type="password" placeholder="Password">
+                <form action="/login" method="POST" id="login_form">
+                    <input name="user" id="login_user" type="text" placeholder="Employee Id">
+                    <input type="password" id="login_password" placeholder="Password">
                     <button class="btn btn-info btn-block login" type="submit">Login</button>
                 </form>
+                <div class="status"></div>
             </div>
         </div>
 
