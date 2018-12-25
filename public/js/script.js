@@ -63,10 +63,10 @@ $(document).ready(function(){
 					}
 					$(".status").html(output).delay(5000).fadeOut();
 				}
-				else
-				{
-					//redirect to dashboard
-				}
+				else if (data.status == 1)
+					window.location = "../../dashboarda";
+				else if (data.status == 2)
+					window.location = "../../dashboardb";
             }
         });
     }
