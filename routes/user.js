@@ -21,19 +21,20 @@ router.post('/login', function(req, res){
     console.log(req.body);
 
     User.findOne({ employee_id: req.body.username }, function(err, user) {
-        console.log(user);
+        console.log("login----------->");
 
         if (err) throw err;
 
         if (user)
         {
+            var status = user.admin + 1;
             user.comparePassword(req.body.password, function(err, isMatch) {
                 if (err) throw err;
                 if (isMatch)
                 {
                     res.send(JSON.stringify({
                         error : errors,
-                        status : 2
+                        status : status
                     }));
                 }
                 else{

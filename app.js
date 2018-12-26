@@ -17,6 +17,11 @@ var server = app.listen(8080, function(){
 });
 
 const user = require('./routes/user');
+//const dashboarda = require('./routes/dashboarda');
+
+const Asset = require('./models/assets');
+
+const User = require('./models/users');
 
 //session middleware
  app.use(session({
@@ -39,6 +44,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //use user
 app.use('/user', user);
 
+//app.use('/dashboarda', dashboarda);
+
 app.use(function(req, res, next){
     errors = [];
     next();
@@ -53,7 +60,17 @@ app.get('/logout', function(req, res){
 	res.render('index')
 });
 
+
+
+
 app.get('/dashboarda', function(req, res) {
+
+	Asset.find({}, function(err, user) {
+		if (err) throw err;
+		console.log(user)
+	});
+    	
+
 	res.render('dashboarda', {
 		title : 'emmapp',
 		details : {'first_name':'Anist', 'rights' : 'admin'},
@@ -63,6 +80,7 @@ app.get('/dashboarda', function(req, res) {
 		{name : 'GE7738', desc : 'MV SUBSTATION - 7C2 PHP CRESCENT'}
 		]
 	});
+
 });
 
 
@@ -77,13 +95,34 @@ app.get('/register', function(req, res) {
 	res.render('register');
 });
 
-app.post('/createjobcard', function(req, res) {
-	//access prevention here if req.session.rights != admin
-
-	res.render('templates/createjobcardform', {
+app.post('/getview', function(req, res) {
+	
+	if (req.body.view == 'createjobcard') {
+		res.render('templates/createjobcardform', {
 			title : 'emmapp',
 			details : {'first_name':'Anist', 'rights' : 'admin'}
 		});
+	}
+	else if (req.body.view == 'reviewjobcards')
+	{
+		res.send('Job Cards Review Coming Soon');
+	}
+	else if (req.body.view == 'useraccounts') {
+
+		res.send('Manage User Accounts Coming Soon');
+	}
+	else
+	{
+		res.send('Empty Request');
+	}
+
+
+});
+
+app.post('/createjobcard', function(req, res) {
+	//access prevention here if req.session.rights != admin
+
+	res.send('Patience is a virtue. Just dont wait forever');
 
 });
 
@@ -92,7 +131,9 @@ app.get('/logon', function (req, res){
     res.render('logon');
 });
 
-
+app.get('/form', function(req, res){
+  res.render('form');
+});
 app.use(function(req, res) {
     res.send("what are you trying to do" + req.url);
 });

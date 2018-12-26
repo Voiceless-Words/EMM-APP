@@ -1,3 +1,19 @@
+function getview() {
+		var workspace = document.getElementById('workspace');
+		console.log(event.target.value);
+
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+   		if (this.readyState == 4 && this.status == 200) {
+   				workspace.innerHTML = this.responseText;
+   			}
+		}
+		xhttp.open("POST", "/getview", true);
+   		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   		xhttp.send('view='+event.target.value);
+    		
+    }
+
 $(document).ready(function(){
     $("#loginForm").submit(function (e) {
         e.preventDefault();
@@ -7,7 +23,7 @@ $(document).ready(function(){
 			username : $("#login_user").val(),
             password : $("#login_password").val()
 		};
-		check_data(user,  "../../user/logon");
+		check_data(user,  "../../user/login");
     });
 
 	$("#registerForm").submit(function (e) {
@@ -87,8 +103,9 @@ $(document).ready(function(){
             url : path,
             data : user,
             success : function(data) {
-				// data = JSON.parse(data);
-                if (data.status == 0)
+				data = JSON.parse(data);
+				console.log(data);
+                if (data.error.length > 0)
 				{
 					var output = '';
 					for (var i = 0; i < data.error.length; i++)
@@ -100,11 +117,12 @@ $(document).ready(function(){
 					}
 					$(".status").html(output).delay(5000).fadeOut();
 				}
-				else if (data.status == 1)//user
-					window.location = "../../dashboarda";
-				else if (data.status == 2)//admin
+				else if (data.status == 1)
 					window.location = "../../dashboardb";
+				else if (data.status == 2)
+					window.location = "../../dashboarda";
             }
         });
     }
+
 });

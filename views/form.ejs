@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Document</title>
+</head>
+<body>
+<div class="col-xs-12">
+  <div class="col-md-12" >
+      <h3> Cable Marking</h3>
+  <div id="field">
+  <div id="field0">
+ <!-- option select-->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="action_id">Correctly Placed, <span>(on the cable at the top or bottom)?</span> <b>Cable 1</b></label>
+        <div class="col-md-5">
+          <select class="form-control">
+            <option value="YES">YES</option>
+            <option value="NO">NO</option>
+          </select>
+        </div>
+    </div>
+    <br>
+ <!-- option select-->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="action_name">Securely Placed, <span>(Tag fitted)?</span></label>
+        <div class="col-md-5">
+          <select class="form-control">
+            <option value="YES">YES</option>
+            <option value="NO">NO</option>
+          </select>
+        </div>
+    </div>
+    <br>
+    <!-- option select-->
+       <div class="form-group">
+           <label class="col-md-4 control-label" for="action_name">Label Level Correct, <span>(Placed At the top or bottom)?</span></label>
+           <div class="col-md-5">
+             <select class="form-control">
+               <option value="YES">YES</option>
+               <option value="NO">NO</option>
+             </select>
+           </div>
+       </div>
+    <br>
+  </div>
+</div>
+<!-- Button -->
+      <div class="form-group">
+        <div class="col-md-4">
+          <button id="add-more" name="add-more" class="btn btn-primary">Add More</button>
+        </div>
+      </div>
+      <br><br>
+    </div>
+  </div>
+<% include templates/footer %>
