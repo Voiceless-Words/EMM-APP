@@ -57,4 +57,37 @@ router.post('/login', function(req, res){
     });
 });
 
+router.post('/register', function(req, res){
+    var newUser = {
+        employee_id: req.body.employee_id,
+        first_name: req.body.first_name,
+        last_name : req.body.last_name,
+        password : req.body.password,
+        contact : req.body.contact
+    };
+    console.log(newUser);
+    //will parse the data here *dont forget
+    User.create( newUser, function(err, doc) {
+        console.log(doc);
+
+        if (err){
+            console.log(err);
+            errors.push("<strong>User</strong> Exists");
+            res.send(JSON.stringify({
+                error : errors,
+                status : 0
+            }));
+        }
+
+        if (doc)
+        {
+            errors.push("<strong>User</strong> Created");
+            res.send(JSON.stringify({
+                error : errors,
+                status : 0
+            }));
+        }
+    });
+});
+
 module.exports = router;

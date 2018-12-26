@@ -9,7 +9,7 @@ const ejs = require('ejs');
 const path = require('path');
 
 mongoose.set('useCreateIndex', true);
-mongoose.connect("mongodb+srv://admin:"+ process.env.DB_PASSWORD +"@cluster0-xzip0.mongodb.net/test?retryWrites=true" ,  { useNewUrlParser: true })
+mongoose.connect("mongodb+srv://admin:"+ process.env.DB_PASSWORD +"@cluster0-xzip0.mongodb.net/emm?retryWrites=true" ,  { useNewUrlParser: true })
 
 var app = express();
 var server = app.listen(8080, function(){
@@ -73,6 +73,9 @@ app.get('/dashboardb', function(req, res) {
 		});
 });
 
+app.get('/register', function(req, res) {
+	res.render('register');
+});
 
 app.post('/createjobcard', function(req, res) {
 	//access prevention here if req.session.rights != admin
