@@ -65,21 +65,26 @@ app.get('/logout', function(req, res){
 
 app.get('/dashboarda', function(req, res) {
 
-	Asset.find({}, function(err, user) {
+	Asset.find({}, function(err, assets) {
+
 		if (err) throw err;
-		console.log(user)
-	});
+		console.log(assets);
+
+		User.find({'admin' : '0'}, function(err, user) {
+			if (err) throw err;
+			console.log(user);
+
+			res.render('dashboarda', {
+				title : 'emmapp',
+				details : {'first_name':'Anist', 'rights' : 'admin'},
+				assets : assets
+			});
+		});
     	
 
-	res.render('dashboarda', {
-		title : 'emmapp',
-		details : {'first_name':'Anist', 'rights' : 'admin'},
-		assets : [
-		{name : 'GE7736', desc : 'MV SUBSTATION - 7C2 JAVA CRESCENT'},
-		{name : 'GE7737', desc : 'MV SUBSTATION - 7C2 PYTHON CRESCENT'},
-		{name : 'GE7738', desc : 'MV SUBSTATION - 7C2 PHP CRESCENT'}
-		]
 	});
+
+
 
 });
 
@@ -95,10 +100,29 @@ app.get('/dashboardb', function(req, res) {
 app.post('/getview', function(req, res) {
 	
 	if (req.body.view == 'createjobcard') {
-		res.render('templates/createjobcardform', {
-			title : 'emmapp',
-			details : {'first_name':'Anist', 'rights' : 'admin'}
+		Asset.find({}, function(err, assets) {
+
+		if (err) throw err;
+		console.log(assets);
+
+		User.find({'admin' : '0'}, function(err, users) {
+			if (err) throw err;
+			console.log(users);
+
+			res.render('templates/createjobcardform', {
+				title : 'emmapp',
+				details : {'first_name':'Anist', 'rights' : 'admin'},
+				assets : assets,
+				users : users
+
+			});
 		});
+    	
+
+	});
+
+
+
 	}
 	else if (req.body.view == 'reviewjobcards')
 	{

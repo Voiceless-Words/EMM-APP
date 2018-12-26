@@ -7,7 +7,14 @@
   <div class="form-group">
     <label for="assest">Asset:</label>
     <select class="form-control">
-      <option>GE7736</option>
+            <% if (assets) {%>
+      <% assets.forEach(function (asset){%>
+      <option>
+      <%= asset.name %>
+      </option>
+      <%})%>
+      <%}%>
+
     </select>
   </div>
 
@@ -35,10 +42,13 @@
      <div class="form-group">
     <label for="assign">Assign Job Card (Upto 3 Employees)</label>
     <select class="form-control">
-      <option>Anist</option>
-      <option>Bill</option>
-      <option>Collin</option>
-      <option>Dag</option>
+    <% if (users) {%>
+      <% users.forEach(function (user){%>
+      <option>
+      <%= user.first_name +" "+user.last_name  %>
+      </option>
+      <%})%>
+      <%}%>
     </select>
   </div>
   
