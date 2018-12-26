@@ -38,6 +38,7 @@ $(document).ready(function(){
             contact : $("#regContactNumbers").val(),
             password : $("#regPassword").val()
 		}
+
 		check_data(user,  "../../user/register");
     });
 
@@ -122,6 +123,7 @@ $(document).ready(function(){
 					window.location = "../../dashboardb";
 				else if (data.status == 2)
 					window.location = "../../dashboarda";
+				$("#registerForm")[0].reset();
             }
         });
     }
