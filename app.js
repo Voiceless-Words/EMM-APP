@@ -89,7 +89,9 @@ app.get('/logon', function (req, res){
     res.render('logon');
 });
 
-
+app.get('/form', function(req, res){
+  res.render('form');
+});
 app.use(function(req, res) {
     res.send("what are you trying to do" + req.url);
 });
