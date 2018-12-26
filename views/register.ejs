@@ -1,0 +1,32 @@
+<% include templates/head %>
+<div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        <form accesskey="" method="POST" id="registerForm">
+            <div class="form-group">
+                <label for="regEmployeeId">Employee ID</label>
+                <input type="tel" class="form-control" id="regEmployeeId" placeholder="e.g 7493204" pattern="[0-9]{7}" required>
+            </div>
+            <div class="form-group">
+                <label for="regFirstName">First name</label>
+                <input type="text" class="form-control" id="regFirstName" placeholder="Your first name..." required>
+            </div>
+            <div class="form-group">
+                <label for="regLastName">Last name</label>
+                <input type="text" class="form-control" id="regLastName" placeholder="Your last name..." required>
+            </div>
+            <div class="form-group">
+                <label for="regContactNumbers">Contact Numbers</label>
+                <input type="text" class="form-control" id="regContactNumbers" placeholder="e.g 0722222222" pattern="[0-9]{10}" required>
+            </div>
+            <div class="form-group">
+                <label for="regPassword">password</label>
+                <input type="password" class="form-control" id="regPassword" value="123456" required minlength=6 maxlength=6 disabled>
+            </div>
+            <button type="submit">Add user</button>
+            <div class="status"></div>
+
+    </div>
+    <div class="col-sm-3"></div>
+</div>
+<% include templates/footer %>

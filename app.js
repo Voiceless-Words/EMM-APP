@@ -96,6 +96,9 @@ app.get('/dashboardb', function(req, res) {
 		});
 });
 
+app.get('/register', function(req, res) {
+	res.render('register');
+});
 
 app.post('/getview', function(req, res) {
 	
