@@ -51,7 +51,12 @@ app.get('/logout', function(req, res){
 app.get('/dashboarda', function(req, res) {
 	res.render('dashboarda', {
 		title : 'emmapp',
-		details : {'first_name':'Anist', 'rights' : 'admin'}
+		details : {'first_name':'Anist', 'rights' : 'admin'},
+		assets : [
+		{name : 'GE7736', desc : 'MV SUBSTATION - 7C2 JAVA CRESCENT'},
+		{name : 'GE7737', desc : 'MV SUBSTATION - 7C2 PYTHON CRESCENT'},
+		{name : 'GE7738', desc : 'MV SUBSTATION - 7C2 PHP CRESCENT'}
+		]
 	});
 });
 
@@ -64,7 +69,7 @@ app.get('/dashboardb', function(req, res) {
 });
 
 
-app.get('/createjobcard', function(req, res) {
+app.post('/createjobcard', function(req, res) {
 	//access prevention here if req.session.rights != admin
 
 	res.render('templates/createjobcardform', {
