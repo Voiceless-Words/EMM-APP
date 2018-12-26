@@ -123,7 +123,8 @@ $(document).ready(function(){
 					window.location = "../../dashboardb";
 				else if (data.status == 2)
 					window.location = "../../dashboarda";
-				$("#registerForm")[0].reset();
+				if (path === "../../user/register")
+					$("#registerForm")[0].reset();
             }
         });
     }
