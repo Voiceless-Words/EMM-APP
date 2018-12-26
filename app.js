@@ -74,13 +74,34 @@ app.get('/dashboardb', function(req, res) {
 });
 
 
-app.post('/createjobcard', function(req, res) {
-	//access prevention here if req.session.rights != admin
-
-	res.render('templates/createjobcardform', {
+app.post('/getview', function(req, res) {
+	
+	if (req.body.view == 'createjobcard') {
+		res.render('templates/createjobcardform', {
 			title : 'emmapp',
 			details : {'first_name':'Anist', 'rights' : 'admin'}
 		});
+	}
+	else if (req.body.view == 'reviewjobcards')
+	{
+		res.send('Job Cards Review Coming Soon');
+	}
+	else if (req.body.view == 'useraccounts') {
+
+		res.send('Manage User Accounts Coming Soon');
+	}
+	else
+	{
+		res.send('Empty Request');
+	}
+
+
+});
+
+app.post('/createjobcard', function(req, res) {
+	//access prevention here if req.session.rights != admin
+
+	res.send('Patience is a virtue. Just dont wait forever');
 
 });
 

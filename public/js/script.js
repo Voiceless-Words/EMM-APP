@@ -1,4 +1,21 @@
+function getview() {
+		var workspace = document.getElementById('workspace');
+		console.log(event.target.value);
+
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+   		if (this.readyState == 4 && this.status == 200) {
+   				workspace.innerHTML = this.responseText;
+   			}
+		}
+		xhttp.open("POST", "/getview", true);
+   		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   		xhttp.send('view='+event.target.value);
+    		
+    }
+
 $(document).ready(function(){
+
     $("#login_form").submit(function (e) {
         e.preventDefault();
 		$(".status").html('').show();
@@ -70,4 +87,5 @@ $(document).ready(function(){
             }
         });
     }
+
 });
