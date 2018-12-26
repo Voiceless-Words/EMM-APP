@@ -17,6 +17,7 @@ var server = app.listen(8080, function(){
 });
 
 const user = require('./routes/user');
+const search = require('./routes/search');
 //const dashboarda = require('./routes/dashboarda');
 
 const Asset = require('./models/assets');
@@ -43,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //use user
 app.use('/user', user);
+app.use('/search', search);
 
 //app.use('/dashboarda', dashboarda);
 
