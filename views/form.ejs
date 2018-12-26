@@ -1,0 +1,29 @@
+<% include templates/head %>
+<form id="cables" action="form_sent.php" method="post">
+ <div id="cable">
+   <div class="form-group">
+     <label for="correct">Correctly Placed, <span>(on the cable at the top or bottom?)</span>Cable1</label>
+     <select class="form-control">
+       <option>YES</option>
+       <option>NO</option>
+     </select>
+   </div>
+   <div class="form-group">
+     <label for="secure">Securely Placed, <span>(Tag fitted?)</span></label>
+     <select class="form-control">
+       <option>YES</option>
+       <option>NO</option>
+     </select>
+   </div>
+   <div class="form-group">
+     <label for="level">Label Level Correct, <span>(Placed At the top or bottom?)</span></label>
+     <select class="form-control">
+       <option>YES</option>
+       <option>NO</option>
+     </select>
+   </div>
+ </div>
+   <button id='add-cable'>Add more fields</button><br><br>
+   <input type="submit">
+</form>
+<% include templates/footer %>
