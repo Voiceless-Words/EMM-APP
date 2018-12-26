@@ -14,6 +14,7 @@ function getview() {
     		
     }
 
+
 $(document).ready(function(){
     $("#loginForm").submit(function (e) {
         e.preventDefault();
@@ -84,7 +85,7 @@ $(document).ready(function(){
 			var output= '';
 			for (var i = 0; i < errors.length; i++)
 			{
-				output += `<div class="alert no-margin no-padding">
+				output += `<div class="alert alert-warning no-margin no-padding">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 					${errors[i]}
 				</div>`;
