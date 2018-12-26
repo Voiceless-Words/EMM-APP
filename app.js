@@ -9,7 +9,7 @@ const ejs = require('ejs');
 const path = require('path');
 
 mongoose.set('useCreateIndex', true);
-mongoose.connect("mongodb+srv://admin:"+ process.env.DB_PASSWORD +"@cluster0-xzip0.mongodb.net/test?retryWrites=true" ,  { useNewUrlParser: true })
+mongoose.connect("mongodb+srv://admin:"+ process.env.DB_PASSWORD +"@cluster0-xzip0.mongodb.net/emm?retryWrites=true" ,  { useNewUrlParser: true })
 
 var app = express();
 var server = app.listen(8080, function(){
@@ -17,6 +17,11 @@ var server = app.listen(8080, function(){
 });
 
 const user = require('./routes/user');
+//const dashboarda = require('./routes/dashboarda');
+
+const Asset = require('./models/assets');
+
+const User = require('./models/users');
 
 //session middleware
  app.use(session({
@@ -39,6 +44,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //use user
 app.use('/user', user);
 
+//app.use('/dashboarda', dashboarda);
+
 app.use(function(req, res, next){
     errors = [];
     next();
@@ -53,7 +60,17 @@ app.get('/logout', function(req, res){
 	res.render('index')
 });
 
+
+
+
 app.get('/dashboarda', function(req, res) {
+
+	Asset.find({}, function(err, user) {
+		if (err) throw err;
+		console.log(user)
+	});
+    	
+
 	res.render('dashboarda', {
 		title : 'emmapp',
 		details : {'first_name':'Anist', 'rights' : 'admin'},
@@ -63,6 +80,7 @@ app.get('/dashboarda', function(req, res) {
 		{name : 'GE7738', desc : 'MV SUBSTATION - 7C2 PHP CRESCENT'}
 		]
 	});
+
 });
 
 
