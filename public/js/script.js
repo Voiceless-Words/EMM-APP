@@ -63,9 +63,9 @@ $(document).ready(function(){
 					}
 					$(".status").html(output).delay(5000).fadeOut();
 				}
-				else if (data.status == 1)
+				else if (data.status == 1)//user
 					window.location = "../../dashboarda";
-				else if (data.status == 2)
+				else if (data.status == 2)//admin
 					window.location = "../../dashboardb";
             }
         });

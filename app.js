@@ -1,21 +1,26 @@
 const express = require('express');
+const dotenv = require('dotenv').config();
 const session = require('express-session');
 const bodyParser = require('body-parser');
-// const ejs = require('ejs');
+const mongoose = require('mongoose');
+const ejs = require('ejs');
+
+
 const path = require('path');
+
+mongoose.set('useCreateIndex', true);
+mongoose.connect("mongodb+srv://admin:"+ process.env.DB_PASSWORD +"@cluster0-xzip0.mongodb.net/test?retryWrites=true" ,  { useNewUrlParser: true })
 
 var app = express();
 var server = app.listen(8080, function(){
     console.log("server started port 8080");
-})
+});
 
 const user = require('./routes/user');
 
-
-
 //session middleware
  app.use(session({
-     secret: "passwhatever12", resave: false, saveUninitialized: true
+     secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true
  }));
 
 //view engine middleware
