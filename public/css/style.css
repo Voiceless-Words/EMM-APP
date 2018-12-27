@@ -165,13 +165,7 @@ html,body{
 .clear {
     clear: both;
 }
-<<<<<<< HEAD
-footer {
-    background: rgba(185, 142, 142, 0.2);
-    padding: 0.5em 0;
-    border-top: thin solid #5f5f5f;
 
+#changePassBtn {
+    display: none;
 }
-=======
-
->>>>>>> acbfefbf9bbe38a6aeb27f27e08eb4ec7f76c64b

@@ -18,10 +18,10 @@ router.use(function(req, res, next){
 
 router.post('/login', function(req, res){
     var status = 0;
-    console.log(req.body);
+    // console.log(req.body);
 
     User.findOne({ employee_id: req.body.username }, function(err, user) {
-        console.log("login----------->");
+        // console.log("login----------->");
 
         if (err) throw err;
 
@@ -32,10 +32,29 @@ router.post('/login', function(req, res){
                 if (err) throw err;
                 if (isMatch)
                 {
-                    res.send(JSON.stringify({
-                        error : errors,
-                        status : status
-                    }));
+                    if (req.body.password == "123456")
+                    {
+                        res.send(JSON.stringify({
+                            error : errors,
+                            status : -1
+                        }));
+                    }
+                    else
+                    {
+                        //set session
+                            // req.session.user = employee id
+                         User.find({"employee_id": { "$regex": req.body.username, "$options": "i"}})
+                        .then(users => {
+                                req.session.user = users[0].employee_id;
+                                // console.log("session set as "+req.session.user);
+                                res.send(JSON.stringify({
+                                    error : errors,
+                                    status : status
+                                }));
+                            })
+                        .catch(error => { console.log(error); })
+                        
+                    }
                 }
                 else{
                     errors.push("<strong>Pasword</strong> Incorrect");
@@ -66,13 +85,13 @@ router.post('/register', function(req, res){
         password : req.body.password,
         contact : req.body.contact
     };
-    console.log(newUser);
+    // console.log(newUser);
     //will parse the data here *dont forget
     User.create( newUser, function(err, doc) {
-        console.log(doc);
+        // console.log(doc);
 
         if (err){
-            console.log(err);
+            // console.log(err);
             errors.push("<strong>User</strong> Exists");
             res.send(JSON.stringify({
                 error : errors,

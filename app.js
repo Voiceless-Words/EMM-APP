@@ -100,7 +100,7 @@ app.get('/dashboardb', function(req, res) {
 		});
 });
 
-app.get('/register', function(req, res) {
+app.get('/register', isAdmin, function(req, res) {
 	res.render('register');
 });
 
@@ -165,3 +165,30 @@ app.get('/form', function(req, res){
 app.use(function(req, res) {
     res.send("what are you trying to do" + req.url);
 });
+
+
+
+function isAdmin(req, res, next){
+	console.log("session set as ------->"+req.session.user);
+	var errors = [];
+	if (req.session.user)
+	{
+		User.find({"employee_id": { "$regex": req.session.body, "$options": "i"}})
+		.then(users => {
+			if (users[0].admin == 1)
+			{
+				next();
+			}
+			else
+			{
+				errors.push("You dont have admin rights");
+				res.send(JSON.stringify({
+					error : errors,
+					status : 403
+				}));
+			}
+			})
+		.catch(error => { console.log(error); })
+	}
+    next();
+}
