@@ -106,7 +106,17 @@ $(document).ready(function(){
 			$(".status").html(output).delay(5000).fadeOut();
 		}
 		else
-			submit_data(user, path);
+		{
+			if ("cpassword" in user)
+			{
+				update_field('password',{
+					username: user.username,
+					password: user.ccpassword
+				}, path);
+			}
+			else
+				submit_data(user, path);
+		}
 	}
 
     function submit_data(user, path)
@@ -145,6 +155,23 @@ $(document).ready(function(){
 					window.location = "../../dashboarda";
 				if (path === "../../user/register")
 					$("#registerForm")[0].reset();
+            }
+        });
+    }
+	function update_field( name, user, path)
+    {
+
+        console.log(user);
+        $.ajax({
+            type : "POST",
+            url : "../../user/update",
+            data :{
+				user : user.username,
+				value : user.password
+			},
+            success : function() {
+				console.log("register");
+				submit_data(user, path);
             }
         });
     }

@@ -180,7 +180,7 @@ function isAdmin(req, res, next){
 			else
 			{
 				errors.push("You dont have admin rights");
-				res.send(JSON.stringify({
+				res.render(JSON.stringify({
 					error : errors,
 					status : 403
 				}));
