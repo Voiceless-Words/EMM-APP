@@ -67,14 +67,16 @@ app.get('/logout', function(req, res){
 
 app.get('/dashboarda', function(req, res) {
 
+	console.log(req.session.user);
 	Asset.find({}, function(err, assets) {
 
+
 		if (err) throw err;
-		console.log(assets);
+		//console.log(assets);
 
 		User.find({'admin' : '0'}, function(err, user) {
 			if (err) throw err;
-			console.log(user);
+		//	console.log(user);
 
 			res.render('dashboarda', {
 				title : 'emmapp',
