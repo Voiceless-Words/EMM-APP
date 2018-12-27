@@ -14,21 +14,21 @@
           <label for="correct">Correctly Placed, <span>(on the cable at the top or bottom)<b>Cable 1</b></span></label>
           <select class="form-control">
             <option value="YES">YES</option>
-            <option value="NO">NO</option>
+            <option value="NO" selected>NO</option>
           </select>
         </div>
         <div class="form-group">
           <label for="tag">Securely Placed, <span>(Tag fitted)?</span></label>
           <select class="form-control">
             <option value="YES">YES</option>
-            <option value="NO">NO</option>
+            <option value="NO" selected>NO</option>
           </select>
         </div>
         <div class="form-group">
           <label for="label">Label Level Correct, <span>(Placed at the top or bottom)?</span></label>
           <select class="form-control">
             <option value="YES">YES</option>
-            <option value="NO">NO</option>
+            <option value="NO" selected>NO</option>
           </select>
         </div>
         <h3>House Breaker</h3>
@@ -36,12 +36,13 @@
           <label for="fitted">Securely fitted, Not hanging</label>
           <select class="form-control">
             <option value="YES">YES</option>
-            <option value="NO">NO</option>
+            <option value="NO" selected>NO</option>
           </select>
         </div>
         <div class="form-group">
           <label for="fitted">Size, please specify?</label>
           <select class="form-control">
+            <option value="" selected disabled hidden>Choose here</option>
             <option value="88">88</option>
             <option value="120">120</option>
             <option value="85">85</option>
@@ -49,38 +50,41 @@
         </div>
         <div class="form-group">
           <label for="fitted">Meters secured and labelled?</label>
-          <select class="form-control">
+          <select class="form-control" onchange="meterSelectCheck(this);">
             <option value="YES">YES</option>
             <option value="NO">NO</option>
-            <option value="NO">N/A</option>
+            <option value="NA">N/A</option>
           </select>
         </div>
-        <div class="form-group">
-          <label for="fitted">Meters Seals Installed?</label>
-          <select class="form-control">
-            <option value="YES">YES</option>
-            <option value="NO">NO</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="fitted">Meters Seals Colour</label>
-          <select class="form-control">
-            <option value="Blue">BLUE</option>
-            <option value="Green">GREEN</option>
-            <option value="Yellow">YELLOW</option>
-            <option value="Red">Red</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="fitted">Any Meter Bypassed?</label>
-          <select class="form-control">
-            <option value="YES">YES</option>
-            <option value="NO">NO</option>
-          </select>
+        <div id="meterAvailable" style="display:none;">
+          <div class="form-group">
+            <label for="fitted">Meters Seals Installed?</label>
+            <select class="form-control">
+              <option value="YES">YES</option>
+              <option value="NO" selected>NO</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fitted">Meters Seals Colour</label>
+            <select class="form-control">
+              <option value="" selected disabled hidden>Choose here</option>
+              <option value="Blue">BLUE</option>
+              <option value="Green">GREEN</option>
+              <option value="Yellow">YELLOW</option>
+              <option value="Red">Red</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fitted">Any Meter Bypassed?</label>
+            <select class="form-control">
+              <option value="YES">YES</option>
+              <option value="NO" selected>NO</option>
+            </select>
+          </div>
         </div>
         <div class="form-group">
           <label for="fitted">Stands Connected to Enclosure, please specify stand no.</label>
-          <input type="text" name="stand_no" placeholder="Please specify stand number">
+          <input class="form-control" type="text" name="stand_no" placeholder="Please specify stand number">
         </div>
         <!-- End of fields-->
         <div class="col-md-1">
