@@ -27,6 +27,18 @@ $(document).ready(function(){
 		check_data(user,  "../../user/login");
     });
 
+	$("#passwordForm").submit(function (e) {
+        e.preventDefault();
+		$(".statusp").html('').show();
+		console.log($(".statusp").html());
+        var user = {
+			username : $("#login_user").val(),
+            cpassword : $("#cpassword").val(),
+            ccpassword : $("#ccpassword").val(),
+		};
+		check_data(user,  "../../user/login");
+    });
+
 	$("#registerForm").submit(function (e) {
         e.preventDefault();
 		$(".status").html('').show();
@@ -56,7 +68,7 @@ $(document).ready(function(){
 				if (user[key].length > 7)
 					errors.push("<strong>"+key+"</strong> too long");
 			}
-			else if (key === "password")
+			else if (key === "password" || key === "cpassword" || key === "ccpassword")
 			{
 				if (user[key].length < 6)
 					errors.push("<strong>Password</strong> too short");
@@ -99,7 +111,8 @@ $(document).ready(function(){
 
     function submit_data(user, path)
     {
-        console.log("form submitted");
+
+        console.log(user);
         $.ajax({
             type : "POST",
             url : path,
@@ -118,6 +131,13 @@ $(document).ready(function(){
 						</div>`;
 					}
 					$(".status").html(output).delay(5000).fadeOut();
+				}
+				else if (data.status == -1)
+				{
+					//force user to change the password
+					// alert("change password: Im working on it");
+					console.log($('#changePassBtn').text());
+					$('#myModal').modal('show');
 				}
 				else if (data.status == 1)
 					window.location = "../../dashboardb";
