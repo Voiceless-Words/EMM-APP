@@ -1,12 +1,79 @@
 <% include templates/head%>
-<% include templates/nav%>
+<!-- <% include templates/nav%> -->
+
+<div class="pos-f-t">
+
+  <nav class="navbar navbar-dark bg-dark">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#top_level_menu" aria-controls="top_level_menu" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+  </nav>
+
+  <div class="collapse" id="top_level_menu">
+	<div class="bg-dark p-4 row text-center text-white">
+		<div class="col-sm-12"><h3>Filter the results</h3><hr></div>
+		<div class="col-sm-4 navbar-toggler filters" data-toggle="collapse" data-target="#filter_date" aria-controls="filter_date" aria-expanded="false" aria-label="Toggle navigation"><p>Date</p></div>
+		<div class="col-sm-4 navbar-toggler filters" data-toggle="collapse" data-target="#filter_number" aria-controls="filter_date" aria-expanded="false" aria-label="Toggle navigation"><p>Job Number</p></div>
+		<div class="col-sm-4 navbar-toggler filters" data-toggle="collapse" data-target="#filter_location" aria-controls="filter_date" aria-expanded="false" aria-label="Toggle navigation"><p>Job Location</p></div>
+	  <!-- <h4 class="text-white">Collapsed content</h4>
+	  <span class="text-muted">Toggleable via the navbar brand.</span> -->
+	</div>
+</div>
+<div class="collapse" id="filter_date">
+	<div class="bg-primary p-4 row text-center text-white">
+		<form class="col-sm-12">
+			<label class="my-1 mr-2" for="date_pref">Preference</label>
+			<select class="custom-select my-1 mr-sm-2" id="date_pref">
+				<option selected>Choose...</option>
+				<option value="1">Oldest First</option>
+				<option value="2">Newest First</option>
+			</select>
+
+			<button type="submit" class="btn btn-primary my-1">Filter</button>
+		</form>
+	</div>
+</div>
+
+<div class="collapse" id="filter_number">
+	<div class="bg-primary p-4 row text-center text-white">
+		<form class="col-sm-12">
+			<div class="form-group row">
+				<label for="filter_search" class="col-2 col-form-label">Search</label>
+				<div class="col-10">
+					<input class="form-control" type="search" value="How do I shoot web" id="filter_search">
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-primary my-1">Filter</button>
+		</form>
+	</div>
+</div>
+
+<div class="collapse" id="filter_location">
+	<div class="bg-primary p-4 row text-center text-white">
+		<form class="col-sm-12">
+			<label class="my-1 mr-2" for="date_pref">Preference</label>
+			<select class="custom-select my-1 mr-sm-2" id="date_pref">
+				<option selected>Choose...</option>
+				<option value="1">Germiston CBD</option>
+				<option value="2">Knites</option>
+				<option value="3">blahblah</option>
+			</select>
+
+			<button type="submit" class="btn btn-primary my-1">Filter</button>
+		</form>
+	</div>
+</div>
+
+</div>
+
 <br><br>
-<div class="container">   
+<div class="container">
 <div class="row">
 
 	<div class="col-md-6">
 		<br>
-		<% include templates/jobcardsnotif%>		
+		<% include templates/jobcardsnotif%>
 	</div>
 	
 </div>

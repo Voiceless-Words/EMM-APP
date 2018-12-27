@@ -24,13 +24,18 @@ router.post('/login', function(req, res){
     User.findOne({ employee_id: req.body.username }, function(err, user) {
         // console.log("login----------->");
 
-        if (err) throw err;
+        if (err)
+        {
+            console.log(err);
+        }
 
         if (user)
         {
             var status = user.admin + 1;
             user.comparePassword(req.body.password, function(err, isMatch) {
-                if (err) throw err;
+                if (err){
+                    console.log(err);
+                }
                 if (isMatch)
                 {
                     if (req.body.password == "123456")

@@ -15,6 +15,20 @@ $(document).ready(function () {
         getAllUserInfo($(this).attr("data-employee"));
     });
 
+    $('.filters').click(function () {
+
+        var siblings = ['#filter_date', '#filter_number', '#filter_location'];
+        console.log(siblings);
+        for (var i = 0; i < siblings.length; i++)
+        {
+            if (siblings[i] != $(this).attr('data-target'))
+            {
+                $(siblings[i]).removeClass('show');
+            }
+        }
+
+    });
+
 
     function searchFor(value)
     {
