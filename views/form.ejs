@@ -4,11 +4,11 @@
   <div class="col-sm-3"></div>
   <div class="col-sm-6">
     <div class="form-group dynamic-element" style="display:none">
-      <div>
+      <div id="cable0">
       <div class="col-md-2"></div>
       <h3>Cable Marking</h3>
         <div class="form-group">
-          <label for="correct">Correctly Placed, <span>(on the cable at the top or bottom)<b>Cable 1</b></span></label>
+          <label for="correct">Correctly Placed, <span>(on the cable at the top or bottom)<b>Cable <span class="cableNumber"></span></b></span></label>
           <select class="form-control">
             <option value="YES">YES</option>
             <option value="NO" selected>NO</option>
@@ -47,14 +47,14 @@
         </div>
         <div class="form-group">
           <label for="meter">Meters secured and labelled?</label>
-          <select id="meterCheck" class="form-control" onchange="meterSelectCheck(this);">
+          <select id="meterCheck0" class="form-control" onchange="meterSelectCheck(this);">
             <option>please select</option>
             <option value="YES">YES</option>
             <option value="NO">NO</option>
             <option value="NA">N/A</option>
           </select>
         </div>
-        <div class="meterAvailable" style="display:none;">
+        <div class="meterAvailable0" id="meterA0" style="display:none;">
           <div class="form-group">
             <label for="meterSeals">Meters Seals Installed?</label>
             <select class="form-control">
@@ -85,7 +85,7 @@
           <input class="form-control" type="text" name="stand_no" placeholder="Please specify stand number">
         </div>
         <div class="col-md-1">
-          <button type="button" name="button"class="delete btn btn-danger">Remove</button>
+          <button type="button" id="delete0" name="button"class="delete btn btn-danger">Remove</button>
         </div>
       </div>
     </div>
@@ -101,7 +101,7 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-12">
-              <button type="button" class="add-one btn btn-primary">Add More</button>
+              <button type="button" class="add-one btn btn-primary" onclick="add();">Add More</button>
           </div>
         </div>
       </div>
