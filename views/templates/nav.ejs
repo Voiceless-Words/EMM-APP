@@ -11,7 +11,9 @@
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white">
+          <% if (details) {%>
           <%= details.first_name%>
+          <% }%>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/profile">Edit Profile</a>
@@ -20,7 +22,7 @@
         </div>
       </li>
     </ul>
-    <% if (details.rights == 'admin') {%>
+    <% if (details.admin == '1') {%>
     <% include search%>
     <%}%>
 
