@@ -18,11 +18,9 @@ function meterSelectCheck(nameSelect)
     var val = nameSelect.value;
     if (val === "NA")
     {
-      alert("in here bosso");
       $(".meterAvailable").hide();
     }
     else {
         $(".meterAvailable").show();
     }
-    alert(val);
 }
