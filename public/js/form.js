@@ -5,6 +5,7 @@ function add(){
   $('#meterCheck'+(i - 1)).attr('id','meterCheck'+ i);
   $('#cable'+(i - 1)).attr('id','cable'+ i);
   $('#meterA'+(i - 1)).attr('id','meterA'+ i);
+  $('#meterA' + i).css('display', 'none');
   $('#delete' +(i - 1)).attr('id', 'delete' + i);
   $('.dynamic-element').first().clone().appendTo('.dynamic-stuff').show();
   attach_delete();
