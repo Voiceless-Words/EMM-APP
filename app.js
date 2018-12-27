@@ -100,7 +100,7 @@ app.get('/dashboardb', function(req, res) {
 		});
 });
 
-app.get('/register', isAdmin, function(req, res) {
+app.get('/register', function(req, res) {
 	res.render('register');
 });
 
@@ -187,7 +187,7 @@ function isAdmin(req, res, next){
 			else
 			{
 				errors.push("You dont have admin rights");
-				res.render(JSON.stringify({
+				res.send(JSON.stringify({
 					error : errors,
 					status : 403
 				}));
@@ -195,5 +195,7 @@ function isAdmin(req, res, next){
 			})
 		.catch(error => { console.log(error); })
 	}
-    next();
+	else {
+		res.render('index');
+	}
 }
