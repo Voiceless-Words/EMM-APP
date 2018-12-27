@@ -6,7 +6,8 @@
   </div>
   <div class="form-group">
     <label for="assest">Asset:</label>
-    <select class="form-control">
+    <select id='asset_name' class="form-control" onchange="getdescriptions(<%=JSON.stringify(assets)%>)">
+      <option></option>
             <% if (assets) {%>
       <% assets.forEach(function (asset){%>
       <option>
@@ -20,16 +21,15 @@
 
     <div class="form-group">
     <label for="description">Asset Description:</label>
-    <select class="form-control">
-      <option>MV SUBSTATION - 7C2 JAVA CRESCENT</option>
-    </select>
+    <p id="asset_description" class="text-secondary">
+      <i>no asset selected</i>
+    </p>
   </div>
-
 
   <div class="form-group">
     <label for="duedate">Required By:</label>
-
     <input id="datepicker" class="form-control" width="276" />
+</div>
 
   </div>
 
@@ -56,10 +56,3 @@
   
   <button type="submit" class="btn btn-primary">Create Job Card</button>
 </form>
-<script type="text/javascript">
-    alert($('#datepicker'));
-
-$('#datepicker').datepicker({
-            uiLibrary: 'bootstrap4'
-        });
-</script>
