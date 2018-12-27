@@ -28,20 +28,41 @@ router.post('/search', function(req, res){
             ]
         })
     .then(users => {
-            console.log(users.length);
-            var results = [];
-            for(var i = 0; i < users.length; i++)
-            {
-                console.log(users[i].first_name);
-                var user = {
-                    first_name : users[i].first_name,
-                    last_name : users[i].last_name,
-                    employee_id : users[i].employee_id,
-                    contact : users[i].contact,
-                };
-                results.push(user);
-            }
-            res.send(results);
+            console.log(users);
+            var response = {
+                count : users.length,
+                data : users.map(function(users){
+                    return {
+                        first_name : users.first_name,
+                        last_name : users.last_name,
+                        employee_id : users.employee_id,
+                        contact : users.contact,
+                    };
+                })
+            };
+            res.send(response);
+        })
+    .catch(error => { console.log(error); })
+});
+
+router.post('/all', function(req, res){
+
+    User.find({"employee_id": { "$regex": req.body.user, "$options": "i"}})
+    .then(users => {
+            console.log(users);
+            var response = {
+                count : users.length,
+                data : users.map(function(users){
+                    return {
+                        first_name : users.first_name,
+                        last_name : users.last_name,
+                        employee_id : users.employee_id,
+                        contact : users.contact,
+                        date : users.date
+                    };
+                })
+            };
+            res.send(response);
         })
     .catch(error => { console.log(error); })
 });
