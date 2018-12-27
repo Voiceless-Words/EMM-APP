@@ -15,6 +15,14 @@ function attach_delete(){
 
 function meterSelectCheck(nameSelect)
 {
-    var val = nameSelect.options[nameSelect.selectedIndex].value;
-    document.getElementById("meterAvailable").style.display = val == 'NA' ? 'none' : "block";
+    var val = nameSelect.value;
+    if (val === "NA")
+    {
+      alert("in here bosso");
+      $(".meterAvailable").hide();
+    }
+    else {
+        $(".meterAvailable").show();
+    }
+    alert(val);
 }

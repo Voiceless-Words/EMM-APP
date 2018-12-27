@@ -1,14 +1,11 @@
 <% include templates/head %>
 <% include templates/nav %>
-<!-- HIDDEN DYNAMIC ELEMENT TO CLONE -->
-<!-- you can replace it with any other elements -->
 <div class="row">
   <div class="col-sm-3"></div>
   <div class="col-sm-6">
     <div class="form-group dynamic-element" style="display:none">
       <div>
       <div class="col-md-2"></div>
-      <!-- Replace these fields -->
       <h3>Cable Marking</h3>
         <div class="form-group">
           <label for="correct">Correctly Placed, <span>(on the cable at the top or bottom)<b>Cable 1</b></span></label>
@@ -40,7 +37,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="fitted">Size, please specify?</label>
+          <label for="size">Size, please specify?</label>
           <select class="form-control">
             <option value="" selected disabled hidden>Choose here</option>
             <option value="88">88</option>
@@ -49,23 +46,24 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="fitted">Meters secured and labelled?</label>
-          <select class="form-control" onchange="meterSelectCheck(this);">
+          <label for="meter">Meters secured and labelled?</label>
+          <select id="meterCheck" class="form-control" onchange="meterSelectCheck(this);">
+            <option>please select</option>
             <option value="YES">YES</option>
             <option value="NO">NO</option>
             <option value="NA">N/A</option>
           </select>
         </div>
-        <div id="meterAvailable" style="display:none;">
+        <div class="meterAvailable" style="display:none;">
           <div class="form-group">
-            <label for="fitted">Meters Seals Installed?</label>
+            <label for="meterSeals">Meters Seals Installed?</label>
             <select class="form-control">
               <option value="YES">YES</option>
               <option value="NO" selected>NO</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="fitted">Meters Seals Colour</label>
+            <label for="meterSealsColour">Meters Seals Colour</label>
             <select class="form-control">
               <option value="" selected disabled hidden>Choose here</option>
               <option value="Blue">BLUE</option>
@@ -75,7 +73,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="fitted">Any Meter Bypassed?</label>
+            <label for="meterBypassed">Any Meter Bypassed?</label>
             <select class="form-control">
               <option value="YES">YES</option>
               <option value="NO" selected>NO</option>
@@ -83,25 +81,20 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="fitted">Stands Connected to Enclosure, please specify stand no.</label>
+          <label for="standConnected">Stands Connected to Enclosure, please specify stand no.</label>
           <input class="form-control" type="text" name="stand_no" placeholder="Please specify stand number">
         </div>
-        <!-- End of fields-->
         <div class="col-md-1">
           <button type="button" name="button"class="delete btn btn-danger">Remove</button>
         </div>
       </div>
     </div>
-    <!-- END OF HIDDEN ELEMENT -->
     <div class="form-container">
       <form class="form-horizontal">
       <fieldset>
-      <!-- Form Name -->
       <legend class="title">Cables and House Breakers</legend>
 
       <div class="dynamic-stuff">
-        <!-- Dynamic element will be cloned here -->
-        <!-- You can call clone function once if you want it to show it a first element-->
       </div>
 
       <!-- Button -->
