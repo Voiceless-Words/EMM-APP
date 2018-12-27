@@ -67,18 +67,20 @@ app.get('/logout', function(req, res){
 
 app.get('/dashboarda', function(req, res) {
 
+	console.log(req.session.body);
 	Asset.find({}, function(err, assets) {
 
+
 		if (err) throw err;
-		console.log(assets);
+		//console.log(assets);
 
 		User.find({'admin' : '0'}, function(err, user) {
 			if (err) throw err;
-			console.log(user);
+		//	console.log(user);
 
 			res.render('dashboarda', {
 				title : 'emmapp',
-				details : {'first_name':'Anist', 'rights' : 'admin'},
+				details : {'first_name':'Anist', 'admin' : '1'},
 				assets : assets
 			});
 		});
@@ -94,7 +96,7 @@ app.get('/dashboarda', function(req, res) {
 app.get('/dashboardb', function(req, res) {
 	res.render('dashboardb', {
 			title : 'emmapp',
-			details : {'first_name':'Anist', 'rights' : 'user'}
+			details : {'first_name':'Anist', 'admin' : '0'}
 		});
 });
 
@@ -116,7 +118,7 @@ app.post('/getview', function(req, res) {
 
 			res.render('templates/createjobcardform', {
 				title : 'emmapp',
-				details : {'first_name':'Anist', 'rights' : 'admin'},
+				details : {'first_name':'Anist', 'admin' : '1'},
 				assets : assets,
 				users : users
 
@@ -158,8 +160,13 @@ app.get('/logon', function (req, res){
 });
 
 app.get('/form', function(req, res){
-  res.render('form');
+  res.render('form', {
+				title : 'emmapp',
+				details : {'first_name':'Anist', 'admin' : '0'} 
+				//This will be the details of the user who's logged in 
+			});
 });
+
 app.use(function(req, res) {
     res.send("what are you trying to do" + req.url);
 });
