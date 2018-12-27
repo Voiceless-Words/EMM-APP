@@ -3,6 +3,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const session = require('express-session');
+const bcrypt = require('bcrypt-nodejs');
 const router = express.Router();
 
 const User = require('../models/users');
@@ -111,19 +112,32 @@ router.post('/register', function(req, res){
 });
 
 router.post('/update', function(req, res){
-     User.updateOne({"employee_id": req.body.user}, {
-         password : req.body.value
-     })
-    .then(users => {
-            console.log(users);
-            // req.session.user = users[0].employee_id;
-            User.save;
-            // console.log("session set as "+req.session.user);
-            res.send(JSON.stringify({
-                status : 200
-            }));
-        })
-    .catch(error => { console.log(error); })
+    
+    bcrypt.genSalt(process.env.SALT_BCRYPT, function(err, salt) {
+        ///testing
+        if (err) return next(err);
+
+        // hash the password using our new salt
+        bcrypt.hash(req.body.value, salt, null, function(err, hash) {
+            if (err)
+                console.log("change password err");
+
+            // override the cleartext password with the hashed one
+            User.updateOne({"employee_id": req.body.user}, {
+                password : hash
+            })
+            .then(users => {
+                    console.log(users);
+
+                    // req.session.user = users[0].employee_id;
+                    // console.log("session set as "+req.session.user);
+                    res.send(JSON.stringify({
+                        status : 200
+                    }));
+                })
+            .catch(error => { console.log(error); })
+        });
+    });
 });
 
 module.exports = router;
