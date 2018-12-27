@@ -12,3 +12,9 @@ function attach_delete(){
     $(this).closest('.form-group').remove();
   });
 }
+
+function meterSelectCheck(nameSelect)
+{
+    var val = nameSelect.options[nameSelect.selectedIndex].value;
+    document.getElementById("meterAvailable").style.display = val == 'NA' ? 'none' : "block";
+}

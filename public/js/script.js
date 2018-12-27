@@ -6,6 +6,9 @@ function getview() {
 		xhttp.onreadystatechange = function() {
    		if (this.readyState == 4 && this.status == 200) {
    				workspace.innerHTML = this.responseText;
+   				 $('#datepicker').datepicker({
+            		uiLibrary: 'bootstrap4'
+        		});
    			}
 		}
 		xhttp.open("POST", "/getview", true);
@@ -14,8 +17,8 @@ function getview() {
     		
     }
 
-
 $(document).ready(function(){
+
     $("#loginForm").submit(function (e) {
         e.preventDefault();
 		$(".status").html('').show();
