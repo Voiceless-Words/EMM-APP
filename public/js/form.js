@@ -55,3 +55,35 @@ function meterSelectCheck(nameSelect)
         $(".meterAvailable" + l).show();
     }
 }
+function plinth(elem){
+  var val = elem.value;
+  if(val === 'NO')
+  {
+    $("#plinth").hide();
+  }
+  else {
+    $("#plinth").show();
+  }
+}
+
+function plinthCondition(elem){
+  var val = elem.value;
+  if(val === 'YES')
+  {
+    $("#plinthCondition").hide();
+  }
+  else {
+    $("#plinthCondition").show();
+  }
+}
+
+function electronics(elem){
+  var val = elem.value;
+  if(val === 'NO')
+  {
+    $("#electronics").hide();
+  }
+  else {
+    $("#electronics").show();
+  }
+}

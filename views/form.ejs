@@ -91,23 +91,122 @@
     </div>
     <div class="form-container">
       <form class="form-horizontal">
-      <fieldset>
-      <legend class="title">Cables and House Breakers</legend>
+          <fieldset>
+            <legend class="title">Cables and House Breakers</legend>
 
-      <div class="dynamic-stuff">
-      </div>
+            <div class="dynamic-stuff">
+            </div>
 
-      <!-- Button -->
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-12">
-              <button type="button" class="add-one btn btn-primary" onclick="add();">Add More</button>
+            <!-- Button -->
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="add-one btn btn-primary" onclick="add();">Add More</button>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <h3>Condition of Box</h3>
+          <div class="form-group">
+            <label for="boxDoor">Can all the doors be opened, and secured?</label>
+            <select class="form-control">
+              <option value="YES">YES</option>
+              <option value="NO" selected>NO</option>
+            </select>
           </div>
-        </div>
+          <div class="form-group">
+            <label for="boxDamage">Visible body damage?</label>
+            <select class="form-control">
+              <option value="YES">YES</option>
+              <option value="NO" selected>NO</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="plinthVisible">Plinth Visible?</label>
+            <select class="form-control" onchange="plinth(this);">
+              <option value="YES">YES</option>
+              <option value="NO" selected>NO</option>
+            </select>
+          </div>
+          <div id="plinth" style = "display: none;">
+            <div class="form-group">
+              <label for="plinthCondition">Plinth in a good Condition, if no please state defect?</label>
+              <select class="form-control" onchange="plinthCondition(this);">
+                <option>please select</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+              </select>
+            </div>
+          </div>
+          <div id="plinthCondition" style = "display: none;">
+            <div class="form-group">
+              <label for="plinthDefect">State Defect</label>
+              <input class="form-control" type="text" name="plinthDefect">
+            </div>
+          </div>
+          <h3>Electronics (If Applicable)</h3>
+          <div class="form-group">
+            <label for="electronics">Electronics Available?</label>
+            <select class="form-control" onchange="electronics(this);">
+              <option>please select</option>
+              <option value="YES">YES</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+          <div id="electronics" style = "display: none;">
+            <div class="form-group">
+              <label for="electSecure">Fitted Securely?</label>
+              <select class="form-control">
+                <option value="YES">YES</option>
+                <option value="NO" selected>NO</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="electDoor">All Doors in Operation?</label>
+              <select class="form-control">
+                <option value="YES">YES</option>
+                <option value="NO" selected>NO</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="electTransponder">Transponder Secure?</label>
+              <select class="form-control">
+                <option value="YES">YES</option>
+                <option value="NO" selected>NO</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="electDoorBypassed">Door Bypassed?</label>
+              <select class="form-control">
+                <option value="YES">YES</option>
+                <option value="NO" selected>NO</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="battery">Battery Installed?</label>
+              <select class="form-control">
+                <option value="YES">YES</option>
+                <option value="NO" selected>NO</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="working">In a working condition?</label>
+              <select class="form-control">
+                <option value="YES">YES</option>
+                <option value="NO" selected>NO</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="remote">Remote Devices Working?</label>
+              <select class="form-control">
+                <option value="YES">YES</option>
+                <option value="NO" selected>NO</option>
+              </select>
+            </div>
+          </div>
+          <button type="button" name="button" class="btn 0btn-success">Next</button>
+        </form>
       </div>
-    </fieldset>
-    </form>
-    </div>
     </div>
   <div class="col-sm-3"></div>
 </div>
