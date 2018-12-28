@@ -17,12 +17,13 @@ $(document).ready(function () {
 
     $('.filters').click(function () {
 
-        var siblings = ['#filter_date', '#filter_number', '#filter_location'];
+        var siblings = ['#filter_date', '#filter_number', '#filter_location', '#filter_status'];
         console.log(siblings);
         for (var i = 0; i < siblings.length; i++)
         {
             if (siblings[i] != $(this).attr('data-target'))
             {
+                console.log(siblings[i]);
                 $(siblings[i]).removeClass('show');
             }
         }

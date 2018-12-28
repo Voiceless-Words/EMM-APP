@@ -12,9 +12,10 @@
   <div class="collapse" id="top_level_menu">
 	<div class="bg-dark p-4 row text-center text-white no-margin">
 		<div class="col-sm-12"><h3>Filter the results</h3><hr></div>
-		<div class="col-sm-4 navbar-toggler filters" data-toggle="collapse" data-target="#filter_date" aria-controls="filter_date" aria-expanded="false" aria-label="Toggle navigation"><p>Date</p></div>
-		<div class="col-sm-4 navbar-toggler filters" data-toggle="collapse" data-target="#filter_number" aria-controls="filter_date" aria-expanded="false" aria-label="Toggle navigation"><p>Job Number</p></div>
-		<div class="col-sm-4 navbar-toggler filters" data-toggle="collapse" data-target="#filter_location" aria-controls="filter_date" aria-expanded="false" aria-label="Toggle navigation"><p>Job Location</p></div>
+		<div class="col-sm-3 navbar-toggler filters" data-toggle="collapse" data-target="#filter_date" aria-controls="filter_date" aria-expanded="false" aria-label="Toggle navigation"><p>Date</p></div>
+		<div class="col-sm-3 navbar-toggler filters" data-toggle="collapse" data-target="#filter_number" aria-controls="filter_date" aria-expanded="false" aria-label="Toggle navigation"><p>Job Number</p></div>
+		<div class="col-sm-3 navbar-toggler filters" data-toggle="collapse" data-target="#filter_location" aria-controls="filter_date" aria-expanded="false" aria-label="Toggle navigation"><p>Job Location</p></div>
+		<div class="col-sm-3 navbar-toggler filters" data-toggle="collapse" data-target="#filter_status" aria-controls="filter_date" aria-expanded="false" aria-label="Toggle navigation"><p>Status</p></div>
 	  <!-- <h4 class="text-white">Collapsed content</h4>
 	  <span class="text-muted">Toggleable via the navbar brand.</span> -->
 	</div>
@@ -63,7 +64,23 @@
 	</div>
 </div>
 
+<div class="collapse" id="filter_status">
+	<div class="bg-primary p-4 row text-center text-white">
+		<form class="col-sm-12">
+			<label class="my-1 mr-2" for="date_pref">Preference</label>
+			<select class="custom-select my-1 mr-sm-2" id="date_pref">
+				<option selected>Choose...</option>
+				<option value="1">Active</option>
+				<option value="2">Pending</option>
+				<option value="3">Closed</option>
+			</select>
+
+			<button type="submit" class="btn btn-primary my-1">Filter</button>
+		</form>
+	</div>
 </div>
+
+
 
 <br><br>
 <div class="container">
@@ -72,40 +89,44 @@
 	<div class="col-md-3"></div>
 	<div class="col-md-6">
 		<!-- <div class="row"> -->
+				<!-- <div class="strike">
+				<span>Kringle</span>
+				</div> -->
 			<div class="card border-secondary mb-3 shadow">
-				<div class="row">
-					<div class="card-header col-xs-6">Job NO: 686943</div>
-					<div class="card-header text-right col-xs-6">Creation date: 23/01/18</div>
+				<div class="row container-fluid card-header no-margin">
+					<div class=" col-6"><p class="text-left">Job NO: 686943</p></div>
+					<div class=" col-6"><p class="text-right">Date: 23/01/18</p></div>
 				</div>
 				<div class="card-body text-secondary">
 					<h5 class="card-title">Status : panding</h5>
 					<p class="card-text">location : Katlegong ext: 5</p>
 				</div>
 				<div class="row">
-					<div class="col-sm-12">
-						<button type="button" class="btn btn-default col-md-3 job_modal" data-job="686943" data-toggle="modal" data-target=".Large_card">view card</button>
+					<div class="col-12">
+						<button type="button" class="btn btn-default col-12 job_modal" data-job="686943" data-toggle="modal" data-target=".Large_card">view card</button>
 					</div>
 				</div>
 			</div>
 
 			<div class="card border-secondary mb-3 shadow">
-				<div class="row">
-					<div class="card-header col-xs-6">Job NO: 786943</div>
-					<div class="card-header text-right col-xs-6">Creation date: 11/11/18</div>
+				<div class="row container-fluid card-header no-margin">
+					<div class=" col-6"><p class="text-left">Job NO: 786943</p></div>
+					<div class=" col-6"><p class="text-right">Date: 21/11/18</p></div>
 				</div>
 				<div class="card-body text-secondary">
 					<h5 class="card-title">Status : active</h5>
 					<p class="card-text">location : Germiston CBD</p>
 				</div>
 				<div class="row">
-					<div class="col-sm-12">
-						<button type="button" class="btn btn-default col-md-3 job_modal" data-job="786943" data-toggle="modal" data-target=".Large_card">view card</button>
+					<div class="col-12">
+						<button type="button" class="btn btn-default col-12 job_modal" data-job="786943" data-toggle="modal" data-target=".Large_card">view card</button>
 					</div>
 				</div>
 			</div>
 		<!-- </div> -->
 		<!-- <br> -->
 		<!-- <% include templates/jobcardsnotif%> -->
+
 	</div>
 	<div class="col-md-3"></div>
 
@@ -122,7 +143,9 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="avatar"></div>
-					blah blah wait...
+					<div class="row">
+						divs of here
+					</div>
                 </div>
 
                 <!-- Modal footer -->
@@ -138,4 +161,5 @@
 </div>
 </div>
 
+	
 <%include templates/footer%>
