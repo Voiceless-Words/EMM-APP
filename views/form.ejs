@@ -9,37 +9,41 @@
       <h3>Cable Marking</h3>
         <div class="form-group">
           <label for="correct">Correctly Placed, <span>(on the cable at the top or bottom)<b>Cable <span class="cableNumber"></span></b></span></label>
-          <select class="form-control">
+          <select class="form-control" name="correct" required>
+            <option value="">--Please Select--</option>
             <option value="YES">YES</option>
-            <option value="NO" selected>NO</option>
+            <option value="NO">NO</option>
           </select>
         </div>
         <div class="form-group">
           <label for="tag">Securely Placed, <span>(Tag fitted)?</span></label>
-          <select class="form-control">
+          <select class="form-control" name="tag" required>
+            <option value="">--Please Select--</option>
             <option value="YES">YES</option>
-            <option value="NO" selected>NO</option>
+            <option value="NO">NO</option>
           </select>
         </div>
         <div class="form-group">
           <label for="label">Label Level Correct, <span>(Placed at the top or bottom)?</span></label>
-          <select class="form-control">
+          <select class="form-control" name="label">
+            <option value="">--Please Select--</option>
             <option value="YES">YES</option>
-            <option value="NO" selected>NO</option>
+            <option value="NO">NO</option>
           </select>
         </div>
         <h3>House Breaker</h3>
         <div class="form-group">
           <label for="fitted">Securely fitted, Not hanging</label>
-          <select class="form-control">
+          <select class="form-control" name="fitted" required>
+            <option value="">--Please Select--</option>
             <option value="YES">YES</option>
             <option value="NO" selected>NO</option>
           </select>
         </div>
         <div class="form-group">
           <label for="size">Size, please specify?</label>
-          <select class="form-control">
-            <option value="" selected disabled hidden>Choose here</option>
+          <select class="form-control" name="size" required>
+            <option value="">--Please Select--</option>
             <option value="88">88</option>
             <option value="120">120</option>
             <option value="85">85</option>
@@ -47,8 +51,8 @@
         </div>
         <div class="form-group">
           <label for="meter">Meters secured and labelled?</label>
-          <select id="meterCheck0" class="form-control" onchange="meterSelectCheck(this);">
-            <option>please select</option>
+          <select id="meterCheck0" class="form-control" onchange="meterSelectCheck(this);" name="meter" required>
+            <option value="">--Please Select--</option>
             <option value="YES">YES</option>
             <option value="NO">NO</option>
             <option value="NA">N/A</option>
@@ -57,15 +61,16 @@
         <div class="meterAvailable0" id="meterA0" style="display:none;">
           <div class="form-group">
             <label for="meterSeals">Meters Seals Installed?</label>
-            <select class="form-control">
+            <select class="form-control" name="meterSeals" required>
+              <option value="">--Please Select--</option>
               <option value="YES">YES</option>
               <option value="NO" selected>NO</option>
             </select>
           </div>
           <div class="form-group">
             <label for="meterSealsColour">Meters Seals Colour</label>
-            <select class="form-control">
-              <option value="" selected disabled hidden>Choose here</option>
+            <select class="form-control" name="meterSealsColour" required>
+              <option value="">--Please Select--</option>
               <option value="Blue">BLUE</option>
               <option value="Green">GREEN</option>
               <option value="Yellow">YELLOW</option>
@@ -74,15 +79,16 @@
           </div>
           <div class="form-group">
             <label for="meterBypassed">Any Meter Bypassed?</label>
-            <select class="form-control">
+            <select class="form-control" name="meterBypassed" required>
+              <option value="">--Please Select--</option>
               <option value="YES">YES</option>
-              <option value="NO" selected>NO</option>
+              <option value="NO">NO</option>
             </select>
           </div>
         </div>
         <div class="form-group">
           <label for="standConnected">Stands Connected to Enclosure, please specify stand no.</label>
-          <input class="form-control" type="text" name="stand_no" placeholder="Please specify stand number">
+          <input class="form-control" type="text" name="stand_no" placeholder="Please specify stand number" required>
         </div>
         <div class="col-md-1">
           <button type="button" id="delete0" name="button"class="delete btn btn-danger">Remove</button>
@@ -109,30 +115,33 @@
           <h3>Condition of Box</h3>
           <div class="form-group">
             <label for="boxDoor">Can all the doors be opened, and secured?</label>
-            <select class="form-control">
+            <select class="form-control" name="boxDoor" required>
+              <option value="">--Please Select--</option>
               <option value="YES">YES</option>
-              <option value="NO" selected>NO</option>
+              <option value="NO">NO</option>
             </select>
           </div>
           <div class="form-group">
             <label for="boxDamage">Visible body damage?</label>
-            <select class="form-control">
+            <select class="form-control" name="boxDamage" required>
+              <option value="">--Please Select--</option>
               <option value="YES">YES</option>
-              <option value="NO" selected>NO</option>
+              <option value="NO">NO</option>
             </select>
           </div>
           <div class="form-group">
             <label for="plinthVisible">Plinth Visible?</label>
-            <select class="form-control" onchange="plinth(this);">
+            <select class="form-control" name="plinthVisible" onchange="plinth(this);" required>
+              <option value="">--Please Select--</option>
               <option value="YES">YES</option>
-              <option value="NO" selected>NO</option>
+              <option value="NO">NO</option>
             </select>
           </div>
           <div id="plinth" style = "display: none;">
             <div class="form-group">
               <label for="plinthCondition">Plinth in a good Condition, if no please state defect?</label>
-              <select class="form-control" onchange="plinthCondition(this);">
-                <option>please select</option>
+              <select class="form-control" onchange="plinthCondition(this);" name="plinthCondition" required>
+                <option value="">--Please Select--</option>
                 <option value="YES">YES</option>
                 <option value="NO">NO</option>
               </select>
@@ -141,14 +150,14 @@
           <div id="plinthCondition" style = "display: none;">
             <div class="form-group">
               <label for="plinthDefect">State Defect</label>
-              <input class="form-control" type="text" name="plinthDefect">
+              <input class="form-control" type="text" name="plinthDefect" required>
             </div>
           </div>
           <h3>Electronics (If Applicable)</h3>
           <div class="form-group">
             <label for="electronics">Electronics Available?</label>
-            <select class="form-control" onchange="electronics(this);">
-              <option>please select</option>
+            <select class="form-control" onchange="electronics(this);" name="electronics" required>
+              <option value="">--Please Select--</option>
               <option value="YES">YES</option>
               <option value="NO">NO</option>
             </select>
@@ -156,55 +165,62 @@
           <div id="electronics" style = "display: none;">
             <div class="form-group">
               <label for="electSecure">Fitted Securely?</label>
-              <select class="form-control">
+              <select class="form-control" name="electSecure" required>
+                <option value="">--Please Select--</option>
                 <option value="YES">YES</option>
-                <option value="NO" selected>NO</option>
+                <option value="NO">NO</option>
               </select>
             </div>
             <div class="form-group">
               <label for="electDoor">All Doors in Operation?</label>
-              <select class="form-control">
+              <select class="form-control" name="electDoor" required>
+                <option value="">--Please Select--</option>
                 <option value="YES">YES</option>
-                <option value="NO" selected>NO</option>
+                <option value="NO">NO</option>
               </select>
             </div>
             <div class="form-group">
               <label for="electTransponder">Transponder Secure?</label>
-              <select class="form-control">
+              <select class="form-control" name="electTransponder" required>
+                <option value="">--Please Select--</option>
                 <option value="YES">YES</option>
-                <option value="NO" selected>NO</option>
+                <option value="NO">NO</option>
               </select>
             </div>
             <div class="form-group">
               <label for="electDoorBypassed">Door Bypassed?</label>
-              <select class="form-control">
+              <select class="form-control" name="electDoorBypassed" required>
+                <option value="">--Please Select--</option>
                 <option value="YES">YES</option>
-                <option value="NO" selected>NO</option>
+                <option value="NO">NO</option>
               </select>
             </div>
             <div class="form-group">
               <label for="battery">Battery Installed?</label>
-              <select class="form-control">
+              <select class="form-control" name="battery" required>
+                <option value="">--Please Select--</option>
                 <option value="YES">YES</option>
-                <option value="NO" selected>NO</option>
+                <option value="NO">NO</option>
               </select>
             </div>
             <div class="form-group">
               <label for="working">In a working condition?</label>
-              <select class="form-control">
+              <select class="form-control" name="working" required>
+                <option value="">--Please Select--</option>
                 <option value="YES">YES</option>
-                <option value="NO" selected>NO</option>
+                <option value="NO">NO</option>
               </select>
             </div>
             <div class="form-group">
               <label for="remote">Remote Devices Working?</label>
-              <select class="form-control">
+              <select class="form-control" name="remote" required>
+                <option value="">--Please Select--</option>
                 <option value="YES">YES</option>
-                <option value="NO" selected>NO</option>
+                <option value="NO">NO</option>
               </select>
             </div>
           </div>
-          <button type="button" name="button" class="btn 0btn-success">Next</button>
+           <button type="submit" class="btn btn-success">Submit Form</button>
         </form>
       </div>
     </div>
