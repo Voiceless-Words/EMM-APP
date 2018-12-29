@@ -84,7 +84,7 @@ app.get('/dashboarda', function(req, res) {
 				assets : assets
 			});
 		});
-    	
+
 
 	});
 
@@ -105,7 +105,7 @@ app.get('/register', function(req, res) {
 });
 
 app.post('/getview', function(req, res) {
-	
+
 	if (req.body.view == 'createjobcard') {
 		Asset.find({}, function(err, assets) {
 
@@ -124,7 +124,7 @@ app.post('/getview', function(req, res) {
 
 			});
 		});
-    	
+
 
 	});
 
@@ -160,10 +160,10 @@ app.get('/logon', function (req, res){
 });
 
 app.get('/form', function(req, res){
-  res.render('form', {
+  res.render('inspection', {
 				title : 'emmapp',
-				details : {'first_name':'Anist', 'admin' : '0'} 
-				//This will be the details of the user who's logged in 
+				details : {'first_name':'Anist', 'admin' : '0'}
+				//This will be the details of the user who's logged in
 			});
 });
 
