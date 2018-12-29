@@ -160,7 +160,7 @@ app.get('/logon', function (req, res){
 });
 
 app.get('/form', function(req, res){
-  res.render('inspection', {
+  res.render('form', {
 				title : 'emmapp',
 				details : {'first_name':'Anist', 'admin' : '0'}
 				//This will be the details of the user who's logged in
