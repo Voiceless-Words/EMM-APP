@@ -9,7 +9,7 @@
       <h3>Cable Marking</h3>
         <div class="form-group">
           <label for="correct">Correctly Placed, <span>(on the cable at the top or bottom)<b>Cable <span id="cableNumber0"></span></b></span></label>
-          <select class="form-control" name="correct" required>
+          <select class="form-control" name="correct[]" required>
             <option value="">--Please Select--</option>
             <option value="YES">YES</option>
             <option value="NO">NO</option>
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
           <label for="tag">Securely Placed, <span>(Tag fitted)?</span></label>
-          <select class="form-control" name="tag" required>
+          <select class="form-control" name="tag[]" required>
             <option value="">--Please Select--</option>
             <option value="YES">YES</option>
             <option value="NO">NO</option>
@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
           <label for="label">Label Level Correct, <span>(Placed at the top or bottom)?</span></label>
-          <select class="form-control" name="label">
+          <select class="form-control" name="label[]">
             <option value="">--Please Select--</option>
             <option value="YES">YES</option>
             <option value="NO">NO</option>
@@ -34,7 +34,7 @@
         <h3>House Breaker</h3>
         <div class="form-group">
           <label for="fitted">Securely fitted, Not hanging</label>
-          <select class="form-control" name="fitted" required>
+          <select class="form-control" name="fitted[]" required>
             <option value="">--Please Select--</option>
             <option value="YES">YES</option>
             <option value="NO">NO</option>
@@ -42,7 +42,7 @@
         </div>
         <div class="form-group">
           <label for="size">Size, please specify?</label>
-          <select class="form-control" name="size" required>
+          <select class="form-control" name="size[]" required>
             <option value="">--Please Select--</option>
             <option value="88">88</option>
             <option value="120">120</option>
@@ -62,7 +62,7 @@
         <div class="meterAvailable0" id="meterA0" style="display:none;">
           <div class="form-group">
             <label for="meterSeals">Meters Seals Installed?</label>
-            <select class="form-control" name="meterSeals" required>
+            <select class="form-control" name="meterSeals[]" required>
               <option value="">--Please Select--</option>
               <option value="YES">YES</option>
               <option value="NO">NO</option>
@@ -70,7 +70,7 @@
           </div>
           <div class="form-group">
             <label for="meterSealsColour">Meters Seals Colour</label>
-            <select class="form-control" name="meterSealsColour" required>
+            <select class="form-control" name="meterSealsColour[]" required>
               <option value="">--Please Select--</option>
               <option value="Blue">BLUE</option>
               <option value="Green">GREEN</option>
@@ -80,7 +80,7 @@
           </div>
           <div class="form-group">
             <label for="meterBypassed">Any Meter Bypassed?</label>
-            <select class="form-control" name="meterBypassed" required>
+            <select class="form-control" name="meterBypassed[]" required>
               <option value="">--Please Select--</option>
               <option value="YES">YES</option>
               <option value="NO">NO</option>
@@ -98,7 +98,7 @@
       </div>
     </div>
     <div class="form-container">
-      <form class="form-horizontal" id="myform">
+      <form class="form-horizontal" id="myForm" method="POST">
           <fieldset>
             <legend class="title">Cables and House Breakers</legend>
 
@@ -228,7 +228,7 @@
             </div>
           </div>
         </fieldset>
-           <button type="submit" class="btn btn-success">Submit Form</button>
+           <button type="submit" class="btn btn-success" onclick="callThis()">Submit Form</button>
         </form>
       </div>
     </div>
