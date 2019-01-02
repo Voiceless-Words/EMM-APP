@@ -21,19 +21,47 @@ $(document).ready(function(){
 
 function saveInputs(){
   if(navigator.onLine){
+    $('#submit').click(function() {
+      //get values here piet
+      $.ajax({
+        url: "/save_form",
+        type: "POST",
+        dataType: "json",
+        data: {
+          //the values that I need to get from form
+        },
+        contentType: "application/json",
+        cache: false,
+        timeout: 5000,
+
+        complete: function() {
+          console.log('process complete');
+        },
+
+        success: function(data) {
+          console.log(data);
+          console.log('process sucess');
+        },
+        error: function() {
+          console.log('process error');
+        },
+      });
+    })
     console.log("We are on the line");
   }
   else{
-
+    //add the values from the form
     var transaction = db.transaction(["formInputs"], "readwrite");
 
     var store = transaction.objectStore("formInputs");
-    var customer = {
+
+    //all the values goes here
+    var formInput = {
         name: "Piet",
         email: "piet@gmail.com"
     }
 
-    var request = store.add(customer);
+    var request = store.add(formInput);
 
     //onsuccess
     request.onsuccess = function(e){
