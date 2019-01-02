@@ -53,6 +53,11 @@ app.use(function(req, res, next){
     next();
 });
 
+app.post('/cordova', (req, res) =>{
+	console.log("cordova");
+	res.send("hitting the server");
+})
+
 app.get('/', function (req, res){
     res.render('index');
 });
