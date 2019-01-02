@@ -5,16 +5,16 @@
 }
 
 body {
-    background-color: #E5EBEA;
+    font-family: 'Poppins', sans-serif;
+    background-color: #cfd9df;
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    width: 100vw;
     min-height: 100vh;
-    min-width: 100vw;
-    position: relative;
-    color: #aaa;
 }
 
 .emm-body, .loginBody {
     width: 100vh;
-    height: 100vh;
+    min-height: 100vh;
     position: relative;
 }
 
@@ -23,11 +23,11 @@ body {
     width: 100px;height: 100px;
     margin: 10px auto 30px;
     border-radius: 100%;
-    border: 2px solid #aaa;
+    border: 2px solid rgba(0, 0, 0, 0.1);
     background-size: cover;
 }
 
-#dashboardBody, #accountsBody, #jobCardBody, #helpBody {
+#dashboardBody, #accountsBody, #jobCardBody, #helpBody,#dashboardBodyUser, #assignedJobsBody {
     display: none;
     width: 100vw;
 }
@@ -42,7 +42,7 @@ body {
     background-color: rgba(0, 0, 0, 0.1);
     /* position: relative; */
     color: aliceblue;
-    border : 2px solid #ccc;
+    border : 2px solid rgba(200, 200, 200, 0.1);
 }
 
 .tile  i {
@@ -73,11 +73,11 @@ body {
     min-height: 100vh;
 }
 
-#sidebar.active {
+#sidebar.active, #sidebarUser.active {
     margin-left: 0;
 }
 
-#sidebar {
+#sidebar, #sidebarUser {
     width: 250px;
     position: fixed;
     top: 40px;
@@ -114,10 +114,6 @@ a[data-toggle="collapse"] {
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background: #fafafa;
-}
 
 p {
     font-family: 'Poppins', sans-serif;
@@ -133,32 +129,32 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
-#sidebar .sidebar-header {
+#sidebar .sidebar-header, #sidebarUser .sidebar-header {
     padding: 20px;
     background: #6d7fcc;
 }
 
-#sidebar ul.components {
+#sidebar ul.components, #sidebarUser ul.components {
     padding: 20px 0;
     border-bottom: 1px solid #47748b;
 }
 
-#sidebar ul p {
+#sidebar ul p, #sidebarUser ul p {
     color: #fff;
     padding: 10px;
 }
 
-#sidebar ul li a {
+#sidebar ul li a, #sidebarUser ul li a {
     padding: 10px;
     font-size: 1.1em;
     display: block;
 }
-#sidebar ul li a:hover {
+#sidebar ul li a:hover, #sidebarUser ul li a:hover {
     color: #7386D5;
     background: #fff;
 }
 
-#sidebar ul li.active > a, a[aria-expanded="true"] {
+#sidebar ul li.active > a, a[aria-expanded="true"], #sidebarUser ul li.active > a {
     color: #fff;
     background: #6d7fcc;
 }
@@ -168,7 +164,7 @@ ul ul a {
     background: #6d7fcc;
 }
 
-#content {
+#content, #contentUser {
     display: none;
     font-size: 20px;
     top : 0px;
@@ -176,4 +172,28 @@ ul ul a {
     height: 40px;
     padding: 0;
     margin: 0;
+    clear: both;
 }
+
+.color1 {
+    background: rgb(34,193,195);
+    background: linear-gradient(45deg, rgba(34,193,195,0.5) 0%, rgba(253,187,45,0.4) 100%);
+}
+
+input[type='text'], input[type='password'], input[type='email'], input[type='date'], select.form-control, input[type='checkbox'] {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+    border-radius: 20px;
+    font-size: 16px;
+    border: 1px groove rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.lightT {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.no-margin {
+    margin:0;
+}
+

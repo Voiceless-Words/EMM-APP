@@ -7,9 +7,18 @@ $(document).ready(function(){
     $('#loginForm').submit(function(e){
         e.preventDefault();
         console.log("sending");
-        $('#loginBody').hide();
-        $('#dashboardBody').show();
-        $('#content').show();
+        if ($('#loginPassword').val() == 1)
+        {
+            $('#loginBody').hide();
+            $('#dashboardBodyUser').show();
+            $('#contentUser').show();
+        }
+        else
+        {
+            $('#loginBody').hide();
+            $('#dashboardBody').show();
+            $('#content').show();
+        }
     //     $.ajax({
     //         type : "POST",
     //         url : 'http://192.168.43.152:8080/cordova',
@@ -23,13 +32,16 @@ $(document).ready(function(){
     //     });
     });
 
-    $('#signOutBuutton').click(function(e){
+    $('.signOutBuutton').click(function(e){
         $('#sidebar').removeClass('active');  //close side bar
+        $('#sidebarUser').removeClass('active');  //close side bar
         e.preventDefault();  //stop link from redirecting
         //clean all data stored on the local storage about the current user session;
         $('#content').hide();
+        $('#contentUser').hide();
         $('.top_nav').hide();
         $('#loginBody').show().siblings().hide();
+        console.log("sign out");
     });
 
     $('.userAccountsButton').click(function(){
@@ -52,6 +64,11 @@ $(document).ready(function(){
         $('#jobCardBody').show().siblings().hide();
     });
 
+    $('.assignedJobsButton').click(function(){
+        $('#sidebarUser').removeClass('active');  //close side bar
+        $('#assignedJobsBody').show().siblings().hide();
+    });
+
     $('.helpButton').click(function(){
         $('.top_nav').hide();
         $('#sidebar').removeClass('active');  //close side bar
@@ -61,9 +78,13 @@ $(document).ready(function(){
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
+    $('#sidebarCollapseUser').on('click', function () {
+        $('#sidebarUser').toggleClass('active');
+    });
 
     $('.emm-body').click(function(){
         $('#sidebar').removeClass('active');
+        $('#sidebarUser').removeClass('active');
     });
 
     // $('#sidebarCollapse').on('click', function () {
