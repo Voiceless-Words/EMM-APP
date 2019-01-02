@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+  <script type="text/javascript" src="https://printjs-4de6.kxcdn.com/print.min.js">
+
+  </script>
+  </head>
+  <body>
+
+  <form id="printJS-form" action="#" method="post">
+    <input type="text" name="name" value="Piet">
+    <input type="text" name="lname" value="Ragolane">
+  </form>
+  <button type="button" onclick="printJS('printJS-form', 'html')">
+    Form Print
+  </button>
+<% include templates/footer %>

@@ -1,0 +1,64 @@
+<% include templates/head %>
+<% include templates/nav %>
+<div class="row">
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6">
+    <div class="form-group dynamic-element" style="display:none">
+      <div id="risk0">
+      <div class="col-md-2"></div>
+        <div class="form-group">
+          <label for="identifyRisk">Identified Risk</label>
+          <select class="form-control" name="identifyRisk" required>
+            <option value="">--Please Select--</option>
+            <option value="risk1">Naked Wires</option>
+            <option value="risk2">Something Something</option>
+            <option value="risk3">Something Something</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="associatedRisk">Associated Risk</label>
+          <select class="form-control" name="associatedRisk" required>
+            <option value="">--Please Select--</option>
+            <option value="asRisk1">Electricution</option>
+            <option value="asRisk2">Falling from height</option>
+          </select>
+        </div
+        <div class="form-group">
+          <label for="minimizeRisk">Steps Taken to Minimize Risk</label>
+          <select class="form-control" name="minimizeRisk" required>
+            <option value="">--Please Select--</option>
+            <option value="minRisk1">Correct Tools and PPE</option>
+            <option value="minRisk2">Isolate the wires</option>
+          </select>
+        </div>
+        <br>
+        <div class="col-md-1">
+          <button type="button" id="delete0" name="button"class="delete btn btn-danger">Remove</button>
+        </div>
+      </div>
+    </div>
+    <div class="form-container">
+      <form class="form-horizontal" id="myform">
+          <fieldset>
+            <legend class="title">Risk Assessment</legend>
+            <p>I <b><%=details.first_name %></b> hereby declare that tasks to be performed have been shown to all workers registered below for this inspection.</p>
+
+            <div class="dynamic-stuff">
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="add-one btn btn-primary" onclick="addRisk();">Add More</button>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+           <button type="submit" class="btn btn-success">Submit Form</button>
+        </form>
+      </div>
+    </div>
+  <div class="col-sm-3"></div>
+</div>
+<% include templates/footer %>
