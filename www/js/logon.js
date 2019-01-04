@@ -2,7 +2,7 @@ $(document).ready(function(){
 //  onclick="document.getElementById('body2').style.display = 'block';
 //  document.getElementById('body1').style.display = 'none';"
 //  $('#sidebar').addClass('active');
-
+var boxCondition = [];
 
     $('#loginForm').submit(function(e){
         e.preventDefault();
@@ -48,7 +48,6 @@ $(document).ready(function(){
         $('.top_nav').show();
         $('#sidebar').removeClass('active');  //close side bar
         $('#accountsBody').show().siblings().hide();
-        console.log($('#accountsBody').siblings());
         
     });
 
@@ -85,6 +84,19 @@ $(document).ready(function(){
     $('.emm-body').click(function(){
         $('#sidebar').removeClass('active');
         $('#sidebarUser').removeClass('active');
+    });
+
+    $('#conditionA').submit(function(e){
+        e.preventDefault();
+        let conditionAData = {
+            boxDoor : $('#boxDoor :selected').text(),
+            boxDamage : $('#boxDamage :selected').text(),
+            plinthVisible : $('#plinthVisible :selected').text(),
+            plinthCondition : $('#plinthCondition :selected').text(),
+            plinthDefect : $('#plinthDefect').text(),
+        }
+        // console.log(conditionAData.boxDamage);
+        console.log($('#plinthDefect').text());
     });
 
     // $('#sidebarCollapse').on('click', function () {

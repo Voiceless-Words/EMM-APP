@@ -367,7 +367,86 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Inspection form here..</p>
+        <div class="row no-margin">
+            <div class="col-12">
+                <form id="conditionA">
+                    <h3>Box Condition</h3>
+                    <div class="form-group">
+                        <label for="boxDoor">Can all the doors be opened, and secured?</label>
+                        <select class="form-control" required id="boxDoor">
+                            <option value="">--select one--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="boxDamage">Visible body damage?</label>
+                        <select class="form-control" required id="boxDamage">
+                            <option value="">--select one--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="plinthVisible">Plinth Visible?</label>
+                        <select class="form-control" required id="plinthVisible">
+                            <option value="">--select one--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="plinthCondition">Plinth in a good Condition?</label>
+                        <select class="form-control" required id="plinthCondition">
+                            <option value="">--select one--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="plinthDefect">State Defect</label>
+                        <textarea class="form-control" name="plinthDefect" id="plinthDefect" rows="3" required></textarea>
+                    </div>
+                    <input type="submit" value="Next" class="btn btn-primary">
+                </form>
+                <form id="conditionB">
+                    <h3>Electronics</h3>
+                    <div class="form-group">
+                        <label for="electronic">Electronics Available?</label>
+                        <select class="form-control" required id="electronic">
+                            <option value="">--select one--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="electSecure">Visible body damage?</label>
+                        <select class="form-control" required id="electSecure">
+                            <option value="">--select one--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="electDoor">Plinth Visible?</label>
+                        <select class="form-control" required id="electDoor">
+                            <option value="">--select one--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="electTransponder">Plinth in a good Condition?</label>
+                        <select class="form-control" required id="electTransponder">
+                            <option value="">--select one--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <input type="submit" value="Next" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary">Save changes</button>
