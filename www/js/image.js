@@ -7,7 +7,7 @@ function onDeviceReady(){
 function cameraTakePicture(){
   navigator.camera.getPicture(onSuccess, onFail, {
     quality:75,
-    destinationType: Camera.DestinationType.DATA_URL
+    destinationType: Camera.DestinationType.FILE_URI
   });
 
   function onSuccess(){
