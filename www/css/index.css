@@ -197,3 +197,16 @@ input[type='text'], input[type='password'], input[type='email'], input[type='dat
     margin:0;
 }
 
+.plinthDefectParent, #conditionB, #elect, #meterC1, #addCableForm, .addCable, #conditionButton, .markJobFinished{
+    display: none;
+}
+
+#conditionButton {
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+    padding: 1em;
+}
+
+.addCable {
+    max-height: 100px;
+}
+
