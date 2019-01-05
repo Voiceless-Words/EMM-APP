@@ -1,4 +1,17 @@
-document.addEventListener("deviceready", onDeviceReady, false);
+(function(){
+  var bareObj = Object.create(null);
+  Object.defineProperty(bareObj, {
+    'key': {
+    value: 'value',
+    enumerable: false,
+    configurable: true,
+    writable: true
+  }
+});
+console.log(bareObj);
+})();
+
+/*document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady(){
   document.getElementById('cameraTakePicture').addEventListener('click', cameraTakePicture);
@@ -18,4 +31,4 @@ function cameraTakePicture(){
   function onFail(){
     alert("Failed to load because this shit happened" + message);
   }
-}
+}*/

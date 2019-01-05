@@ -1,4 +1,25 @@
 $(document).ready(function(){
+  var request = indexedDB.open('formInputs', 1);
+
+  request.onupgradeneeded = function(event){
+    var db = event.target.result;
+    if(!db.objectStoreNames.contains('formInputs')){
+      var os = db.createObjectStore('formInputs', {keyPath: "id", autoIncrement: true});
+      os.createIndex('name', 'name', {unique:false});
+    }
+  }
+  //succes
+  request.onsuccess = function(event){
+    console.log('success database open');
+    db = event.target.result;
+  };
+        //error
+  request.onerror = function(event){
+    console.log('error database not opened');
+  };
+});
+
+$(document).ready(function(){
 //  onclick="document.getElementById('body2').style.display = 'block';
 //  document.getElementById('body1').style.display = 'none';"
 //  $('#sidebar').addClass('active');
@@ -23,11 +44,11 @@ var boxCondition = [];
 	//         type : "POST",
 	//         url : 'http://192.168.43.152:8080/cordova',
 	//         success : function(data) {
-				
+
 	//                 $('#loginBody').hide();
 	//                 $('#dashboardBody').show();
 	//                 $('#content').show();
-				
+
 	//         }
 	//     });
 	});
@@ -48,7 +69,7 @@ var boxCondition = [];
 		$('.top_nav').show();
 		$('#sidebar').removeClass('active');  //close side bar
 		$('#accountsBody').show().siblings().hide();
-		
+
 	});
 
 	$('.dashboardButton').click(function(){
@@ -134,6 +155,59 @@ var boxCondition = [];
 		// select where data-jobNumber == jobNumber and set disabled to true
 		jobs['status'] = 1;
 		jobs[jobNumber]['cables'] = cablesObj;
+
+    if(navigator.onLine){
+        //get values here piet
+        var jobNo = Object.keys(jobs)[0];
+        console.log(jobNo);
+        var formData = JSON.stringify(jobs);
+        $.ajax({
+          url: "http://localhost:8080/save_form",
+          type: "POST",
+          dataType: "json",
+          data: {data:formData},
+          contentType: "application/json",
+          cache: false,
+          timeout: 5000,
+
+          complete: function() {
+            console.log('process complete');
+          },
+
+          success: function(data) {
+            console.log(data);
+            console.log('process sucess');
+          },
+          error: function() {
+            console.log('process error');
+          },
+        });
+      console.log("We are on the line");
+    }
+    else{
+      //add the values from the form
+      var transaction = db.transaction(["formInputs"], "readwrite");
+
+      var store = transaction.objectStore("formInputs");
+
+      //all the values goes here
+      var formInput = jobs;
+
+      var request = store.add(formInput);
+
+      //onsuccess
+      request.onsuccess = function(e){
+        console.log("The form data was saved");
+        window.location.href="localhost:81/www/index.html"
+      }
+
+      //error
+      request.onerror = function(e){
+        alert("sorry form data was not added");
+        console.log('Error', e.target.error.name);
+      }
+    }
+    console.log("You are off the line");
 		console.log(jobs);
 		var clean;
 		conditionAData = clean;
@@ -183,9 +257,9 @@ var jobNumber = 0;
 		name = "cable"+cableCount;
 		$('#addCableForm').show();
 		$('#conditionButton').hide();
-		
+
 	});
-	
+
 	$('#addCableForm').submit(function (e) {
 		e.preventDefault();
 		cablesObj['cableCount'] = cableCount;

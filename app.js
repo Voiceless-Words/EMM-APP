@@ -165,6 +165,7 @@ app.get('/logon', function (req, res){
 });
 
 app.get('/form', function(req, res){
+app.post('/form_save', function(req, res){
   res.render('form', {
 				title : 'emmapp',
 				details : {'first_name':'Anist', 'admin' : '0'}
