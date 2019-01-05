@@ -4,6 +4,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const ejs = require('ejs');
+const cors = require('cors');
 
 
 const path = require('path');
@@ -12,6 +13,10 @@ mongoose.set('useCreateIndex', true);
 mongoose.connect("mongodb+srv://admin:"+ process.env.DB_PASSWORD +"@cluster0-xzip0.mongodb.net/emm?retryWrites=true" ,  { useNewUrlParser: true })
 
 var app = express();
+
+app.use(cors());
+
+
 var server = app.listen(8080, function(){
     console.log("server started port 8080");
 });
