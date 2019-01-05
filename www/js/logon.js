@@ -28,6 +28,43 @@ var boxCondition = [];
 	$('#loginForm').submit(function(e){
 		e.preventDefault();
 		console.log("sending");
+
+		var username = document.getElementById('employeeNumber').value;
+		var password = document.getElementById('loginPassword').value;
+
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+   		if (this.readyState == 4 && this.status == 200) {
+
+   				var response = JSON.parse(this.responseText);
+   				console.log(response.status);
+
+   				if (response.status == 2) {
+   					$('#loginBody').hide();
+					$('#dashboardBody').show();
+					$('#content').show();
+   				}
+   				else if (response.status == 1) {
+   					$('#loginBody').hide();
+					$('#dashboardBodyUser').show();
+					$('#contentUser').show();
+   				}
+   				else if (response.status == -1)
+   				{
+   					alert('show Interface to create password');
+   				}
+   				else
+   				{
+   					alert('Incorrect Credentials');
+   				}
+   				
+   			}
+		}
+		xhttp.open("POST", "http://localhost:8080/user/login", true);
+   		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   		xhttp.send('username='+username
+   			+"&password="+password);
+/*
 		if ($('#loginPassword').val() == 1)
 		{
 			$('#loginBody').hide();
@@ -39,7 +76,7 @@ var boxCondition = [];
 			$('#loginBody').hide();
 			$('#dashboardBody').show();
 			$('#content').show();
-		}
+		} */
 	//     $.ajax({
 	//         type : "POST",
 	//         url : 'http://192.168.43.152:8080/cordova',

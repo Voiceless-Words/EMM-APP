@@ -42,7 +42,7 @@ router.post('/login', function(req, res){
                     {
                         res.send(JSON.stringify({
                             error : errors,
-                            status : -1
+                            status : -1,
                         }));
                     }
                     else
