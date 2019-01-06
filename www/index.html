@@ -130,6 +130,32 @@
                <div class="col-sm-3"></div>
            </div>
         </div>
+        <div class="align-items-center" id="createPasswordBody">
+           <div class="row no-margin">
+               <div class="col-sm-3"></div>
+               <div class="col-sm-6 p-4">
+                   <div class="avatar"></div>
+                    <h2 class="text-center">Welcome! Please create a password</h2>
+                    <form id="createPasswordForm" class="p-4">
+                        <div class="form-group">
+                            <label for="employeeNumber_create">Employee number</label>
+                            <input type="text" class="form-control" id="employeeNumber_create" aria-describedby="empHelp" disabled>
+                            <small id="empHelp" class="form-text text-muted">Create a password for this employee number</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword_create">Password</label>
+                            <input type="password" class="form-control" id="loginPassword_create" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="cloginPassword_create">Password</label>
+                            <input type="password" class="form-control" id="cloginPassword_create" placeholder="Confirm Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Password</button>
+                    </form>
+               </div>
+               <div class="col-sm-3"></div>
+           </div>
+        </div>
         <div class="align-items-center" id="dashboardBody">
             <div class="row  no-margin">
                 <div class="col-sm-2"></div>
@@ -204,40 +230,48 @@
                     <div class="col-12 pt-4 pb-4">
                         <ul class="nav nav-tabs nav-fill">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Add Users</a>
+                                <a class="nav-link active" data-toggle="tab" href="#registerForm">Add Users</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Remove Users</a>
+                                <a class="nav-link" data-toggle="tab" href="#removeUsersForm">Remove Users</a>
                             </li>
                         </ul>
                     </div>
-                    <form id="registerForm" class="p-4">
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="Enter First Name...">
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name..">
-                        </div>
-                        <div class="form-group">
-                            <label for="regEmployeeNumber">Employee number</label>
-                            <input type="text" class="form-control" id="regEmployeeNumber" aria-describedby="empHelp" placeholder="Enter Employee number">
-                            <small id="empHelp" class="form-text text-muted">This is a unique number for every employee.</small>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-2">Setting</div>
-                            <div class="col-sm-10">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="adminSetting">
-                                    <label class="form-check-label" for="adminSetting">
-                                    give admin rights
-                                    </label>
+                    <div class="tab-content">
+                        <form id="registerForm" class="tab-pane in active p-4">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="Enter First Name...">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name..">
+                            </div>
+                            <div class="form-group">
+                                <label for="regEmployeeNumber">Employee number</label>
+                                <input type="text" class="form-control" id="regEmployeeNumber" aria-describedby="empHelp" placeholder="Enter Employee number">
+                                <small id="empHelp" class="form-text text-muted">This is a unique number for every employee.</small>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-2">Setting</div>
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="adminSetting">
+                                        <label class="form-check-label" for="adminSetting">
+                                        give admin rights
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add User</button>
-                    </form>
+                            <button type="submit" class="btn btn-primary">Add User</button>
+                        </form>
+                        <form id="removeUsersForm" class="p-4 tab-pane fade in">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="Enter First Name...">
+                            </div>
+                        </form>
+                    </div>
                     <button id="cameraTakePicture">Take Photo</button>
                     <img id="myImage">
                </div>
@@ -253,54 +287,80 @@
                     <div class="col-12 p-4">
                         <ul class="nav nav-tabs nav-fill">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Add New Job</a>
+                                <a class="nav-link active" data-toggle="tab" href="#createJobForm">Add New Job</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">Review Jobs</a>
+                                <a class="nav-link" data-toggle="tab" href="#reviewJobTab">Review Jobs</a>
                             </li>
                         </ul>
-                        <form class="p-4">
-                            <div class="form-group">
-                                <label for="addJob-jobCardNumber">Jobcard Number</label>
-                                <input type="email" class="form-control" id="addJob-jobCardNumber" placeholder="Enter job card number here...">
+                        <div class="tab-content">
+                            <form class="p-4 tab-pane in active" id="createJobForm">
+                                <div class="form-group">
+                                    <label for="addJob-jobCardNumber">Jobcard Number</label>
+                                    <input type="email" class="form-control" id="addJob-jobCardNumber" placeholder="Enter job card number here...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="addJob-assets">Select an asset number</label>
+                                    <select class="form-control" id="addJob-assets">
+                                        <option>GE7736</option>
+                                        <option>GE7737</option>
+                                        <option>GE7738</option>
+                                        <option>GE7739</option>
+                                        <option>GE7740</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addJob-jobCardNumber">Asset Desription</label>
+                                    <p>MV SUBSTATION - JC2 PHP CRESCENT</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addJob-requiredByDate">Required by:</label>
+                                    <input type="date" name="requiredByDate" id="addJob-requiredByDate">
+                                </div>
+                                <div class="form-group">
+                                    <label for="addJob-activity">Select an Activity</label>
+                                    <select class="form-control" id="addJob-activity">
+                                        <option>Primary Substation Inspection</option>
+                                        <option>Secondary Substation Inspection</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addJob-assign">Assign job to: <small>max : 3 people</small> </label>
+                                    <select multiple class="form-control" id="addJob-assign">
+                                        <option>Dora</option>
+                                        <option>Sofia</option>
+                                        <option>Nella</option>
+                                        <option>Elsa</option>
+                                        <option>Cinderella</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Create JobCard</button>
+                            </form>
+                            <div id="reviewJobTab">
+                                <form action="" class="p-4">
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <input class="form-control" type="search" placeholder="Search for Job Card" id="jobCardSearch">
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="jobSearchResults">
+                                    <h2 class="text-center">1 match</h2>
+                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lightT userJobCard" data-toggle="modal" data-target=".bd-example-modal-lg" data-jobNumber="7879341">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <span class="mb-1">Job Number : 7879341</span>
+                                            <small>3 days ago</small>
+                                        </div>
+                                        <strong class="mb-1">Assigned to</strong>
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <span>Dora</span><span>Sofia</span><span>Elsa</span>
+                                        </div>
+                                        <p>Primary Substation Inspection</p>
+                                        <small>Due Date: 23/05/19</small>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="addJob-assets">Select an asset number</label>
-                                <select class="form-control" id="addJob-assets">
-                                    <option>GE7736</option>
-                                    <option>GE7737</option>
-                                    <option>GE7738</option>
-                                    <option>GE7739</option>
-                                    <option>GE7740</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="addJob-jobCardNumber">Asset Desription</label>
-                                <p>MV SUBSTATION - JC2 PHP CRESCENT</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="addJob-requiredByDate">Required by:</label>
-                                <input type="date" name="requiredByDate" id="addJob-requiredByDate">
-                            </div>
-                            <div class="form-group">
-                                <label for="addJob-activity">Select an Activity</label>
-                                <select class="form-control" id="addJob-activity">
-                                    <option>Primary Substation Inspection</option>
-                                    <option>Secondary Substation Inspection</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="addJob-assign">Assign job to: <small>max : 3 people</small> </label>
-                                <select multiple class="form-control" id="addJob-assign">
-                                    <option>Dora</option>
-                                    <option>Sofia</option>
-                                    <option>Nella</option>
-                                    <option>Elsa</option>
-                                    <option>Cinderella</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Create JobCard</button>
-                        </form>
+                        </div>
                     </div>
 
                </div>
@@ -363,14 +423,14 @@
   <div class="modal-dialog  modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Inspection Form</h5>
+        <h5 class="modal-title">Inspection Form: <span class="jobDisplay"></span></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="row no-margin">
-            <div class="col-12">
+            <div class="col-12 formContainer">
                 <form id="conditionA">
                     <h3>Box Condition</h3>
                     <div class="form-group">
@@ -566,7 +626,7 @@
                         <label for="standConnected">Stands Connected to Enclosure, please specify stand no.</label>
                         <input class="form-control" type="text" id="standConnected" placeholder="Please specify stand number" required="">
                     </div>
-                    <input type="submit" value="Save Cable">
+                    <input type="submit" class="btn btn-primary" value="Save Cable">
                     </div>
                 </form>
                 <div class="col-12 flex-column justify-content-center color1 p-4 mb-2"  id="conditionButton">
@@ -588,6 +648,6 @@
         <script src="css/jquery-3.3.1.min.js"></script>
         <script src="css/bs/js/bootstrap.min.js"></script>
         <script src="js/logon.js"></script>
-        <script type="text/javascript" src="js/image.js">
+        <script type="text/javascript" src="js/image.js"></script>
     </body>
 </html>

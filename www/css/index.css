@@ -27,7 +27,7 @@ body {
     background-size: cover;
 }
 
-#dashboardBody, #accountsBody, #jobCardBody, #helpBody,#dashboardBodyUser, #assignedJobsBody {
+#dashboardBody, #accountsBody, #jobCardBody, #helpBody,#dashboardBodyUser, #assignedJobsBody, #createPasswordBody {
     display: none;
     width: 100vw;
 }
@@ -180,7 +180,7 @@ ul ul a {
     background: linear-gradient(45deg, rgba(34,193,195,0.5) 0%, rgba(253,187,45,0.4) 100%);
 }
 
-input[type='text'], input[type='password'], input[type='email'], input[type='date'], select.form-control, input[type='checkbox'] {
+input[type='text'], input[type='password'], input[type='email'], input[type='date'], select.form-control, input[type='checkbox'], input[type='search'] {
     background-color: rgba(0, 0, 0, 0.1);
     color: white;
     border-radius: 20px;
