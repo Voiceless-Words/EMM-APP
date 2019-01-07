@@ -297,16 +297,17 @@
                             <form class="p-4 tab-pane in active" id="createJobForm">
                                 <div class="form-group">
                                     <label for="addJob-jobCardNumber">Jobcard Number</label>
-                                    <input type="email" class="form-control" id="addJob-jobCardNumber" placeholder="Enter job card number here...">
+                                    <input type="text" class="form-control" id="addJob-jobCardNumber" placeholder="Enter job card number here..." required>
                                 </div>
                                 <div class="form-group">
                                     <label for="addJob-assets">Select an asset number</label>
                                     <select class="form-control" id="addJob-assets">
-                                        <option>GE7736</option>
-                                        <option>GE7737</option>
-                                        <option>GE7738</option>
-                                        <option>GE7739</option>
-                                        <option>GE7740</option>
+                                        <option value="">--Please select one--</option>
+                                        <option value="GE7736">GE7736</option>
+                                        <option value="GE7736">GE7737</option>
+                                        <option value="GE7736">GE7738</option>
+                                        <option value="GE7736">GE7739</option>
+                                        <option value="GE7736">GE7740</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -320,23 +321,25 @@
                                 <div class="form-group">
                                     <label for="addJob-activity">Select an Activity</label>
                                     <select class="form-control" id="addJob-activity">
-                                        <option>Primary Substation Inspection</option>
-                                        <option>Secondary Substation Inspection</option>
+                                        <option value="">--Please select one--</option>
+                                        <option value="PSI">Primary Substation Inspection</option>
+                                        <option value="SSI">Secondary Substation Inspection</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="addJob-assign">Assign job to: <small>max : 3 people</small> </label>
                                     <select multiple class="form-control" id="addJob-assign">
-                                        <option>Dora</option>
-                                        <option>Sofia</option>
-                                        <option>Nella</option>
-                                        <option>Elsa</option>
-                                        <option>Cinderella</option>
+                                        <option value="">--Please select one--</option>
+                                        <option value="Dora">Dora</option>
+                                        <option value="Sofia">Sofia</option>
+                                        <option value="Nella">Nella</option>
+                                        <option value="Elsa">Elsa</option>
+                                        <option value="Cinderella">Cinderella</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Create JobCard</button>
                             </form>
-                            <div id="reviewJobTab">
+                            <div id="reviewJobTab" class="tab-pane fade in">
                                 <form action="" class="p-4">
                                     <div class="form-group row">
                                         <div class="col-12">
@@ -649,5 +652,6 @@
         <script src="css/bs/js/bootstrap.min.js"></script>
         <script src="js/logon.js"></script>
         <script type="text/javascript" src="js/image.js"></script>
+        <script type="text/javascript" src="js/manageJobs.js"></script>
     </body>
 </html>

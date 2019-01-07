@@ -41,7 +41,7 @@ var boxCondition = [];
    				}
    			}
 		}
-		xhttp.open("POST", "http://localhost:8080/user/login", true);
+		xhttp.open("POST", "http://192.168.43.152:8080/user/login", true);
    		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
    		xhttp.send('username='+username
    			+"&password="+password);
