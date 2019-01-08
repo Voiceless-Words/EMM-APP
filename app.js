@@ -172,25 +172,32 @@ app.get('/logon', function (req, res){
 });
 
 app.post('/form_save', function(req, res){
+
   var obj = JSON.parse(req.body.form);
-  var no = req.body.jobNo
+  var no = req.body.jobNo;
   var cables = obj[no]['cables'];
-  var con1 = obj[no]['conditionAData']
-  var con2 = obj[no]['conditionBData']
-  /*var form = new Forms({
+  var number = cables.cableCount;
+  var con1 = obj[no]['conditionAData'];
+  var con2 = obj[no]['conditionBData'];
+  var form = new Forms({
     jobnumber: no,
     conditionA: con1,
     conditionB: con2,
     cables: cables,
     time: Date.now()
   });
+
   form.save(function (err) {
   if (err) return handleError(err);
+
   console.log("saved akere");
-});*/
+
+});
+
   console.log(cables);
   console.log(con1);
   console.log(con2);
+  console.log(number);
   res.send("success");
 });
 
