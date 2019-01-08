@@ -147,9 +147,9 @@ app.post('/getview', function(req, res) {
 				assets : assets,
 				users : users
 
-			});	
+			});
 			}
-			
+
 		});
 
 
@@ -186,27 +186,8 @@ app.get('/logon', function (req, res){
     res.render('logon');
 });
 
-app.post('/jobcard_save', function(req, res){
-
-  var obj = JSON.parse(req.body.newjob);
-  
-  var jobcard = new JobCard({
-  	jobCardNumber: obj.jobNumber,
-    permitNumber: 34567890,
-    assetName: obj.jobAssets,
-    activity: obj.jobActivity,
-    status: '0',
-    employee_id: obj.jobAssignedTo,
-    created_by: 'Need to get current user somehow',
-    time : Date.now()
-  });
-
-  JobCard.save(function (err) {
-  if (err) return handleError(err);
-
-  console.log("saved akere");
-});
-
+app.get('/inspection', function (req, res){
+    res.render('inspection');
 });
 
 app.post('/form_save', function(req, res){
