@@ -145,9 +145,9 @@ app.post('/getview', function(req, res) {
 				assets : assets,
 				users : users
 
-			});	
+			});
 			}
-			
+
 		});
 
 
@@ -182,6 +182,10 @@ app.post('/createjobcard', function(req, res) {
 
 app.get('/logon', function (req, res){
     res.render('logon');
+});
+
+app.get('/inspection', function (req, res){
+    res.render('inspection');
 });
 
 app.post('/form_save', function(req, res){
