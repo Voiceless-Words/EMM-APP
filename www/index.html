@@ -187,7 +187,7 @@
                             <div class="align-items-center px-4 pt-4">
                                 <i class="fas fa-edit d-flex flex-row justify-content-center"></i><br />
                             </div>
-                                <p class="text-center text-white">Manage Jobs</p>
+                                <a href="#createJobForm" onclick="getjobstuff()"><p class="text-center text-white">Manage Jobs</p></a>
                         </div>
                     </div>
                 </div>
@@ -291,7 +291,7 @@
                     <div class="col-12 p-4">
                         <ul class="nav nav-tabs nav-fill">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#createJobForm">Add New Job</a>
+                                <a class="nav-link active" data-toggle="tab" href="#createJobForm" onclick="getjobstuff()">Add New Job</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#reviewJobTab">Review Jobs</a>
@@ -301,22 +301,17 @@
                             <form class="p-4 tab-pane in active" id="createJobForm">
                                 <div class="form-group">
                                     <label for="addJob-jobCardNumber">Jobcard Number</label>
-                                    <input type="text" class="form-control" id="addJob-jobCardNumber" placeholder="Enter job card number here..." required>
+                                    <input type="text" class="form-control" id="addJob-jobCardNumber" placeholder="Enter job card number here..." disabled required>
                                 </div>
                                 <div class="form-group">
                                     <label for="addJob-assets">Select an asset number</label>
-                                    <select class="form-control" id="addJob-assets">
-                                        <option value="">--Please select one--</option>
-                                        <option value="GE7736">GE7736</option>
-                                        <option value="GE7736">GE7737</option>
-                                        <option value="GE7736">GE7738</option>
-                                        <option value="GE7736">GE7739</option>
-                                        <option value="GE7736">GE7740</option>
+                                    <select class="form-control" id="addJob-assets" oninput="getdescription()">
+                                        <option>--Please select one--</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="addJob-jobCardNumber">Asset Desription</label>
-                                    <p>MV SUBSTATION - JC2 PHP CRESCENT</p>
+                                    <p id="asset_description"><i>No Asset Selected</i></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="addJob-requiredByDate">Required by:</label>
@@ -331,14 +326,10 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <p id="Assign to :"></p>
                                     <label for="addJob-assign">Assign job to: <small>max : 3 people</small> </label>
-                                    <select multiple class="form-control" id="addJob-assign">
+                                    <select multiple class="form-control" id="addJob-assign" oninput="recordselect()">
                                         <option value="">--Please select one--</option>
-                                        <option value="Dora">Dora</option>
-                                        <option value="Sofia">Sofia</option>
-                                        <option value="Nella">Nella</option>
-                                        <option value="Elsa">Elsa</option>
-                                        <option value="Cinderella">Cinderella</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Create JobCard</button>
