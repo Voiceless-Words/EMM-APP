@@ -89,7 +89,8 @@ router.post('/register', function(req, res){
         first_name: req.body.first_name,
         last_name : req.body.last_name,
         password : req.body.password,
-        contact : req.body.contact
+        contact : req.body.contact,
+        admin : req.body.admin
     };
     // console.log(newUser);
     //will parse the data here *dont forget

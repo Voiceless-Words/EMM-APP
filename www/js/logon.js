@@ -29,8 +29,8 @@ var boxCondition = [];
 		e.preventDefault();
 		console.log("sending");
 
-		var username = document.getElementById('employeeNumber').value;
-		var password = document.getElementById('loginPassword').value;
+		var username = $('#employeeNumber').val();
+		var password = $('#loginPassword').val();
 
 		xhttp.onreadystatechange = function() {
    		if (this.readyState == 4 && this.status == 200) {
@@ -51,16 +51,22 @@ var boxCondition = [];
    				else if (response.status == -1)
    				{
    					alert('show Interface to create password');
+					   console.log(username);
+					$('#employeeNumber_create').val(username);
+					$('#createPasswordBody').show().siblings().hide();
    				}
    				else
    				{
    					alert('Incorrect Credentials');
    				}
+<<<<<<< HEAD
    				
 
+=======
+>>>>>>> 19afd988611c6ebfec4cb624aebadf2eeeba81f0
    			}
 		}
-		xhttp.open("POST", "http://localhost:8080/user/login", true);
+		xhttp.open("POST", "http://192.168.43.152:8080/user/login", true);
    		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
    		xhttp.send('username='+username
    			+"&password="+password);
@@ -178,16 +184,20 @@ var boxCondition = [];
 			working : $('#working :selected').text(),
 			remote : $('#remote :selected').text(),
 		}
-		$('#conditionA').hide();
-		$('#conditionB').hide();
-		$('#conditionButton').show();
-		$('.addCable').show();
+		$('#conditionA').hide().siblings().hide();
+		$('.addCable').show().siblings().show();
 		$('.markJobFinished').show();
 		// console.log(conditionAData.boxDamage);
-		console.log($('#plinthDefect').text());
 		jobs[jobNumber]['conditionAData'] = conditionAData;
 		jobs[jobNumber]['conditionBData'] = conditionBData;
 		console.log(jobs);
+	});
+
+	$('#conditionButton').click(function(){
+		$('#conditionA').show().siblings().hide();
+		$('.formContainer').show().siblings().hide();
+		$('.markJobFinished').hide();
+
 	});
 
 	$('.markJobFinished').click(function(){
@@ -264,23 +274,24 @@ var boxCondition = [];
 		conditionBData = clean;
 		cableCount = 0;
 		cableCount = clean;
-		$('#conditionButton').hide();
 		$('#conditionA').show();
-		$('.addCable').hide();
-		$('.cables').hide();
+		$('.addCable').hide().siblings().hide();
 		$('.markJobFinished').hide();
 		$('.closeModal').click();
-		$('[data-jobNumber="'+jobNumber).hide()+'"]';
+		$('[data-jobNumber="'+jobNumber+'"]').hide();
+		$('#conditionA')[0].reset();
+		$('#conditionB')[0].reset();
 	});
 var jobNumber = 0;
 	$('.userJobCard').click(function(){
 		$('#addCableForm').hide();
+		$('.formContainer').show();
 		console.log(typeof conditionAData);
 		if (conditionAData)
 		{
-			$('#conditionButton').show();
-			$('#conditionA').hide();
-			$('.addCable').show();
+			$('#conditionButton').show().siblings().show();
+			$('.markJobFinished').show();
+			$('#conditionA').hide().siblings().hide();
 		}
 		else {
 			$('#conditionA').show();
@@ -295,6 +306,8 @@ var jobNumber = 0;
 			jobs['status'] = 0;
 		}
 		console.log(jobs);
+		$('#addCableForm')[0].reset();
+		$('.jobDisplay').text(jobNumber);
 	});
 
 	var cableCount = 0;
@@ -306,8 +319,13 @@ var jobNumber = 0;
 		cableCount++;
 		name = "cable"+cableCount;
 		$('#addCableForm').show();
+<<<<<<< HEAD
 		$('#conditionButton').hide();
 
+=======
+		$('.formContainer').show().siblings().hide();
+		$('.markJobFinished').hide();
+>>>>>>> 19afd988611c6ebfec4cb624aebadf2eeeba81f0
 	});
 
 	$('#addCableForm').submit(function (e) {
@@ -319,19 +337,42 @@ var jobNumber = 0;
 			label : $('#label :selected').text(),
 			fitted : $('#fitted :selected').text(),
 			size : $('#size :selected').text(),
-			meter : $('#meter :selected').text(),
+			meter : $('#meter :selected').val(),
 			meterSeals : $('#meterSeals :selected').val(),
 			meterSealsColour : $('#meterSealsColour :selected').val(),
 			meterBypassed : $('#meterBypassed :selected').val(),
 			standConnected : $('#standConnected').val(),
 		};
 		var current = $('.cables').html();
-		current += `<div class="col-12 btn btn-primary mt-2 mb-2 text-center"><strong>${name}</strong></div>`;
+		current += `<div class="col-12 btn btn-primary mt-2 mb-2 text-center cableSelect" data-cableName="${name}"><strong>${name}</strong></div>`;
 		$('.cables').html(current);
-		$('#conditionButton').show();
-		$('.addCable').show();
+		$('.addCable').show().siblings().show();
 		$('#addCableForm').hide();
+		$('#addCableForm')[0].reset();
+		$('.markJobFinished').show();
 		console.log(cablesObj);
+	});
+
+	$(document).on('click', ".cableSelect", function(){
+		var name = $(this).attr("data-cableName");
+		console.log(cablesObj);
+		$("#correct option[value="+ cablesObj[name].correct +"]").prop('selected', 'selected');
+		$("#tag option[value="+ cablesObj[name].tag +"]").prop('selected', 'selected');
+		$("#label option[value="+ cablesObj[name].label +"]").prop('selected', 'selected');
+		$("#fitted option[value="+ cablesObj[name].fitted +"]").prop('selected', 'selected');
+		$("#size option[value="+ cablesObj[name].size +"]").prop('selected', 'selected');
+		$("#meter option[value="+ cablesObj[name].meter +"]").prop('selected', 'selected');
+		if (cablesObj[name].meter != "NA")
+		{
+			$("#meterSeals option[value="+ cablesObj[name].meterSeals +"]").prop('selected', 'selected');
+			$("#meterSealsColour option[value="+ cablesObj[name].meterSealsColour +"]").prop('selected', 'selected');
+			$("#meterBypassed option[value="+ cablesObj[name].meterBypassed +"]").prop('selected', 'selected');
+		}
+		$("#standConnected option[value="+ cablesObj[name].standConnected +"]").prop('selected', 'selected');
+
+		$('#addCableForm').show();
+		$('.formContainer').show().siblings().hide();
+		$('.markJobFinished').hide();
 	});
 
 	// $('#sidebarCollapse').on('click', function () {
