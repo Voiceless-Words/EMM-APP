@@ -33,24 +33,32 @@ $(document).ready(function(){
         var i = 0;
         while(i < myRecords.length)
         {
+          console.log(myRecords[i]);
           var jobNo = Object.keys(myRecords[i])[0];
           var jobNo1 = Object.keys(myRecords[i])[1];
+          var jobNo2 = Object.keys(myRecords[i])[2];
           var stringD = JSON.stringify(myRecords[i][jobNo1]);
-
-          /*$.ajax({
+          var num = myRecords[i][jobNo];
+          console.log(stringD);
+          $.ajax({
             url:"http://localhost:8080/form_save",
             data:{
-              jobNo: jobNo,
+              jobNo: num,
               form:stringD,
             },
             error: function () {
               console.log("Something wrong happened");
             },
             succes: function () {
-              console.log("Successful ajax");
+              console.log("Successful ajax sent");
             },
             type: 'POST'
-          });*/
+          });
+          var deleteValue = objectStore.delete(myRecords[i][jobNo2]);
+
+          deleteValue.onsuccess = function(event) {
+            console.log("Deleted the value");
+          }
           i++;
         }
       }
@@ -247,7 +255,6 @@ var boxCondition = [];
         var jobNo = Object.keys(jobs)[0];
         console.log(jobNo);
         var stringD = JSON.stringify(jobs);
-
         $.ajax({
           url:"http://localhost:8080/form_save",
           data:{

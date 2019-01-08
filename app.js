@@ -194,8 +194,9 @@ app.post('/form_save', function(req, res){
 
   var obj = JSON.parse(req.body.form);
   var no = req.body.jobNo;
+  console.log(obj);
+  console.log(no);
   var cables = obj[no]['cables'];
-  var number = cables.cableCount;
   var con1 = obj[no]['conditionAData'];
   var con2 = obj[no]['conditionBData'];
 
@@ -214,10 +215,9 @@ app.post('/form_save', function(req, res){
 
 });
 
-  console.log(cables);
-  console.log(con1);
-  console.log(con2);
-  console.log(number);
+  //console.log(cables);
+  //console.log(con1);
+  //console.log(con2);
   res.send("success");
 });
 
