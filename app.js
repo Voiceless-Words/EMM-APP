@@ -169,13 +169,11 @@ app.get('/logon', function (req, res){
     res.render('logon');
 });
 
-app.get('/form', function(req, res){
 app.post('/form_save', function(req, res){
-  res.render('form', {
-				title : 'emmapp',
-				details : {'first_name':'Anist', 'admin' : '0'}
-				//This will be the details of the user who's logged in
-			});
+  console.log(req.body.jobNo);
+  console.log(req.body.form);
+  console.log(req.body.cables);
+  res.send("success");
 });
 
 app.use(function(req, res) {

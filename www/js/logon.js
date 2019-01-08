@@ -32,7 +32,6 @@ var boxCondition = [];
 		var username = document.getElementById('employeeNumber').value;
 		var password = document.getElementById('loginPassword').value;
 
-		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
    		if (this.readyState == 4 && this.status == 200) {
 
@@ -58,6 +57,7 @@ var boxCondition = [];
    					alert('Incorrect Credentials');
    				}
    				
+
    			}
 		}
 		xhttp.open("POST", "http://localhost:8080/user/login", true);
@@ -65,6 +65,7 @@ var boxCondition = [];
    		xhttp.send('username='+username
    			+"&password="+password);
 /*
+*/
 		if ($('#loginPassword').val() == 1)
 		{
 			$('#loginBody').hide();
@@ -77,6 +78,7 @@ var boxCondition = [];
 			$('#dashboardBody').show();
 			$('#content').show();
 		} */
+		}
 	//     $.ajax({
 	//         type : "POST",
 	//         url : 'http://192.168.43.152:8080/cordova',
@@ -197,32 +199,44 @@ var boxCondition = [];
         //get values here piet
         var jobNo = Object.keys(jobs)[0];
         console.log(jobNo);
-        var formData = JSON.stringify(jobs);
+        var stringD = JSON.stringify(jobs);
+
         $.ajax({
-          url: "http://localhost:8080/save_form",
-          type: "POST",
-          dataType: "json",
-          data: {data:formData},
-          contentType: "application/json",
-          cache: false,
-          timeout: 5000,
-
-          complete: function() {
-            console.log('process complete');
+          url:"http://localhost:8080/form_save",
+          data:{
+            jobNo: jobNo,
+            form:stringD,
+            cables: cablesObj
           },
-
-          success: function(data) {
-            console.log(data);
-            console.log('process sucess');
+          error: function () {
+            console.log("Something wrong happened");
           },
-          error: function() {
-            console.log('process error');
+          succes: function () {
+            console.log("Successful ajax");
           },
+          type: 'POST'
         });
-      console.log("We are on the line");
     }
     else{
       //add the values from the form
+      var jobNo = Object.keys(jobs)[0];
+      console.log(jobNo);
+      var stringD = JSON.stringify(jobs);
+
+      $.ajax({
+        url:"http://localhost:8080/form_save",
+        data:{
+          jobNo: jobNo,
+          form:stringD
+        },
+        error: function () {
+          console.log("Something wrong happened");
+        },
+        succes: function () {
+          console.log("Successful ajax");
+        },
+        type: 'POST'
+      });
       var transaction = db.transaction(["formInputs"], "readwrite");
 
       var store = transaction.objectStore("formInputs");
@@ -244,7 +258,6 @@ var boxCondition = [];
         console.log('Error', e.target.error.name);
       }
     }
-    console.log("You are off the line");
 		console.log(jobs);
 		var clean;
 		conditionAData = clean;
