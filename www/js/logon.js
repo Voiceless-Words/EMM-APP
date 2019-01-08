@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
   var request = indexedDB.open('formInputs', 1);
 
@@ -5,13 +6,55 @@ $(document).ready(function(){
     var db = event.target.result;
     if(!db.objectStoreNames.contains('formInputs')){
       var os = db.createObjectStore('formInputs', {keyPath: "id", autoIncrement: true});
-      os.createIndex('name', 'name', {unique:false});
+      os.createIndex('jobNumber', 'jobNumber', {unique:true});
     }
   }
   //succes
   request.onsuccess = function(event){
     console.log('success database open');
     db = event.target.result;
+    if(navigator.onLine){
+      var transaction = db.transaction(["formInputs"], "readwrite");
+      transaction.onsuccess = function(event) {
+        console.log("Opened transaction successfully");
+      };
+
+      transaction.onerror = function(event) {
+        console.log("Transaction not complete: "+transaction.error);
+      }
+
+      var objectStore = transaction.objectStore("formInputs");
+      var storeRequest = objectStore.getAll();
+
+      storeRequest.onsuccess = function(event) {
+        console.log("request succesfull we get all records");
+
+        var myRecords = storeRequest.result;
+        var i = 0;
+        while(i < myRecords.length)
+        {
+          var jobNo = Object.keys(myRecords[i])[0];
+          var jobNo1 = Object.keys(myRecords[i])[1];
+          var stringD = JSON.stringify(myRecords[i][jobNo1]);
+
+          /*$.ajax({
+            url:"http://localhost:8080/form_save",
+            data:{
+              jobNo: jobNo,
+              form:stringD,
+            },
+            error: function () {
+              console.log("Something wrong happened");
+            },
+            succes: function () {
+              console.log("Successful ajax");
+            },
+            type: 'POST'
+          });*/
+          i++;
+        }
+      }
+    }
   };
         //error
   request.onerror = function(event){
@@ -27,7 +70,7 @@ var boxCondition = [];
 
 	$('#loginForm').submit(function(e){
 		e.preventDefault();
-		console.log("sending");
+		/*console.log("sending");
 
 		var username = $('#employeeNumber').val();
 		var password = $('#loginPassword').val();
@@ -64,8 +107,8 @@ var boxCondition = [];
 		xhttp.open("POST", "http://localhost:8080/user/login", true);
    		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
    		xhttp.send('username='+username
-   			+"&password="+password);
-/*
+   			+"&password="+password);*/
+
 
 		if ($('#loginPassword').val() == 1)
 		{
@@ -78,7 +121,7 @@ var boxCondition = [];
 			$('#loginBody').hide();
 			$('#dashboardBody').show();
 			$('#content').show();
-		} */
+		}
 	//     $.ajax({
 	//         type : "POST",
 	//         url : 'http://192.168.43.152:8080/cordova',
@@ -223,29 +266,12 @@ var boxCondition = [];
     else{
       //add the values from the form
       var jobNo = Object.keys(jobs)[0];
-      console.log(jobNo);
-      var stringD = JSON.stringify(jobs);
-
-      /*$.ajax({
-        url:"http://localhost:8080/form_save",
-        data:{
-          jobNo: jobNo,
-          form:stringD
-        },
-        error: function () {
-          console.log("Something wrong happened");
-        },
-        succes: function () {
-          console.log("Successful ajax");
-        },
-        type: 'POST'
-      });*/
       var transaction = db.transaction(["formInputs"], "readwrite");
 
       var store = transaction.objectStore("formInputs");
 
       //all the values goes here
-      var formInput = jobs;
+      var formInput = {jobNumber: jobNo, jobs:jobs};
 
       var request = store.add(formInput);
 
