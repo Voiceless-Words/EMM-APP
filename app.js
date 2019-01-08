@@ -33,6 +33,8 @@ const Forms = require('./models/form');
 
 const JobCard = require('./models/jobCard');
 
+const JobSave = require('./models/jobSave');
+
 //session middleware
  app.use(session({
      secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true
@@ -190,6 +192,24 @@ app.get('/inspection', function (req, res){
     res.render('inspection');
 });
 
+app.post('/jobcard_save', function(req, res){
+  var val = JSON.parse(req.body.newjob);
+  console.log(val.jobNumber);
+  var job = new JobSave({
+    jobCardNumber: val.jobNumber,
+    assetName: val.jobAssets,
+    activity: val.jobActivity,
+    status: 0,
+    employee_id: val.jobAssignedTo,
+    time : Date.now()
+  });
+  job.save(function (err) {
+  if (err) return handleError(err);
+
+  console.log("saved the job");
+
+});
+});
 app.post('/form_save', function(req, res){
 
   var obj = JSON.parse(req.body.form);
