@@ -31,7 +31,7 @@ var boxCondition = [];
 
 		var username = $('#employeeNumber').val();
 		var password = $('#loginPassword').val();
-
+    var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
    		if (this.readyState == 4 && this.status == 200) {
 
@@ -59,11 +59,6 @@ var boxCondition = [];
    				{
    					alert('Incorrect Credentials');
    				}
-<<<<<<< HEAD
-   				
-
-=======
->>>>>>> 19afd988611c6ebfec4cb624aebadf2eeeba81f0
    			}
 		}
 		xhttp.open("POST", "http://192.168.43.152:8080/user/login", true);
@@ -83,7 +78,6 @@ var boxCondition = [];
 			$('#loginBody').hide();
 			$('#dashboardBody').show();
 			$('#content').show();
-		} */
 		}
 	//     $.ajax({
 	//         type : "POST",
@@ -216,7 +210,6 @@ var boxCondition = [];
           data:{
             jobNo: jobNo,
             form:stringD,
-            cables: cablesObj
           },
           error: function () {
             console.log("Something wrong happened");
@@ -233,7 +226,7 @@ var boxCondition = [];
       console.log(jobNo);
       var stringD = JSON.stringify(jobs);
 
-      $.ajax({
+      /*$.ajax({
         url:"http://localhost:8080/form_save",
         data:{
           jobNo: jobNo,
@@ -246,7 +239,7 @@ var boxCondition = [];
           console.log("Successful ajax");
         },
         type: 'POST'
-      });
+      });*/
       var transaction = db.transaction(["formInputs"], "readwrite");
 
       var store = transaction.objectStore("formInputs");
@@ -319,13 +312,10 @@ var jobNumber = 0;
 		cableCount++;
 		name = "cable"+cableCount;
 		$('#addCableForm').show();
-<<<<<<< HEAD
 		$('#conditionButton').hide();
 
-=======
 		$('.formContainer').show().siblings().hide();
 		$('.markJobFinished').hide();
->>>>>>> 19afd988611c6ebfec4cb624aebadf2eeeba81f0
 	});
 
 	$('#addCableForm').submit(function (e) {

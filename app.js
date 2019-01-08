@@ -29,6 +29,8 @@ const Asset = require('./models/assets');
 
 const User = require('./models/users');
 
+const Forms = require('./models/form');
+
 //session middleware
  app.use(session({
      secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true
@@ -170,9 +172,25 @@ app.get('/logon', function (req, res){
 });
 
 app.post('/form_save', function(req, res){
-  console.log(req.body.jobNo);
-  console.log(req.body.form);
-  console.log(req.body.cables);
+  var obj = JSON.parse(req.body.form);
+  var no = req.body.jobNo
+  var cables = obj[no]['cables'];
+  var con1 = obj[no]['conditionAData']
+  var con2 = obj[no]['conditionBData']
+  /*var form = new Forms({
+    jobnumber: no,
+    conditionA: con1,
+    conditionB: con2,
+    cables: cables,
+    time: Date.now()
+  });
+  form.save(function (err) {
+  if (err) return handleError(err);
+  console.log("saved akere");
+});*/
+  console.log(cables);
+  console.log(con1);
+  console.log(con2);
   res.send("success");
 });
 
