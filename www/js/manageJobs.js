@@ -1,3 +1,7 @@
+
+var jobcardstuff = [];
+var people_list = [];
+
 $(document).ready(function(){
     var newJob;
     $('#createJobForm').submit(function(e){
@@ -7,20 +11,28 @@ $(document).ready(function(){
             jobAssets : $('#addJob-assets :selected').text(),
             jobRequiredByDate : $('#addJob-requiredByDate').val(),
             jobActivity : $('#addJob-activity :selected').text(),
-            jobAssignedTo : $('#Job-assign :selected').text(),
+            jobAssignedTo : people_list,
 
         };
         $('#createJobForm')[0].reset();
         console.log(newJob);
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+                
+            console.log('New Job Card Created');
+            alert('New Job Card Created');
+            
+            }
+        }
+        xhttp.open("POST", "http://localhost:8080/jobcard_save", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send('newjob='+JSON.stringify(newJob));
     });
 
     // Do as u like with the form data obj newJob
-
-    console.log(JSON.stringify(newJob));
-
 });
-
-var jobcardstuff = []
 
 function getjobstuff() {
         var d = Number(new Date());
@@ -54,13 +66,9 @@ function getjobstuff() {
                    
                 });
 
-
                 }
-                   
-                
+                          
                 jobcardstuff = [response.users, response.assets]
-
-
             }
         }
         xhttp.open("POST", "http://localhost:8080/getview", true);
@@ -81,6 +89,46 @@ function getdescription() {
     });
     if (found == 0) {
         document.getElementById('asset_description').innerHTML = '<i>No Asset Selected</i>';        
+    }
+    
+}
+
+function recordselect() {
+    var added = 0;
+    var i = 0;
+
+    if (event.target.value == '0') {
+        people_list = [];
+        document.getElementById('people').innerHTML = '';
+        document.getElementById('msg').innerHTML = '<div class="alert alert-success"><strong>Cleared!</strong> Please assign jobcard</div>';
+    }
+    else {
+        if (people_list.length < 3 ) {
+
+            people_list.forEach((user_id)=>{
+                if (user_id == event.target.value) {
+                    added = 1;
+                }
+            });
+
+            if (added != 1) 
+            {
+                people_list.push(event.target.value);
+                jobcardstuff[0].forEach((user) => {
+            
+                    if (user.employee_id == event.target.value) {
+                        document.getElementById('people').innerHTML += user.first_name +' '+user.last_name + " <br>";
+                        document.getElementById('msg').innerHTML = '<div class="alert alert-success">'+user.first_name+' is queued for this Jobcard</div>';
+                    }
+                });
+            }
+            else 
+                document.getElementById('msg').innerHTML = '<div class="alert alert-info">This user is already queued for this Jobcard</div>';
+        }
+        else {
+            document.getElementById('msg').innerHTML = '<div class="alert alert-warning">You may add upto 3 employees only</div>';
+        }
+
     }
     
 }

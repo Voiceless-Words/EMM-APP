@@ -328,8 +328,10 @@
                                 <div class="form-group">
                                     <p id="Assign to :"></p>
                                     <label for="addJob-assign">Assign job to: <small>max : 3 people</small> </label>
+                                    <p id="people"></p>
+                                    <div id="msg"></div>
                                     <select multiple class="form-control" id="addJob-assign" oninput="recordselect()">
-                                        <option value="">--Please select one--</option>
+                                        <option value="0">select / clear</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Create JobCard</button>

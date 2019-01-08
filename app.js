@@ -31,6 +31,8 @@ const User = require('./models/users');
 
 const Forms = require('./models/form');
 
+const JobCard = require('./models/jobCard');
+
 //session middleware
  app.use(session({
      secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true
@@ -184,6 +186,29 @@ app.get('/logon', function (req, res){
     res.render('logon');
 });
 
+app.post('/jobcard_save', function(req, res){
+
+  var obj = JSON.parse(req.body.newjob);
+  
+  var jobcard = new JobCard({
+  	jobCardNumber: obj.jobNumber,
+    permitNumber: 34567890,
+    assetName: obj.jobAssets,
+    activity: obj.jobActivity,
+    status: '0',
+    employee_id: obj.jobAssignedTo,
+    created_by: 'Need to get current user somehow',
+    time : Date.now()
+  });
+
+  JobCard.save(function (err) {
+  if (err) return handleError(err);
+
+  console.log("saved akere");
+});
+
+});
+
 app.post('/form_save', function(req, res){
 
   var obj = JSON.parse(req.body.form);
@@ -192,6 +217,7 @@ app.post('/form_save', function(req, res){
   var number = cables.cableCount;
   var con1 = obj[no]['conditionAData'];
   var con2 = obj[no]['conditionBData'];
+
   var form = new Forms({
     jobnumber: no,
     conditionA: con1,
