@@ -61,12 +61,12 @@ var boxCondition = [];
    				}
    			}
 		}
-		xhttp.open("POST", "http://192.168.43.152:8080/user/login", true);
+		xhttp.open("POST", "http://localhost:8080/user/login", true);
    		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
    		xhttp.send('username='+username
    			+"&password="+password);
 /*
-*/
+
 		if ($('#loginPassword').val() == 1)
 		{
 			$('#loginBody').hide();
@@ -78,7 +78,7 @@ var boxCondition = [];
 			$('#loginBody').hide();
 			$('#dashboardBody').show();
 			$('#content').show();
-		}
+		} */
 	//     $.ajax({
 	//         type : "POST",
 	//         url : 'http://192.168.43.152:8080/cordova',

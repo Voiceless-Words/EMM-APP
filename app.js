@@ -128,13 +128,26 @@ app.post('/getview', function(req, res) {
 			if (err) throw err;
 			console.log(users);
 
-			res.render('templates/createjobcardform', {
+			if (req.body.format == 'JSON') {
+				var newjobforminfo = {
+					'users' : users,
+					'assets' : assets
+				}
+				console.log(newjobforminfo);
+				res.send(newjobforminfo);
+				res.end();
+			}
+			else
+			{
+				res.render('templates/createjobcardform', {
 				title : 'emmapp',
 				details : {'first_name':'Anist', 'admin' : '1'},
 				assets : assets,
 				users : users
 
-			});
+			});	
+			}
+			
 		});
 
 
