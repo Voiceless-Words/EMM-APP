@@ -78,7 +78,7 @@ var boxCondition = [];
 
 	$('#loginForm').submit(function(e){
 		e.preventDefault();
-		/*console.log("sending");
+		console.log("sending");
 
 		var username = $('#employeeNumber').val();
 		var password = $('#loginPassword').val();
@@ -115,21 +115,21 @@ var boxCondition = [];
 		xhttp.open("POST", "http://localhost:8080/user/login", true);
    		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
    		xhttp.send('username='+username
-   			+"&password="+password);*/
+   			+"&password="+password);
 
 
-		if ($('#loginPassword').val() == 1)
-		{
-			$('#loginBody').hide();
-			$('#dashboardBodyUser').show();
-			$('#contentUser').show();
-		}
-		else
-		{
-			$('#loginBody').hide();
-			$('#dashboardBody').show();
-			$('#content').show();
-		}
+		// if ($('#loginPassword').val() == 1)
+		// {
+		// 	$('#loginBody').hide();
+		// 	$('#dashboardBodyUser').show();
+		// 	$('#contentUser').show();
+		// }
+		// else
+		// {
+		// 	$('#loginBody').hide();
+		// 	$('#dashboardBody').show();
+		// 	$('#content').show();
+		// }
 	//     $.ajax({
 	//         type : "POST",
 	//         url : 'http://192.168.43.152:8080/cordova',
@@ -159,6 +159,13 @@ var boxCondition = [];
 		$('.top_nav').show();
 		$('#sidebar').removeClass('active');  //close side bar
 		$('#accountsBody').show().siblings().hide();
+
+	});
+	
+	$('.adminProfile').click(function(){
+		$('.top_nav').show();
+		$('#sidebar').removeClass('active');  //close side bar
+		$('#adminProfile').show().siblings().hide();
 
 	});
 

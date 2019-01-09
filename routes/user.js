@@ -19,7 +19,7 @@ router.use(function(req, res, next){
 
 router.post('/login', function(req, res){
     var status = 0;
-    // console.log(req.body);
+    console.log(req.body);
 
     User.findOne({ employee_id: req.body.username }, function(err, user) {
         // console.log("login----------->");
@@ -48,11 +48,11 @@ router.post('/login', function(req, res){
                     else
                     {
                         //set session
-                            // req.session.user = employee id
+                            // req.session.user = req.body.username;
                          User.find({"employee_id": { "$regex": req.body.username, "$options": "i"}})
                         .then(users => {
                                 req.session.user = users[0].employee_id;
-                                // console.log("session set as "+req.session.user);
+                                console.log("session set as "+req.session.user);
                                 res.send(JSON.stringify({
                                     error : errors,
                                     status : status
@@ -135,8 +135,8 @@ router.post('/update', function(req, res){
             .then(users => {
                     console.log(users);
 
-                    // req.session.user = users[0].employee_id;
-                    // console.log("session set as "+req.session.user);
+                    req.session.user = users[0].employee_id;
+                    console.log("session set as "+req.session.user);
                     res.send(JSON.stringify({
                         status : 200
                     }));

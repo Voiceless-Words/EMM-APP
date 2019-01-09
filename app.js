@@ -23,6 +23,7 @@ var server = app.listen(8080, function(){
 
 const user = require('./routes/user');
 const search = require('./routes/search');
+const data = require('./routes/data');
 //const dashboarda = require('./routes/dashboarda');
 
 const Asset = require('./models/assets');
@@ -56,6 +57,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //use user
 app.use('/user', user);
 app.use('/search', search);
+app.use('/data', passSession, data);
 
 //app.use('/dashboarda', dashboarda);
 
@@ -63,11 +65,6 @@ app.use(function(req, res, next){
     errors = [];
     next();
 });
-
-app.post('/cordova', (req, res) =>{
-	console.log("cordova");
-	res.send("hitting the server");
-})
 
 app.get('/', function (req, res){
     res.render('index');
@@ -103,9 +100,6 @@ app.get('/dashboarda', function(req, res) {
 
 
 	});
-
-
-
 });
 
 
@@ -272,4 +266,10 @@ function isAdmin(req, res, next){
 	else {
 		res.render('index');
 	}
+}
+
+function passSession (res, req, next) {
+	console.log('session in app');
+	console.log(req.session);
+	next();
 }
