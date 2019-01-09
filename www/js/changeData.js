@@ -1,8 +1,5 @@
 $(document).ready(function(){
-    var user;
     $('#changeAdminFirstName').submit(function(e){
-        user = $('#employeeNumber').val();
-        console.log(user);
         e.preventDefault();
         console.log('attempting change');
         if ($('#adminFirstName').val().length > 5)
@@ -14,7 +11,6 @@ $(document).ready(function(){
     });
     $('#changeAdminLastName').submit(function(e){
         user = $('#employeeNumber').val();
-        console.log(user);
         e.preventDefault();
         if ($('#adminLastName').val().length > 5)
         {
@@ -26,14 +22,13 @@ $(document).ready(function(){
 
     function changeField(name, value)
     {
-        console.log(user);
         $.ajax({
             type : "POST",
             url : 'http://localhost:8080/data/update_field',
             data : {
                 name : name,
                 value : value,
-                id : user
+                id : window.user
             },
             success : function(data) {
                 console.log(data);

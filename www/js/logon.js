@@ -1,73 +1,73 @@
 
 $(document).ready(function(){
-  var request = indexedDB.open('formInputs', 1);
+	var request = indexedDB.open('formInputs', 1);
 
-  request.onupgradeneeded = function(event){
-    var db = event.target.result;
-    if(!db.objectStoreNames.contains('formInputs')){
-      var os = db.createObjectStore('formInputs', {keyPath: "id", autoIncrement: true});
-      os.createIndex('jobNumber', 'jobNumber', {unique:true});
-    }
-  }
-  //succes
-  request.onsuccess = function(event){
-    console.log('success database open');
-    db = event.target.result;
-    if(navigator.onLine){
-      var transaction = db.transaction(["formInputs"], "readwrite");
-      transaction.onsuccess = function(event) {
-        console.log("Opened transaction successfully");
-      };
+	request.onupgradeneeded = function(event){
+		var db = event.target.result;
+		if(!db.objectStoreNames.contains('formInputs')){
+			var os = db.createObjectStore('formInputs', {keyPath: "id", autoIncrement: true});
+			os.createIndex('jobNumber', 'jobNumber', {unique:true});
+		}
+	}
+	//succes
+	request.onsuccess = function(event){
+		console.log('success database open');
+		db = event.target.result;
+		if(navigator.onLine){
+			var transaction = db.transaction(["formInputs"], "readwrite");
+			transaction.onsuccess = function(event) {
+				console.log("Opened transaction successfully");
+			};
 
-      transaction.onerror = function(event) {
-        console.log("Transaction not complete: "+transaction.error);
-      }
+			transaction.onerror = function(event) {
+				console.log("Transaction not complete: "+transaction.error);
+			}
 
-      var objectStore = transaction.objectStore("formInputs");
-      var storeRequest = objectStore.getAll();
+			var objectStore = transaction.objectStore("formInputs");
+			var storeRequest = objectStore.getAll();
 
-      storeRequest.onsuccess = function(event) {
-        console.log("request succesfull we get all records");
+			storeRequest.onsuccess = function(event) {
+				console.log("request succesfull we get all records");
 
-        var myRecords = storeRequest.result;
-        var i = 0;
-        while(i < myRecords.length)
-        {
-          console.log(myRecords[i]);
-          var jobNo = Object.keys(myRecords[i])[0];
-          var jobNo1 = Object.keys(myRecords[i])[1];
-          var jobNo2 = Object.keys(myRecords[i])[2];
-          var stringD = JSON.stringify(myRecords[i][jobNo1]);
-          var num = myRecords[i][jobNo];
-          console.log(stringD);
-          $.ajax({
-            url:"http://localhost:8080/form_save",
-            data:{
-              jobNo: num,
-              form:stringD,
-            },
-            error: function () {
-              console.log("Something wrong happened");
-            },
-            succes: function () {
-              console.log("Successful ajax sent");
-            },
-            type: 'POST'
-          });
-          var deleteValue = objectStore.delete(myRecords[i][jobNo2]);
+				var myRecords = storeRequest.result;
+				var i = 0;
+				while(i < myRecords.length)
+				{
+					console.log(myRecords[i]);
+					var jobNo = Object.keys(myRecords[i])[0];
+					var jobNo1 = Object.keys(myRecords[i])[1];
+					var jobNo2 = Object.keys(myRecords[i])[2];
+					var stringD = JSON.stringify(myRecords[i][jobNo1]);
+					var num = myRecords[i][jobNo];
+					console.log(stringD);
+					$.ajax({
+						url:"http://localhost:8080/form_save",
+						data:{
+							jobNo: num,
+							form:stringD,
+						},
+						error: function () {
+							console.log("Something wrong happened");
+						},
+						succes: function () {
+							console.log("Successful ajax sent");
+						},
+						type: 'POST'
+					});
+					var deleteValue = objectStore.delete(myRecords[i][jobNo2]);
 
-          deleteValue.onsuccess = function(event) {
-            console.log("Deleted the value");
-          }
-          i++;
-        }
-      }
-    }
-  };
-        //error
-  request.onerror = function(event){
-    console.log('error database not opened');
-  };
+					deleteValue.onsuccess = function(event) {
+						console.log("Deleted the value");
+					}
+					i++;
+				}
+			}
+		}
+	};
+				//error
+	request.onerror = function(event){
+		console.log('error database not opened');
+	};
 });
 
 $(document).ready(function(){
@@ -80,56 +80,58 @@ var boxCondition = [];
 		e.preventDefault();
 		console.log("sending");
 
-		/*var username = $('#employeeNumber').val();
+		var username = $('#employeeNumber').val();
 		var password = $('#loginPassword').val();
-    var xhttp = new XMLHttpRequest();
+		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
-   		if (this.readyState == 4 && this.status == 200) {
+	 		if (this.readyState == 4 && this.status == 200) {
 
-   				var response = JSON.parse(this.responseText);
-   				console.log(response.status);
+	 				var response = JSON.parse(this.responseText);
+	 				console.log(response.status);
 
-   				if (response.status == 2) {
-   					$('#loginBody').hide();
-					$('#dashboardBody').show();
-					$('#content').show();
-   				}
-   				else if (response.status == 1) {
-   					$('#loginBody').hide();
-					$('#dashboardBodyUser').show();
-					$('#contentUser').show();
-   				}
-   				else if (response.status == -1)
-   				{
-   					alert('show Interface to create password');
-					   console.log(username);
+	 				if (response.status == 2) {
+	 					$('#loginBody').hide();
+                        $('#dashboardBody').show();
+                        $('#content').show();
+                        window.user = username;
+	 				}
+	 				else if (response.status == 1) {
+						$('#loginBody').hide();
+						$('#dashboardBodyUser').show();
+						$('#contentUser').show();
+						window.user = username;
+	 				}
+	 				else if (response.status == -1)
+	 				{
+	 					alert('show Interface to create password');
+						 console.log(username);
 					$('#employeeNumber_create').val(username);
 					$('#createPasswordBody').show().siblings().hide();
-   				}
-   				else
-   				{
-   					alert('Incorrect Credentials');
-   				}
-   			}
+	 				}
+	 				else
+	 				{
+	 					alert('Incorrect Credentials');
+	 				}
+	 			}
 		}
 		xhttp.open("POST", "http://localhost:8080/user/login", true);
-   		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-   		xhttp.send('username='+username
-   			+"&password="+password);*/
+	 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	 		xhttp.send('username='+username
+	 			+"&password="+password);
 
 
-		 if ($('#loginPassword').val() == 1)
-		 {
-		 	$('#loginBody').hide();
-			$('#dashboardBodyUser').show();
-		 	$('#contentUser').show();
-		 }
-		 else
-		 {
-			$('#loginBody').hide();
-		 	$('#dashboardBody').show();
-		 	$('#content').show();
-		 }
+		//  if ($('#loginPassword').val() == 1)
+		//  {
+		//  	$('#loginBody').hide();
+		// 	$('#dashboardBodyUser').show();
+		//  	$('#contentUser').show();
+		//  }
+		//  else
+		//  {
+		// 	$('#loginBody').hide();
+		//  	$('#dashboardBody').show();
+		//  	$('#content').show();
+		//  }
 	//     $.ajax({
 	//         type : "POST",
 	//         url : 'http://192.168.43.152:8080/cordova',
@@ -228,13 +230,13 @@ var boxCondition = [];
 		e.preventDefault();
 			conditionBData = {
 			electronic : $('#electronic :selected').text(),
-			electSecure : $('#electSecure :selected').text(),
-			electDoor : $('#electDoor :selected').text(),
-			electTransponder : $('#electTransponder :selected').text(),
-			electDoorBypassed : $('#electDoorBypassed :selected').text(),
-			battery : $('#battery :selected').text(),
-			working : $('#working :selected').text(),
-			remote : $('#remote :selected').text(),
+			electSecure : $('#electSecure :selected').val(),
+			electDoor : $('#electDoor :selected').val(),
+			electTransponder : $('#electTransponder :selected').val(),
+			electDoorBypassed : $('#electDoorBypassed :selected').val(),
+			battery : $('#battery :selected').val(),
+			working : $('#working :selected').val(),
+			remote : $('#remote :selected').val(),
 		}
 		$('#conditionA').hide().siblings().hide();
 		$('.addCable').show().siblings().show();
@@ -242,7 +244,7 @@ var boxCondition = [];
 		// console.log(conditionAData.boxDamage);
 		jobs[jobNumber]['conditionAData'] = conditionAData;
 		jobs[jobNumber]['conditionBData'] = conditionBData;
-		console.log(jobs);
+		// console.log(jobs);
 	});
 
 	$('#conditionButton').click(function(){
@@ -257,50 +259,50 @@ var boxCondition = [];
 		jobs['status'] = 1;
 		jobs[jobNumber]['cables'] = cablesObj;
 
-    if(navigator.onLine){
-        //get values here piet
-        var jobNo = Object.keys(jobs)[0];
-        console.log(jobNo);
-        var stringD = JSON.stringify(jobs);
-        $.ajax({
-          url:"http://localhost:8080/form_save",
-          data:{
-            jobNo: jobNo,
-            form:stringD,
-          },
-          error: function () {
-            console.log("Something wrong happened");
-          },
-          succes: function () {
-            console.log("Successful ajax");
-          },
-          type: 'POST'
-        });
-    }
-    else{
-      //add the values from the form
-      var jobNo = Object.keys(jobs)[0];
-      var transaction = db.transaction(["formInputs"], "readwrite");
+		if(navigator.onLine){
+				//get values here piet
+				var jobNo = Object.keys(jobs)[0];
+				console.log(jobNo);
+				var stringD = JSON.stringify(jobs);
+				$.ajax({
+					url:"http://localhost:8080/form_save",
+					data:{
+						jobNo: jobNo,
+						form:stringD,
+					},
+					error: function () {
+						console.log("Something wrong happened");
+					},
+					succes: function () {
+						console.log("Successful ajax");
+					},
+					type: 'POST'
+				});
+		}
+		else{
+			//add the values from the form
+			var jobNo = Object.keys(jobs)[0];
+			var transaction = db.transaction(["formInputs"], "readwrite");
 
-      var store = transaction.objectStore("formInputs");
+			var store = transaction.objectStore("formInputs");
 
-      //all the values goes here
-      var formInput = {jobNumber: jobNo, jobs:jobs};
+			//all the values goes here
+			var formInput = {jobNumber: jobNo, jobs:jobs};
 
-      var request = store.add(formInput);
+			var request = store.add(formInput);
 
-      //onsuccess
-      request.onsuccess = function(e){
-        console.log("The form data was saved");
-        window.location.href="localhost:81/www/index.html"
-      }
+			//onsuccess
+			request.onsuccess = function(e){
+				console.log("The form data was saved");
+				window.location.href="localhost:81/www/index.html"
+			}
 
-      //error
-      request.onerror = function(e){
-        alert("sorry form data was not added");
-        console.log('Error', e.target.error.name);
-      }
-    }
+			//error
+			request.onerror = function(e){
+				alert("sorry form data was not added");
+				console.log('Error', e.target.error.name);
+			}
+		}
 		console.log(jobs);
 		var clean;
 		conditionAData = clean;
@@ -358,10 +360,10 @@ var jobNumber = 0;
 
 	$('#addCableForm').submit(function (e) {
 		e.preventDefault();
-    var name = cableCount;
+		var name = cableCount;
 		//cablesObj['cableCount'] = cableCount;
 		cablesObj.push({
-      name: "cable"+cableCount,
+			name: "cable"+cableCount,
 			correct : $('#correct :selected').text(),
 			tag : $('#tag :selected').text(),
 			label : $('#label :selected').text(),
