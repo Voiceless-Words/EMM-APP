@@ -225,6 +225,7 @@ app.post('/form_save', function(req, res){
   var cables = obj[no]['cables'];
   var con1 = obj[no]['conditionAData'];
   var con2 = obj[no]['conditionBData'];
+  var completedby = obj[no]['completedby'];
 
   var form = new Forms({
     jobnumber: no,
@@ -232,6 +233,7 @@ app.post('/form_save', function(req, res){
     conditionB: con2,
     cables: cables,
     reviewStatus: 0,
+    completedby: completedby,
     time: Date.now()
   });
 
