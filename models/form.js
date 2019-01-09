@@ -32,6 +32,7 @@ var formSchema = new Schema({
       meterBypassed: {type: String},
       standConnected: {type: String}
  }],
+    reviewStatus: {type: Number},
     time : { type : Date, default: Date.now }
 });
 

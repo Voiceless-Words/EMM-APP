@@ -114,6 +114,18 @@ app.get('/register', function(req, res) {
 	res.render('register');
 });
 
+app.post('/reviewjob', function(req, res){
+  if (req.body.view == 'data')
+  {
+    Forms.find({'reviewStatus': '0'}, function(err, values){
+      if (err) throw err;
+      console.log(values)
+			res.send(values);
+			res.end();
+    });
+  }
+});
+
 app.post('/getview', function(req, res) {
 
 	if (req.body.view == 'createjobcard') {
@@ -219,6 +231,7 @@ app.post('/form_save', function(req, res){
     conditionA: con1,
     conditionB: con2,
     cables: cables,
+    reviewStatus: 0,
     time: Date.now()
   });
 
