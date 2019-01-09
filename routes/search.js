@@ -73,7 +73,8 @@ router.post('/reviewJob', function(req, res){
 
     Forms.find({
         $or: [
-                {"jobnumber": { "$regex": lookFor, "$options": "i"}}
+                {"jobnumber": { "$regex": lookFor, "$options": "i"}},
+                {"completedby": { "$regex": lookFor, "$options": "i"}}
             ]
         })
     .then(users => {

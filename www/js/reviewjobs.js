@@ -12,4 +12,7 @@ function reviewjobs(){
 }
 $(document).ready(function(){
 // .JobCardReview
+    $(document).on('click', ".JobCardReview", function(){
+        $('.jobDisplay').text($(this).attr('data-jobNumber'));
+    });
 });

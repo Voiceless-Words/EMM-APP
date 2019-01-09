@@ -44,7 +44,7 @@ $(document).ready(function(){
 						url:"http://localhost:8080/form_save",
 						data:{
 							jobNo: num,
-							form:stringD
+							form:stringD,
 						},
 						error: function () {
 							console.log("Something wrong happened");
@@ -259,7 +259,6 @@ var boxCondition = [];
 		// select where data-jobNumber == jobNumber and set disabled to true
 		jobs['status'] = 1;
 		jobs[jobNumber]['cables'] = cablesObj;
-    jobs[jobNumber]['completedby'] = window.user;
 
 		if(navigator.onLine){
 				//get values here piet
@@ -270,7 +269,7 @@ var boxCondition = [];
 					url:"http://localhost:8080/form_save",
 					data:{
 						jobNo: jobNo,
-						form:stringD
+						form:stringD,
 					},
 					error: function () {
 						console.log("Something wrong happened");
