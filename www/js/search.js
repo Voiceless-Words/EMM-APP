@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $("#searchReview").on("input", function () {
         searchReview( $("#jobCardSearch").val());
-        
+
     });
 
     function searchReview(value){
@@ -9,7 +9,7 @@ $(document).ready(function(){
         $('.jobSearchResults').html(output);
          $.ajax({
             type : "POST",
-            url : 'http://localhost:8080/search/reviewJob',
+            url : 'http://192.168.1.100:8080/search/reviewJob',
             data : {
                 value : value,
                 id : window.user

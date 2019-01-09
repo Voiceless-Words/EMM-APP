@@ -20,13 +20,13 @@ $(document).ready(function(){
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-                
+
             console.log('New Job Card Created');
             alert('New Job Card Created');
-            
+
             }
         }
-        xhttp.open("POST", "http://localhost:8080/jobcard_save", true);
+        xhttp.open("POST", "http://192.168.1.100:8080/jobcard_save", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send('newjob='+JSON.stringify(newJob));
     });
@@ -42,20 +42,20 @@ function getjobstuff() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-                
+
             //console.log(this.responseText.users);
                 var response = JSON.parse(this.responseText);
                 console.log(response.users);
                 console.log(response.assets);
 
-                
+
                 if (jobcardstuff.length != 2) {
 
                     response.users.forEach(function(user) {
                     var o = new Option(user.employee_id, user.employee_id);
                     $(o).html(user.first_name);
                     $("#addJob-assign").append(o)
-                   
+
                      });
 
 
@@ -63,15 +63,15 @@ function getjobstuff() {
                     var o = new Option(asset.name, asset.name);
                     $(o).html(asset.name);
                     $("#addJob-assets").append(o)
-                   
+
                 });
 
                 }
-                          
+
                 jobcardstuff = [response.users, response.assets]
             }
         }
-        xhttp.open("POST", "http://localhost:8080/getview", true);
+        xhttp.open("POST", "http://192.168.1.100:8080/getview", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send('view=createjobcard&format=JSON');
 }
@@ -88,9 +88,9 @@ function getdescription() {
         }
     });
     if (found == 0) {
-        document.getElementById('asset_description').innerHTML = '<i>No Asset Selected</i>';        
+        document.getElementById('asset_description').innerHTML = '<i>No Asset Selected</i>';
     }
-    
+
 }
 
 function recordselect() {
@@ -111,18 +111,18 @@ function recordselect() {
                 }
             });
 
-            if (added != 1) 
+            if (added != 1)
             {
                 people_list.push(event.target.value);
                 jobcardstuff[0].forEach((user) => {
-            
+
                     if (user.employee_id == event.target.value) {
                         document.getElementById('people').innerHTML += user.first_name +' '+user.last_name + " <br>";
                         document.getElementById('msg').innerHTML = '<div class="alert alert-success">'+user.first_name+' is queued for this Jobcard</div>';
                     }
                 });
             }
-            else 
+            else
                 document.getElementById('msg').innerHTML = '<div class="alert alert-info">This user is already queued for this Jobcard</div>';
         }
         else {
@@ -130,5 +130,5 @@ function recordselect() {
         }
 
     }
-    
+
 }

@@ -41,7 +41,7 @@ $(document).ready(function(){
 					var num = myRecords[i][jobNo];
 					console.log(stringD);
 					$.ajax({
-						url:"http://localhost:8080/form_save",
+						url:"http://192.168.1.100:8080/form_save",
 						data:{
 							jobNo: num,
 							form:stringD,
@@ -114,7 +114,7 @@ var boxCondition = [];
 	 				}
 	 			}
 		}
-		xhttp.open("POST", "http://localhost:8080/user/login", true);
+		xhttp.open("POST", "http://192.168.1.100:8080/user/login", true);
 	 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	 		xhttp.send('username='+username
 	 			+"&password="+password);
@@ -266,7 +266,7 @@ var boxCondition = [];
 				console.log(jobNo);
 				var stringD = JSON.stringify(jobs);
 				$.ajax({
-					url:"http://localhost:8080/form_save",
+					url:"http://192.168.1.100:8080/form_save",
 					data:{
 						jobNo: jobNo,
 						form:stringD,
@@ -295,7 +295,7 @@ var boxCondition = [];
 			//onsuccess
 			request.onsuccess = function(e){
 				console.log("The form data was saved");
-				window.location.href="localhost:81/www/index.html"
+				//window.location.href="localhost:81/www/index.html"
 			}
 
 			//error
