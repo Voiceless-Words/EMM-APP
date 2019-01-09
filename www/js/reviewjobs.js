@@ -10,3 +10,6 @@ function reviewjobs(){
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send('view=data&format=JSON');
 }
+$(document).ready(function(){
+// .JobCardReview
+});

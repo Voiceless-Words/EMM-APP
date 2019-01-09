@@ -6,6 +6,7 @@ const session = require('express-session');
 const router = express.Router();
 
 const User = require('../models/users');
+const Forms = require('../models/form');
 
  router.use(session({
      secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true
@@ -63,6 +64,21 @@ router.post('/all', function(req, res){
                 })
             };
             res.send(response);
+        })
+    .catch(error => { console.log(error); })
+});
+
+router.post('/reviewJob', function(req, res){
+    var lookFor = req.body.value;
+
+    Forms.find({
+        $or: [
+                {"jobnumber": { "$regex": lookFor, "$options": "i"}}
+            ]
+        })
+    .then(users => {
+            console.log(users);
+            res.send(users);
         })
     .catch(error => { console.log(error); })
 });

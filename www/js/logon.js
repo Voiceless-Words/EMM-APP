@@ -155,6 +155,7 @@ var boxCondition = [];
 		$('.top_nav').hide();
 		$('#loginBody').show().siblings().hide();
 		console.log("sign out");
+        window.user = 0;
 	});
 
 	$('.userAccountsButton').click(function(){
