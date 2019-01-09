@@ -33,6 +33,7 @@ var formSchema = new Schema({
       standConnected: {type: String}
  }],
     reviewStatus: {type: Number},
+    completedby:{type: String},
     time : { type : Date, default: Date.now }
 });
 
