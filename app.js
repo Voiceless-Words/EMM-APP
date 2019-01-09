@@ -199,13 +199,22 @@ app.get('/inspection', function (req, res){
 });
 
 app.post('/jobcard_save', function(req, res){
+
   var val = JSON.parse(req.body.newjob);
   console.log(val.jobNumber);
+  console.log(val.jobAssets);
+  console.log(val.jobActivity);
+  console.log(val.jobRequiredByDate);
+  console.log(val.jobCreatedBy);
+  console.log(val.jobAssignedTo);
+  
   var job = new JobSave({
     jobCardNumber: val.jobNumber,
     assetName: val.jobAssets,
     activity: val.jobActivity,
     status: 0,
+    requiredBy : val.jobRequiredByDate,
+    created_by: val.jobCreatedBy,
     employee_id: val.jobAssignedTo,
     time : Date.now()
   });

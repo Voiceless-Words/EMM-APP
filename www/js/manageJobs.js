@@ -12,6 +12,7 @@ $(document).ready(function(){
             jobRequiredByDate : $('#addJob-requiredByDate').val(),
             jobActivity : $('#addJob-activity :selected').text(),
             jobAssignedTo : people_list,
+            jobCreatedBy : window.user
 
         };
         $('#createJobForm')[0].reset();
