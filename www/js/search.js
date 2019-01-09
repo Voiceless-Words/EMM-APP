@@ -30,6 +30,7 @@ $(document).ready(function(){
                                     <span>Dora</span><span>Sofia</span><span>Elsa</span>
                                 </div>
                                 <p>Primary Substation Inspection</p>
+                                <p>status : closed -> by ${data[i]['completedby']}</p>
                                 <small>Due Date: 23/05/19</small>
                             </a>`;
                 }
