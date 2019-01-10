@@ -9,7 +9,7 @@ $(document).ready(function(){
         $('.jobSearchResults').html(output);
          $.ajax({
             type : "POST",
-            url : 'http://192.168.1.100:8080/search/reviewJob',
+            url : 'http://192.168.1.101:8080/search/reviewJob',
             data : {
                 value : value,
                 id : window.user
