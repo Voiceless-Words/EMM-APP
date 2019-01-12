@@ -1,15 +1,15 @@
-(function(){
-  var bareObj = Object.create(null);
-  Object.defineProperty(bareObj, {
-    'key': {
-    value: 'value',
-    enumerable: false,
-    configurable: true,
-    writable: true
-  }
-});
-console.log(bareObj);
-})();
+// (function(){
+//   var bareObj = Object.create(null);
+//   Object.defineProperty(bareObj, {
+//     'key': {
+//     value: 'value',
+//     enumerable: false,
+//     configurable: true,
+//     writable: true
+//   }
+// });
+// console.log(bareObj);
+// })();
 
 /*document.addEventListener("deviceready", onDeviceReady, false);
 

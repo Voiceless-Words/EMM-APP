@@ -68,56 +68,55 @@ $(document).ready(function(){
 	request.onerror = function(event){
 		console.log('error database not opened');
 	};
-});
 
-$(document).ready(function(){
 //  onclick="document.getElementById('body2').style.display = 'block';
 //  document.getElementById('body1').style.display = 'none';"
 //  $('#sidebar').addClass('active');
-var boxCondition = [];
+	var boxCondition = [];
 
-	$('#loginForm').submit(function(e){
-		e.preventDefault();
-		console.log("sending");
+	// $('#loginForm').submit(function(e){
+	// 	e.preventDefault();
+	// 	console.log("sending");
 
-		var username = $('#employeeNumber').val();
-		var password = $('#loginPassword').val();
-		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-	 		if (this.readyState == 4 && this.status == 200) {
+	// 	var username = $('#employeeNumber').val();
+	// 	var password = $('#loginPassword').val();
+	// 	var xhttp = new XMLHttpRequest();
+	// 	xhttp.onreadystatechange = function() {
+	//  		if (this.readyState == 4 && this.status == 200) {
 
-	 				var response = JSON.parse(this.responseText);
-	 				console.log(response.status);
+	//  				var response = JSON.parse(this.responseText);
+	//  				console.log(response.status);
 
-	 				if (response.status == 2) {
-	 					$('#loginBody').hide();
-                        $('#dashboardBody').show();
-                        $('#content').show();
-                        window.user = username;
-	 				}
-	 				else if (response.status == 1) {
-						$('#loginBody').hide();
-						$('#dashboardBodyUser').show();
-						$('#contentUser').show();
-						window.user = username;
-	 				}
-	 				else if (response.status == -1)
-	 				{
-	 					alert('show Interface to create password');
-						 console.log(username);
-					$('#employeeNumber_create').val(username);
-					$('#createPasswordBody').show().siblings().hide();
-	 				}
-	 				else
-	 				{
-	 					alert('Incorrect Credentials');
-	 				}
-	 			}
-		}
-		xhttp.open("POST", "http://emmapp.us.openode.io/user/login", true);
-	 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	 		xhttp.send('username='+username
-	 			+"&password="+password);
+	//  				if (response.status == 2) {
+	//  					$('#loginBody').hide();
+    //                     $('#dashboardBody').show();
+    //                     $('#content').show();
+    //                     window.user = username;
+	//  				}
+	//  				else if (response.status == 1) {
+	// 					$('#loginBody').hide();
+	// 					$('#dashboardBodyUser').show();
+	// 					$('#contentUser').show();
+	// 					window.user = username;
+	//  				}
+	//  				else if (response.status == -1)
+	//  				{
+	//  					alert('show Interface to create password');
+	// 					 console.log(username);
+	// 					$('#employeeNumber_create').val(username);
+	// 					$('#createPasswordBody').show().siblings().hide();
+
+	//  				}
+	//  				else
+	//  				{
+	//  					alert('Incorrect Credentials');
+	//  				}
+	//  			}
+	// 	}
+	// 	xhttp.open("POST", "http://emmapp.us.openode.io/user/login", true);
+	//  		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	//  		xhttp.send('username='+username
+	//  			+"&password="+password);
 
 
 		//  if ($('#loginPassword').val() == 1)
@@ -143,7 +142,7 @@ var boxCondition = [];
 
 	//         }
 	//     });
-	});
+	// });
 
 	$('.signOutBuutton').click(function(e){
 		$('#sidebar').removeClass('active');  //close side bar
@@ -408,16 +407,6 @@ var jobNumber = 0;
 		$('.markJobFinished').hide();
 	});
 
-	// $('#sidebarCollapse').on('click', function () {
-	//     // open or close navbar
-	//     $('#sidebar').toggleClass('active');
-	//     // close dropdowns
-	//     $('.collapse.in').toggleClass('in');
-	//     // and also adjust aria-expanded attributes we use for the open/closed arrows
-	//     // in our CSS
-	//     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-	// });
-
 	$("#addJob-assign").on('change', function(e) {
 		if (Object.keys($(this).val()).length > 3) {
 			$('option[value="' + $(this).val().toString().split(',')[3] + '"]').prop('selected', false);
@@ -444,5 +433,185 @@ var jobNumber = 0;
 		else
 			$('#meterC1').hide();
 	});
+
+	$("#loginForm").submit(function (e) {
+        e.preventDefault();
+		$(".status").html('').show();
+		console.log($(".status").html());
+        var user = {
+			username : $("#employeeNumber").val(),
+            password : $("#loginPassword").val()
+		};
+		check_data(user,  "http://emmapp.us.openode.io/user/login");
+    });
+
+	$("#registerForm").submit(function (e) {
+        e.preventDefault();
+		$(".status").html('').show();
+		console.log($(".status").html());
+        var user = {
+			employee_id : $("#regEmployeeNumber").val(),
+            first_name : $("#firstName").val(),
+            last_name : $("#lastName").val(),
+            contact : $("#contactNumber").val(),
+            password : 123456,
+			creator: window.user
+		}
+
+		check_data(user,  "http://emmapp.us.openode.io/user/register");
+    });
+
+	$("#createPasswordForm").submit(function (e) {
+        e.preventDefault();
+		$(".statusp").html('').show();
+		console.log($(".statusp").html());
+        var user = {
+			username : $("#employeeNumber_create").val(),
+            cpassword : $("#loginPassword_create").val(),
+            ccpassword : $("#cloginPassword_create").val(),
+		};
+		check_data(user,  "http://emmapp.us.openode.io/user/login");
+    });
+
+	function check_data(user, path)
+	{
+		var errors = [];
+
+		Object.keys(user).forEach(function(key) {
+
+			console.log(key, user[key]);
+			console.log(user);
+			if (key === "username" || key === "employee_id")
+			{
+				if (user[key].length < 7)
+					errors.push("<strong>"+key+"</strong> too short");
+				if (user[key].length > 7)
+					errors.push("<strong>"+key+"</strong> too long");
+			}
+			else if (key === "password" || key === "cpassword" || key === "ccpassword")
+			{
+				if (user[key].length < 6)
+					errors.push("<strong>Password</strong> too short");
+				else if (user[key].length > 30)
+					errors.push("<strong>Password</strong> too short");
+			}
+			else if (key === "first_name" || key === "last_name")
+			{
+				if (user[key].length < 2)
+					errors.push("<strong>"+key+"</strong> too short");
+				else if (user[key].length > 30)
+					errors.push("<strong>"+key+"</strong> too long");
+			}
+			else if (key === "contact")
+			{
+				if (user[key].length > 10)
+					errors.push("<strong>"+key+"</strong> too long");
+				if (user[key].length < 10)
+					errors.push("<strong>"+key+"</strong> too short");
+				if (parseInt(user[key]).length > 10)
+					errors.push("<strong>"+key+"</strong> Not valid");
+			}
+		});
+		
+		if (errors.length != 0)
+		{
+			var output= '';
+			for (var i = 0; i < errors.length; i++)
+			{
+				output += `<div class="alert alert-warning no-margin no-padding">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					${errors[i]}
+				</div>`;
+			}
+			$(".status").html(output).delay(5000).fadeOut();
+		}
+		else
+		{
+			if ("cpassword" in user)
+			{
+				update_field('password',{
+					username: user.username,
+					password: user.ccpassword
+				}, path);
+			}
+			else
+				submit_data(user, path);
+		}
+	}
+
+    function submit_data(user, path)
+    {
+        console.log("form submitted path = "+path);
+        $.ajax({
+            type : "POST",
+            url : path,
+            data : user,
+            success : function(data) {
+				data = JSON.parse(data);
+				console.log(data);
+                if (data.error.length > 0)
+				{
+					console.log("i have errors to print");
+					var output = '';
+					for (var i = 0; i < data.error.length; i++)
+					{
+						output += `<div class="alert no-margin no-padding">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							${data.error[i]}
+						</div>`;
+					}
+					$(".status").html(output).delay(5000).fadeOut();
+				}
+				else if (data.status == -1)
+				{
+					//force user to change the password
+					// alert("change password: Im working on it");
+					// console.log($('#changePassBtn').text());
+					// $('#myModal').modal('show');
+
+					// alert('show Interface to create password');
+						// console.log(username);
+					$('#employeeNumber_create').val(user.username);
+					$('#createPasswordBody').show().siblings().hide();
+				}
+				else if (data.status == 1)
+				{
+					$('#loginBody').hide();
+					$('#dashboardBodyUser').show();
+					$('#contentUser').show();
+					window.user = user.username;
+				}
+				else if (data.status == 2)
+				{
+					console.log("returned status 2");
+					$('#loginBody').hide();
+					$('#dashboardBody').show();
+					$('#content').show();
+					window.user = user.username;
+				}
+				if (path === "http://emmapp.us.openode.io/user/register")
+					$("#registerForm")[0].reset();
+            }
+        });
+    }
+
+	function update_field( name, user, path)
+    {
+
+        console.log(user);
+        $.ajax({
+            type : "POST",
+            url : "http://emmapp.us.openode.io/user/update",
+            data :{
+				user : user.username,
+				value : user.password
+			},
+            success : function() {
+				console.log("register");
+				console.log(user);
+				submit_data(user, path);
+            }
+        });
+    }
 
 });
