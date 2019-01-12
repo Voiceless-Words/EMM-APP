@@ -41,7 +41,7 @@ $(document).ready(function(){
 					var num = myRecords[i][jobNo];
 					console.log(stringD);
 					$.ajax({
-						url:"http://192.168.1.100:8080/form_save",
+						url:"http://emmapp.us.openode.io/form_save",
 						data:{
 							jobNo: num,
 							form:stringD,
@@ -114,7 +114,7 @@ var boxCondition = [];
 	 				}
 	 			}
 		}
-		xhttp.open("POST", "http://192.168.1.100:8080/user/login", true);
+		xhttp.open("POST", "http://emmapp.us.openode.io/user/login", true);
 	 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	 		xhttp.send('username='+username
 	 			+"&password="+password);
@@ -134,7 +134,7 @@ var boxCondition = [];
 		//  }
 	//     $.ajax({
 	//         type : "POST",
-	//         url : 'http://192.168.1.100:8080/cordova',
+	//         url : 'http://emmapp.us.openode.io/cordova',
 	//         success : function(data) {
 
 	//                 $('#loginBody').hide();
@@ -266,7 +266,7 @@ var boxCondition = [];
 				console.log(jobNo);
 				var stringD = JSON.stringify(jobs);
 				$.ajax({
-					url:"http://192.168.1.100:8080/form_save",
+					url:"http://emmapp.us.openode.io/form_save",
 					data:{
 						jobNo: jobNo,
 						form:stringD,
