@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('#changeAdminFirstName').submit(function(e){
-        e.preventDefault();
+        e.preventDefault(); 
         console.log('attempting change');
         if ($('#adminFirstName').val().length > 5)
         {
