@@ -9,7 +9,7 @@ $(document).ready(function(){
         $('.jobSearchResults').html(output);
          $.ajax({
             type : "POST",
-            url : 'http://emmapp.us.openode.io/search/reviewJob',
+            url : 'http://localhost:8080/search/reviewJob',
             data : {
                 value : value,
                 id : window.user

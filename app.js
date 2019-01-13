@@ -62,6 +62,7 @@ app.use('/data', passSession, data);
 //app.use('/dashboarda', dashboarda);
 
 app.use(function(req, res, next){
+	console.log(req.url);
     errors = [];
     next();
 });
@@ -223,7 +224,7 @@ app.post('/jobcard_save', function(req, res){
 
   console.log("saved the job");
 
-});
+	});
 });
 app.post('/form_save', function(req, res){
 

@@ -41,7 +41,7 @@ $(document).ready(function(){
 					var num = myRecords[i][jobNo];
 					console.log(stringD);
 					$.ajax({
-						url:"http://emmapp.us.openode.io/form_save",
+						url:"http://localhost:8080/form_save",
 						data:{
 							jobNo: num,
 							form:stringD,
@@ -69,80 +69,8 @@ $(document).ready(function(){
 		console.log('error database not opened');
 	};
 
-//  onclick="document.getElementById('body2').style.display = 'block';
-//  document.getElementById('body1').style.display = 'none';"
-//  $('#sidebar').addClass('active');
 	var boxCondition = [];
 
-	// $('#loginForm').submit(function(e){
-	// 	e.preventDefault();
-	// 	console.log("sending");
-
-	// 	var username = $('#employeeNumber').val();
-	// 	var password = $('#loginPassword').val();
-	// 	var xhttp = new XMLHttpRequest();
-	// 	xhttp.onreadystatechange = function() {
-	//  		if (this.readyState == 4 && this.status == 200) {
-
-	//  				var response = JSON.parse(this.responseText);
-	//  				console.log(response.status);
-
-	//  				if (response.status == 2) {
-	//  					$('#loginBody').hide();
-    //                     $('#dashboardBody').show();
-    //                     $('#content').show();
-    //                     window.user = username;
-	//  				}
-	//  				else if (response.status == 1) {
-	// 					$('#loginBody').hide();
-	// 					$('#dashboardBodyUser').show();
-	// 					$('#contentUser').show();
-	// 					window.user = username;
-	//  				}
-	//  				else if (response.status == -1)
-	//  				{
-	//  					alert('show Interface to create password');
-	// 					 console.log(username);
-	// 					$('#employeeNumber_create').val(username);
-	// 					$('#createPasswordBody').show().siblings().hide();
-
-	//  				}
-	//  				else
-	//  				{
-	//  					alert('Incorrect Credentials');
-	//  				}
-	//  			}
-	// 	}
-	// 	xhttp.open("POST", "http://emmapp.us.openode.io/user/login", true);
-	//  		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	//  		xhttp.send('username='+username
-	//  			+"&password="+password);
-
-
-		//  if ($('#loginPassword').val() == 1)
-		//  {
-		//  	$('#loginBody').hide();
-		// 	$('#dashboardBodyUser').show();
-		//  	$('#contentUser').show();
-		//  }
-		//  else
-		//  {
-		// 	$('#loginBody').hide();
-		//  	$('#dashboardBody').show();
-		//  	$('#content').show();
-		//  }
-	//     $.ajax({
-	//         type : "POST",
-	//         url : 'http://emmapp.us.openode.io/cordova',
-	//         success : function(data) {
-
-	//                 $('#loginBody').hide();
-	//                 $('#dashboardBody').show();
-	//                 $('#content').show();
-
-	//         }
-	//     });
-	// });
 
 	$('.signOutBuutton').click(function(e){
 		$('#sidebar').removeClass('active');  //close side bar
@@ -265,7 +193,7 @@ $(document).ready(function(){
 				console.log(jobNo);
 				var stringD = JSON.stringify(jobs);
 				$.ajax({
-					url:"http://emmapp.us.openode.io/form_save",
+					url:"http://localhost:8080/form_save",
 					data:{
 						jobNo: jobNo,
 						form:stringD,
@@ -442,7 +370,7 @@ var jobNumber = 0;
 			username : $("#employeeNumber").val(),
             password : $("#loginPassword").val()
 		};
-		check_data(user,  "http://emmapp.us.openode.io/user/login");
+		check_data(user,  "http://localhost:8080/user/login");
     });
 
 	$("#registerForm").submit(function (e) {
@@ -455,10 +383,11 @@ var jobNumber = 0;
             last_name : $("#lastName").val(),
             contact : $("#contactNumber").val(),
             password : 123456,
-			creator: window.user
-		}
-
-		check_data(user,  "http://emmapp.us.openode.io/user/register");
+			creator: window.user,
+			admin: $('#adminSetting').is(':checked') ? 1 : 0
+		};
+		console.log(user);
+		check_data(user,  "http://localhost:8080/user/register");
     });
 
 	$("#createPasswordForm").submit(function (e) {
@@ -470,7 +399,7 @@ var jobNumber = 0;
             cpassword : $("#loginPassword_create").val(),
             ccpassword : $("#cloginPassword_create").val(),
 		};
-		check_data(user,  "http://emmapp.us.openode.io/user/login");
+		check_data(user,  "http://localhost:8080/user/login");
     });
 
 	function check_data(user, path)
@@ -512,7 +441,7 @@ var jobNumber = 0;
 					errors.push("<strong>"+key+"</strong> Not valid");
 			}
 		});
-		
+
 		if (errors.length != 0)
 		{
 			var output= '';
@@ -564,32 +493,22 @@ var jobNumber = 0;
 				}
 				else if (data.status == -1)
 				{
-					//force user to change the password
-					// alert("change password: Im working on it");
-					// console.log($('#changePassBtn').text());
-					// $('#myModal').modal('show');
-
-					// alert('show Interface to create password');
-						// console.log(username);
 					$('#employeeNumber_create').val(user.username);
 					$('#createPasswordBody').show().siblings().hide();
 				}
 				else if (data.status == 1)
 				{
-					$('#loginBody').hide();
-					$('#dashboardBodyUser').show();
+					$('#dashboardBodyUser').show().siblings().hide();
 					$('#contentUser').show();
 					window.user = user.username;
 				}
 				else if (data.status == 2)
 				{
-					console.log("returned status 2");
-					$('#loginBody').hide();
-					$('#dashboardBody').show();
+					$('#dashboardBody').show().siblings().hide();
 					$('#content').show();
 					window.user = user.username;
 				}
-				if (path === "http://emmapp.us.openode.io/user/register")
+				if (path === "http://localhost:8080/user/register")
 					$("#registerForm")[0].reset();
             }
         });
@@ -597,18 +516,14 @@ var jobNumber = 0;
 
 	function update_field( name, user, path)
     {
-
-        console.log(user);
         $.ajax({
             type : "POST",
-            url : "http://emmapp.us.openode.io/user/update",
+            url : "http://localhost:8080/user/update",
             data :{
 				user : user.username,
 				value : user.password
 			},
-            success : function() {
-				console.log("register");
-				console.log(user);
+            success : function(data) {
 				submit_data(user, path);
             }
         });
