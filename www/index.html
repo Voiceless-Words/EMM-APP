@@ -82,7 +82,7 @@
                 <a href="#pages" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
                 <ul class="collapse list-unstyled" id="pages">
                     <li>
-                        <a href="#" class="dashboardButton">Dasboard</a>
+                        <a href="#" class="dashboardUserButton">Dasboard</a>
                     </li>
                     <li>
                         <a href="#" class="assignedJobsButton">Assigned Jobs</a>
@@ -164,7 +164,7 @@
                 <div class="col-sm-8 p-4">
                     <div class="avatar"></div>
                     <div class="userstatus p-4 text-center">
-                        <h3><small>Signed in as</small><br>Sfiso Wilson</h3>
+                        <h3><small>Signed in as</small><br><span class="firstName"></span> <span class="lastName"></span></h3>
                     </div>
                     <div class="row p-4 ">
                         <div class="col-6 tile d-flex flex-column justify-content-center color1 adminProfile">
@@ -202,7 +202,7 @@
                 <div class="col-sm-8 p-4">
                     <div class="avatar"></div>
                     <div class="userstatus p-4 text-center">
-                        <h3><small>Signed in as</small><br>Sfiso Wilson</h3>
+                        <h3><small>Signed in as</small><br><span class="firstName"></span> <span class="lastName"></span></h3>
                     </div>
                     <div class="row p-4 ">
                         <div class="col-6 tile d-flex flex-column justify-content-center color1 assignedJobsButton">
@@ -381,8 +381,21 @@
                             <div id="reviewJobTab" class="tab-pane fade in">
                                 <form id="searchReview" class="p-4">
                                     <div class="form-group row">
+                                        <div class="col-6">
+                                            start: <input type="date" id="cardStart" class="form-control">
+                                        </div>
+                                        <div class="col-6">
+                                            end: <input type="date" id="cardEnd" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <div class="col-12">
                                             <input class="form-control" type="search" placeholder="Search for Job Card" id="jobCardSearch">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <input class="form-control btn btn-primary" type="submit" value="Filter">
                                         </div>
                                     </div>
                                 </form>

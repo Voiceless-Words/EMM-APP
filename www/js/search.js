@@ -1,19 +1,45 @@
 $(document).ready(function(){
-    $("#searchReview").on("input", function () {
-        searchReview( $("#jobCardSearch").val());
-
+    // searchReview
+    $("#jobCardSearch").on("input", function () {
+        filter();
     });
 
-    function searchReview(value){
+    $("#searchReview").on("submit", function (e) {
+        e.preventDefault();
+        filter();
+    });
+
+    function filter(){
+
+
+        var dd = (String(new Date().getDate()).length == 1) ? "0"+(new Date().getDate()) : (new Date().getDate());
+        var mm = (String(new Date().getMonth() + 1).length == 1) ? "0"+(new Date().getMonth() + 1) : (new Date().getMonth() + 1); //January is 0!
+        var yyyy = new Date().getFullYear();
+        var today = `${yyyy}-${mm}-${dd}`;
+
+        var start = ($('#cardStart').val()) ? $('#cardStart').val() : '2019-01-10';
+        var end = (!$('#cardEnd').val()) ? today : $('#cardEnd').val();
+        var valid = (end >= start) ? 1 : 0;
+        console.log(end);
+        if (valid){
+            var filters = {
+                search : $('#jobCardSearch').val(),
+                start : start,
+                end : end,
+                id : window.user
+            };
+// (2019,0,13)
+        }
+        searchReview(filters);
+    }
+
+    function searchReview(filters){
         var output = `<h2 class="text-center">searching . . .</h2>`;
         $('.jobSearchResults').html(output);
          $.ajax({
             type : "POST",
             url : 'http://localhost:8080/search/reviewJob',
-            data : {
-                value : value,
-                id : window.user
-            },
+            data : filters,
             success : function(data) {
                 // console.log(data[0]['jobnumber']);
                 output = `<h2 class="text-center">${data.length} match</h2>`;

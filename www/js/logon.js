@@ -1,5 +1,26 @@
 
 $(document).ready(function(){
+	if (getUser('employee_id'))
+	{
+		if (getUser('admin') == 0)
+		{
+			$('#dashboardBodyUser').show().siblings().hide();
+			$('#contentUser').show();
+			window.user = getUser('employee_id');
+			$('.firstName').text(getUser('first_name'));
+			$('.lastName').text(getUser('last_name'));
+		}
+		else if (getUser('admin') == 1)
+		{
+			$('#dashboardBody').show().siblings().hide();
+			$('#content').show();
+			window.user = getUser('employee_id');
+			$('.firstName').text(getUser('first_name'));
+			$('.lastName').text(getUser('last_name'));
+		}
+	}
+
+
 	var request = indexedDB.open('formInputs', 1);
 
 	request.onupgradeneeded = function(event){
@@ -75,14 +96,14 @@ $(document).ready(function(){
 	$('.signOutBuutton').click(function(e){
 		$('#sidebar').removeClass('active');  //close side bar
 		$('#sidebarUser').removeClass('active');  //close side bar
-		e.preventDefault();  //stop link from redirecting
-		//clean all data stored on the local storage about the current user session;
+		e.preventDefault();
 		$('#content').hide();
 		$('#contentUser').hide();
 		$('.top_nav').hide();
 		$('#loginBody').show().siblings().hide();
-		console.log("sign out");
+		deleteUser();
         window.user = 0;
+		$("#loginForm")[0].reset();
 	});
 
 	$('.userAccountsButton').click(function(){
@@ -105,6 +126,12 @@ $(document).ready(function(){
 		$('#dashboardBody').show().siblings().hide();
 	});
 
+	$('.dashboardUserButton').click(function(){
+		$('.top_nav').hide();
+		$('#sidebarUser').removeClass('active');  //close side bar
+		$('#dashboardBodyUser').show().siblings().hide();
+	});
+
 	$('.jobCardButton').click(function(){
 		$('.top_nav').hide();
 		$('#sidebar').removeClass('active');  //close side bar
@@ -125,6 +152,7 @@ $(document).ready(function(){
 	$('#sidebarCollapse').on('click', function () {
 		$('#sidebar').toggleClass('active');
 	});
+
 	$('#sidebarCollapseUser').on('click', function () {
 		$('#sidebarUser').toggleClass('active');
 	});
@@ -501,12 +529,18 @@ var jobNumber = 0;
 					$('#dashboardBodyUser').show().siblings().hide();
 					$('#contentUser').show();
 					window.user = user.username;
+					storeUser(data.user[0]);
+					$('.firstName').text(getUser('first_name'));
+					$('.lastName').text(getUser('last_name'));
 				}
 				else if (data.status == 2)
 				{
 					$('#dashboardBody').show().siblings().hide();
 					$('#content').show();
 					window.user = user.username;
+					storeUser(data.user[0]);
+					$('.firstName').text(getUser('first_name'));
+					$('.lastName').text(getUser('last_name'));
 				}
 				if (path === "http://localhost:8080/user/register")
 					$("#registerForm")[0].reset();
@@ -528,5 +562,27 @@ var jobNumber = 0;
             }
         });
     }
+
+	function storeUser(user)
+	{
+		var currentUser = JSON.stringify(user);
+		localStorage.setItem('currentUser', currentUser);
+	}
+
+	function getUser(field)
+	{
+		if (localStorage.hasOwnProperty('currentUser'))
+		{
+			var user = JSON.parse(localStorage.getItem('currentUser'));
+			return user[field];
+		}
+		else
+			return null;
+	}
+
+	function deleteUser()
+	{
+		localStorage.removeItem('currentUser');
+	}
 
 });

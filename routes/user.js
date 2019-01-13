@@ -55,7 +55,8 @@ router.post('/login', function(req, res){
                                 console.log("session set as "+req.session.user);
                                 res.send(JSON.stringify({
                                     error : errors,
-                                    status : status
+                                    status : status,
+                                    user : users
                                 }));
                             })
                         .catch(error => { console.log(error); })
@@ -155,6 +156,15 @@ router.post('/update', function(req, res){
             .catch(error => { console.log(error); })
         });
     });
+});
+
+router.post('/userData', function(req, res){
+     User.find({"employee_id": req.body.user})
+    .then(users => {
+        console.log(users);
+        res.send(users);
+    })
+    .catch(error => { console.log(error); })
 });
 
 module.exports = router;
