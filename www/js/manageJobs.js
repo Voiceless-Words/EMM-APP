@@ -36,10 +36,7 @@ $(document).ready(function(){
 });
 
 function getjobstuff() {
-        var d = Number(new Date());
-
-        document.getElementById('addJob-jobCardNumber').value = d;
-
+        
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -109,6 +106,17 @@ function showPosition(position) {
   "<br>Longitude: " + position.coords.longitude; 
 }
 
+function createjobcardno() {
+    var prefix = '';
+    var area = document.getElementById('addJob-jobLocation').value;
+
+    console.log(area);
+
+    //if (addJob-jobLocation)
+    var d = Number(new Date());
+    document.getElementById('addJob-jobCardNumber').value = d;
+
+} 
 
 function recordselect() {
     var added = 0;

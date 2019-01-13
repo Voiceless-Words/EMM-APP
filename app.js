@@ -294,6 +294,12 @@ app.post('/pics_save', function(req, res){
 });
 
 
+app.use(function(req, res) {
+    res.send("what are you trying to do" + req.url);
+});
+
+
+
 
 function isAdmin(req, res, next){
 	console.log("session set as ------->"+req.session.user);
