@@ -17,10 +17,9 @@ let app = {
         navigator.camera.getPicture(app.success1, app.failure, opts);
     },
     success1: function(imgURI){
-        document.getElementById('msg').textContent = imgURI;
         document.getElementById('photo').src = imgURI;
         $.ajax({
-          url:"http://emmapp.us.openode.io/pic_save",
+          url:"http://192.168.1.101:8080/pic_save",
           data:{
             jobnumber: "123",
             img:"imgURI"

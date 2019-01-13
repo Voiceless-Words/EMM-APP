@@ -18,7 +18,7 @@ var app = express();
 app.use(cors());
 
 
-var server = app.listen(80, function(){
+var server = app.listen(8080, function(){
     console.log("server started port 8080");
 });
 
@@ -278,6 +278,8 @@ app.use(function(req, res) {
 });
 
 app.post('/pic_save', function(req, res){
+  console.log(req.body.jobnumber);
+  console.log(req.body.img);
   var image1 = new Image({
     jobnumber: req.body.jobnumber,
     img:req.body.img
