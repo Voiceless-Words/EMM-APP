@@ -18,24 +18,24 @@ let app = {
     },
     success1: function(imgURI){
         document.getElementById('photo').src = imgURI;
-        $.ajax({
-          url:"http://192.168.1.101:8080/pic_save",
-          data:{
-            jobnumber: "123",
-            img:"imgURI"
-          },
-          error: function () {
-            console.log("Something wrong happened");
-          },
-          success: function () {
-            console.log("Successful ajax sent");
-          },
-          type: 'POST'
-        });
-
+        savePhoto();
     },
     failure: function(msg){
         document.getElementById('msg').textContent = msg;
     }
 };
 document.addEventListener('deviceready', app.init);
+
+function savePhoto(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+
+    //console.log(this.responseText.users);
+        console.log("done");
+      }
+    }
+    xhttp.open("POST", "http://192.168.1.101:8080/pics_save", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send('view=createjobcard&format=JSON');
+}
