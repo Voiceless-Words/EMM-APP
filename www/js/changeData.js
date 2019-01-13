@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('#changeAdminFirstName').submit(function(e){
-        e.preventDefault(); 
+        e.preventDefault();
         console.log('attempting change');
         if ($('#adminFirstName').val().length > 5)
         {
@@ -24,7 +24,7 @@ $(document).ready(function(){
     {
         $.ajax({
             type : "POST",
-            url : 'http://localhost:8080/data/update_field',
+            url : 'http://emmapp.us.openode.io/data/update_field',
             data : {
                 name : name,
                 value : value,

@@ -27,7 +27,7 @@ $(document).ready(function(){
 
             }
         }
-        xhttp.open("POST", "http://localhost:8080/jobcard_save", true);
+        xhttp.open("POST", "http://emmapp.us.openode.io/jobcard_save", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send('newjob='+JSON.stringify(newJob));
     });
@@ -72,7 +72,7 @@ function getjobstuff() {
                 jobcardstuff = [response.users, response.assets]
             }
         }
-        xhttp.open("POST", "http://localhost:8080/getview", true);
+        xhttp.open("POST", "http://emmapp.us.openode.io/getview", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send('view=createjobcard&format=JSON');
 }

@@ -204,6 +204,11 @@
                     <div class="userstatus p-4 text-center">
                         <h3><small>Signed in as</small><br>Sfiso Wilson</h3>
                     </div>
+                    <div class="col-12 electDoorBypassed">
+                        <p><img src="./img/logo.png" alt="logo" id="photo" style="display: none;"/></p>
+                        <p><button id="btn"> Take Picture</button></p>
+                        <p id="msg"></p>
+                    </div>
                     <div class="row p-4 ">
                         <div class="col-6 tile d-flex flex-column justify-content-center color1 assignedJobsButton">
                             <div class="align-items-center px-4 pt-4">
@@ -278,8 +283,6 @@
                             </div>
                         </form>
                     </div>
-                    <button id="cameraTakePicture">Take Photo</button>
-                    <img id="myImage">
                </div>
                <div class="col-sm-2"></div>
             </div>
@@ -533,7 +536,6 @@
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
-                        </div>
                         <div class="form-group">
                             <label for="electDoorBypassed">Door Bypassed?</label>
                             <select class="form-control" id="electDoorBypassed">
@@ -697,6 +699,7 @@
 
         <script src="css/jquery-3.3.1.min.js"></script>
         <script src="css/bs/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
         <script src="js/logon.js?n=1"></script>
         <script type="text/javascript" src="js/image.js"></script>
         <script type="text/javascript" src="js/manageJobs.js"></script>

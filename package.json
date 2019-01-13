@@ -4,7 +4,7 @@
   "description": "field work",
   "main": "app",
   "scripts": {
-    "start": "node index.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "file-system": "^2.2.2",
     "mongoose": "^5.4.0",
     "path": "^0.12.7"
   }

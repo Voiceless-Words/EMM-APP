@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const ejs = require('ejs');
 const cors = require('cors');
+const fs = require('fs');
 
 
 const path = require('path');
@@ -17,8 +18,21 @@ var app = express();
 app.use(cors());
 
 
-var server = app.listen(8080, function(){
+var server = app.listen(80, function(){
     console.log("server started port 8080");
+});
+
+app.use(function(req, res, next) {
+   var allowedOrigins = ['http://127.0.0.1:8080','http://emmapp.us.openode.io', 'http://localhost:81', 'http://localhost:8080', 'http://localhost:3000', 'http://192.168.43.54:3000'];
+   var origin = req.headers.origin;
+   if(allowedOrigins.indexOf(origin) > -1){
+        res.setHeader('Access-Control-Allow-Origin', origin);
+   }
+   //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8080');
+   res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+   res.header('Access-Control-Allow-Credentials', true);
+  return next();
 });
 
 const user = require('./routes/user');
@@ -35,6 +49,8 @@ const Forms = require('./models/form');
 const JobCard = require('./models/jobCard');
 
 const JobSave = require('./models/jobSave');
+
+const Image = require('./models/img');
 
 //session middleware
  app.use(session({
@@ -161,10 +177,7 @@ app.post('/getview', function(req, res) {
 
 		});
 
-
 	});
-
-
 
 	}
 	else if (req.body.view == 'reviewjobcards')
@@ -208,7 +221,7 @@ app.post('/jobcard_save', function(req, res){
   console.log(val.jobRequiredByDate);
   console.log(val.jobCreatedBy);
   console.log(val.jobAssignedTo);
-  
+
   var job = new JobSave({
     jobCardNumber: val.jobNumber,
     assetName: val.jobAssets,
@@ -262,6 +275,17 @@ app.post('/form_save', function(req, res){
 
 app.use(function(req, res) {
     res.send("what are you trying to do" + req.url);
+});
+
+app.post('/pic_save', function(req, res){
+  var image1 = new Image({
+    jobnumber: req.body.jobnumber,
+    img:req.body.img
+  });
+  image1.save(function(err, img){
+    if (err) throw err;
+  });
+  res.send("success");
 });
 
 
