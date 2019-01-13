@@ -273,12 +273,10 @@ app.post('/form_save', function(req, res){
   res.send("success");
 });
 
-app.use(function(req, res) {
-    res.send("what are you trying to do" + req.url);
-});
-
-app.post('/pic_save', function(req, res){
-  var image1 = new Image({
+app.get('/pic_save', function(req, res){
+  
+  console.log('Tries');
+  /*var image1 = new Image({
     jobnumber: req.body.jobnumber,
     img:req.body.img
   });
@@ -286,9 +284,15 @@ app.post('/pic_save', function(req, res){
     if (err) throw err;
 
     console.log("saved akere");
-  });
+  }); */
   res.send("success");
 });
+
+
+app.use(function(req, res) {
+    res.send("what are you trying to do" + req.url);
+});
+
 
 
 

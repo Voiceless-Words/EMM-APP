@@ -17,10 +17,26 @@ let app = {
         navigator.camera.getPicture(app.success1, app.failure, opts);
     },
     success1: function(imgURI){
-        document.getElementById('msg').textContent = imgURI;
+        
         document.getElementById('photo').src = imgURI;
-        $.ajax({
-          url:"http://localhost:8080/pic_save",
+
+        console.log(imgURI);
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+            //console.log(this.responseText.users);
+            alert('tried');
+            console.log('tried');
+      
+            }
+        }
+        xhttp.open("POST", "http://emmapp.us.openode.io/pic_save", true);
+        xhttp.setRequestHeader("Content-type", "multipart/form-data");
+        xhttp.send('img='+imgURI+'&jobcardno=123');
+       /* $.ajax({
+          url:"http://emmapp.us.openode.io/pic_save",
           data:{
             jobnumber: "123",
             img:"imgURI"
@@ -32,7 +48,7 @@ let app = {
             console.log("Successful ajax sent");
           },
           type: 'POST'
-        });
+        });*/
 
     },
     failure: function(msg){

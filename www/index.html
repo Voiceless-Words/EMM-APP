@@ -342,7 +342,7 @@
                     <div class="col-12 p-4">
                         <ul class="nav nav-tabs nav-fill">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#createJobForm" onclick="getjobstuff()">Add New Job</a>
+                                <a class="nav-link active" data-toggle="tab" href="#createJobForm">Add New Job</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#reviewJobTab" onclick="reviewjobs()">Review Jobs</a>
@@ -350,6 +350,14 @@
                         </ul>
                         <div class="tab-content">
                             <!-- <form class="p-4 tab-pane in active" id="createJobForm">
+                                <div class="form-group">
+                                    <label for="addJob-jobLocation">Select Area</label>
+                                    <select id="addJob-jobLocation" class="form-control" oninput="createjobcardno()">
+                                        <option>Buurendal</option>
+                                        <option>Highway Garden</option>
+                                        <option>Harmelia</option>
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label for="addJob-jobCardNumber">Jobcard Number</label>
                                     <input type="text" class="form-control" id="addJob-jobCardNumber" placeholder="Enter job card number here..." disabled required>
@@ -373,14 +381,7 @@
                                         <option>Fibre Glass</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="addJob-jobLocation">Area</label>
-                                    <select class="form-control" id="addJob-jobLocation">
-                                        <option>Buurendal</option>
-                                        <option>Highway Garden</option>
-                                        <option>Harmelia</option>
-                                    </select>
-                                </div>
+                                
                                 <div class="form-group">
                                     <label for="addJob-jobCardcoords">Asset Desription</label>
                                     <button onclick="getLocation()">Get Location</button>
@@ -513,7 +514,7 @@
                         
                                 <button type="submit" class="btn btn-primary">Create JobCard</button>
                             </form>
-                                <button  class="list-group-item list-group-item-action flex-column align-items-start lightT userJobCard" data-toggle="modal" data-target=".bd-example-modal-lg" data-jobNumber="7879345">form</button>
+                            <button  class="list-group-item list-group-item-action flex-column align-items-start lightT usersJobCard" data-toggle="modal" data-target=".bd-example-modal-lg" data-jobNumber="7879345">form</button>
                             <div id="reviewJobTab" class="tab-pane fade in">
                                 <form id="searchReview" class="p-4">
                                     <div class="form-group row">

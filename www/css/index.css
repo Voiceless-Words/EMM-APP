@@ -32,7 +32,7 @@ body {
     width: 100vw;
 }
 
-.top_nav {
+.top_nav, .userJobCard {
     display: none;
 }
 
