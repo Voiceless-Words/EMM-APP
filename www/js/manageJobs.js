@@ -8,28 +8,40 @@ $(document).ready(function(){
         e.preventDefault();
         newJob = {
             jobNumber : $('#addJob-jobCardNumber').val(),
-            jobAssets : $('#addJob-assets :selected').text(),
-            jobRequiredByDate : $('#addJob-requiredByDate').val(),
-            jobActivity : $('#addJob-activity :selected').text(),
-            jobAssignedTo : people_list,
-            jobCreatedBy : window.user
-
+            permitNumber : $('#addJob-jobPermitNumber').val(),
+            jobAssetsType : $('#addJob-assets-Type :selected').text(),
+            assetsMaterial : $('#addJob-assets-Mat :selected').text(),
+            jobLocation : $('#addJob-jobLocation :selected').text(),
+            jobActivity : $('#addJob-activity').text(),
+            asset_lati : $('.asset_lati').text(),
+            asset_long : $('.asset_long').text(),
+            jobCreatedBy : window.user,
+            company: getUser('creator')
         };
         $('#createJobForm')[0].reset();
         console.log(newJob);
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-
-            console.log('New Job Card Created');
-            alert('New Job Card Created');
-
+        $.ajax({
+            type : "POST",
+            url : "http://localhost:8080/jobcard_save",
+            data : newJob,
+            success : function(data) {
+				console.log(data);
             }
-        }
-        xhttp.open("POST", "http://emmapp.us.openode.io/jobcard_save", true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send('newjob='+JSON.stringify(newJob));
+        });
+
+        // var xhttp = new XMLHttpRequest();
+        // xhttp.onreadystatechange = function() {
+        // if (this.readyState == 4 && this.status == 200) {
+
+        //     console.log('New Job Card Created');
+        //     alert('New Job Card Created');
+
+        //     }
+        // }
+        // xhttp.open("POST", "http://localhost:8080/jobcard_save", true);
+        // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        // xhttp.send('newjob='+JSON.stringify(newJob));
     });
 
     // Do as u like with the form data obj newJob
@@ -72,7 +84,7 @@ function getjobstuff() {
                 jobcardstuff = [response.users, response.assets]
             }
         }
-        xhttp.open("POST", "http://emmapp.us.openode.io/getview", true);
+        xhttp.open("POST", "http://localhost:8080/getview", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send('view=createjobcard&format=JSON');
 }
@@ -105,8 +117,8 @@ function getLocation() {
 }
 
 function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude; 
+  x.innerHTML = 'Latitude: <span class="asset_lati">' + position.coords.latitude + 
+  '</span><br>Longitude: <span class="asset_long">' + position.coords.longitude + '</span>'; 
 }
 
 

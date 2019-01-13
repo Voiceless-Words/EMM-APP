@@ -20,7 +20,7 @@ let app = {
         document.getElementById('msg').textContent = imgURI;
         document.getElementById('photo').src = imgURI;
         $.ajax({
-          url:"http://emmapp.us.openode.io/pic_save",
+          url:"http://localhost:8080/pic_save",
           data:{
             jobnumber: "123",
             img:"imgURI"

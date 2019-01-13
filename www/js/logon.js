@@ -62,7 +62,7 @@ $(document).ready(function(){
 					var num = myRecords[i][jobNo];
 					console.log(stringD);
 					$.ajax({
-						url:"http://emmapp.us.openode.io/form_save",
+						url:"http://localhost:8080/form_save",
 						data:{
 							jobNo: num,
 							form:stringD,
@@ -143,6 +143,12 @@ $(document).ready(function(){
 		$('#assignedJobsBody').show().siblings().hide();
 	});
 
+	$('.startJob').click(function(){
+		$('#sidebarUser').removeClass('active');  //close side bar
+		$('#startJob').show().siblings().hide();
+		getjobstuff();
+	});
+
 	$('.helpButton').click(function(){
 		$('.top_nav').hide();
 		$('#sidebar').removeClass('active');  //close side bar
@@ -221,7 +227,7 @@ $(document).ready(function(){
 				console.log(jobNo);
 				var stringD = JSON.stringify(jobs);
 				$.ajax({
-					url:"http://emmapp.us.openode.io/form_save",
+					url:"http://localhost:8080/form_save",
 					data:{
 						jobNo: jobNo,
 						form:stringD,
@@ -398,7 +404,7 @@ var jobNumber = 0;
 			username : $("#employeeNumber").val(),
             password : $("#loginPassword").val()
 		};
-		check_data(user,  "http://emmapp.us.openode.io/user/login");
+		check_data(user,  "http://localhost:8080/user/login");
     });
 
 	$("#registerForm").submit(function (e) {
@@ -415,7 +421,7 @@ var jobNumber = 0;
 			admin: $('#adminSetting').is(':checked') ? 1 : 0
 		};
 		console.log(user);
-		check_data(user,  "http://emmapp.us.openode.io/user/register");
+		check_data(user,  "http://localhost:8080/user/register");
     });
 
 	$("#createPasswordForm").submit(function (e) {
@@ -427,7 +433,7 @@ var jobNumber = 0;
             cpassword : $("#loginPassword_create").val(),
             ccpassword : $("#cloginPassword_create").val(),
 		};
-		check_data(user,  "http://emmapp.us.openode.io/user/login");
+		check_data(user,  "http://localhost:8080/user/login");
     });
 
 	function check_data(user, path)
@@ -542,7 +548,7 @@ var jobNumber = 0;
 					$('.firstName').text(getUser('first_name'));
 					$('.lastName').text(getUser('last_name'));
 				}
-				if (path === "http://emmapp.us.openode.io/user/register")
+				if (path === "http://localhost:8080/user/register")
 					$("#registerForm")[0].reset();
             }
         });
@@ -552,7 +558,7 @@ var jobNumber = 0;
     {
         $.ajax({
             type : "POST",
-            url : "http://emmapp.us.openode.io/user/update",
+            url : "http://localhost:8080/user/update",
             data :{
 				user : user.username,
 				value : user.password
@@ -563,6 +569,7 @@ var jobNumber = 0;
         });
     }
 
+});
 	function storeUser(user)
 	{
 		var currentUser = JSON.stringify(user);
@@ -584,5 +591,3 @@ var jobNumber = 0;
 	{
 		localStorage.removeItem('currentUser');
 	}
-
-});

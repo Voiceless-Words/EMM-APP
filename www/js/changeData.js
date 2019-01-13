@@ -24,7 +24,7 @@ $(document).ready(function(){
     {
         $.ajax({
             type : "POST",
-            url : 'http://emmapp.us.openode.io/data/update_field',
+            url : 'http://localhost:8080/data/update_field',
             data : {
                 name : name,
                 value : value,
