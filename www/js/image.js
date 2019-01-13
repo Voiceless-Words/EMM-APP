@@ -14,16 +14,16 @@ let app = {
             targetWidth: 300,
             targetHeight: 400
         };
-        navigator.camera.getPicture(app.success, app.failure, opts);
+        navigator.camera.getPicture(app.success1, app.failure, opts);
     },
-    success: function(imgURI){
+    success1: function(imgURI){
         document.getElementById('msg').textContent = imgURI;
         document.getElementById('photo').src = imgURI;
         $.ajax({
           url:"http://emmapp.us.openode.io/pic_save",
           data:{
             jobnumber: "123",
-            img:imgURI,
+            img:"imgURI"
           },
           error: function () {
             console.log("Something wrong happened");
