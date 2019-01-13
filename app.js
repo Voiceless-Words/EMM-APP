@@ -282,8 +282,10 @@ app.post('/pic_save', function(req, res){
     jobnumber: req.body.jobnumber,
     img:req.body.img
   });
-  image1.save(function(err, img){
+  image1.save(function(err){
     if (err) throw err;
+
+    console.log("saved akere");
   });
   res.send("success");
 });
