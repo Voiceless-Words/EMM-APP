@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var imgSchema = new Schema({
   jobnumber: {type: String},
+  type: {type:String},
   img:{type: String}
 });
 

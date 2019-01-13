@@ -204,10 +204,9 @@
                     <div class="userstatus p-4 text-center">
                         <h3><small>Signed in as</small><br><span class="firstName"></span> <span class="lastName"></span></h3>
                     </div>
-                    <div class="col-12 electDoorBypassed">
+                    <div class="col-12 ">
                         <p><img src="./img/logo.png" alt="logo" id="photo" style="display: none;"/></p>
                         <p><button id="btn"> Take Picture</button></p>
-                        <p id="msg"></p>
                     </div>
                     <div class="row p-4 ">
                         <div class="col-6 tile d-flex flex-column justify-content-center color1 assignedJobsButton">
@@ -381,7 +380,7 @@
                                         <option>Fibre Glass</option>
                                     </select>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="addJob-jobCardcoords">Asset Desription</label>
                                     <button onclick="getLocation()">Get Location</button>
@@ -394,7 +393,7 @@
                                     <p id="addJob-activity"><i>Pillar Box Inspection</i></p>
                                 </div>
 
-                        
+
                                 <button type="submit" class="btn btn-primary">Create JobCard</button>
                             </form> -->
                             <div id="reviewJobTab" class="tab-pane fade in">
@@ -511,7 +510,7 @@
                                     <p><i id="addJob-activity">Pillar Box Inspection</i></p>
                                 </div>
 
-                        
+
                                 <button type="submit" class="btn btn-primary">Create JobCard</button>
                             </form>
                             <button  class="list-group-item list-group-item-action flex-column align-items-start lightT usersJobCard" id="usersJobCard" data-toggle="modal" data-target=".bd-example-modal-lg" data-jobNumber="4">form</button>
@@ -569,6 +568,25 @@
       <div class="modal-body">
         <div class="row no-margin">
             <div class="col-12 formContainer">
+              <form id="conditionA">
+                  <h3>Risk Assessment</h3>
+                  <div class="form-group">
+                      <p>I <b><span class="firstName"></span> <span class="firstName"></b> hereby declare that tasks to be performed
+                      have been shown to all workers registered below for this inspection</span></p>
+                  </div>
+                  <div class="form-group">
+                      <p>Risks</p>
+                  </div>
+                  <div class="form-group">
+                      <p>Add other people </p>
+                  </div>
+                  <div class="form-group">
+                    <input type="checkbox"> <p>I, the responsible person, declare that the nature
+                    and location of this work as well as all the precautions, special conditions and danger
+                    involved have been explained to the workers.<p>
+                  </div>
+                  <input type="submit" value="Next" class="btn btn-primary next" data-to="conditionB">
+              </form>
                 <form id="conditionA">
                     <h3>Box Condition</h3>
                     <div class="form-group">
@@ -761,7 +779,7 @@
                     </fieldset>
                     <div class="form-group">
                         <label for="standConnected">Stands Connected to Enclosure, please specify stand no.</label>
-                        <input class="form-control" type="text" id="standConnected" placeholder="Please specify stand number" required="">
+                        <input class="form-control" type="text" id="standConnected" placeholder="Please specify stand no. and street name" required="">
                     </div>
                     <input type="submit" class="btn btn-primary" value="Save Cable">
                     </div>

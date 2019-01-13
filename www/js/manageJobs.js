@@ -50,7 +50,7 @@ $(document).ready(function(){
 });
 
 function getjobstuff() {
-        
+
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -83,7 +83,7 @@ function getjobstuff() {
                 jobcardstuff = [response.users, response.assets]
             }
         }
-        xhttp.open("POST", "http://localhost:8080/getview", true);
+        xhttp.open("POST", "http://192.168.1.101:8080/getview", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send('view=createjobcard&format=JSON');
 }
@@ -117,8 +117,8 @@ function getLocation() {
 }
 
 function showPosition(position) {
-  x.innerHTML = 'Latitude: <span class="asset_lati">' + position.coords.latitude + 
-  '</span><br>Longitude: <span class="asset_long">' + position.coords.longitude + '</span>'; 
+  x.innerHTML = 'Latitude: <span class="asset_lati">' + position.coords.latitude +
+  '</span><br>Longitude: <span class="asset_long">' + position.coords.longitude + '</span>';
 }
 
 function createjobcardno() {
