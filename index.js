@@ -93,7 +93,7 @@ app.get('/logout', function(req, res){
 
 app.get('/dashboarda', function(req, res) {
 
-	console.log(req.session.body);
+	// console.log(req.session.body);
 	Asset.find({}, function(err, assets) {
 
 
@@ -145,18 +145,18 @@ app.post('/getview', function(req, res) {
 		Asset.find({}, function(err, assets) {
 
 		if (err) throw err;
-		console.log(assets);
+		// console.log(assets);
 
 		User.find({'admin' : '0'}, function(err, users) {
 			if (err) throw err;
-			console.log(users);
+			// console.log(users);
 
 			if (req.body.format == 'JSON') {
 				var newjobforminfo = {
 					'users' : users,
 					'assets' : assets
 				}
-				console.log(newjobforminfo);
+				// console.log(newjobforminfo);
 				res.send(newjobforminfo);
 				res.end();
 			}
@@ -228,18 +228,17 @@ app.post('/jobcard_save', function(req, res){
   });
    console.log(job);
   job.save(function (err) {
-//   if (err) console.log(err);
-
-  		console.log("saved the job");
-
+  if (err) console.log(err);
+  else
+	res.send("200");
 	});
 });
 app.post('/form_save', function(req, res){
 
   var obj = JSON.parse(req.body.form);
   var no = req.body.jobNo;
-  console.log(obj);
-  console.log(no);
+//   console.log(obj);
+//   console.log(no);
   var cables = obj[no]['cables'];
   var con1 = obj[no]['conditionAData'];
   var con2 = obj[no]['conditionBData'];
@@ -273,33 +272,6 @@ app.use(function(req, res) {
 });
 
 
-
-function isAdmin(req, res, next){
-	console.log("session set as ------->"+req.session.user);
-	var errors = [];
-	if (req.session.user)
-	{
-		User.find({"employee_id": { "$regex": req.session.body, "$options": "i"}})
-		.then(users => {
-			if (users[0].admin == 1)
-			{
-				next();
-			}
-			else
-			{
-				errors.push("You dont have admin rights");
-				res.send(JSON.stringify({
-					error : errors,
-					status : 403
-				}));
-			}
-			})
-		.catch(error => { console.log(error); })
-	}
-	else {
-		res.render('index');
-	}
-}
 
 function passSession (res, req, next) {
 	console.log('session in app');

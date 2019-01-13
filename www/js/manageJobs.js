@@ -2,8 +2,8 @@
 var jobcardstuff = [];
 var people_list = [];
 
+var newJob;
 $(document).ready(function(){
-    var newJob;
     $('#createJobForm').submit(function(e){
         e.preventDefault();
         newJob = {
@@ -23,14 +23,7 @@ $(document).ready(function(){
         
         console.log($('.usersJobCard').text());
         $('.usersJobCard').click();
-        // $.ajax({
-        //     type : "POST",
-        //     url : "http://localhost:8080/jobcard_save",
-        //     data : newJob,
-        //     success : function(data) {
-		// 		console.log(data);
-        //     }
-        // });
+        
 
         // var xhttp = new XMLHttpRequest();
         // xhttp.onreadystatechange = function() {
@@ -83,7 +76,7 @@ function getjobstuff() {
                 jobcardstuff = [response.users, response.assets]
             }
         }
-        xhttp.open("POST", "http://192.168.1.101:8080/getview", true);
+        xhttp.open("POST", "http://localhost:8080/getview", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send('view=createjobcard&format=JSON');
 }

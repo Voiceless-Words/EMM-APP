@@ -23,7 +23,7 @@ var server = app.listen(8080, function(){
 });
 
 app.use(function(req, res, next) {
-   var allowedOrigins = ['http://emmapp.us.openode.io', 'http://localhost:81', 'http://localhost:8080', 'http://localhost:3000', 'http://192.168.43.54:3000', 'http://192.168.1.101:8080'];
+   var allowedOrigins = ['http://emmapp.us.openode.io', 'http://localhost:81', 'http://localhost:8080', 'http://localhost:3000', 'http://192.168.43.54:3000', 'http://localhost:8080'];
    var origin = req.headers.origin;
    if(allowedOrigins.indexOf(origin) > -1){
         res.setHeader('Access-Control-Allow-Origin', origin);
