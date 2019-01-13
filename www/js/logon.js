@@ -147,6 +147,7 @@ $(document).ready(function(){
 		$('#sidebarUser').removeClass('active');  //close side bar
 		$('#startJob').show().siblings().hide();
 		getjobstuff();
+		createjobcardno();
 	});
 
 	$('.helpButton').click(function(){
@@ -280,10 +281,11 @@ $(document).ready(function(){
 		$('#conditionB')[0].reset();
 	});
 var jobNumber = 0;
-	$('.userJobCard').click(function(){
+	$('.usersJobCard').click(function(){
 		$('#addCableForm').hide();
 		$('.formContainer').show();
 		console.log(typeof conditionAData);
+		console.log($(this).text());
 		if (conditionAData)
 		{
 			$('#conditionButton').show().siblings().show();
@@ -293,12 +295,12 @@ var jobNumber = 0;
 		else {
 			$('#conditionA').show();
 		}
-		if (jobNumber != 0 && jobNumber != $(this).attr("data-jobNumber") && conditionAData)
+		if (jobNumber != 0 && jobNumber != $(this).attr("data-job-number") && conditionAData)
 		{
 			alert("Please finish Job "+ jobNumber +" before doing other jobs");
 			$('.bd-example-modal-lg').hide();
 		}else{
-			jobNumber = $(this).attr("data-jobNumber");
+			jobNumber = $(this).attr("data-job-number");
 			jobs[jobNumber] = {};
 			jobs['status'] = 0;
 		}
@@ -312,6 +314,7 @@ var jobNumber = 0;
 
 	$('.addCable').click(function(){
 		$(this).hide();
+		selectedCable = -1;
 		cableCount++;
 		$('#addCableForm').show();
 		$('#conditionButton').hide();
@@ -323,22 +326,43 @@ var jobNumber = 0;
 	$('#addCableForm').submit(function (e) {
 		e.preventDefault();
 		var name = cableCount;
+		console.log(`name = ${name}`);
+		console.log(`selectedCable = ${selectedCable}`);
 		//cablesObj['cableCount'] = cableCount;
-		cablesObj.push({
-			name: "cable"+cableCount,
-			correct : $('#correct :selected').text(),
-			tag : $('#tag :selected').text(),
-			label : $('#label :selected').text(),
-			fitted : $('#fitted :selected').text(),
-			size : $('#size :selected').text(),
-			meter : $('#meter :selected').val(),
-			meterSeals : $('#meterSeals :selected').val(),
-			meterSealsColour : $('#meterSealsColour :selected').val(),
-			meterBypassed : $('#meterBypassed :selected').val(),
-			standConnected : $('#standConnected').val(),
-		});
-		var current = $('.cables').html();
-		current += `<div class="col-12 btn btn-primary mt-2 mb-2 text-center cableSelect" data-cableName="${name}"><strong>${name}</strong></div>`;
+		if (selectedCable > -1)
+		{
+			cablesObj[selectedCable] = {
+				name: "cable"+cableCount,
+				correct : $('#correct :selected').text(),
+				tag : $('#tag :selected').text(),
+				label : $('#label :selected').text(),
+				fitted : $('#fitted :selected').text(),
+				size : $('#size :selected').text(),
+				meter : $('#meter :selected').val(),
+				meterSeals : $('#meterSeals :selected').val(),
+				meterSealsColour : $('#meterSealsColour :selected').val(),
+				meterBypassed : $('#meterBypassed :selected').val(),
+				standConnected : $('#standConnected').val(),
+			};
+		}
+		else{
+			cablesObj.push({
+				name: "cable"+cableCount,
+				correct : $('#correct :selected').text(),
+				tag : $('#tag :selected').text(),
+				label : $('#label :selected').text(),
+				fitted : $('#fitted :selected').text(),
+				size : $('#size :selected').text(),
+				meter : $('#meter :selected').val(),
+				meterSeals : $('#meterSeals :selected').val(),
+				meterSealsColour : $('#meterSealsColour :selected').val(),
+				meterBypassed : $('#meterBypassed :selected').val(),
+				standConnected : $('#standConnected').val(),
+			});
+			var current = $('.cables').html();
+			current += `<div class="col-12 btn btn-primary mt-2 mb-2 text-center cableSelect" data-cableName="${name}"><strong>Cable ${name}</strong></div>`;
+
+		}
 		$('.cables').html(current);
 		$('.addCable').show().siblings().show();
 		$('#addCableForm').hide();
@@ -346,9 +370,10 @@ var jobNumber = 0;
 		$('.markJobFinished').show();
 		console.log(cablesObj);
 	});
-
+var selectedCable = -1;
 	$(document).on('click', ".cableSelect", function(){
 		var name = $(this).attr("data-cableName") - 1;
+		selectedCable = name;
 		console.log(cablesObj);
 		$("#correct option[value="+ cablesObj[name].correct +"]").prop('selected', 'selected');
 		$("#tag option[value="+ cablesObj[name].tag +"]").prop('selected', 'selected');
@@ -362,7 +387,7 @@ var jobNumber = 0;
 			$("#meterSealsColour option[value="+ cablesObj[name].meterSealsColour +"]").prop('selected', 'selected');
 			$("#meterBypassed option[value="+ cablesObj[name].meterBypassed +"]").prop('selected', 'selected');
 		}
-		$("#standConnected option[value="+ cablesObj[name].standConnected +"]").prop('selected', 'selected');
+		$("#standConnected").val(cablesObj[name].standConnected);
 
 		$('#addCableForm').show();
 		$('.formContainer').show().siblings().hide();

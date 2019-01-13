@@ -18,9 +18,10 @@ $(document).ready(function(){
             jobCreatedBy : window.user,
             company: getUser('creator')
         };
-        $('#createJobForm')[0].reset();
+        // $('#createJobForm')[0].reset();
         console.log(newJob);
-        $('.usersJobCard').data('jobnumber', '333');
+        
+        console.log($('.usersJobCard').text());
         $('.usersJobCard').click();
         // $.ajax({
         //     type : "POST",
@@ -107,6 +108,7 @@ function getdescription() {
 var x = document.getElementById("asset_location");
 
 function getLocation() {
+    console.log('clicked');
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
   } else {
@@ -120,16 +122,20 @@ function showPosition(position) {
 }
 
 function createjobcardno() {
-    var prefix = '';
-    var area = document.getElementById('addJob-jobLocation').value;
+    var date = new Date();
+    var creator = getUser('creator');
+    var seconds = Math.round(date.getTime() / 1000);
+    var cardNumber = creator+seconds+window.user;
+    // var area = document.getElementById('addJob-jobLocation').value;
 
-    console.log(area);
+    console.log(new Date());
 
     //if (addJob-jobLocation)
     var d = Number(new Date());
-    document.getElementById('addJob-jobCardNumber').value = d;
+    document.getElementById('addJob-jobCardNumber').value = cardNumber;
+    document.getElementById('usersJobCard').dataset.jobNumber = cardNumber;
 
-} 
+}
 
 function recordselect() {
     var added = 0;

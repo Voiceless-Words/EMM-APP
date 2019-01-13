@@ -32,7 +32,7 @@ body {
     width: 100vw;
 }
 
-.top_nav, .userJobCard {
+.top_nav, .usersJobCard {
     display: none;
 }
 
@@ -182,7 +182,7 @@ ul ul a {
 
 input[type='text'], input[type='password'], input[type='email'], input[type='date'], select.form-control, input[type='checkbox'], input[type='search'] {
     background-color: rgba(0, 0, 0, 0.1);
-    color: white;
+    color: black;
     border-radius: 20px;
     font-size: 16px;
     border: 1px groove rgba(0, 0, 0, 0.1);
