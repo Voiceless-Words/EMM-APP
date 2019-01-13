@@ -20,7 +20,7 @@ $(document).ready(function(){
         };
         // $('#createJobForm')[0].reset();
         console.log(newJob);
-        
+
         console.log($('.usersJobCard').text());
         $('.usersJobCard').click();
         // $.ajax({
@@ -83,7 +83,7 @@ function getjobstuff() {
                 jobcardstuff = [response.users, response.assets]
             }
         }
-        xhttp.open("POST", "http://192.168.1.101:8080/getview", true);
+        xhttp.open("POST", "http://emmapp.us.openode.io/getview", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send('view=createjobcard&format=JSON');
 }

@@ -23,8 +23,8 @@ $(document).ready(function(){
     function changeField(name, value)
     {
         $.ajax({
-            type : "POST",
-            url : 'http://192.168.1.101:8080/data/update_field',
+            type : "POST",emmapp.us.openode.io
+            url : 'http://emmapp.us.openode.io/data/update_field',
             data : {
                 name : name,
                 value : value,
