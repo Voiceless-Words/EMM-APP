@@ -23,7 +23,7 @@ var server = app.listen(8080, function(){
 });
 
 app.use(function(req, res, next) {
-   var allowedOrigins = ['http://127.0.0.1:8080','http://emmapp.us.openode.io', 'http://localhost:81', 'http://localhost:8080', 'http://localhost:3000', 'http://192.168.43.54:3000', 'http://192.168.1.101:8080'];
+   var allowedOrigins = ['http://emmapp.us.openode.io', 'http://localhost:81', 'http://localhost:8080', 'http://localhost:3000', 'http://192.168.43.54:3000', 'http://192.168.1.101:8080'];
    var origin = req.headers.origin;
    if(allowedOrigins.indexOf(origin) > -1){
         res.setHeader('Access-Control-Allow-Origin', origin);
@@ -273,23 +273,21 @@ app.post('/form_save', function(req, res){
   res.send("success");
 });
 
-app.use(function(req, res) {
-    res.send("what are you trying to do" + req.url);
-});
-
 app.post('/pics_save', function(req, res){
   console.log('here');
-  /*console.log(req.body.jobnumber);
+  var imageData = req.body.img;
+  console.log(req.body.jobnumber);
   console.log(req.body.img);
   var image1 = new Image({
     jobnumber: req.body.jobnumber,
-    img:req.body.img
+    type: 'image/jpeg',
+    img:imageData
   });
   image1.save(function(err){
     if (err) throw err;
 
     console.log("saved akere");
-  });*/
+  });
   res.send("success");
 });
 

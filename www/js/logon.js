@@ -75,21 +75,6 @@ $(document).ready(function(){
 						},
 						type: 'POST'
 					});
-					//this test
-					$.ajax({
-						url:"http://192.168.1.101:8080/pic_save",
-						data:{
-							jobnumber: "123",
-							img:"imgURI"
-						},
-						error: function () {
-							console.log("Something wrong happened");
-						},
-						success: function () {
-							console.log("Successful ajax sent");
-						},
-						type: 'POST'
-					});
 					var deleteValue = objectStore.delete(myRecords[i][jobNo2]);
 
 					deleteValue.onsuccess = function(event) {
