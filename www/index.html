@@ -349,36 +349,45 @@
                                     <input type="text" class="form-control" id="addJob-jobCardNumber" placeholder="Enter job card number here..." disabled required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="addJob-assets">Select an asset number</label>
-                                    <select class="form-control" id="addJob-assets" oninput="getdescription()">
-                                        <option>--Please select one--</option>
+                                    <label for="addJob-jobPermitNumber">Permit Number</label>
+                                    <input type="text" class="form-control" id="addJob-jobPermitNumber" placeholder="Enter Permit Number number here..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addJob-assets-Type">Select Asset Type</label>
+                                    <select id="addJob-assets-Type" class="form-control" oninput="" ="updateJobCardNumber()">
+                                        <option>Pillar Box</option>
+                                        <option>Pole-Mounted Box</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="addJob-jobCardNumber">Asset Desription</label>
-                                    <p id="asset_description"><i>No Asset Selected</i></p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="addJob-requiredByDate">Required by:</label>
-                                    <input type="date" name="requiredByDate" id="addJob-requiredByDate">
-                                </div>
-                                <div class="form-group">
-                                    <label for="addJob-activity">Select an Activity</label>
-                                    <select class="form-control" id="addJob-activity">
-                                        <option value="">--Please select one--</option>
-                                        <option value="PSI">Primary Substation Inspection</option>
-                                        <option value="SSI">Secondary Substation Inspection</option>
+                                    <label for="addJob-assets-Mat">Select the asset's Material</label>
+                                    <select class="form-control" id="addJob-assets-Mat">
+                                        <option>Steel</option>
+                                        <option>Plastic</option>
+                                        <option>Fibre Glass</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <p id="Assign to :"></p>
-                                    <label for="addJob-assign">Assign job to: <small>max : 3 people</small> </label>
-                                    <p id="people"></p>
-                                    <div id="msg"></div>
-                                    <select multiple class="form-control" id="addJob-assign" oninput="recordselect()">
-                                        <option value="0">select / clear</option>
+                                    <label for="addJob-jobLocation">Area</label>
+                                    <select class="form-control" id="addJob-jobLocation">
+                                        <option>Buurendal</option>
+                                        <option>Highway Garden</option>
+                                        <option>Harmelia</option>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="addJob-jobCardcoords">Asset Desription</label>
+                                    <button onclick="getLocation()">Get Location</button>
+                                    <p id="asset_location">
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="addJob-activity">Activity</label>
+                                    <p id="addJob-activity"><i>Pillar Box Inspection</i></p>
+                                </div>
+
+                        
                                 <button type="submit" class="btn btn-primary">Create JobCard</button>
                             </form>
                             <div id="reviewJobTab" class="tab-pane fade in">
