@@ -38,7 +38,11 @@ $(document).ready(function(){
         $('.jobSearchResults').html(output);
          $.ajax({
             type : "POST",
+<<<<<<< HEAD
             url : 'http://192.168.1.101:8080/search/reviewJob',
+=======
+            url : 'http://localhost:8080/search/reviewJob',
+>>>>>>> f3b3a180301ead8852cc8fa327e0b4488269a02b
             data : filters,
             success : function(data) {
                 // console.log(data[0]['jobnumber']);

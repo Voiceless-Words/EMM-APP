@@ -4,12 +4,15 @@ var mongoose = require('mongoose'),
 var jobSchema = new Schema({
     jobCardNumber: { type: Number},
     permitNumber: { type: Number},
-    assetName: { type: String},
-    activity: { type: String},
+    jobAssetsType: { type: String},
+    assetsMaterial: { type: String},
+    jobLocation: { type: String},
+    company: { type: String},
+    jobActivity: { type: String},
+    asset_lati: { type: String},
+    asset_long: { type: String},
     status: { type: String, default: '0' },
-    employee_id: [{type: String, default: null }],
-    requiredBy :{ type : Date },
-    created_by: { type: String, required: true },
+    jobCreatedBy: { type: String, required: true },
     time : { type : Date, default: Date.now }
 });
 

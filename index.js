@@ -213,30 +213,26 @@ app.get('/inspection', function (req, res){
 
 app.post('/jobcard_save', function(req, res){
 
-  var val = JSON.parse(req.body.newjob);
-  console.log(val.jobNumber);
-  console.log(val.jobAssets);
-  console.log(val.jobActivity);
-  console.log(val.jobRequiredByDate);
-  console.log(val.jobCreatedBy);
-  console.log(val.jobAssignedTo);
-
+  var val = req.body;
   var job = new JobSave({
     jobCardNumber: val.jobNumber,
-    assetName: val.jobAssets,
-    activity: val.jobActivity,
-    status: 0,
-    requiredBy : val.jobRequiredByDate,
+    permitNumber: val.permitNumber,
+    assetsMaterial: val.assetsMaterial,
+    jobLocation: val.jobLocation,
+    asset_lati: val.asset_lati,
+    asset_long: val.asset_long,
+    jobAssetType: val.jobAssetsType,
+    jobActivity: val.jobActivity,
     created_by: val.jobCreatedBy,
-    employee_id: val.jobAssignedTo,
-    time : Date.now()
+	company : val.company
   });
+   console.log(job);
   job.save(function (err) {
-  if (err) return handleError(err);
+//   if (err) console.log(err);
 
-  console.log("saved the job");
+  		console.log("saved the job");
 
-});
+	});
 });
 app.post('/form_save', function(req, res){
 

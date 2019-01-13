@@ -143,6 +143,12 @@ $(document).ready(function(){
 		$('#assignedJobsBody').show().siblings().hide();
 	});
 
+	$('.startJob').click(function(){
+		$('#sidebarUser').removeClass('active');  //close side bar
+		$('#startJob').show().siblings().hide();
+		getjobstuff();
+	});
+
 	$('.helpButton').click(function(){
 		$('.top_nav').hide();
 		$('#sidebar').removeClass('active');  //close side bar
@@ -563,6 +569,7 @@ var jobNumber = 0;
         });
     }
 
+});
 	function storeUser(user)
 	{
 		var currentUser = JSON.stringify(user);
@@ -584,5 +591,3 @@ var jobNumber = 0;
 	{
 		localStorage.removeItem('currentUser');
 	}
-
-});

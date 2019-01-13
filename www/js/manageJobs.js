@@ -8,12 +8,15 @@ $(document).ready(function(){
         e.preventDefault();
         newJob = {
             jobNumber : $('#addJob-jobCardNumber').val(),
-            jobAssets : $('#addJob-assets :selected').text(),
-            jobRequiredByDate : $('#addJob-requiredByDate').val(),
-            jobActivity : $('#addJob-activity :selected').text(),
-            jobAssignedTo : people_list,
-            jobCreatedBy : window.user
-
+            permitNumber : $('#addJob-jobPermitNumber').val(),
+            jobAssetsType : $('#addJob-assets-Type :selected').text(),
+            assetsMaterial : $('#addJob-assets-Mat :selected').text(),
+            jobLocation : $('#addJob-jobLocation :selected').text(),
+            jobActivity : $('#addJob-activity').text(),
+            asset_lati : $('.asset_lati').text(),
+            asset_long : $('.asset_long').text(),
+            jobCreatedBy : window.user,
+            company: getUser('creator')
         };
         $('#createJobForm')[0].reset();
         console.log(newJob);
@@ -36,7 +39,7 @@ $(document).ready(function(){
 });
 
 function getjobstuff() {
-        
+
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -102,8 +105,8 @@ function getLocation() {
 }
 
 function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude; 
+  x.innerHTML = 'Latitude: <span class="asset_lati">' + position.coords.latitude +
+  '</span><br>Longitude: <span class="asset_long">' + position.coords.longitude + '</span>';
 }
 
 function createjobcardno() {
@@ -116,7 +119,7 @@ function createjobcardno() {
     var d = Number(new Date());
     document.getElementById('addJob-jobCardNumber').value = d;
 
-} 
+}
 
 function recordselect() {
     var added = 0;
