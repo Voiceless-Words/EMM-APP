@@ -3,14 +3,14 @@ var mongoose = require('mongoose'),
 
 var jobSchema = new Schema({
 
-	jobCardNumber: { type: Number},
+	jobCardNumber: { type: String},
     permitNumber : { type: String},
     assetType: { type: String},
     assetsMaterial: { type: String},
-    jobActivity : { type: String },
+    jobActivity : { type: String},
     jobLocation : { type: String},
-    created_by: { type: String },
-    gps_lati : { type: String },
+    created_by: { type: String},
+    gps_lati : { type: String},
     gps_long : { type: String},
     time : { type : Date, default: Date.now }
 

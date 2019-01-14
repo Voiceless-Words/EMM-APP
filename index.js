@@ -213,7 +213,8 @@ app.get('/inspection', function (req, res){
 
 app.post('/jobcard_save', function(req, res){
 
-  var val = req.body;
+
+  var val = req.body.newjob;
   var job = new JobSave({
     jobCardNumber: val.jobNumber,
     permitNumber: val.permitNumber,
@@ -223,8 +224,7 @@ app.post('/jobcard_save', function(req, res){
     asset_long: val.asset_long,
     jobAssetType: val.jobAssetsType,
     jobActivity: val.jobActivity,
-    created_by: val.jobCreatedBy,
-	company : val.company
+    created_by: val.jobCreatedBy
   });
    console.log(job);
   job.save(function (err) {
