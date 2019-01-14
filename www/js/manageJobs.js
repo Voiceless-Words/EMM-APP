@@ -1,6 +1,9 @@
 
 var jobcardstuff = [];
 var people_list = [];
+var asset_lati = '';
+var asset_long = '';
+var jobcardnumber = '';
 
 var newJob;
 $(document).ready(function(){
@@ -13,8 +16,8 @@ $(document).ready(function(){
             assetsMaterial : $('#addJob-assets-Mat :selected').text(),
             jobLocation : $('#addJob-jobLocation :selected').text(),
             jobActivity : $('#addJob-activity').text(),
-            asset_lati : $('.asset_lati').text(),
-            asset_long : $('.asset_long').text(),
+            asset_lati : asset_lati,//$('.asset_lati').text(),
+            asset_long : asset_long,// $('.asset_long').text(),
             jobCreatedBy : window.user,
             company: getUser('creator')
         };
@@ -41,7 +44,7 @@ $(document).ready(function(){
 
     // Do as u like with the form data obj newJob
 });
-
+/*
 function getjobstuff() {
 
         var xhttp = new XMLHttpRequest();
@@ -80,38 +83,46 @@ function getjobstuff() {
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send('view=createjobcard&format=JSON');
 }
-
-
-function getdescription() {
-    var found = 0;
-
-    jobcardstuff[1].forEach(function(asset){
-        if (asset.name == event.target.value)
-        {
-            document.getElementById('asset_description').innerHTML = asset.description;
-            found = 1;
-        }
-    });
-    if (found == 0) {
-        document.getElementById('asset_description').innerHTML = '<i>No Asset Selected</i>';
-    }
-
-}
+*/
 
 var x = document.getElementById("asset_location");
 
-function getLocation() {
-    console.log('clicked');
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    x.innerHTML = "Geolocation is not supported by this device.";
-  }
+// onSuccess Callback
+//   This method accepts a `Position` object, which contains
+//   the current GPS coordinates
+//
+var onSuccess = function(position) {
+    $('#loader_id').hide();
+     asset_lati = position.coords.latitude;
+     asset_long = position.coords.longitude;
+    x.innerHTML = 'Latitude: '  + position.coords.latitude          + '\n' +
+          'Longitude: '         + position.coords.longitude         + '\n' +
+          'Altitude: '          + position.coords.altitude          + '\n' +
+          'Accuracy: '          + position.coords.accuracy          + '\n' +
+          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+          'Heading: '           + position.coords.heading           + '\n' +
+          'Speed: '             + position.coords.speed             + '\n' +
+          'Timestamp: '         + new Date(position.timestamp)      + '\n';
+};
+
+// onError Callback receives a PositionError object
+//
+function onError(error) {
+    alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
+    $('#loader_id').hide();
+    x.innerHTML = 'Try again. If App asks for location permission, please allow';
+
 }
 
-function showPosition(position) {
-  x.innerHTML = 'Latitude: <span class="asset_lati">' + position.coords.latitude +
-  '</span><br>Longitude: <span class="asset_long">' + position.coords.longitude + '</span>';
+
+function getLocation() {
+
+navigator.geolocation.getCurrentPosition(onSuccess, onError, {maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
+$('#loader_id').show();
+console.log('clicked');
+
+  
 }
 
 function createjobcardno() {
@@ -119,14 +130,22 @@ function createjobcardno() {
     var creator = getUser('creator');
     var seconds = Math.round(date.getTime() / 1000);
     var cardNumber = creator+seconds+window.user;
-    // var area = document.getElementById('addJob-jobLocation').value;
-
+    var area = document.getElementById('addJob-jobLocation').value;
+    var prefix = '';
     console.log(new Date());
 
-    //if (addJob-jobLocation)
-    var d = Number(new Date());
-    document.getElementById('addJob-jobCardNumber').value = cardNumber;
-    document.getElementById('usersJobCard').dataset.jobNumber = cardNumber;
+    if (area == 'Buurendal') {
+        prefix = 'BDL';
+    } else if (area == 'Highway Garden') {
+        prefix = 'HG';
+    } else if (area == 'Harmelia') {
+        prefix = 'HR';
+    }
+
+    document.getElementById('addJob-jobCardNumber').value = prefix + cardNumber;
+    document.getElementById('usersJobCard').dataset.jobNumber = prefix + cardNumber;
+
+    jobcardnumber = prefix + cardNumber;
 
 }
 
