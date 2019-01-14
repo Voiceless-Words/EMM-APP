@@ -27,7 +27,7 @@ $(document).ready(function(){
 
        // console.log($('.usersJobCard').text());
       //  $('.usersJobCard').click();
-        
+
 
          var xhttp = new XMLHttpRequest();
          xhttp.onreadystatechange = function() {
@@ -39,7 +39,7 @@ $(document).ready(function(){
 
              }
          }
-         xhttp.open("POST", "http://localhost:8080/jobo_save", true);
+         xhttp.open("POST", "http://localhost:8080/jobcard_save", true);
          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
          xhttp.send('newjob='+JSON.stringify(newJob));
 
@@ -127,7 +127,7 @@ navigator.geolocation.getCurrentPosition(onSuccess, onError, {maximumAge: 3000, 
 $('#loader_id').show();
 console.log('clicked');
 
-  
+
 }
 
 function createjobcardno() {
