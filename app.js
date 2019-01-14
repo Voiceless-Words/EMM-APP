@@ -213,18 +213,10 @@ app.get('/inspection', function (req, res){
 });
 
 
-app.post('/jobo_save', function(req, res){
-
-console.log('Shit!');
-console.log(req.body.newjob);
-console.log('I am here');
-
-});
-
-
 app.post('/jobcard_save', function(req, res){
+  console.log("it gets in here");
 
-//  var val = JSON.parse(req.body.newjob);
+  /*var val = JSON.parse(req.body.newjob);
 
 
   var job = new JobSave({
@@ -240,14 +232,14 @@ app.post('/jobcard_save', function(req, res){
     time : Date.now()
   });
 
-  
 
-  job.save(function (err) {
+
+  /*job.save(function (err) {
   if (err) return handleError(err);
 
   console.log("saved the job");
 
-	});
+});*/
 });
 
 app.post('/form_save', function(req, res){
