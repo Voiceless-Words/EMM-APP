@@ -35,11 +35,7 @@ let app = {
         });
     },
     failure: function(msg){
-        document.getElementById('msg').textContent = msg;
+        console.log(msg);
     }
 };
 document.addEventListener('deviceready', app.init);
-
-function savePhoto(){
-
-}
