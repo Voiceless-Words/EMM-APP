@@ -1,5 +1,6 @@
 
 $(document).ready(function(){
+	$('#loginBody').show().siblings().hide();
 	if (getUser('employee_id'))
 	{
 		if (getUser('admin') == 0)
