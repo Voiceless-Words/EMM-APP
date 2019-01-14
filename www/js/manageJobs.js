@@ -35,7 +35,7 @@ $(document).ready(function(){
 
              console.log('New Job Card Created');
              console.log(this.response);
-             alert(this.response);
+      
 
              }
          }
@@ -49,47 +49,6 @@ $(document).ready(function(){
 
     // Do as u like with the form data obj newJob
 });
-/*
-function getjobstuff() {
-
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-
-            //console.log(this.responseText.users);
-                var response = JSON.parse(this.responseText);
-                console.log(response.users);
-                console.log(response.assets);
-
-
-                if (jobcardstuff.length != 2) {
-
-                    response.users.forEach(function(user) {
-                    var o = new Option(user.employee_id, user.employee_id);
-                    $(o).html(user.first_name);
-                    $("#addJob-assign").append(o)
-
-                     });
-
-
-                    response.assets.forEach(function(asset) {
-                    var o = new Option(asset.name, asset.name);
-                    $(o).html(asset.name);
-                    $("#addJob-assets").append(o)
-
-                });
-
-                }
-
-                jobcardstuff = [response.users, response.assets]
-            }
-        }
-        xhttp.open("POST", "http://localhost:8080/getview", true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send('view=createjobcard&format=JSON');
-}
-*/
-
 var x = document.getElementById("asset_location");
 
 // onSuccess Callback
@@ -133,7 +92,7 @@ console.log('clicked');
 function createjobcardno() {
     var date = new Date();
     var creator = getUser('creator');
-    var seconds = Math.round(date.getTime() / 1000);
+    var seconds = Math.round(Number(date.getTime()) / 1000);
     var cardNumber = creator+seconds+window.user;
     var area = document.getElementById('addJob-jobLocation').value;
     var prefix = '';

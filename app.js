@@ -216,10 +216,18 @@ app.get('/inspection', function (req, res){
 
 
 app.post('/jobcard_save', function(req, res){
-  console.log("it gets in here");
 
-  /*var val = JSON.parse(req.body.newjob);
+  console.log(req.body.newjob);
 
+  var val = JSON.parse(req.body.newjob);
+
+  console.log(val.jobNumber);
+console.log(val.permitNumber);
+console.log(val.jobAssetsType);
+console.log(val.assetsMaterial);
+console.log(val.jobActivity);
+console.log(val.jobCreatedBy);
+console.log(val.jobNumber);
 
   var job = new JobSave({
     jobCardNumber: val.jobNumber,
@@ -236,12 +244,13 @@ app.post('/jobcard_save', function(req, res){
 
 
 
-  /*job.save(function (err) {
+  job.save(function (err) {
   if (err) return handleError(err);
 
-  console.log("saved the job");
+	  console.log("saved the job");
+	  res.send('200');
 
-});*/
+	}); 
 });
 
 app.post('/form_save', function(req, res){
