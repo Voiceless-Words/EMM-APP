@@ -146,8 +146,6 @@ $(document).ready(function(){
 	$('.startJob').click(function(){
 		$('#sidebarUser').removeClass('active');  //close side bar
 		$('#startJob').show().siblings().hide();
-		getjobstuff();
-		createjobcardno();
 	});
 
 	$('.helpButton').click(function(){

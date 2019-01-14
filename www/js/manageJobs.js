@@ -22,24 +22,29 @@ $(document).ready(function(){
             company: getUser('creator')
         };
         // $('#createJobForm')[0].reset();
+
         console.log(newJob);
 
-        console.log($('.usersJobCard').text());
-        $('.usersJobCard').click();
+       // console.log($('.usersJobCard').text());
+      //  $('.usersJobCard').click();
         
 
-        // var xhttp = new XMLHttpRequest();
-        // xhttp.onreadystatechange = function() {
-        // if (this.readyState == 4 && this.status == 200) {
+         var xhttp = new XMLHttpRequest();
+         xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {
 
-        //     console.log('New Job Card Created');
-        //     alert('New Job Card Created');
+             console.log('New Job Card Created');
+             console.log(this.response);
+             alert(this.response);
 
-        //     }
-        // }
-        // xhttp.open("POST", "http://localhost:8080/jobcard_save", true);
-        // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        // xhttp.send('newjob='+JSON.stringify(newJob));
+             }
+         }
+         xhttp.open("POST", "http://localhost:8080/jobo_save", true);
+         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+         xhttp.send('newjob='+JSON.stringify(newJob));
+
+         console.log('I sent :' + JSON.stringify(newJob));
+
     });
 
     // Do as u like with the form data obj newJob
