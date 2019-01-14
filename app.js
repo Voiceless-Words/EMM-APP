@@ -18,11 +18,11 @@ var app = express();
 app.use(cors());
 
 
-var server = app.listen(8080, function(){
+var server = app.listen(80, function(){
     console.log("server started port 8080");
 });
 
-/*
+
 app.use(function(req, res, next) {
    var allowedOrigins = ['http://emmapp.us.openode.io', 'http://localhost:81', 'http://localhost:8080', 'http://localhost:3000', 'http://192.168.43.54:3000', 'http://localhost:8080'];
    var origin = req.headers.origin;
@@ -36,7 +36,6 @@ app.use(function(req, res, next) {
   return next();
 });
 
-*/
 const user = require('./routes/user');
 const search = require('./routes/search');
 const data = require('./routes/data');
@@ -250,7 +249,7 @@ console.log(val.jobNumber);
 	  console.log("saved the job");
 	  res.send('200');
 
-	}); 
+	});
 });
 
 app.post('/form_save', function(req, res){

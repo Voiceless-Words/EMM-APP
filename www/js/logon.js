@@ -62,7 +62,7 @@ $(document).ready(function(){
 					var num = myRecords[i][jobNo];
 					console.log(stringD);
 					$.ajax({
-						url:"http://localhost:8080/form_save",
+						url:"http://emmapp.us.openode.io/form_save",
 						data:{
 							jobNo: num,
 							form:stringD,
@@ -235,7 +235,7 @@ $(document).ready(function(){
 				//get values here piet
 				$.ajax({
 					type : "POST",
-					url : "http://localhost:8080/jobcard_save",
+					url : "http://emmapp.us.openode.io/jobcard_save",
 					data : newJob,
 					success : function(data) {
 						console.log(data);
@@ -247,7 +247,7 @@ $(document).ready(function(){
 				console.log(jobNo);
 				var stringD = JSON.stringify(jobs);
 				$.ajax({
-					url:"http://localhost:8080/form_save",
+					url:"http://emmapp.us.openode.io/form_save",
 					data:{
 						jobNo: jobNo,
 						form:stringD,
@@ -456,7 +456,7 @@ var selectedCable = -1;
 			username : $("#employeeNumber").val(),
             password : $("#loginPassword").val()
 		};
-		check_data(user,  "http://localhost:8080/user/login");
+		check_data(user,  "http://emmapp.us.openode.io/user/login");
     });
 
 	$("#registerForm").submit(function (e) {
@@ -473,7 +473,7 @@ var selectedCable = -1;
 			admin: $('#adminSetting').is(':checked') ? 1 : 0
 		};
 		console.log(user);
-		check_data(user,  "http://localhost:8080/user/register");
+		check_data(user,  "http://emmapp.us.openode.io/user/register");
     });
 
 	$("#createPasswordForm").submit(function (e) {
@@ -485,7 +485,7 @@ var selectedCable = -1;
             cpassword : $("#loginPassword_create").val(),
             ccpassword : $("#cloginPassword_create").val(),
 		};
-		check_data(user,  "http://localhost:8080/user/login");
+		check_data(user,  "http://emmapp.us.openode.io/user/login");
     });
 
 	function check_data(user, path)
@@ -600,7 +600,7 @@ var selectedCable = -1;
 					$('.firstName').text(getUser('first_name'));
 					$('.lastName').text(getUser('last_name'));
 				}
-				if (path === "http://localhost:8080/user/register")
+				if (path === "http://emmapp.us.openode.io/user/register")
 					$("#registerForm")[0].reset();
             }
         });
@@ -610,7 +610,7 @@ var selectedCable = -1;
     {
         $.ajax({
             type : "POST",
-            url : "http://localhost:8080/user/update",
+            url : "http://emmapp.us.openode.io/user/update",
             data :{
 				user : user.username,
 				value : user.password

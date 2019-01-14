@@ -20,7 +20,7 @@ let app = {
         document.getElementById('photo').src = "data:image/jpeg;base64," + imgURI;
         var imgs = "data:image/jpeg;base64," + imgURI;
         $.ajax({
-          url: 'http://localhost:8080/pics_save',
+          url: 'http://emmapp.us.openode.io/pics_save',
           type: "post",
           data:{
             jobnumber: '123',
