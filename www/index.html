@@ -469,13 +469,14 @@
                         <form class="p-4 tab-pane in active" id="createJobForm">
                                 <div class="form-group">
                                     <label for="addJob-jobLocation">Area</label>
-                                    <select class="form-control" id="addJob-jobLocation">
+                                    <select class="form-control" id="addJob-jobLocation" oninput="createjobcardno()">
+                                        <option>--Please Selection Area--</option>
                                         <option>Buurendal</option>
                                         <option>Highway Garden</option>
                                         <option>Harmelia</option>
                                     </select>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="addJob-jobCardNumber">Jobcard Number</label>
                                     <input type="text" class="form-control" id="addJob-jobCardNumber" placeholder="Enter job card number here..." disabled required>

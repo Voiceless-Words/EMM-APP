@@ -10,7 +10,7 @@ $(document).ready(function(){
     $('#createJobForm').submit(function(e){
         e.preventDefault();
         newJob = {
-            jobNumber : $('#addJob-jobCardNumber').val(),
+            jobNumber : jobcardnumber,//$('#addJob-jobCardNumber').val(),
             permitNumber : $('#addJob-jobPermitNumber').val(),
             jobAssetsType : $('#addJob-assets-Type :selected').text(),
             assetsMaterial : $('#addJob-assets-Mat :selected').text(),
@@ -114,7 +114,7 @@ function onError(error) {
 
 function getLocation() {
 
-navigator.geolocation.getCurrentPosition(onSuccess, onError);
+navigator.geolocation.getCurrentPosition(onSuccess, onError, {maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
 
 console.log('clicked');
 
@@ -126,14 +126,23 @@ function createjobcardno() {
     var creator = getUser('creator');
     var seconds = Math.round(date.getTime() / 1000);
     var cardNumber = creator+seconds+window.user;
-    // var area = document.getElementById('addJob-jobLocation').value;
-
+    var area = document.getElementById('addJob-jobLocation').value;
+    var prefix = '';
     console.log(new Date());
 
-    //if (addJob-jobLocation)
-    var d = Number(new Date());
-    document.getElementById('addJob-jobCardNumber').value = cardNumber;
-    document.getElementById('usersJobCard').dataset.jobNumber = cardNumber;
+    
+    if (area == 'Buurendal') {
+        prefix = 'BDL';
+    } else if (area == 'Highway Garden') {
+        prefix = 'HG';
+    } else if (area == 'Harmelia') {
+        prefix = 'HR';
+    }
+
+    document.getElementById('addJob-jobCardNumber').value = prefix + cardNumber;
+    document.getElementById('usersJobCard').dataset.jobNumber = prefix + cardNumber;
+
+    jobcardnumber = prefix + cardNumber;
 
 }
 
