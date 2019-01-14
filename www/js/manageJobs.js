@@ -1,6 +1,9 @@
 
 var jobcardstuff = [];
 var people_list = [];
+var asset_lati = '';
+var asset_long = '';
+var jobcardnumber = '';
 
 var newJob;
 $(document).ready(function(){
@@ -13,8 +16,8 @@ $(document).ready(function(){
             assetsMaterial : $('#addJob-assets-Mat :selected').text(),
             jobLocation : $('#addJob-jobLocation :selected').text(),
             jobActivity : $('#addJob-activity').text(),
-            asset_lati : $('.asset_lati').text(),
-            asset_long : $('.asset_long').text(),
+            asset_lati : asset_lati,//$('.asset_lati').text(),
+            asset_long : asset_long,// $('.asset_long').text(),
             jobCreatedBy : window.user,
             company: getUser('creator')
         };
