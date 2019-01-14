@@ -10,7 +10,7 @@ $(document).ready(function(){
     $('#createJobForm').submit(function(e){
         e.preventDefault();
         newJob = {
-            jobNumber : jobcardnumber,//$('#addJob-jobCardNumber').val(),
+            jobNumber : $('#addJob-jobCardNumber').val(),
             permitNumber : $('#addJob-jobPermitNumber').val(),
             jobAssetsType : $('#addJob-assets-Type :selected').text(),
             assetsMaterial : $('#addJob-assets-Mat :selected').text(),
@@ -92,6 +92,7 @@ var x = document.getElementById("asset_location");
 //   the current GPS coordinates
 //
 var onSuccess = function(position) {
+    $('#loader_id').hide();
      asset_lati = position.coords.latitude;
      asset_long = position.coords.longitude;
     x.innerHTML = 'Latitude: '  + position.coords.latitude          + '\n' +
@@ -115,7 +116,7 @@ function onError(error) {
 function getLocation() {
 
 navigator.geolocation.getCurrentPosition(onSuccess, onError, {maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
-
+$('#loader_id').show();
 console.log('clicked');
 
   
