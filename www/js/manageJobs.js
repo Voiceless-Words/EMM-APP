@@ -100,18 +100,36 @@ function getdescription() {
 
 var x = document.getElementById("asset_location");
 
-function getLocation() {
-    console.log('clicked');
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    x.innerHTML = "Geolocation is not supported by this device.";
-  }
+// onSuccess Callback
+//   This method accepts a `Position` object, which contains
+//   the current GPS coordinates
+//
+var onSuccess = function(position) {
+    x.innerHTML = 'Latitude: '  + position.coords.latitude          + '\n' +
+          'Longitude: '         + position.coords.longitude         + '\n' +
+          'Altitude: '          + position.coords.altitude          + '\n' +
+          'Accuracy: '          + position.coords.accuracy          + '\n' +
+          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+          'Heading: '           + position.coords.heading           + '\n' +
+          'Speed: '             + position.coords.speed             + '\n' +
+          'Timestamp: '         + new Date(position.timestamp)      + '\n';
+};
+
+// onError Callback receives a PositionError object
+//
+function onError(error) {
+    alert('code: '    + error.code    + '\n' +
+          'message: ' + error.message + '\n');
 }
 
-function showPosition(position) {
-  x.innerHTML = 'Latitude: <span class="asset_lati">' + position.coords.latitude +
-  '</span><br>Longitude: <span class="asset_long">' + position.coords.longitude + '</span>';
+
+function getLocation() {
+
+navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+console.log('clicked');
+
+  
 }
 
 function createjobcardno() {
