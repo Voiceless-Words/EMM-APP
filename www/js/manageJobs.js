@@ -82,7 +82,7 @@ function onError(error) {
 
 function getLocation() {
 
-navigator.geolocation.getCurrentPosition(onSuccess, onError, {maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
+navigator.geolocation.getCurrentPosition(onSuccess, onError, {maximumAge: 3000, timeout: 15000, enableHighAccuracy: true });
 $('#loader_id').show();
 console.log('clicked');
 
