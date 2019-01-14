@@ -91,6 +91,9 @@
                     <li>
                         <a href="#" class="startJob">Job</a>
                     </li>
+                    <li>
+                      <a href="#" id="btn"> Take Picture</a>
+                    </li>
                 </ul>
             </li>
             <br>
@@ -205,7 +208,6 @@
                     </div>
                     <div class="col-12 ">
                         <p><img src="./img/logo.png" alt="logo" id="photo" style="display: none;"/></p>
-                        <p><button id="btn"> Take Picture</button></p>
                     </div>
                     <div class="row p-4 ">
                         <div class="col-6 tile d-flex flex-column justify-content-center color1 userProfileSettings">
@@ -575,8 +577,9 @@
                         <p>I <b><span class="firstName"></span> <span class="firstName"></b> hereby declare that tasks to be performed
                         have been shown to all workers registered below for this inspection</span></p>
                     </div>
-                    <div class="form-group">
-                        <p>Risks</p>
+                    <p>Risks</p>
+                    <div class="col-12 flex-column justify-content-center color1 p-4 mb-2 addRisk">
+                        <h4 class="text-center text-white"><i class="fas fa-plus"></i>Identify Risk</h4>
                     </div>
                     <div class="form-group">
                         <input type="checkbox" id="riskCheck"> <p>I, the responsible person, declare that the nature
@@ -694,6 +697,36 @@
                     </fieldset>
                     <input type="submit" value="Save" class="btn btn-primary">
                 </form>
+                <!--changes i make -->
+                <form id="" action="addRiskForm">
+                  <div class="form-group">
+                    <label for="identifyRisk">Identified Risk</label>
+                    <select class="form-control" name="identifyRisk" required>
+                      <option value="">--Please Select--</option>
+                      <option value="risk1">Naked Wires</option>
+                      <option value="risk2">Something Something</option>
+                      <option value="risk3">Something Something</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="associatedRisk">Associated Risk</label>
+                    <select class="form-control" name="associatedRisk" required>
+                      <option value="">--Please Select--</option>
+                      <option value="asRisk1">Electricution</option>
+                      <option value="asRisk2">Falling from height</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="minimizeRisk">Steps Taken to Minimize Risk</label>
+                    <select class="form-control" name="minimizeRisk" required>
+                      <option value="">--Please Select--</option>
+                      <option value="minRisk1">Correct Tools and PPE</option>
+                      <option value="minRisk2">Isolate the wires</option>
+                    </select>
+                  </div>
+                </form>
+                <!--see-->
+                
                 <form action="" id="addCableForm">
                     <h3>Cable Marking</h3>
                     <div class="form-group">
@@ -722,6 +755,16 @@
                     </div>
                     <h3>House Breaker</h3>
                     <div class="form-group">
+                        <label for="breaker">Circuit Breaker Condition</label>
+                        <select class="form-control" id="breaker" required="">
+                            <option value="">--Please Select--</option>
+                            <option value="Good Condition">Good Condition</option>
+                            <option value="Burnt">Burnt</option>
+                            <option value="Broken">Broken</option>
+                            <option value="Labeling Faded">Labeling Faded</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="fitted">Securely fitted, Not hanging</label>
                         <select class="form-control" id="fitted" required="">
                             <option value="">--Please Select--</option>
@@ -733,9 +776,14 @@
                         <label for="size">Size, please specify?</label>
                         <select class="form-control" id="size" required="">
                             <option value="">--Please Select--</option>
-                            <option value="88">88</option>
-                            <option value="120">120</option>
-                            <option value="85">85</option>
+                            <option value="40">40</option>
+                            <option value="45">45</option>
+                            <option value="50">50</option>
+                            <option value="55">55</option>
+                            <option value="60">60</option>
+                            <option value="63">63</option>
+                            <option value="80">80</option>
+                            <option value="100">100</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -764,6 +812,7 @@
                                     <option value="Green">Green</option>
                                     <option value="Yellow">Yellow</option>
                                     <option value="Red">Red</option>
+                                    <option value="NA">N/A<option>
                                 </select>
                         </div>
                         <div class="form-group">

@@ -16,21 +16,21 @@ var app = express();
 
 app.use(cors());
 
-// app.use(function(req, res, next) {
-//   var allowedOrigins = ['http://127.0.0.1:8080', 'http://localhost:81', 'http://localhost:8080', 'http://localhost:3000', 'http://192.168.43.54:3000'];
-//   var origin = req.headers.origin;
-//   if(allowedOrigins.indexOf(origin) > -1){
-//        res.setHeader('Access-Control-Allow-Origin', origin);
-//   }
-//   //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8080');
-//   res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
-//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//   res.header('Access-Control-Allow-Credentials', true);
-//   return next();
-// });
+ app.use(function(req, res, next) {
+   var allowedOrigins = ['http://127.0.0.1:8080', 'http://localhost:81', 'http://localhost:3000', 'http://192.168.43.54:3000'];
+   var origin = req.headers.origin;
+   if(allowedOrigins.indexOf(origin) > -1){
+        res.setHeader('Access-Control-Allow-Origin', origin);
+   }
+   //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8080');
+   res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+   res.header('Access-Control-Allow-Credentials', true);
+   return next();
+ });
 
 
-var server = app.listen(8080, function(){
+var server = app.listen(80, function(){
     console.log("server started port 8080");
 });
 
@@ -48,6 +48,8 @@ const Forms = require('./models/form');
 const JobCard = require('./models/jobCard');
 
 const JobSave = require('./models/jobSave');
+
+const Image = require('./models/img');
 
 //session middleware
  app.use(session({
@@ -265,6 +267,24 @@ app.post('/form_save', function(req, res){
   //console.log(cables);
   //console.log(con1);
   //console.log(con2);
+  res.send("success");
+});
+
+app.post('/pics_save', function(req, res){
+  console.log('here');
+  var imageData = req.body.img;
+  console.log(req.body.jobnumber);
+  console.log(req.body.img);
+  var image1 = new Image({
+    jobnumber: req.body.jobnumber,
+    type: 'image/jpeg',
+    img:imageData
+  });
+  image1.save(function(err){
+    if (err) throw err;
+
+    console.log("saved akere");
+  });
   res.send("success");
 });
 
