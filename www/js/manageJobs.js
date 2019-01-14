@@ -26,7 +26,7 @@ $(document).ready(function(){
         console.log(newJob);
 
        // console.log($('.usersJobCard').text());
-      //  $('.usersJobCard').click();
+        $('.usersJobCard').click();
 
 
          var xhttp = new XMLHttpRequest();
