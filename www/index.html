@@ -57,7 +57,7 @@
                         <a href="#" class="userAccountsButton">User Accounts</a>
                     </li>
                     <li>
-                        <a href="#" class="jobCardButton">Job Cards</a>
+                        <a href="#" class="workReview">Word review</a>
                     </li>
                 </ul>
             </li>
@@ -85,10 +85,10 @@
                         <a href="#" class="dashboardUserButton">Dasboard</a>
                     </li>
                     <li>
-                        <a href="#" class="assignedJobsButton">Assigned Jobs</a>
+                        <a href="#" class="userProfileSettings">Profile Settings</a>
                     </li>
                     <li>
-                        <a href="#" class="jobCardButton">Job Cards</a>
+                        <a href="#" class="startJob">Job</a>
                     </li>
                 </ul>
             </li>
@@ -209,11 +209,11 @@
                         <p><button id="btn"> Take Picture</button></p>
                     </div>
                     <div class="row p-4 ">
-                        <div class="col-6 tile d-flex flex-column justify-content-center color1 assignedJobsButton">
+                        <div class="col-6 tile d-flex flex-column justify-content-center color1 userProfileSettings">
                             <div class="align-items-center px-4 pt-4">
                                 <i class="fas fa-user d-flex flex-row justify-content-center"></i><br />
                             </div>
-                                <p class="text-center text-white">Assigned Jobs</p>
+                                <p class="text-center text-white">Profile Settings</p>
                         </div>
                         <div class="col-6 tile d-flex flex-column justify-content-center color1">
                             <div class="align-items-center px-4 pt-4">
@@ -332,24 +332,26 @@
                <div class="col-sm-2"></div>
             </div>
         </div>
-        <div class="align-items-center" id="jobCardBody">
+        <div class="align-items-center" id="workReview">
              <div class="row no-margin">
                <div class="col-sm-2"></div>
                <div class="col-sm-8 p-4">
                    <div class="avatar"></div>
-                    <h2 class="text-center">Manage Job Cards</h2>
+                    <h2 class="text-center">Work statistics</h2>
                     <div class="col-12 p-4">
                         <ul class="nav nav-tabs nav-fill">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#createJobForm">Add New Job</a>
+                                <a class="nav-link active" data-toggle="tab" href="#generateReports">Generate Reports</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#reviewJobTab" onclick="reviewjobs()">Review Jobs</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <!-- <form class="p-4 tab-pane in active" id="createJobForm">
-                                <div class="form-group">
+                           <form class="p-4 tab-pane in active" id="generateReports">
+                               form filters
+                           </form>
+                                 <!-- <div class="form-group">
                                     <label for="addJob-jobLocation">Select Area</label>
                                     <select id="addJob-jobLocation" class="form-control" oninput="createjobcardno()">
                                         <option>Buurendal</option>
@@ -426,36 +428,28 @@
                <div class="col-sm-2"></div>
             </div>
         </div>
-        <div class="align-items-center" id="assignedJobsBody">
+        <div class="align-items-center" id="userProfileSettings">
              <div class="row no-margin">
                <div class="col-sm-2"></div>
                <div class="col-sm-8 p-4">
                    <div class="avatar"></div>
-                    <!-- <h2 class="text-center">Assigned Jobs</h2>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lightT userJobCard" data-toggle="modal" data-target=".bd-example-modal-lg" data-jobNumber="7879345">
-                            <div class="d-flex w-100 justify-content-between">
-                                <span class="mb-1">Job Number : 7879345</span>
-                                <small>3 days ago</small>
-                            </div>
-                            <strong class="mb-1">Assigned to</strong>
-                            <div class="d-flex w-100 justify-content-between">
-                                <span>Dora</span><span>Sofia</span><span>Elsa</span>
-                            </div>
-                            <p>Primary Substation Inspection</p>
-                            <small>Due Date: 23/05/19</small>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start lightT userJobCard" data-toggle="modal" data-target=".bd-example-modal-lg" data-jobNumber="7879348">
-                            <div class="d-flex w-100 justify-content-between">
-                                <span class="mb-1">Job Number : 7879348</span>
-                                <small>3 days ago</small>
-                            </div>
-                            <strong class="mb-1">Assigned to</strong>
-                            <div class="d-flex w-100 justify-content-between">
-                                <span>Dora</span><span>Sofia</span><span>Elsa</span>
-                            </div>
-                            <p>Primary Substation Inspection</p>
-                            <small>Due Date: 23/05/19</small>
-                        </a> -->
+                     <h2 class="text-center">Change Password</h2>
+                     <form id="changePasswordForm" class="p-4">
+                        <div class="form-group">
+                            <label for="opassword">Current Password</label>
+                            <input type="password" class="form-control" id="opassword" placeholder="Current Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="changePassword_create">Password</label>
+                            <input type="password" class="form-control" id="changePassword" placeholder="New Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="cchangePassword_create">Password</label>
+                            <input type="password" class="form-control" id="cchangePassword" placeholder="Confirm Password">
+                        </div>
+                        <div class="status p-2"></div>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </form>
 
                     </div>
                </div>
@@ -581,11 +575,11 @@
                         <p>Add other people </p>
                     </div>
                     <div class="form-group">
-                        <input type="checkbox"> <p>I, the responsible person, declare that the nature
+                        <input type="checkbox" id="riskCheck"> <p>I, the responsible person, declare that the nature
                         and location of this work as well as all the precautions, special conditions and danger
                         involved have been explained to the workers.<p>
                     </div>
-                    <input type="submit" value="Next" class="btn btn-primary next" data-to="conditionB">
+                    <input type="submit" value="Proceed" class="btn btn-primary next" data-to="conditionA">
                 </form>
                 <form id="conditionA">
                     <h3>Box Condition</h3>

@@ -91,7 +91,7 @@ $(document).ready(function(){
 	};
 
 	var boxCondition = [];
-
+	var riskTerms = 0;
 
 	$('.signOutBuutton').click(function(e){
 		$('#sidebar').removeClass('active');  //close side bar
@@ -138,9 +138,9 @@ $(document).ready(function(){
 		$('#jobCardBody').show().siblings().hide();
 	});
 
-	$('.assignedJobsButton').click(function(){
+	$('.userProfileSettings').click(function(){
 		$('#sidebarUser').removeClass('active');  //close side bar
-		$('#assignedJobsBody').show().siblings().hide();
+		$('#userProfileSettings').show().siblings().hide();
 	});
 
 	$('.startJob').click(function(){
@@ -185,8 +185,19 @@ $(document).ready(function(){
 		}
 		$('#conditionA').hide();
 		$('#conditionB').show();
-		// console.log(conditionAData.boxDamage);
-		console.log($('#plinthDefect').text());
+	});
+
+	$('#riskForm').submit(function(e){
+		e.preventDefault();
+		riskTerms = ($("#riskCheck").is(':checked')) ? 1 : 0;
+		if (riskTerms)
+		{
+			$('#conditionButton').hide();
+			$('#conditionA').show().siblings().hide();
+		}
+		else{
+			alert("please accept the risk assessment terms before you can continue...");
+		}
 	});
 
 	$('#conditionB').submit(function(e){
@@ -294,29 +305,37 @@ var jobNumber = 0;
 	$('.usersJobCard').click(function(){
 		$('#addCableForm').hide();
 		$('.formContainer').show();
-		console.log(typeof conditionAData);
-		console.log($(this).text());
-		if (conditionAData)
+		if (riskTerms)
 		{
-			$('#conditionButton').show().siblings().show();
-			$('.markJobFinished').show();
-			$('#conditionA').hide().siblings().hide();
+
+			// console.log(typeof conditionAData);
+			// console.log($(this).text());
+			if (conditionAData)
+			{
+				$('#conditionButton').show().siblings().show();
+				$('.markJobFinished').show();
+				$('#conditionA').hide().siblings().hide();
+			}
+			else {
+				$('#conditionA').show();
+			}
+			if (jobNumber != 0 && jobNumber != $(this).attr("data-job-number") && conditionAData)
+			{
+				alert("Please finish Job "+ jobNumber +" before doing other jobs");
+				$('.bd-example-modal-lg').hide();
+			}else{
+				jobNumber = $(this).attr("data-job-number");
+				jobs[jobNumber] = {};
+				jobs['status'] = 0;
+			}
+			console.log(jobs);
+			$('#addCableForm')[0].reset();
+			$('.jobDisplay').text(jobNumber);
 		}
-		else {
-			$('#conditionA').show();
+		else{
+			console.log("should just be showing risk");
+			$('#riskForm').show().siblings().hide();
 		}
-		if (jobNumber != 0 && jobNumber != $(this).attr("data-job-number") && conditionAData)
-		{
-			alert("Please finish Job "+ jobNumber +" before doing other jobs");
-			$('.bd-example-modal-lg').hide();
-		}else{
-			jobNumber = $(this).attr("data-job-number");
-			jobs[jobNumber] = {};
-			jobs['status'] = 0;
-		}
-		console.log(jobs);
-		$('#addCableForm')[0].reset();
-		$('.jobDisplay').text(jobNumber);
 	});
 
 	var cableCount = 0;
