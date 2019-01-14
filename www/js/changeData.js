@@ -42,6 +42,28 @@ $(document).ready(function(){
         }
     });
 
+    $('#changeAdminPassword').submit(function(e){
+        e.preventDefault()
+        var password = $('#adminPassword').val();
+        var cpassword = $('#adminCPassword').val();
+        var opassword = $('#adminCurrentPassword').val();
+        if (password.length < 6 || cpassword.length < 6)
+        {
+            alert("your password is too short");
+        }
+        else if (password.length > 30 || cpassword.length > 30)
+        {
+            alert("your password is too long");
+        }
+        else if (cpassword === password)
+        {
+            changePassword(opassword, password);
+        }
+        else {
+            alert("passwords dont match");
+        }
+    });
+
     function changeField(name, value)
     {
         $.ajax({
@@ -75,7 +97,12 @@ function changePassword(opassword, password){
             },
             success : function(data) {
                 console.log(data);
-                alert("Password successfully changed");
+                if (data.status == 200)
+                    alert("Password successfully changed");
+                if (data.status == 505)
+                    alert("Something went wrong, Please try again");
+                if (data.status == 100)
+                    alert("Incorrect password provided, Please try again");
             }
         });
 }
