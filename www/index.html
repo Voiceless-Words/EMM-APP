@@ -12,6 +12,7 @@
         <script src="css/fontawesome/js/fontawesome.js"></script>
         <link href="css/bs/css/bootstrap.min.css" rel="stylesheet">
         <link href="css/index.css" rel="stylesheet">
+        <link href="css/float.css" rel="stylesheet">
     </head>
     <body>
 
@@ -207,6 +208,9 @@
                     <div class="col-12 ">
                         <p><img src="./img/logo.png" alt="logo" id="photo" style="display: none;"/></p>
                         <p><button id="btn"> Take Picture</button></p>
+                    </div>
+                    <div class="fab" id="masterfab">
+                      <span>+</span>
                     </div>
                     <div class="row p-4 ">
                         <div class="col-6 tile d-flex flex-column justify-content-center color1 assignedJobsButton">
@@ -500,7 +504,7 @@
                                         <option>Fibre Glass</option>
                                     </select>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="addJob-jobCardcoords">Asset Desription</label>
                                     <button type="button" onclick="getLocation()" class="btn">Get Location</button>
