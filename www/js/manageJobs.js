@@ -110,6 +110,9 @@ var onSuccess = function(position) {
 function onError(error) {
     alert('code: '    + error.code    + '\n' +
           'message: ' + error.message + '\n');
+    $('#loader_id').hide();
+    x.innerHTML = 'Try again. If App asks for location permission, please allow';
+
 }
 
 
