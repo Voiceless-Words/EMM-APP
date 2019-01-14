@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Welcome to EMM</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="css/fontawesome/css/all.css" rel="stylesheet">
+        <script src="css/fontawesome/js/fontawesome.js"></script>
+        <link href="css/bs/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/index.css" rel="stylesheet">
+        <!-- <link href="css/float.css" rel="stylesheet"> -->
+    </head>
+    <body>
+
+
+     <div id="content" class="col-12">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+
+                    <span id="sidebarCollapse">
+                        <i class="fas fa-align-left"></i>
+                    </span>
+
+                </div>
+            </nav>
+        </div>
+    <div id="contentUser" class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <span id="sidebarCollapseUser">
+                    <i class="fas fa-align-left"></i>
+                </span>
+
+            </div>
+        </nav>
+    </div>
+        <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>EMM</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <!-- <p>info</p> -->
+            <li class="active">
+                <a href="#pagesUser" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <ul class="collapse list-unstyled" id="pagesUser">
+                    <li>
+                        <a href="#" class="dashboardButton">Dasboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="userAccountsButton">User Accounts</a>
+                    </li>
+                    <li>
+                        <a href="#" class="workReview">work review</a>
+                    </li>
+                </ul>
+            </li>
+            <br>
+            <hr>
+            <li>
+                <a href="#" class="signOutBuutton">Sign out</a>
+            </li>
+            <li>
+                <a href="#" class="helpButton">Help</a>
+            </li>
+        </ul>
+    </nav>
+    <nav id="sidebarUser">
+        <div class="sidebar-header">
+            <h3>EMM</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <!-- <p>info</p> -->
+            <li class="active">
+                <a href="#pages" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <ul class="collapse list-unstyled" id="pages">
+                    <li>
+                        <a href="#" class="dashboardUserButton">Dasboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="userProfileSettings">Profile Settings</a>
+                    </li>
+                    <li>
+                        <a href="#" class="startJob">Job</a>
+                    </li>
+                </ul>
+            </li>
+            <br>
+            <hr>
+            <li>
+                <a href="#" class="signOutBuutton">Sign out</a>
+            </li>
+            <li>
+                <a href="#" class="helpButton">Help</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="d-flex flex-column justify-content-center emm-body clearfix">
+
+        <div class="align-items-center" id="adminProfile">
+             <div class="row no-margin">
+               <div class="col-sm-2"></div>
+               <div class="col-sm-8 p-4">
+                   <div class="avatar"></div>
+                    <h2 class="text-center">Profile Settings</h2>
+                    <div class="tab-content">
+                        <form id="changeAdminFirstName" class="tab-pane in active p-4">
+                            <div class="form-group">
+                                <label for="adminFirstName">First Name</label>
+                                <input type="text" class="form-control" id="adminFirstName" placeholder="New First Name...">
+                            </div>
+                            <div class="fnameStatus"></div>
+                            <input type="submit" class="btn-primary btn" value="Change first name">
+                        </form>
+                        <form id="changeAdminLastName" class="tab-pane in active p-4">
+                            <div class="form-group">
+                                <label for="adminLastName">Last Name</label>
+                                <input type="text" class="form-control" id="adminLastName" placeholder="New Last Name...">
+                            </div>
+                            <div class="lnameStatus"></div>
+                            <input type="submit" class="btn-primary btn" value="Change last name">
+                        </form>
+                        <form id="changeAdminPassword" class="tab-pane in active p-4">
+                            <div class="form-group">
+                                <label for="adminCurrentPassword">Password</label>
+                                <input type="password" class="form-control" id="adminCurrentPassword" placeholder="Current Password...">
+                            </div>
+                            <div class="form-group">
+                                <label for="adminPassword">Password</label>
+                                <input type="password" class="form-control" id="adminPassword" placeholder="New Password...">
+                            </div>
+                            <div class="form-group">
+                                <label for="adminCPassword">Confirm Password</label>
+                                <input type="password" class="form-control" id="adminCPassword" placeholder="Confirm Password...">
+                            </div>
+                            <input type="submit" class="btn-primary btn" value="Change Password">
+                        </form>
+                    </div>
+               </div>
+               <div class="col-sm-2"></div>
+            </div>
+        </div>
+        </div>
+
+          <script src="css/jquery-3.3.1.min.js"></script>
+        <script src="css/bs/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/logon.js?n=1"></script>
+        <script type="text/javascript" src="js/image.js"></script>
+        <script type="text/javascript" src="js/manageJobs.js"></script>
+        <script type="text/javascript" src="js/manageUsers.js"></script>
+        <script type="text/javascript" src="js/changeData.js"></script>
+        <script type="text/javascript" src="js/reviewjobs.js"></script>
+        <script type="text/javascript" src="js/search.js"></script>
+    </body>
+</html>

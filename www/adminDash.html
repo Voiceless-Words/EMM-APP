@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Welcome to EMM</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="css/fontawesome/css/all.css" rel="stylesheet">
+        <script src="css/fontawesome/js/fontawesome.js"></script>
+        <link href="css/bs/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/index.css" rel="stylesheet">
+        <!-- <link href="css/float.css" rel="stylesheet"> -->
+    </head>
+    <body>
+
+
+     <div id="content" class="col-12">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+
+                    <span id="sidebarCollapse">
+                        <i class="fas fa-align-left"></i>
+                    </span>
+
+                </div>
+            </nav>
+        </div>
+    <div id="contentUser" class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <span id="sidebarCollapseUser">
+                    <i class="fas fa-align-left"></i>
+                </span>
+
+            </div>
+        </nav>
+    </div>
+        <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>EMM</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <!-- <p>info</p> -->
+            <li class="active">
+                <a href="#pagesUser" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <ul class="collapse list-unstyled" id="pagesUser">
+                    <li>
+                        <a href="#" class="dashboardButton">Dasboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="userAccountsButton">User Accounts</a>
+                    </li>
+                    <li>
+                        <a href="#" class="workReview">work review</a>
+                    </li>
+                </ul>
+            </li>
+            <br>
+            <hr>
+            <li>
+                <a href="#" class="signOutBuutton">Sign out</a>
+            </li>
+            <li>
+                <a href="#" class="helpButton">Help</a>
+            </li>
+        </ul>
+    </nav>
+    <nav id="sidebarUser">
+        <div class="sidebar-header">
+            <h3>EMM</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <!-- <p>info</p> -->
+            <li class="active">
+                <a href="#pages" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <ul class="collapse list-unstyled" id="pages">
+                    <li>
+                        <a href="#" class="dashboardUserButton">Dasboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="userProfileSettings">Profile Settings</a>
+                    </li>
+                    <li>
+                        <a href="#" class="startJob">Job</a>
+                    </li>
+                </ul>
+            </li>
+            <br>
+            <hr>
+            <li>
+                <a href="#" class="signOutBuutton">Sign out</a>
+            </li>
+            <li>
+                <a href="#" class="helpButton">Help</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="d-flex flex-column justify-content-center emm-body clearfix">
+       
+       <div class="align-items-center">
+            <div class="row  no-margin">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8 p-4">
+                    <div class="avatar"></div>
+                    <div class="userstatus p-4 text-center">
+                        <h3><small>Signed in as</small><br><span class="firstName"></span> <span class="lastName"></span></h3>
+                    </div>
+                    <div class="row p-4 ">
+                        <div class="col-6 tile d-flex flex-column justify-content-center color1 adminProfile">
+                            <div class="align-items-center px-4 pt-4">
+                                <i class="fas fa-user d-flex flex-row justify-content-center"></i><br />
+                            </div>
+                                <p class="text-center text-white">User Profile</p>
+                        </div>
+                        <div class="col-6 tile d-flex flex-column justify-content-center text-white userAccountsButton color1">
+                            <div class="align-items-center px-4 pt-4">
+                                <i class="fas fa-users-cog d-flex flex-row justify-content-center"></i><br />
+                            </div>
+                                <p class="text-center text-white">User Accounts</p>
+                        </div>
+                        <!-- <div class="col-6 tile d-flex flex-column justify-content-center bg-secondary text-white jobCardButton">
+                            <div class="align-items-center px-4 pt-4">
+                                <i class="fas fa-plus d-flex flex-row justify-content-center"></i><br />
+                            </div>
+                                <p class="text-center text-white">Add Jobs</p>
+                        </div> -->
+                        <div class="col-12 tile d-flex flex-column justify-content-center text-white jobCardButton color1">
+                            <div class="align-items-center px-4 pt-4">
+                                <i class="fas fa-edit d-flex flex-row justify-content-center"></i><br />
+                            </div>
+                                <a href="#createJobForm"><p class="text-center text-white workReview">Work Statistics</p></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+    </div>
+
+      <script src="css/jquery-3.3.1.min.js"></script>
+        <script src="css/bs/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/logon.js?n=1"></script>
+        <script type="text/javascript" src="js/image.js"></script>
+        <script type="text/javascript" src="js/manageJobs.js"></script>
+        <script type="text/javascript" src="js/manageUsers.js"></script>
+        <script type="text/javascript" src="js/changeData.js"></script>
+        <script type="text/javascript" src="js/reviewjobs.js"></script>
+        <script type="text/javascript" src="js/search.js"></script>
+    </body>
+</html>

@@ -10,6 +10,7 @@ $(document).ready(function(){
 			window.user = getUser('employee_id');
 			$('.firstName').text(getUser('first_name'));
 			$('.lastName').text(getUser('last_name'));
+			
 		}
 		else if (getUser('admin') == 1)
 		{
@@ -98,61 +99,69 @@ $(document).ready(function(){
 		$('#sidebar').removeClass('active');  //close side bar
 		$('#sidebarUser').removeClass('active');  //close side bar
 		e.preventDefault();
-		$('#content').hide();
-		$('#contentUser').hide();
-		$('.top_nav').hide();
-		$('#loginBody').show().siblings().hide();
+		// $('#content').hide();
+		// $('#contentUser').hide();
+		// $('.top_nav').hide();
+		// $('#loginBody').show().siblings().hide();
 		deleteUser();
         window.user = 0;
-		$("#loginForm")[0].reset();
+		// $("#loginForm")[0].reset();
+		window.location.href = "index.html";
 	});
 
 	$('.userAccountsButton').click(function(){
 		$('.top_nav').show();
 		$('#sidebar').removeClass('active');  //close side bar
-		$('#accountsBody').show().siblings().hide();
-
+		// $('#accountsBody').show().siblings().hide();
+		window.location.href = "accounts.html";
 	});
 
 	$('.adminProfile').click(function(){
 		$('.top_nav').show();
 		$('#sidebar').removeClass('active');  //close side bar
-		$('#adminProfile').show().siblings().hide();
+		// $('#adminProfile').show().siblings().hide();
+		console.log("go to adminProfile.html");
+		window.location.href = "adminProfile.html";
 
 	});
 
 	$('.dashboardButton').click(function(){
 		$('.top_nav').hide();
 		$('#sidebar').removeClass('active');  //close side bar
-		$('#dashboardBody').show().siblings().hide();
+		// $('#dashboardBody').show().siblings().hide();
+		window.location.href = "adminDash.html";
 	});
 
 	$('.dashboardUserButton').click(function(){
 		$('.top_nav').hide();
 		$('#sidebarUser').removeClass('active');  //close side bar
-		$('#dashboardBodyUser').show().siblings().hide();
+		// $('#dashboardBodyUser').show().siblings().hide();
+		window.location.href = "userDash.html";
 	});
 
 	$('.jobCardButton').click(function(){
 		$('.top_nav').hide();
 		$('#sidebar').removeClass('active');  //close side bar
 		$('#jobCardBody').show().siblings().hide();
-	});
+	}); //delete ?
 
 	$('.userProfileSettings').click(function(){
 		$('#sidebarUser').removeClass('active');  //close side bar
-		$('#userProfileSettings').show().siblings().hide();
+		// $('#userProfileSettings').show().siblings().hide();
+		window.location.href = "userProfile.html";
 	});
 
 	$('.startJob').click(function(){
 		$('#sidebarUser').removeClass('active');  //close side bar
 		$('#startJob').show().siblings().hide();
+		window.location.href = "startjob.html";
 	});
 
 	$('.helpButton').click(function(){
 		$('.top_nav').hide();
 		$('#sidebar').removeClass('active');  //close side bar
-		$('#helpBody').show().siblings().hide();
+		// $('#helpBody').show().siblings().hide();
+		window.location.href = "help.html";
 	});
 
 	$('#sidebarCollapse').on('click', function () {
@@ -443,7 +452,7 @@ var selectedCable = -1;
 		if (Object.keys($(this).val()).length > 3) {
 			$('option[value="' + $(this).val().toString().split(',')[3] + '"]').prop('selected', false);
 		}
-	});
+	}); //delete
 
 	$('#plinthCondition').change(function(){
 		if($('#plinthCondition :selected').text() === "No")
@@ -496,8 +505,8 @@ var selectedCable = -1;
 
 	$("#createPasswordForm").submit(function (e) {
         e.preventDefault();
-		$(".statusp").html('').show();
-		console.log($(".statusp").html());
+		$(".status").html('').show();
+		console.log($(".status").html());
         var user = {
 			username : $("#employeeNumber_create").val(),
             cpassword : $("#loginPassword_create").val(),
@@ -598,16 +607,18 @@ var selectedCable = -1;
 				else if (data.status == -1)
 				{
 					$('#employeeNumber_create').val(user.username);
-					$('#createPasswordBody').show().siblings().hide();
+					// $('#createPasswordBody').show().siblings().hide();
+					window.location.href = "createPasswordBody.html";
 				}
 				else if (data.status == 1)
 				{
-					$('#dashboardBodyUser').show().siblings().hide();
+					// $('#dashboardBodyUser').show().siblings().hide();
 					$('#contentUser').show();
 					window.user = user.username;
 					storeUser(data.user[0]);
 					$('.firstName').text(getUser('first_name'));
 					$('.lastName').text(getUser('last_name'));
+					window.location.href = "userDash.html";
 				}
 				else if (data.status == 2)
 				{
@@ -617,6 +628,7 @@ var selectedCable = -1;
 					storeUser(data.user[0]);
 					$('.firstName').text(getUser('first_name'));
 					$('.lastName').text(getUser('last_name'));
+					window.location.href = "adminDash.html";
 				}
 				if (path === "http://localhost:8080/user/register")
 					$("#registerForm")[0].reset();

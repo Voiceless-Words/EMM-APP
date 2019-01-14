@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Welcome to EMM</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="css/fontawesome/css/all.css" rel="stylesheet">
+        <script src="css/fontawesome/js/fontawesome.js"></script>
+        <link href="css/bs/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/index.css" rel="stylesheet">
+        <!-- <link href="css/float.css" rel="stylesheet"> -->
+    </head>
+    <body>
+
+
+     <div id="content" class="col-12">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+
+                    <span id="sidebarCollapse">
+                        <i class="fas fa-align-left"></i>
+                    </span>
+
+                </div>
+            </nav>
+        </div>
+    <div id="contentUser" class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <span id="sidebarCollapseUser">
+                    <i class="fas fa-align-left"></i>
+                </span>
+
+            </div>
+        </nav>
+    </div>
+        <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>EMM</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <!-- <p>info</p> -->
+            <li class="active">
+                <a href="#pagesUser" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <ul class="collapse list-unstyled" id="pagesUser">
+                    <li>
+                        <a href="#" class="dashboardButton">Dasboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="userAccountsButton">User Accounts</a>
+                    </li>
+                    <li>
+                        <a href="#" class="workReview">work review</a>
+                    </li>
+                </ul>
+            </li>
+            <br>
+            <hr>
+            <li>
+                <a href="#" class="signOutBuutton">Sign out</a>
+            </li>
+            <li>
+                <a href="#" class="helpButton">Help</a>
+            </li>
+        </ul>
+    </nav>
+    <nav id="sidebarUser">
+        <div class="sidebar-header">
+            <h3>EMM</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <!-- <p>info</p> -->
+            <li class="active">
+                <a href="#pages" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <ul class="collapse list-unstyled" id="pages">
+                    <li>
+                        <a href="#" class="dashboardUserButton">Dasboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="userProfileSettings">Profile Settings</a>
+                    </li>
+                    <li>
+                        <a href="#" class="startJob">Job</a>
+                    </li>
+                </ul>
+            </li>
+            <br>
+            <hr>
+            <li>
+                <a href="#" class="signOutBuutton">Sign out</a>
+            </li>
+            <li>
+                <a href="#" class="helpButton">Help</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="d-flex flex-column justify-content-center emm-body clearfix">
+        <div class="align-items-center" id="startJob">
+             <div class="row no-margin">
+               <div class="col-sm-2"></div>
+               <div class="col-sm-8 p-4">
+                   <div class="avatar"></div>
+                        <form class="p-4 tab-pane in active" id="createJobForm">
+                                <div class="form-group">
+                                    <label for="addJob-jobLocation">Area</label>
+                                    <select class="form-control" id="addJob-jobLocation" oninput="createjobcardno()" required>
+                                        <option value="">--Please Select Area--</option>
+                                        <option value="Buurendal">Buurendal</option>
+                                        <option value="Highway Garden">Highway Garden</option>
+                                        <option value="Harmelia">Harmelia</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="addJob-jobCardNumber">Jobcard Number</label>
+                                    <input type="text" class="form-control" id="addJob-jobCardNumber" placeholder="Enter job card number here..." disabled required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addJob-jobPermitNumber">Permit Number</label>
+                                    <input type="text" class="form-control" id="addJob-jobPermitNumber" placeholder="Enter Permit Number number here..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addJob-assets-Type">Select Asset Type</label>
+                                    <select id="addJob-assets-Type" class="form-control" oninput="" ="updateJobCardNumber()">
+                                        <option>Pillar Box</option>
+                                        <option>Pole-Mounted Box</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addJob-assets-Mat">Select the asset's Material</label>
+                                    <select class="form-control" id="addJob-assets-Mat">
+                                        <option>Steel</option>
+                                        <option>Plastic</option>
+                                        <option>Fibre Glass</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="addJob-jobCardcoords">Asset Desription</label>
+                                    <button type="button" onclick="getLocation()" class="btn">Get Location</button>
+                                    <p id="asset_location">
+                                        <div class="loader" id="loader_id"></div>
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="addJob-activity">Activity</label>
+                                    <p><i id="addJob-activity">Pillar Box Inspection</i></p>
+                                </div>
+
+
+                                <button type="submit" class="btn btn-primary">Create JobCard</button>
+                            </form>
+                            <button  class="list-group-item list-group-item-action flex-column align-items-start lightT usersJobCard" id="usersJobCard" data-toggle="modal" data-target=".bd-example-modal-lg" data-jobNumber="4">form</button>
+                            <div id="reviewJobTab" class="tab-pane fade in">
+                                <form id="searchReview" class="p-4">
+                                    <div class="form-group row">
+                                        <div class="col-6">
+                                            start: <input type="date" id="cardStart" class="form-control">
+                                        </div>
+                                        <div class="col-6">
+                                            end: <input type="date" id="cardEnd" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <input class="form-control" type="search" placeholder="Search for Job Card" id="jobCardSearch">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <input class="form-control btn btn-primary" type="submit" value="Filter">
+                                        </div>
+                                    </div>
+                                </form>
+                    </div>
+               </div>
+               <div class="col-sm-2"></div>
+            </div>
+        </div>
+
+    </div>
+
+      <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Inspection Form: <span class="jobDisplay"></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row no-margin">
+            <div class="col-12 formContainer">
+                <form id="riskForm">
+                    <h3>Risk Assessment</h3>
+                    <div class="form-group">
+                        <p>I <b><span class="firstName"></span> <span class="firstName"></b> hereby declare that tasks to be performed
+                        have been shown to all workers registered below for this inspection</span></p>
+                    </div>
+                    <div class="form-group">
+                        <p>Risks</p>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="riskCheck"> <p>I, the responsible person, declare that the nature
+                        and location of this work as well as all the precautions, special conditions and danger
+                        involved have been explained to the workers.<p>
+                    </div>
+                    <input type="submit" value="Proceed" class="btn btn-primary next" data-to="conditionA">
+                </form>
+                <form id="conditionA">
+                    <h3>Box Condition</h3>
+                    <div class="form-group">
+                        <label for="boxDoor">Can all the doors be opened, and secured?</label>
+                        <select class="form-control" required id="boxDoor">
+                            <option value="">--select one--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="boxDamage">Visible body damage?</label>
+                        <select class="form-control" required id="boxDamage">
+                            <option value="">--select one--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="plinthVisible">Plinth Visible?</label>
+                        <select class="form-control" required id="plinthVisible">
+                            <option value="">--select one--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="plinthCondition">Plinth in a good Condition?</label>
+                        <select class="form-control" required id="plinthCondition">
+                            <option value="">--select one--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group plinthDefectParent">
+                        <label for="plinthDefect">State Defect</label>
+                        <textarea class="form-control" name="plinthDefect" id="plinthDefect" rows="3" ></textarea>
+                    </div>
+                    <input type="submit" value="Next" class="btn btn-primary next" data-to="conditionB">
+                </form>
+                <form id="conditionB">
+                    <h3>Electronics</h3>
+                    <div class="form-group">
+                        <label for="electronic">Electronics Available?</label>
+                        <select class="form-control" required id="electronic">
+                            <option value="">--select one--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <fieldset id="elect">
+                        <div class="form-group">
+                            <label for="electSecure">Fitted Securely?</label>
+                            <select class="form-control" id="electSecure">
+                                <option value="">--select one--</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="electDoor">All Doors in Operation?</label>
+                            <select class="form-control" id="electDoor">
+                                <option value="">--select one--</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="electTransponder">Transponder Secure?</label>
+                            <select class="form-control" id="electTransponder">
+                                <option value="">--select one--</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        <div class="form-group">
+                            <label for="electDoorBypassed">Door Bypassed?</label>
+                            <select class="form-control" id="electDoorBypassed">
+                                <option value="">--select one--</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="battery">Battery Installed?</label>
+                            <select class="form-control" id="battery">
+                                <option value="">--select one--</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="working">In a working condition?</label>
+                            <select class="form-control" id="working">
+                                <option value="">--select one--</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="remote">Remote Devices Working?</label>
+                            <select class="form-control" id="remote">
+                                <option value="">--select one--</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <input type="submit" value="Save" class="btn btn-primary">
+                </form>
+                <form action="" id="addCableForm">
+                    <h3>Cable Marking</h3>
+                    <div class="form-group">
+                        <label for="correct">Correctly Placed, <span>(on the cable at the top or bottom)<b><span id="cableName"></span></b></span></label>
+                        <select class="form-control" id="correct" required>
+                            <option value="">--Please Select--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tag">Securely Placed, (Tag fitted)?</label>
+                        <select class="form-control" id="tag" required>
+                            <option value="">--Please Select--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="label">Label Level Correct, (Placed at the top or bottom)?</label>
+                        <select class="form-control" id="label">
+                            <option value="">--Please Select--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <h3>House Breaker</h3>
+                    <div class="form-group">
+                        <label for="fitted">Securely fitted, Not hanging</label>
+                        <select class="form-control" id="fitted" required="">
+                            <option value="">--Please Select--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="size">Size, please specify?</label>
+                        <select class="form-control" id="size" required="">
+                            <option value="">--Please Select--</option>
+                            <option value="88">88</option>
+                            <option value="120">120</option>
+                            <option value="85">85</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="meter">Meters secured and labelled?</label>
+                        <select class="form-control" id="meter" required="">
+                            <option value="">--Please Select--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="NA">N/A</option>
+                        </select>
+                    </div>
+                    <fieldset id="meterC1">
+                        <div class="form-group">
+                            <label for="meterSeals">Meters Seals Installed?</label>
+                            <select class="form-control" id="meterSeals">
+                                <option value="">--Please Select--</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                                <label for="meterSealsColour">Meters Seals Colour</label>
+                                <select class="form-control" id="meterSealsColour">
+                                    <option value="">--Please Select--</option>
+                                    <option value="Blue">Blue</option>
+                                    <option value="Green">Green</option>
+                                    <option value="Yellow">Yellow</option>
+                                    <option value="Red">Red</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="meterBypassed">Any Meter Bypassed?</label>
+                            <select class="form-control" id="meterBypassed">
+                                <option value="">--Please Select--</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <label for="standConnected">Stands Connected to Enclosure, please specify stand no.</label>
+                        <input class="form-control" type="text" id="standConnected" placeholder="Please specify stand no. and street name" required="">
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Save Cable">
+                    </div>
+                </form>
+                <div class="col-12 flex-column justify-content-center color1 p-4 mb-2"  id="conditionButton">
+                        <h3 class="text-center text-white"><i class="fas fa-plus"></i>Condition Form</h3>
+                </div>
+                <div class="col-12 cables mb-4 mt-4"></div>
+                <div class="col-12 flex-column justify-content-center color1 p-4 mb-2 addCable">
+                        <h3 class="text-center text-white"><i class="fas fa-plus"></i>Add Cable</h3>
+                </div>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary markJobFinished">Mark Job as Finished</button>
+        <button type="button" class="btn btn-secondary closeModal" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="modal fade reviewModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Job number: <span class=""></span> details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body">
+            <div class="row no-margin">
+                All information relating to the jobcard here...
+            </div>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary markJobFinished">Mark Job as Finished</button>
+        <button type="button" class="btn btn-secondary closeModal" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <script src="css/jquery-3.3.1.min.js"></script>
+        <script src="css/bs/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/logon.js?n=1"></script>
+        <script type="text/javascript" src="js/image.js"></script>
+        <script type="text/javascript" src="js/manageJobs.js"></script>
+        <script type="text/javascript" src="js/manageUsers.js"></script>
+        <script type="text/javascript" src="js/changeData.js"></script>
+        <script type="text/javascript" src="js/reviewjobs.js"></script>
+        <script type="text/javascript" src="js/search.js"></script>
+    </body>
+</html>

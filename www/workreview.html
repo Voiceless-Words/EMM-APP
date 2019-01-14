@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Welcome to EMM</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="css/fontawesome/css/all.css" rel="stylesheet">
+        <script src="css/fontawesome/js/fontawesome.js"></script>
+        <link href="css/bs/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/index.css" rel="stylesheet">
+        <!-- <link href="css/float.css" rel="stylesheet"> -->
+    </head>
+    <body>
+
+
+     <div id="content" class="col-12">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+
+                    <span id="sidebarCollapse">
+                        <i class="fas fa-align-left"></i>
+                    </span>
+
+                </div>
+            </nav>
+        </div>
+    <div id="contentUser" class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+
+                <span id="sidebarCollapseUser">
+                    <i class="fas fa-align-left"></i>
+                </span>
+
+            </div>
+        </nav>
+    </div>
+        <div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>EMM</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <!-- <p>info</p> -->
+            <li class="active">
+                <a href="#pagesUser" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <ul class="collapse list-unstyled" id="pagesUser">
+                    <li>
+                        <a href="#" class="dashboardButton">Dasboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="userAccountsButton">User Accounts</a>
+                    </li>
+                    <li>
+                        <a href="#" class="workReview">work review</a>
+                    </li>
+                </ul>
+            </li>
+            <br>
+            <hr>
+            <li>
+                <a href="#" class="signOutBuutton">Sign out</a>
+            </li>
+            <li>
+                <a href="#" class="helpButton">Help</a>
+            </li>
+        </ul>
+    </nav>
+    <nav id="sidebarUser">
+        <div class="sidebar-header">
+            <h3>EMM</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <!-- <p>info</p> -->
+            <li class="active">
+                <a href="#pages" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <ul class="collapse list-unstyled" id="pages">
+                    <li>
+                        <a href="#" class="dashboardUserButton">Dasboard</a>
+                    </li>
+                    <li>
+                        <a href="#" class="userProfileSettings">Profile Settings</a>
+                    </li>
+                    <li>
+                        <a href="#" class="startJob">Job</a>
+                    </li>
+                </ul>
+            </li>
+            <br>
+            <hr>
+            <li>
+                <a href="#" class="signOutBuutton">Sign out</a>
+            </li>
+            <li>
+                <a href="#" class="helpButton">Help</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="d-flex flex-column justify-content-center emm-body clearfix">
+
+        <div class="align-items-center" id="workReviewBody">
+             <div class="row no-margin">
+               <div class="col-sm-2"></div>
+               <div class="col-sm-8 p-4">
+                   <div class="avatar"></div>
+                    <h2 class="text-center">Work statistics</h2>
+                    <div class="col-12 p-4">
+                        <ul class="nav nav-tabs nav-fill">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#generateReports">Generate Reports</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#reviewJobTab" onclick="reviewjobs()">Review Jobs</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                           <form class="p-4 tab-pane in active" id="generateReports">
+                               form filters
+                           </form>
+                                 <!-- <div class="form-group">
+                                    <label for="addJob-jobLocation">Select Area</label>
+                                    <select id="addJob-jobLocation" class="form-control" oninput="createjobcardno()">
+                                        <option>Buurendal</option>
+                                        <option>Highway Garden</option>
+                                        <option>Harmelia</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addJob-jobCardNumber">Jobcard Number</label>
+                                    <input type="text" class="form-control" id="addJob-jobCardNumber" placeholder="Enter job card number here..." disabled required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addJob-jobPermitNumber">Permit Number</label>
+                                    <input type="text" class="form-control" id="addJob-jobPermitNumber" placeholder="Enter Permit Number number here..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addJob-assets-Type">Select Asset Type</label>
+                                    <select id="addJob-assets-Type" class="form-control" oninput="" ="updateJobCardNumber()">
+                                        <option>Pillar Box</option>
+                                        <option>Pole-Mounted Box</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addJob-assets-Mat">Select the asset's Material</label>
+                                    <select class="form-control" id="addJob-assets-Mat">
+                                        <option>Steel</option>
+                                        <option>Plastic</option>
+                                        <option>Fibre Glass</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="addJob-jobCardcoords">Asset Desription</label>
+                                    <button onclick="getLocation()">Get Location</button>
+                                    <p id="asset_location">
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="addJob-activity">Activity</label>
+                                    <p id="addJob-activity"><i>Pillar Box Inspection</i></p>
+                                </div>
+
+
+                                <button type="submit" class="btn btn-primary">Create JobCard</button>
+                            </form> -->
+                            <div id="reviewJobTab" class="tab-pane fade in">
+                                <form id="searchReview" class="p-4">
+                                    <div class="form-group row">
+                                        <div class="col-6">
+                                            start: <input type="date" id="cardStart" class="form-control">
+                                        </div>
+                                        <div class="col-6">
+                                            end: <input type="date" id="cardEnd" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <input class="form-control" type="search" placeholder="Search for Job Card" id="jobCardSearch">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <input class="form-control btn btn-primary" type="submit" value="Filter">
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="jobSearchResults"></div>
+                            </div>
+                        </div>
+                    </div>
+
+               </div>
+               <div class="col-sm-2"></div>
+            </div>
+        </div>
+    </div>
+
+      <script src="css/jquery-3.3.1.min.js"></script>
+        <script src="css/bs/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/logon.js?n=1"></script>
+        <script type="text/javascript" src="js/image.js"></script>
+        <script type="text/javascript" src="js/manageJobs.js"></script>
+        <script type="text/javascript" src="js/manageUsers.js"></script>
+        <script type="text/javascript" src="js/changeData.js"></script>
+        <script type="text/javascript" src="js/reviewjobs.js"></script>
+        <script type="text/javascript" src="js/search.js"></script>
+    </body>
+</html>
