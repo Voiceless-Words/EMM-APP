@@ -3,6 +3,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const session = require('express-session');
+const bcrypt = require('bcrypt-nodejs');
 const router = express.Router();
 
 const user = require('./user');
@@ -40,5 +41,46 @@ router.post('/update_field', function(req, res){
                 })
             .catch(error => { console.log(error); })
 });
+
+router.post('/change_password', function(req, res){
+    console.log(req.body);
+        User.findOne({ employee_id: req.body.employeeNumber }, function(err, user)
+        {
+            user.comparePassword(req.body.opassword, function(err, isMatch) {
+                if (err){
+                    res.send(JSON.stringify({
+                        status : 505
+                    }));
+                }
+                if (isMatch)
+                {
+                     bcrypt.genSalt(process.env.SALT_BCRYPT, function(err, salt) {
+                        if (err) return next(err);
+                        bcrypt.hash(req.body.password, salt, null, function(err, hash) {
+                            if (err)
+                                console.log("change password err");
+
+                            User.updateOne({"employee_id": req.body.employeeNumber}, {
+                                password : hash
+                            })
+                            .then(users => {
+                                    res.send(JSON.stringify({
+                                        status : 200
+                                    }));
+                                })
+                            .catch(error => { console.log(error); });
+                        });
+                     });
+                }
+                else{
+                    res.send(JSON.stringify({
+                        status : 100
+                    }));
+                }
+            });
+        });
+});
+
+
 
 module.exports = router;

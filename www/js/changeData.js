@@ -20,6 +20,28 @@ $(document).ready(function(){
             errorOut("The Last Name provided was too short", $('.lnameStatus'));
     });
 
+    $('#changePasswordForm').submit(function(e){
+        e.preventDefault()
+        var password = $('#changePassword').val();
+        var cpassword = $('#cchangePassword').val();
+        var opassword = $('#opassword').val();
+        if (password.length < 6 || cpassword.length < 6)
+        {
+            alert("your password is too short");
+        }
+        else if (password.length > 30 || cpassword.length > 30)
+        {
+            alert("your password is too long");
+        }
+        else if (cpassword === password)
+        {
+            changePassword(opassword, password);
+        }
+        else {
+            alert("passwords dont match");
+        }
+    });
+
     function changeField(name, value)
     {
         $.ajax({
@@ -42,3 +64,18 @@ $(document).ready(function(){
         out.html(err);
     }
 });
+function changePassword(opassword, password){
+    $.ajax({
+            type : "POST",
+            url : 'http://localhost:8080/data/change_password',
+            data : {
+                employeeNumber : window.user,
+                password : password,
+                opassword : opassword
+            },
+            success : function(data) {
+                console.log(data);
+                alert("Password successfully changed");
+            }
+        });
+}
