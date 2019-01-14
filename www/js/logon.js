@@ -62,7 +62,7 @@ $(document).ready(function(){
 					var num = myRecords[i][jobNo];
 					console.log(stringD);
 					$.ajax({
-						url:"http://emmapp.us.openode.io/form_save",
+						url:"http://localhost:8080/form_save",
 						data:{
 							jobNo: num,
 							form:stringD,
@@ -235,7 +235,7 @@ $(document).ready(function(){
 				//get values here piet
 				$.ajax({
 					type : "POST",
-					url : "http://emmapp.us.openode.io/jobcard_save",
+					url : "http://localhost:8080/jobcard_save",
 					data : newJob,
 					success : function(data) {
 						console.log(data);
@@ -247,7 +247,7 @@ $(document).ready(function(){
 				console.log(jobNo);
 				var stringD = JSON.stringify(jobs);
 				$.ajax({
-					url:"http://emmapp.us.openode.io/form_save",
+					url:"http://localhost:8080/form_save",
 					data:{
 						jobNo: jobNo,
 						form:stringD,
@@ -260,6 +260,8 @@ $(document).ready(function(){
 					},
 					type: 'POST'
 				});
+				cablesObj = [];
+				cableCount = 0;
 		}
 		else{
 			//add the values from the form
@@ -289,6 +291,7 @@ $(document).ready(function(){
 		var clean;
 		conditionAData = clean;
 		conditionBData = clean;
+		cablesObj = [];
 		cableCount = 0;
 		cableCount = clean;
 		$('#conditionA').show();
@@ -303,8 +306,12 @@ var jobNumber = 0;
 	$('.usersJobCard').click(function(){
 		$('#addCableForm').hide();
 		$('.formContainer').show();
+		console.log("runs");
+		console.log('rski', riskTerms);
 		if (riskTerms)
 		{
+			console.log('rski', riskTerms);
+
 
 			// console.log(typeof conditionAData);
 			// console.log($(this).text());
@@ -326,13 +333,23 @@ var jobNumber = 0;
 				jobs[jobNumber] = {};
 				jobs['status'] = 0;
 			}
-			console.log(jobs);
-			$('#addCableForm')[0].reset();
-			$('.jobDisplay').text(jobNumber);
 		}
 		else{
+			if (jobNumber != 0 && jobNumber != $(this).attr("data-job-number") && conditionAData)
+			{
+				alert("Please finish Job "+ jobNumber +" before doing other jobs");
+				$('.bd-example-modal-lg').hide();
+			}else{
+				jobNumber = $(this).attr("data-job-number");
+				jobs[jobNumber] = {};
+				jobs['status'] = 0;
+			}
 			console.log("should just be showing risk");
 			$('#riskForm').show().siblings().hide();
+			console.log(jobNumber);
+			console.log( $(this).attr("data-job-number"));
+			$('#addCableForm')[0].reset();
+			$('.jobDisplay').text(jobNumber);
 		}
 	});
 
@@ -456,7 +473,7 @@ var selectedCable = -1;
 			username : $("#employeeNumber").val(),
             password : $("#loginPassword").val()
 		};
-		check_data(user,  "http://emmapp.us.openode.io/user/login");
+		check_data(user,  "http://localhost:8080/user/login");
     });
 
 	$("#registerForm").submit(function (e) {
@@ -473,7 +490,7 @@ var selectedCable = -1;
 			admin: $('#adminSetting').is(':checked') ? 1 : 0
 		};
 		console.log(user);
-		check_data(user,  "http://emmapp.us.openode.io/user/register");
+		check_data(user,  "http://localhost:8080/user/register");
     });
 
 	$("#createPasswordForm").submit(function (e) {
@@ -485,7 +502,7 @@ var selectedCable = -1;
             cpassword : $("#loginPassword_create").val(),
             ccpassword : $("#cloginPassword_create").val(),
 		};
-		check_data(user,  "http://emmapp.us.openode.io/user/login");
+		check_data(user,  "http://localhost:8080/user/login");
     });
 
 	function check_data(user, path)
@@ -600,7 +617,7 @@ var selectedCable = -1;
 					$('.firstName').text(getUser('first_name'));
 					$('.lastName').text(getUser('last_name'));
 				}
-				if (path === "http://emmapp.us.openode.io/user/register")
+				if (path === "http://localhost:8080/user/register")
 					$("#registerForm")[0].reset();
             }
         });
@@ -610,7 +627,7 @@ var selectedCable = -1;
     {
         $.ajax({
             type : "POST",
-            url : "http://emmapp.us.openode.io/user/update",
+            url : "http://localhost:8080/user/update",
             data :{
 				user : user.username,
 				value : user.password

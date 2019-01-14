@@ -213,8 +213,9 @@ app.get('/inspection', function (req, res){
 
 app.post('/jobcard_save', function(req, res){
 
-
-  var val = req.body.newjob;
+	console.log("-------------------------------------------");
+	console.log(req.body);
+  var val = req.body;
   var job = new JobSave({
     jobCardNumber: val.jobNumber,
     permitNumber: val.permitNumber,

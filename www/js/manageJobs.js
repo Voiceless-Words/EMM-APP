@@ -29,21 +29,21 @@ $(document).ready(function(){
         $('.usersJobCard').click();
 
 
-         var xhttp = new XMLHttpRequest();
-         xhttp.onreadystatechange = function() {
-         if (this.readyState == 4 && this.status == 200) {
+        //  var xhttp = new XMLHttpRequest();
+        //  xhttp.onreadystatechange = function() {
+        //  if (this.readyState == 4 && this.status == 200) {
 
-             console.log('New Job Card Created');
-             console.log(this.response);
+        //      console.log('New Job Card Created');
+        //      console.log(this.response);
 
 
-             }
-         }
-         xhttp.open("POST", "http://emmapp.us.openode.io/jobcard_save", true);
-         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-         xhttp.send('newjob='+JSON.stringify(newJob));
+        //      }
+        //  }
+        //  xhttp.open("POST", "http://localhost:8080/jobcard_save", true);
+        //  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        //  xhttp.send('newjob='+JSON.stringify(newJob));
 
-         console.log('I sent :' + JSON.stringify(newJob));
+        //  console.log('I sent :' + JSON.stringify(newJob));
 
     });
 
@@ -106,8 +106,8 @@ function createjobcardno() {
         prefix = 'HR';
     }
 
-    document.getElementById('addJob-jobCardNumber').value = prefix + cardNumber;
-    document.getElementById('usersJobCard').dataset.jobNumber = prefix + cardNumber;
+    document.getElementById('addJob-jobCardNumber').value = (prefix + cardNumber);
+    document.getElementById('usersJobCard').dataset.jobNumber = (prefix + cardNumber);
 
     jobcardnumber = prefix + cardNumber;
 

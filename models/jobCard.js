@@ -2,8 +2,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var jobSchema = new Schema({
-    jobCardNumber: { type: Number},
-    permitNumber: { type: Number},
+    jobCardNumber: { type: String},
+    permitNumber: { type: String},
     jobAssetsType: { type: String},
     assetsMaterial: { type: String},
     jobLocation: { type: String},
