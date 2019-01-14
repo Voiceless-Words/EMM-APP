@@ -44,7 +44,7 @@ $(document).ready(function(){
 
     // Do as u like with the form data obj newJob
 });
-
+/*
 function getjobstuff() {
 
         var xhttp = new XMLHttpRequest();
@@ -83,23 +83,7 @@ function getjobstuff() {
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send('view=createjobcard&format=JSON');
 }
-
-
-function getdescription() {
-    var found = 0;
-
-    jobcardstuff[1].forEach(function(asset){
-        if (asset.name == event.target.value)
-        {
-            document.getElementById('asset_description').innerHTML = asset.description;
-            found = 1;
-        }
-    });
-    if (found == 0) {
-        document.getElementById('asset_description').innerHTML = '<i>No Asset Selected</i>';
-    }
-
-}
+*/
 
 var x = document.getElementById("asset_location");
 
@@ -108,6 +92,8 @@ var x = document.getElementById("asset_location");
 //   the current GPS coordinates
 //
 var onSuccess = function(position) {
+     asset_lati = position.coords.latitude;
+     asset_long = position.coords.longitude;
     x.innerHTML = 'Latitude: '  + position.coords.latitude          + '\n' +
           'Longitude: '         + position.coords.longitude         + '\n' +
           'Altitude: '          + position.coords.altitude          + '\n' +
