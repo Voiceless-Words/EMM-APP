@@ -130,7 +130,6 @@ function createjobcardno() {
     var prefix = '';
     console.log(new Date());
 
-    
     if (area == 'Buurendal') {
         prefix = 'BDL';
     } else if (area == 'Highway Garden') {
