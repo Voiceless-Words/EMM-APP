@@ -18,7 +18,7 @@ var app = express();
 app.use(cors());
 
 
-var server = app.listen(80, function(){
+var server = app.listen(8080, function(){
     console.log("server started port 8080");
 });
 
@@ -212,34 +212,39 @@ app.get('/inspection', function (req, res){
     res.render('inspection');
 });
 
-app.post('/jobcard_save', function(req, res){
 
-  var val = JSON.parse(req.body.newjob);
-  console.log(val.jobNumber);
-  console.log(val.jobAssets);
-  console.log(val.jobActivity);
-  console.log(val.jobRequiredByDate);
-  console.log(val.jobCreatedBy);
-  console.log(val.jobAssignedTo);
+app.post('/jobcard_save', function(req, res){
+  console.log("it gets in here");
+
+  /*var val = JSON.parse(req.body.newjob);
+
 
   var job = new JobSave({
     jobCardNumber: val.jobNumber,
-    assetName: val.jobAssets,
-    activity: val.jobActivity,
-    status: 0,
-    requiredBy : val.jobRequiredByDate,
+    permitNumber : val.permitNumber,
+    assetType: val.jobAssetsType,
+    assetsMaterial: val.assetsMaterial,
+    jobActivity : val.jobActivity,
+    jobLocation : val.jobLocation,
     created_by: val.jobCreatedBy,
-    employee_id: val.jobAssignedTo,
+    gps_lati : val.asset_lati,
+    gps_long : val.asset_long,
     time : Date.now()
   });
-  job.save(function (err) {
+
+
+
+  /*job.save(function (err) {
   if (err) return handleError(err);
 
   console.log("saved the job");
 
-	});
+});*/
 });
+
 app.post('/form_save', function(req, res){
+
+console.log('form save');
 
   var obj = JSON.parse(req.body.form);
   var no = req.body.jobNo;
