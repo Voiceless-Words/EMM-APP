@@ -20,7 +20,7 @@ $(document).ready(function(){
         };
         // $('#createJobForm')[0].reset();
         console.log(newJob);
-        
+
         console.log($('.usersJobCard').text());
         $('.usersJobCard').click();
         
