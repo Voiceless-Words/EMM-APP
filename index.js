@@ -243,6 +243,7 @@ app.post('/form_save', function(req, res){
 //   console.log(obj);
 //   console.log(no);
   var cables = obj[no]['cables'];
+  var images = obj[no]['images'];
   var con1 = obj[no]['conditionAData'];
   var con2 = obj[no]['conditionBData'];
   var completedby = obj[no]['completedby'];
@@ -252,6 +253,7 @@ app.post('/form_save', function(req, res){
     conditionA: con1,
     conditionB: con2,
     cables: cables,
+    images: images,
     reviewStatus: 0,
     completedby: completedby,
     time: Date.now()

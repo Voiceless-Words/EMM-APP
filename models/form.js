@@ -32,6 +32,7 @@ var formSchema = new Schema({
       meterBypassed: {type: String},
       standConnected: {type: String}
  }],
+    images: [],
     reviewStatus: {type: Number},
     completedby:{type: String},
     time : { type : Date, default: Date.now }
