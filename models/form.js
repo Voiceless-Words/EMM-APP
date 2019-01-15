@@ -6,9 +6,9 @@ var formSchema = new Schema({
     conditionA: [{
       boxDoor: {type: String},
       boxDamage: {type: String},
-      plinthVisible: {type: String},
       plinthCondition: {type: String},
-      plintthDefect: {type: String}
+      plintthDefect: {type: String},
+      plinthVisible: {type: String}
     }],
     conditionB: [{
       electronic: {type: String},
@@ -24,6 +24,7 @@ var formSchema = new Schema({
       correct: {type: String},
       tag: {type: String},
       label: {type: String},
+      breakerCondition: {type: String},
       fitted: {type: String},
       size: {type: String},
       meter: {type: String},
