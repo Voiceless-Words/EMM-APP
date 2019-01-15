@@ -276,6 +276,7 @@ $(document).ready(function(){
 				cablesObj = [];
 				imagesList = [];
 				cableCount = 0;
+				$('#asset_location').html('');
 		}
 		else{
 			//add the values from the form
