@@ -10,7 +10,7 @@ $(document).ready(function(){
 			window.user = getUser('employee_id');
 			$('.firstName').text(getUser('first_name'));
 			$('.lastName').text(getUser('last_name'));
-			
+
 		}
 		else if (getUser('admin') == 1)
 		{
@@ -393,6 +393,7 @@ var jobNumber = 0;
 				breakerCondition: $('#breaker : selected').text(),
 				fitted : $('#fitted :selected').text(),
 				size : $('#size :selected').text(),
+				sizeOther:$('#sizeOther :selected').text(),
 				meter : $('#meter :selected').val(),
 				meterSeals : $('#meterSeals :selected').val(),
 				meterSealsColour : $('#meterSealsColour :selected').val(),
@@ -409,6 +410,7 @@ var jobNumber = 0;
 				breakerCondition: $('#breaker : selected').text(),
 				fitted : $('#fitted :selected').text(),
 				size : $('#size :selected').text(),
+				sizeOther : $('#sizeOther :selected').text(),
 				meter : $('#meter :selected').val(),
 				meterSeals : $('#meterSeals :selected').val(),
 				meterSealsColour : $('#meterSealsColour :selected').val(),
@@ -438,6 +440,12 @@ var selectedCable = -1;
 		$("#fitted option[value="+ cablesObj[name].fitted +"]").prop('selected', 'selected');
 		$("#size option[value="+ cablesObj[name].size +"]").prop('selected', 'selected');
 		$("#meter option[value="+ cablesObj[name].meter +"]").prop('selected', 'selected');
+
+		if(cablesObj[name].size === "Other")
+		{
+			$('#sizeOther').val(cablesObj[name].sizeOther);
+		}
+		
 		if (cablesObj[name].meter != "NA")
 		{
 			$("#meterSeals option[value="+ cablesObj[name].meterSeals +"]").prop('selected', 'selected');
@@ -462,6 +470,13 @@ var selectedCable = -1;
 			$('.plinthDefectParent').show(600);
 		else
 			$('.plinthDefectParent').hide();
+	});
+
+	$('#size').change(function(){
+		if($('#size :selected').text() === "Other")
+			$('#sizeOther').show();
+		else
+			$('#sizeOther').hide();
 	});
 
 	$('#electronic').change(function(){
