@@ -97,4 +97,13 @@ router.post('/reviewJob', function(req, res){
     // .catch(error => { console.log(error); })
 });
 
+router.post('/getalljobs', function(req, res){
+    Forms.find({"jobnumber": { "$regex": req.body.user, "$options": "i"}})
+    .then(users => {
+            console.log(users);
+            res.send(users);
+        })
+    .catch(error => { console.log(error); })
+});
+
 module.exports = router;

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="">
     <head>
@@ -106,42 +105,23 @@
 
 
     <div class="d-flex flex-column justify-content-center emm-body clearfix">
-    <div class="align-items-center" id="dashboardBodyUser">
-            <div class="row  no-margin">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8 p-4">
-                    <div class="avatar"></div>
-                    <div class="userstatus p-4 text-center">
-                        <h3><small>Signed in as</small><br><span class="firstName"></span> <span class="lastName"></span></h3>
+        <div class="align-items-center">
+           <div class="row no-margin">
+               <div class="col-sm-3"></div>
+               <div class="col-sm-6 p-4">
+                   <div class="avatar"></div>
+                    <h2 class="text-center">Found <span class="jobcount">0</span> completed jobs</h2>
+                    <div class="completedJobs p-4">
+                        
                     </div>
-                    <div class="row p-4 ">
-                        <div class="col-6 tile d-flex flex-column justify-content-center color1 userProfileSettings">
-                            <div class="align-items-center px-4 pt-4">
-                                <i class="fas fa-user d-flex flex-row justify-content-center"></i><br />
-                            </div>
-                                <p class="text-center text-white">Profile Settings</p>
-                        </div>
-                        <div class="col-6 tile d-flex flex-column justify-content-center color1 closedJobs">
-                            <div class="align-items-center px-4 pt-4">
-                                <i class="fas fa-users-cog d-flex flex-row justify-content-center"></i><br />
-                            </div>
-                                <p class="text-center text-white">Closed Jobs</p>
-                        </div>
-                        <div class="col-12 tile d-flex flex-column justify-content-center color1 startJob">
-                            <div class="align-items-center px-4 pt-4">
-                                <i class="fas fa-users-cog d-flex flex-row justify-content-center"></i><br />
-                            </div>
-                                <p class="text-center text-white">Start a Job</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2"></div>
-            </div>
+               </div>
+               <div class="col-sm-3"></div>
+           </div>
         </div>
+    
+    </div>
 
-        </div>
-
-        <script src="css/jquery-3.3.1.min.js"></script>
+      <script src="css/jquery-3.3.1.min.js"></script>
         <script src="css/bs/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script src="js/logon.js?n=1"></script>
@@ -151,5 +131,13 @@
         <script type="text/javascript" src="js/changeData.js"></script>
         <script type="text/javascript" src="js/reviewjobs.js"></script>
         <script type="text/javascript" src="js/search.js"></script>
+        <script>
+            $(document).ready(function(){
+                
+                var user = getUser('employee_id');
+                var company = getUser('creator');
+                getAllJobs(user, company);
+            });
+        </script>
     </body>
 </html>

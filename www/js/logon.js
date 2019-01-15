@@ -150,6 +150,12 @@ $(document).ready(function(){
 		// $('#userProfileSettings').show().siblings().hide();
 		window.location.href = "userProfile.html";
 	});
+	
+	$('.closedJobs').click(function(){
+		$('#sidebarUser').removeClass('active');  //close side bar
+		// $('#userProfileSettings').show().siblings().hide();
+		window.location.href = "closedJobs.html";
+	});
 
 	$('.startJob').click(function(){
 		$('#sidebarUser').removeClass('active');  //close side bar
@@ -695,3 +701,44 @@ var selectedCable = -1;
 	{
 		localStorage.removeItem('currentUser');
 	}
+function getAllJobs(user, creator)
+{
+	$.ajax({
+		type : "POST",
+		url : "http://localhost/search/getalljobs",
+		data :{
+			user : user,
+			creater : creator
+		},
+		success : function(data) {
+			console.log(data);
+			var output = ``;
+			var div = ``;
+
+			// for (var i = 0; i < data.length; i++)
+			// {
+			// 	var time = String(data[i].time);
+			// 	time = time.splice(0, 10);
+			// 	div = `<a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+			// 		<div class="d-flex w-100 justify-content-between">
+			// 		<h5 class="mb-1">${data[i].jobnumber}</h5>
+			// 		<small>${time}</small>
+			// 		</div>
+			// 		<p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+			// 		<small>Donec id elit non mi porta.</small>
+			// 		</a>`;
+			// 	output += div;
+			// }
+			// $('.jobcount').text(data.length);
+			// $('.completedJobs').html(output);
+		}
+	});
+}
+{/* <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">List group item heading</h5>
+      <small>3 days ago</small>
+    </div>
+    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+    <small>Donec id elit non mi porta.</small>
+  </a> */}
