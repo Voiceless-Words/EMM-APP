@@ -28,7 +28,7 @@ let app = {
         var imgs = "data:image/jpeg;base64," + imgURI;
         imagesList.push(imgs);
         // $.ajax({
-        //   url: 'http://emmapp.us.openode.io/pics_save',
+        //   url: 'http://localhost/pics_save',
         //   type: "post",
         //   data:{
         //     jobnumber: '123',
