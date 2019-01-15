@@ -6,6 +6,9 @@ var asset_long = '';
 var jobcardnumber = '';
 
 var newJob;
+
+
+
 $(document).ready(function(){
     $('#createJobForm').submit(function(e){
         e.preventDefault();

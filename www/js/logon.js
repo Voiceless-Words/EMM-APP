@@ -240,6 +240,9 @@ $(document).ready(function(){
 		// select where data-jobNumber == jobNumber and set disabled to true
 		jobs['status'] = 1;
 		jobs[jobNumber]['cables'] = cablesObj;
+		jobs[jobNumber]['images'] = imagesList;
+		
+		console.log(jobs);
 
 		if(navigator.onLine){
 				//get values here piet
@@ -271,6 +274,7 @@ $(document).ready(function(){
 					type: 'POST'
 				});
 				cablesObj = [];
+				imagesList = [];
 				cableCount = 0;
 		}
 		else{
@@ -296,12 +300,14 @@ $(document).ready(function(){
 				alert("sorry form data was not added");
 				console.log('Error', e.target.error.name);
 			}
+			jobcardnumber = '';
 		}
 		console.log(jobs);
 		var clean;
 		conditionAData = clean;
 		conditionBData = clean;
 		cablesObj = [];
+		imagesList = [];
 		cableCount = 0;
 		cableCount = clean;
 		$('#conditionA').show();
