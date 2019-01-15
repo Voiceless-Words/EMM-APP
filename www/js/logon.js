@@ -387,7 +387,6 @@ var jobNumber = 0;
 		e.preventDefault();
 		var name = cableCount;
 		console.log(`name = ${name}`);
-		console.log(`selectedCable = ${selectedCable}`);
 		//cablesObj['cableCount'] = cableCount;
 		if (selectedCable > -1)
 		{
