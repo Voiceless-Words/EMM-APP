@@ -4,11 +4,11 @@ var mongoose = require('mongoose'),
 var formSchema = new Schema({
     jobnumber: { type: String, required: true },
     conditionA: [{
-      boxDoor: {type: String},
       boxDamage: {type: String},
+      boxDoor: {type: String},
       plinthCondition: {type: String},
-      plintthDefect: {type: String},
-      plinthVisible: {type: String}
+      plinthVisible: {type: String},
+      plintthDefect: {type: String}
     }],
     conditionB: [{
       electronic: {type: String},

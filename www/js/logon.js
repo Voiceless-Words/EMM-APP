@@ -189,7 +189,7 @@ $(document).ready(function(){
 			boxDamage : $('#boxDamage :selected').text(),
 			plinthVisible : $('#plinthVisible :selected').text(),
 			plinthCondition : $('#plinthCondition :selected').text(),
-			plinthDefect : $('#plinthDefect').text(),
+			plinthDefect : $('#plinthDefect').val(),
 		}
 		$('#conditionA').hide();
 		$('#conditionB').show();
@@ -241,7 +241,7 @@ $(document).ready(function(){
 		jobs['status'] = 1;
 		jobs[jobNumber]['cables'] = cablesObj;
 		jobs[jobNumber]['images'] = imagesList;
-		
+
 		console.log(jobs);
 
 		if(navigator.onLine){
