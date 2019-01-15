@@ -8,7 +8,7 @@ var formSchema = new Schema({
       boxDoor: {type: String},
       plinthCondition: {type: String},
       plinthVisible: {type: String},
-      plintthDefect: {type: String}
+      plinthDefect: {type: String}
     }],
     conditionB: [{
       electronic: {type: String},
