@@ -387,7 +387,6 @@ var jobNumber = 0;
 		e.preventDefault();
 		var name = cableCount;
 		console.log(`name = ${name}`);
-		console.log(`selectedCable = ${selectedCable}`);
 		//cablesObj['cableCount'] = cableCount;
 		if (selectedCable > -1)
 		{
@@ -396,7 +395,7 @@ var jobNumber = 0;
 				correct : $('#correct :selected').text(),
 				tag : $('#tag :selected').text(),
 				label : $('#label :selected').text(),
-				breakerCondition: $('#breaker : selected').text(),
+				breakerCondition: $('#breaker :selected').text(),
 				fitted : $('#fitted :selected').text(),
 				size : $('#size :selected').text(),
 				sizeOther:$('#sizeOther :selected').text(),
@@ -413,7 +412,7 @@ var jobNumber = 0;
 				correct : $('#correct :selected').text(),
 				tag : $('#tag :selected').text(),
 				label : $('#label :selected').text(),
-				breakerCondition: $('#breaker : selected').text(),
+				breakerCondition: $('#breaker :selected').text(),
 				fitted : $('#fitted :selected').text(),
 				size : $('#size :selected').text(),
 				sizeOther : $('#sizeOther :selected').text(),
