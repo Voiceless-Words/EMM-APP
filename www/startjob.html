@@ -357,6 +357,16 @@
                     </div>
                     <h3>House Breaker</h3>
                     <div class="form-group">
+                        <label for="breaker">Circuit Breaker Condition</label>
+                        <select class="form-control" id="breaker" required="">
+                            <option value="">--Please Select--</option>
+                            <option value="Good Condition">Good Condition</option>
+                            <option value="Burnt">Burnt</option>
+                            <option value="Broken">Broken</option>
+                            <option value="Labeling Faded">Labeling Faded</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="fitted">Securely fitted, Not hanging</label>
                         <select class="form-control" id="fitted" required="">
                             <option value="">--Please Select--</option>
@@ -368,11 +378,22 @@
                         <label for="size">Size, please specify?</label>
                         <select class="form-control" id="size" required="">
                             <option value="">--Please Select--</option>
-                            <option value="88">88</option>
-                            <option value="120">120</option>
-                            <option value="85">85</option>
+                            <option value="40">40</option>
+                            <option value="45">45</option>
+                            <option value="50">50</option>
+                            <option value="55">55</option>
+                            <option value="60">60</option>
+                            <option value="63">63</option>
+                            <option value="80">80</option>
+                            <option value="100">100</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="size">Size, please specify?</label>
+                        <input type="number" id="sizeOther" class="form-control" value="">
+                    </div>
+
                     <div class="form-group">
                         <label for="meter">Meters secured and labelled?</label>
                         <select class="form-control" id="meter" required="">
@@ -399,6 +420,7 @@
                                     <option value="Green">Green</option>
                                     <option value="Yellow">Yellow</option>
                                     <option value="Red">Red</option>
+                                    <option value="N/A">N/A</option>
                                 </select>
                         </div>
                         <div class="form-group">
@@ -407,6 +429,7 @@
                                 <option value="">--Please Select--</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
+                                <option value="N/A">N/A</option>
                             </select>
                         </div>
                     </fieldset>
