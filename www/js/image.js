@@ -4,7 +4,7 @@ let app = {
         document.getElementById('btn').addEventListener('click', app.takephoto);
     },
     takephoto: function(){
-      
+
         if (jobcardnumber == '')
         {
             alert('Please start a job first');
@@ -27,20 +27,6 @@ let app = {
         document.getElementById('photo').src = "data:image/jpeg;base64," + imgURI;
         var imgs = "data:image/jpeg;base64," + imgURI;
         imagesList.push(imgs);
-        // $.ajax({
-        //   url: 'http://localhost/pics_save',
-        //   type: "post",
-        //   data:{
-        //     jobnumber: '123',
-        //     img:imgs
-        //   },
-        //   error: function () {
-        //     console.log("Something wrong happened");
-        //   },
-        //   success: function () {
-        //     console.log("Successful ajax sent");
-        //   }
-        // });
     },
     failure: function(msg){
         console.log(msg);

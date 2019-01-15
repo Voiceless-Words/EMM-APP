@@ -209,10 +209,6 @@ app.get('/logon', function (req, res){
     res.render('logon');
 });
 
-app.get('/inspection', function (req, res){
-    res.render('inspection');
-});
-
 app.post('/jobcard_save', function(req, res){
 
 	console.log("-------------------------------------------");
@@ -266,27 +262,6 @@ app.post('/form_save', function(req, res){
 
 });
 
-  //console.log(cables);
-  //console.log(con1);
-  //console.log(con2);
-  res.send("success");
-});
-
-app.post('/pics_save', function(req, res){
-  console.log('here');
-  var imageData = req.body.img;
-  console.log(req.body.jobnumber);
-  console.log(req.body.img);
-  var image1 = new Image({
-    jobnumber: req.body.jobnumber,
-    type: 'image/jpeg',
-    img:imageData
-  });
-  image1.save(function(err){
-    if (err) throw err;
-
-    console.log("saved akere");
-  });
   res.send("success");
 });
 
