@@ -57,17 +57,24 @@ $(document).ready(function(){
 				while(i < myRecords.length)
 				{
 					console.log(myRecords[i]);
-					var jobNo = Object.keys(myRecords[i])[0];
-					var jobNo1 = Object.keys(myRecords[i])[1];
-					var jobNo2 = Object.keys(myRecords[i])[2];
-					var stringD = JSON.stringify(myRecords[i][jobNo1]);
-					var num = myRecords[i][jobNo];
+					var key1 = Object.keys(myRecords[i])[0];
+					var key2 = Object.keys(myRecords[i])[1];
+					var key3 = Object.keys(myRecords[i])[2];
+					var key4 = Object.keys(myRecords[i])[3];
+
+					var jobNum = myRecords[i][key1];
+					var stringF = JSON.stringify(myRecords[i][key2]);
+					var stringD = myRecords[i][key3];
+
+					console.log(jobNum);
+					console.log(stringF);
 					console.log(stringD);
+					console.log(key4);
 					$.ajax({
-						url:"http://localhost/form_save",
+						url:"http://emmapp.us.openode.io/form_save",
 						data:{
-							jobNo: num,
-							form:stringD,
+							jobNo: jobNum,
+							form:stringF,
 						},
 						error: function () {
 							console.log("Something wrong happened");
@@ -77,7 +84,15 @@ $(document).ready(function(){
 						},
 						type: 'POST'
 					});
-					var deleteValue = objectStore.delete(myRecords[i][jobNo2]);
+					$.ajax({
+						type : "POST",
+						url : "http://emmapp.us.openode.io/jobcard_save",
+						data : stringD,
+						success : function(data) {
+							console.log(data);
+						}
+					});
+					var deleteValue = objectStore.delete(myRecords[i][key4]);
 
 					deleteValue.onsuccess = function(event) {
 						console.log("Deleted the value");
@@ -150,7 +165,7 @@ $(document).ready(function(){
 		// $('#userProfileSettings').show().siblings().hide();
 		window.location.href = "userProfile.html";
 	});
-	
+
 	$('.closedJobs').click(function(){
 		$('#sidebarUser').removeClass('active');  //close side bar
 		// $('#userProfileSettings').show().siblings().hide();
@@ -196,6 +211,7 @@ $(document).ready(function(){
 			plinthVisible : $('#plinthVisible :selected').text(),
 			plinthCondition : $('#plinthCondition :selected').text(),
 			plinthDefect : $('#plinthDefect').val(),
+			standConnectedBox: $('#standConnectedBox').val()
 		}
 		$('#conditionA').hide();
 		$('#conditionB').show();
@@ -254,7 +270,7 @@ $(document).ready(function(){
 				//get values here piet
 				$.ajax({
 					type : "POST",
-					url : "http://localhost/jobcard_save",
+					url : "http://emmapp.us.openode.io/jobcard_save",
 					data : newJob,
 					success : function(data) {
 						console.log(data);
@@ -266,7 +282,7 @@ $(document).ready(function(){
 				console.log(jobNo);
 				var stringD = JSON.stringify(jobs);
 				$.ajax({
-					url:"http://localhost/form_save",
+					url:"http://emmapp.us.openode.io/form_save",
 					data:{
 						jobNo: jobNo,
 						form:stringD,
@@ -285,6 +301,7 @@ $(document).ready(function(){
 				$('#asset_location').html('');
 		}
 		else{
+
 			//add the values from the form
 			var jobNo = Object.keys(jobs)[0];
 			var transaction = db.transaction(["formInputs"], "readwrite");
@@ -292,7 +309,7 @@ $(document).ready(function(){
 			var store = transaction.objectStore("formInputs");
 
 			//all the values goes here
-			var formInput = {jobNumber: jobNo, jobs:jobs};
+			var formInput = {jobNumber: jobNo, jobs:jobs, jobCard: newJob};
 
 			var request = store.add(formInput);
 
@@ -513,7 +530,7 @@ var selectedCable = -1;
 			username : $("#employeeNumber").val(),
             password : $("#loginPassword").val()
 		};
-		check_data(user,  "http://localhost/user/login");
+		check_data(user,  "http://emmapp.us.openode.io/user/login");
     });
 
 	$("#registerForm").submit(function (e) {
@@ -530,7 +547,7 @@ var selectedCable = -1;
 			admin: $('#adminSetting').is(':checked') ? 1 : 0
 		};
 		console.log(user);
-		check_data(user,  "http://localhost/user/register");
+		check_data(user,  "http://emmapp.us.openode.io/user/register");
     });
 
 	$("#createPasswordForm").submit(function (e) {
@@ -542,7 +559,7 @@ var selectedCable = -1;
             cpassword : $("#loginPassword_create").val(),
             ccpassword : $("#cloginPassword_create").val(),
 		};
-		check_data(user,  "http://localhost/user/login");
+		check_data(user,  "http://emmapp.us.openode.io/user/login");
     });
 	$(document).on('click', ".userClosedCard", function(){
         userClosedCard($(this).attr("data-position"));
@@ -615,7 +632,7 @@ var selectedCable = -1;
 				submit_data(user, path);
 		}
 	}
-	
+
     function submit_data(user, path)
     {
         console.log("form submitted path = "+path);
@@ -663,7 +680,7 @@ var selectedCable = -1;
 					$('.lastName').text(getUser('last_name'));
 					window.location.href = "adminDash.html";
 				}
-				if (path === "http://localhost/user/register")
+				if (path === "http://emmapp.us.openode.io/user/register")
 					$("#registerForm")[0].reset();
             }
         });
@@ -673,7 +690,7 @@ var selectedCable = -1;
     {
         $.ajax({
             type : "POST",
-            url : "http://localhost/user/update",
+            url : "http://emmapp.us.openode.io/user/update",
             data :{
 				user : user.username,
 				value : user.password
@@ -712,7 +729,7 @@ function getAllJobs(user, creator)
 {
 	$.ajax({
 		type : "POST",
-		url : "http://localhost/search/getalljobs",
+		url : "http://emmapp.us.openode.io/search/getalljobs",
 		data :{
 			user : user,
 			creator : creator
