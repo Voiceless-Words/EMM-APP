@@ -544,7 +544,12 @@ var selectedCable = -1;
 		};
 		check_data(user,  "http://localhost/user/login");
     });
-
+	$(document).on('click', ".userClosedCard", function(){
+        userClosedCard($(this).attr("data-position"));
+    });
+	$(document).on('click', ".userClosedImage", function(){
+        userClosedImages($(this).attr("data-position"));
+    });
 	function check_data(user, path)
 	{
 		var errors = [];
@@ -701,6 +706,8 @@ var selectedCable = -1;
 	{
 		localStorage.removeItem('currentUser');
 	}
+
+	var completedJobs;
 function getAllJobs(user, creator)
 {
 	$.ajax({
@@ -708,37 +715,123 @@ function getAllJobs(user, creator)
 		url : "http://localhost/search/getalljobs",
 		data :{
 			user : user,
-			creater : creator
+			creator : creator
 		},
 		success : function(data) {
 			console.log(data);
+			completedJobs = data;
 			var output = ``;
 			var div = ``;
 
-			// for (var i = 0; i < data.length; i++)
-			// {
-			// 	var time = String(data[i].time);
-			// 	time = time.splice(0, 10);
-			// 	div = `<a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-			// 		<div class="d-flex w-100 justify-content-between">
-			// 		<h5 class="mb-1">${data[i].jobnumber}</h5>
-			// 		<small>${time}</small>
-			// 		</div>
-			// 		<p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-			// 		<small>Donec id elit non mi porta.</small>
-			// 		</a>`;
-			// 	output += div;
-			// }
-			// $('.jobcount').text(data.length);
-			// $('.completedJobs').html(output);
+			for (var i = 0; i < data.length; i++)
+			{
+				var imgs = ``;
+				if (data[i].images.length > 0)
+				{
+					imgs += `<button type="button" class="btn btn-secondary userClosedImage"  data-toggle="modal" data-target=".userViewImage" data-position="${i}">View Images</button>`;
+				}
+				var time = String(data[i].time);
+				time = time.slice(0, 10);
+				div = `<div class="list-group-item flex-column align-items-start">
+							<div class="d-flex w-100 justify-content-between">
+								<h6 class="mb-1">${data[i].jobnumber}</h6>
+							</div>
+							<p class="mb-1"><small>Location : </small>France</p><br/>
+							<div class="btn-group col-12" role="group" aria-label="Basic example">
+								<button type="button" class="btn btn-secondary userClosedCard" data-toggle="modal" data-target=".userViewCard" data-position="${i}">View Job</button>
+								${imgs}
+							</div>
+							<small>Date : ${time}</small>
+						</div>`;
+				output += div;
+			}
+			$('.jobcount').text(data.length);
+			$('.completedJobs').html(output);
 		}
 	});
 }
-{/* <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
-      <small>3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small>Donec id elit non mi porta.</small>
-  </a> */}
+
+function userClosedCard(pos) {
+	console.log(completedJobs[pos]);
+	$.ajax({
+		type : "POST",
+		url : "http://localhost/search/getonecard",
+		data :{
+			jobNumber : completedJobs[pos].jobnumber,
+		},
+		success : function(data) {
+			console.log(data);
+			$('.smallJobNumber').text(completedJobs[pos].jobnumber);
+			$('.jobDetails').html(
+				`Permit number : ${data[0].permitNumber} <br>
+				Job Activity : ${data[0].jobActivity}<br>
+				Asset Material : ${data[0].assetsMaterial}<br>
+				Job Location : ${data[0].jobLocation} <br>`
+			);
+			var Plinth = ``;
+			if (completedJobs[pos].conditionA[0].plinthCondition == 'No')
+			{
+				Plinth += `<div class = "col-4 border-bottom">Defect : </div><div class="col-8 border-bottom">${completedJobs[pos].conditionA[0].plinthDefect}</div>`;
+			}
+
+			var electronics = ``;
+			if (completedJobs[pos].conditionB[0].electronic == 'Yes')
+			{
+				electronics += `
+				 <div class = "col-10 border-bottom">Fitted Securely?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionB[0].electSecure}</div>
+				 <div class = "col-10 border-bottom">All Doors in Operation?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionB[0].electDoor}</div>
+				 <div class = "col-10 border-bottom">Transponder Secure?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionB[0].electTransponder}</div>
+				 <div class = "col-10 border-bottom">Door Bypassed?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionB[0].electDoorBypassed}</div>
+				 <div class = "col-10 border-bottom">Battery Installed?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionB[0].battery}</div>
+				 <div class = "col-10 border-bottom">In a working condition?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionB[0].working}</div>
+				 <div class = "col-10 border-bottom">Remote Devices Working?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionB[0].remote}</div>
+						
+				`
+			}
+			$('.boxCondition').html(
+			 	`
+				 <div class = "col-12"><h3>Box Condition</h3></div>
+				 <div class = "col-10 border-bottom">Visible body damage?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionA[0].boxDamage}</div>
+				 <div class = "col-10 border-bottom">Can all the doors be opened, and secured?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionA[0].boxDoor}</div>
+				 <div class = "col-10 border-bottom">Plinth Visible?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionA[0].plinthVisible}</div>
+				 <div class = "col-10 border-bottom">Plinth in a good Condition?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionA[0].plinthCondition}</div>
+				 ${Plinth} <br>
+
+				 <div class = "col-10 border-bottom">Electronics Available?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionB[0].electronic}</div>
+				 ${electronics}
+				`
+			);
+		}
+	});
+}
+
+function userClosedImages(pos) {
+	var final = `<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">`;
+  var lis = ``;
+  var images = ``;
+	for (var i = 0; i < completedJobs[pos].images.length; i++)
+	{
+		lis += `<li data-target="#carouselExampleIndicators" data-slide-to="${i}"></li>`;
+		images += `<div class="carousel-item">
+      <img class="d-block w-100" src="${completedJobs[pos].images[i]}" alt="First slide">
+    </div>`;
+	}
+	final += lis;
+	final += `</ol>
+  <div class="carousel-inner">`;
+	final += images;
+
+	final += `</div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>`;
+$('.imagesDiv').html(final);
+
+}

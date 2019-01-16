@@ -31,7 +31,7 @@ router.post('/login', function(req, res){
         if (user)
         {
             var status = user.admin + 1;
-            console.log(user);
+            // console.log(user);
             user.comparePassword(req.body.password, function(err, isMatch) {
                 if (err){
                     console.log(err);
@@ -47,8 +47,6 @@ router.post('/login', function(req, res){
                     }
                     else
                     {
-                        //set session
-                            // req.session.user = req.body.username;
                          User.find({"employee_id": { "$regex": req.body.username, "$options": "i"}})
                         .then(users => {
                                 req.session.user = users[0].employee_id;

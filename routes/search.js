@@ -7,6 +7,7 @@ const router = express.Router();
 
 const User = require('../models/users');
 const Forms = require('../models/form');
+const JobSave = require('../models/jobSave');
 
  router.use(session({
      secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true
@@ -98,12 +99,24 @@ router.post('/reviewJob', function(req, res){
 });
 
 router.post('/getalljobs', function(req, res){
+    console.log(req.body);
     Forms.find({"jobnumber": { "$regex": req.body.user, "$options": "i"}})
     .then(users => {
-            console.log(users);
+            console.log('getting jobs');
             res.send(users);
         })
     .catch(error => { console.log(error); })
+    
+});
+router.post('/getonecard', function(req, res){
+    console.log(req.body);
+    JobSave.find({"jobCardNumber": { "$regex": req.body.jobNumber, "$options": "i"}})
+    .then(users => {
+            console.log('getting jobs');
+            res.send(users);
+        })
+    .catch(error => { console.log(error); })
+    
 });
 
 module.exports = router;
