@@ -258,6 +258,29 @@ $(document).ready(function(){
 
 	});
 
+	$('.cancelJob').click(function(){
+		var clean;
+		conditionAData = clean;
+		conditionBData = clean;
+		cablesObj = [];
+		imagesList = [];
+		cableCount = 0;
+		cableCount = clean;
+		$('#asset_location').html('');
+		$('#conditionA').show();
+		$('.addCable').hide().siblings().hide();
+		$('.markJobFinished').hide();
+		// $('.closeModal').click();
+		$('[data-jobNumber="'+jobNumber+'"]').hide();
+		$('#conditionA')[0].reset();
+		$('#conditionB')[0].reset();
+		newJob = clean;
+		jobNumber = 0;
+		$('#riskCheck').prop('checked', false);
+		$('.jobDisplay').text('');
+		window.location.href = "userDash.html";
+	});
+
 	$('.markJobFinished').click(function(){
 		// select where data-jobNumber == jobNumber and set disabled to true
 		jobs['status'] = 1;
@@ -299,6 +322,7 @@ $(document).ready(function(){
 				imagesList = [];
 				cableCount = 0;
 				$('#asset_location').html('');
+				$('#riskCheck').prop('checked', false); 
 		}
 		else{
 
@@ -332,7 +356,7 @@ $(document).ready(function(){
 		conditionBData = clean;
 		cablesObj = [];
 		imagesList = [];
-		cableCount = 0;
+		newJob = clean;
 		cableCount = clean;
 		$('#conditionA').show();
 		$('.addCable').hide().siblings().hide();
@@ -341,6 +365,8 @@ $(document).ready(function(){
 		$('[data-jobNumber="'+jobNumber+'"]').hide();
 		$('#conditionA')[0].reset();
 		$('#conditionB')[0].reset();
+		jobNumber = 0;
+		$('.jobDisplay').text('');
 	});
 var jobNumber = 0;
 	$('.usersJobCard').click(function(){
@@ -461,7 +487,7 @@ var selectedCable = -1;
 	$(document).on('click', ".cableSelect", function(){
 		var name = $(this).attr("data-cableName") - 1;
 		selectedCable = name;
-		console.log(cablesObj);
+		console.log(cablesObj[name].breakerCondition);
 		$("#correct option[value="+ cablesObj[name].correct +"]").prop('selected', 'selected');
 		$("#tag option[value="+ cablesObj[name].tag +"]").prop('selected', 'selected');
 		$("#label option[value="+ cablesObj[name].label +"]").prop('selected', 'selected');
@@ -753,7 +779,7 @@ function getAllJobs(user, creator)
 							<div class="d-flex w-120 justify-content-between">
 								<h6 class="mb-1">${data[i].jobnumber}</h6>
 							</div>
-							<p class="mb-1"><small>Location : </small>France</p><br/>
+							
 							<div class="btn-group col-12" role="group" aria-label="Basic example">
 								<button type="button" class="btn btn-secondary userClosedCard" data-toggle="modal" data-target=".userViewCard" data-position="${i}">View Job</button>
 								${imgs}
@@ -824,10 +850,13 @@ function userClosedCard(pos) {
 
 function userClosedImages(pos) {
 	var final = `<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">`;
-  var lis = ``;
-  var images = ``;
-	for (var i = 0; i < completedJobs[pos].images.length; i++)
+  			<ol class="carousel-indicators">`;
+	var lis = `<li data-target="#carouselExampleIndicators" data-slide-to="0"></li>`;
+	var images = `<div class="carousel-item active">
+			<img class="d-block w-100" src="${completedJobs[pos].images[0]}" alt="First slide">
+			</div>`;
+
+	for (var i = 1; i < completedJobs[pos].images.length; i++)
 	{
 		lis += `<li data-target="#carouselExampleIndicators" data-slide-to="${i}"></li>`;
 		images += `<div class="carousel-item">
@@ -836,19 +865,20 @@ function userClosedImages(pos) {
 	}
 	final += lis;
 	final += `</ol>
-  <div class="carousel-inner">`;
+	<div class="carousel-inner">`;
 	final += images;
 
 	final += `</div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>`;
-$('.imagesDiv').html(final);
+	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	</a>
+	<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	</a>
+	</div>`;
+	var test = ``;
+	$('.imagesDiv').html(final);
 
 }
