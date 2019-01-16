@@ -316,7 +316,7 @@ $(document).ready(function(){
 			//onsuccess
 			request.onsuccess = function(e){
 				console.log("The form data was saved");
-				//window.location.href="localhost:81/www/index.html"
+				//window.location.href="emmapp.us.openode.io:81/www/index.html"
 			}
 
 			//error
@@ -750,7 +750,7 @@ function getAllJobs(user, creator)
 				var time = String(data[i].time);
 				time = time.slice(0, 10);
 				div = `<div class="list-group-item flex-column align-items-start">
-							<div class="d-flex w-100 justify-content-between">
+							<div class="d-flex w-120 justify-content-between">
 								<h6 class="mb-1">${data[i].jobnumber}</h6>
 							</div>
 							<p class="mb-1"><small>Location : </small>France</p><br/>
@@ -772,7 +772,7 @@ function userClosedCard(pos) {
 	console.log(completedJobs[pos]);
 	$.ajax({
 		type : "POST",
-		url : "http://localhost/search/getonecard",
+		url : "http://emmapp.us.openode.io/search/getonecard",
 		data :{
 			jobNumber : completedJobs[pos].jobnumber,
 		},
@@ -786,7 +786,7 @@ function userClosedCard(pos) {
 				Job Location : ${data[0].jobLocation} <br>`
 			);
 			var Plinth = ``;
-			if (completedJobs[pos].conditionA[0].plinthCondition == 'No')
+			if (completedJobs[pos].conditionA[0].plinthCondition !== 'Yes')
 			{
 				Plinth += `<div class = "col-4 border-bottom">Defect : </div><div class="col-8 border-bottom">${completedJobs[pos].conditionA[0].plinthDefect}</div>`;
 			}
@@ -802,7 +802,7 @@ function userClosedCard(pos) {
 				 <div class = "col-10 border-bottom">Battery Installed?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionB[0].battery}</div>
 				 <div class = "col-10 border-bottom">In a working condition?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionB[0].working}</div>
 				 <div class = "col-10 border-bottom">Remote Devices Working?</div><div class="col-2 border-bottom">${completedJobs[pos].conditionB[0].remote}</div>
-						
+
 				`
 			}
 			$('.boxCondition').html(

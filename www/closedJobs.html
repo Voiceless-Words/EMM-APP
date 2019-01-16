@@ -112,13 +112,13 @@
                    <div class="avatar"></div>
                     <h2 class="text-center">Found <span class="jobcount">0</span> completed jobs</h2>
                     <div class="completedJobs p-4">
-                        
+
                     </div>
                </div>
                <div class="col-sm-3"></div>
            </div>
         </div>
-    
+
     </div>
     <div class="modal fade userViewCard" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog  modal-dialog-centered">
@@ -173,7 +173,7 @@
       <script src="css/jquery-3.3.1.min.js"></script>
         <script src="css/bs/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
-        <script src="js/logon.js?n=1"></script>
+        <script src="js/logon.js"></script>
         <script type="text/javascript" src="js/image.js"></script>
         <script type="text/javascript" src="js/manageJobs.js"></script>
         <script type="text/javascript" src="js/manageUsers.js"></script>
@@ -182,7 +182,7 @@
         <script type="text/javascript" src="js/search.js"></script>
         <script>
             $(document).ready(function(){
-                
+
                 var user = getUser('employee_id');
                 var company = getUser('creator');
                 getAllJobs(user, company);
