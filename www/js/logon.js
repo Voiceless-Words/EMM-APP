@@ -258,6 +258,29 @@ $(document).ready(function(){
 
 	});
 
+	$('.cancelJob').click(function(){
+		var clean;
+		conditionAData = clean;
+		conditionBData = clean;
+		cablesObj = [];
+		imagesList = [];
+		cableCount = 0;
+		cableCount = clean;
+		$('#asset_location').html('');
+		$('#conditionA').show();
+		$('.addCable').hide().siblings().hide();
+		$('.markJobFinished').hide();
+		// $('.closeModal').click();
+		$('[data-jobNumber="'+jobNumber+'"]').hide();
+		$('#conditionA')[0].reset();
+		$('#conditionB')[0].reset();
+		newJob = clean;
+		jobNumber = 0;
+		$('#riskCheck').prop('checked', false);
+		$('.jobDisplay').text('');
+		window.location.href = "userDash.html";
+	});
+
 	$('.markJobFinished').click(function(){
 		// select where data-jobNumber == jobNumber and set disabled to true
 		jobs['status'] = 1;
@@ -299,6 +322,7 @@ $(document).ready(function(){
 				imagesList = [];
 				cableCount = 0;
 				$('#asset_location').html('');
+				$('#riskCheck').prop('checked', false); 
 		}
 		else{
 
@@ -332,7 +356,7 @@ $(document).ready(function(){
 		conditionBData = clean;
 		cablesObj = [];
 		imagesList = [];
-		cableCount = 0;
+		newJob = clean;
 		cableCount = clean;
 		$('#conditionA').show();
 		$('.addCable').hide().siblings().hide();
@@ -341,6 +365,8 @@ $(document).ready(function(){
 		$('[data-jobNumber="'+jobNumber+'"]').hide();
 		$('#conditionA')[0].reset();
 		$('#conditionB')[0].reset();
+		jobNumber = 0;
+		$('.jobDisplay').text('');
 	});
 var jobNumber = 0;
 	$('.usersJobCard').click(function(){
@@ -461,7 +487,7 @@ var selectedCable = -1;
 	$(document).on('click', ".cableSelect", function(){
 		var name = $(this).attr("data-cableName") - 1;
 		selectedCable = name;
-		console.log(cablesObj);
+		console.log(cablesObj[name].breakerCondition);
 		$("#correct option[value="+ cablesObj[name].correct +"]").prop('selected', 'selected');
 		$("#tag option[value="+ cablesObj[name].tag +"]").prop('selected', 'selected');
 		$("#label option[value="+ cablesObj[name].label +"]").prop('selected', 'selected');
@@ -753,7 +779,7 @@ function getAllJobs(user, creator)
 							<div class="d-flex w-100 justify-content-between">
 								<h6 class="mb-1">${data[i].jobnumber}</h6>
 							</div>
-							<p class="mb-1"><small>Location : </small>France</p><br/>
+							
 							<div class="btn-group col-12" role="group" aria-label="Basic example">
 								<button type="button" class="btn btn-secondary userClosedCard" data-toggle="modal" data-target=".userViewCard" data-position="${i}">View Job</button>
 								${imgs}
