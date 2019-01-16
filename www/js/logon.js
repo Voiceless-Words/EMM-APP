@@ -824,10 +824,13 @@ function userClosedCard(pos) {
 
 function userClosedImages(pos) {
 	var final = `<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">`;
-  var lis = ``;
-  var images = ``;
-	for (var i = 0; i < completedJobs[pos].images.length; i++)
+  			<ol class="carousel-indicators">`;
+	var lis = `<li data-target="#carouselExampleIndicators" data-slide-to="0"></li>`;
+	var images = `<div class="carousel-item active">
+			<img class="d-block w-100" src="${completedJobs[pos].images[0]}" alt="First slide">
+			</div>`;
+
+	for (var i = 1; i < completedJobs[pos].images.length; i++)
 	{
 		lis += `<li data-target="#carouselExampleIndicators" data-slide-to="${i}"></li>`;
 		images += `<div class="carousel-item">
@@ -836,19 +839,20 @@ function userClosedImages(pos) {
 	}
 	final += lis;
 	final += `</ol>
-  <div class="carousel-inner">`;
+	<div class="carousel-inner">`;
 	final += images;
 
 	final += `</div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>`;
-$('.imagesDiv').html(final);
+	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	</a>
+	<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	</a>
+	</div>`;
+	var test = ``;
+	$('.imagesDiv').html(final);
 
 }
