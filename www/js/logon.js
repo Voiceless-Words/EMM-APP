@@ -259,114 +259,121 @@ $(document).ready(function(){
 	});
 
 	$('.cancelJob').click(function(){
-		var clean;
-		conditionAData = clean;
-		conditionBData = clean;
-		cablesObj = [];
-		imagesList = [];
-		cableCount = 0;
-		cableCount = clean;
-		$('#asset_location').html('');
-		$('#conditionA').show();
-		$('.addCable').hide().siblings().hide();
-		$('.markJobFinished').hide();
-		// $('.closeModal').click();
-		$('[data-jobNumber="'+jobNumber+'"]').hide();
-		$('#conditionA')[0].reset();
-		$('#conditionB')[0].reset();
-		newJob = clean;
-		jobNumber = 0;
-		$('#riskCheck').prop('checked', false);
-		$('.jobDisplay').text('');
-		window.location.href = "userDash.html";
+		var conf = confirm("Are you sure you want to cancel? this action can't be reversed");
+		if (conf)
+		{
+			var clean;
+			conditionAData = clean;
+			conditionBData = clean;
+			cablesObj = [];
+			imagesList = [];
+			cableCount = 0;
+			cableCount = clean;
+			$('#asset_location').html('');
+			$('#conditionA').show();
+			$('.addCable').hide().siblings().hide();
+			$('.markJobFinished').hide();
+			// $('.closeModal').click();
+			$('[data-jobNumber="'+jobNumber+'"]').hide();
+			$('#conditionA')[0].reset();
+			$('#conditionB')[0].reset();
+			newJob = clean;
+			jobNumber = 0;
+			$('#riskCheck').prop('checked', false);
+			$('.jobDisplay').text('');
+			window.location.href = "userDash.html";
+		}
 	});
 
 	$('.markJobFinished').click(function(){
-		// select where data-jobNumber == jobNumber and set disabled to true
-		jobs['status'] = 1;
-		jobs[jobNumber]['cables'] = cablesObj;
-		jobs[jobNumber]['images'] = imagesList;
+		var conf = confirm("Are you sure you want to close the Job and mark it as finished? changes can not be edited after this action");
+		if (conf)
+		{
 
-		console.log(jobs);
+			jobs['status'] = 1;
+			jobs[jobNumber]['cables'] = cablesObj;
+			jobs[jobNumber]['images'] = imagesList;
 
-		if(navigator.onLine){
-				//get values here piet
-				$.ajax({
-					type : "POST",
-					url : "http://emmapp.us.openode.io/jobcard_save",
-					data : newJob,
-					success : function(data) {
-						console.log(data);
-					}
-				});
-				$('#createJobForm')[0].reset();
+			console.log(jobs);
 
+			if(navigator.onLine){
+					$.ajax({
+						type : "POST",
+						url : "http://emmapp.us.openode.io/jobcard_save",
+						data : newJob,
+						success : function(data) {
+							console.log(data);
+						}
+					});
+					$('#createJobForm')[0].reset();
+
+					var jobNo = Object.keys(jobs)[0];
+					console.log(jobNo);
+					var stringD = JSON.stringify(jobs);
+					$.ajax({
+						url:"http://emmapp.us.openode.io/form_save",
+						data:{
+							jobNo: jobNo,
+							form:stringD,
+						},
+						error: function () {
+							console.log("Something wrong happened");
+						},
+						succes: function () {
+							console.log("Successful ajax");
+						},
+						type: 'POST'
+					});
+					cablesObj = [];
+					imagesList = [];
+					cableCount = 0;
+					$('#asset_location').html('');
+					$('#riskCheck').prop('checked', false); 
+			}
+			else{
+
+				//add the values from the form
 				var jobNo = Object.keys(jobs)[0];
-				console.log(jobNo);
-				var stringD = JSON.stringify(jobs);
-				$.ajax({
-					url:"http://emmapp.us.openode.io/form_save",
-					data:{
-						jobNo: jobNo,
-						form:stringD,
-					},
-					error: function () {
-						console.log("Something wrong happened");
-					},
-					succes: function () {
-						console.log("Successful ajax");
-					},
-					type: 'POST'
-				});
-				cablesObj = [];
-				imagesList = [];
-				cableCount = 0;
-				$('#asset_location').html('');
-				$('#riskCheck').prop('checked', false); 
-		}
-		else{
+				var transaction = db.transaction(["formInputs"], "readwrite");
 
-			//add the values from the form
-			var jobNo = Object.keys(jobs)[0];
-			var transaction = db.transaction(["formInputs"], "readwrite");
+				var store = transaction.objectStore("formInputs");
 
-			var store = transaction.objectStore("formInputs");
+				//all the values goes here
+				var formInput = {jobNumber: jobNo, jobs:jobs, jobCard: newJob};
 
-			//all the values goes here
-			var formInput = {jobNumber: jobNo, jobs:jobs, jobCard: newJob};
+				var request = store.add(formInput);
 
-			var request = store.add(formInput);
+				//onsuccess
+				request.onsuccess = function(e){
+					console.log("The form data was saved");
+					//window.location.href="localhost:81/www/index.html"
+				}
 
-			//onsuccess
-			request.onsuccess = function(e){
-				console.log("The form data was saved");
-				//window.location.href="localhost:81/www/index.html"
+				//error
+				request.onerror = function(e){
+					alert("sorry form data was not added");
+					console.log('Error', e.target.error.name);
+				}
+				jobcardnumber = '';
 			}
-
-			//error
-			request.onerror = function(e){
-				alert("sorry form data was not added");
-				console.log('Error', e.target.error.name);
-			}
-			jobcardnumber = '';
+			console.log(jobs);
+			var clean;
+			conditionAData = clean;
+			conditionBData = clean;
+			cablesObj = [];
+			imagesList = [];
+			newJob = clean;
+			cableCount = clean;
+			$('#conditionA').show();
+			$('.addCable').hide().siblings().hide();
+			$('.markJobFinished').hide();
+			$('.closeModal').click();
+			$('[data-jobNumber="'+jobNumber+'"]').hide();
+			$('#conditionA')[0].reset();
+			$('#conditionB')[0].reset();
+			jobNumber = 0;
+			$('.jobDisplay').text('');
 		}
-		console.log(jobs);
-		var clean;
-		conditionAData = clean;
-		conditionBData = clean;
-		cablesObj = [];
-		imagesList = [];
-		newJob = clean;
-		cableCount = clean;
-		$('#conditionA').show();
-		$('.addCable').hide().siblings().hide();
-		$('.markJobFinished').hide();
-		$('.closeModal').click();
-		$('[data-jobNumber="'+jobNumber+'"]').hide();
-		$('#conditionA')[0].reset();
-		$('#conditionB')[0].reset();
-		jobNumber = 0;
-		$('.jobDisplay').text('');
 	});
 var jobNumber = 0;
 	$('.usersJobCard').click(function(){
