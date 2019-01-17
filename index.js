@@ -17,7 +17,7 @@ var app = express();
 app.use(cors());
 
  app.use(function(req, res, next) {
-   var allowedOrigins = ['http://127.0.0.1:8080', 'http://localhost:81', 'http://localhost:3000', 'http://192.168.43.54:3000'];
+   var allowedOrigins = ['http://127.0.0.1:8080', 'http://localhost:81', 'http://localhost:3000', 'http://192.168.43.54:3000', 'http://emmapp.us.openode.io'];
    var origin = req.headers.origin;
    if(allowedOrigins.indexOf(origin) > -1){
         res.setHeader('Access-Control-Allow-Origin', origin);
