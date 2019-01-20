@@ -23,7 +23,7 @@ $(document).ready(function(){
 	}
 
 
-	var request = indexedDB.open('formInputs', 1);
+	var request = window.indexedDB.open('formInputs', 1);
 
 	request.onupgradeneeded = function(event){
 		var db = event.target.result;
@@ -328,7 +328,7 @@ $(document).ready(function(){
 					imagesList = [];
 					cableCount = 0;
 					$('#asset_location').html('');
-					$('#riskCheck').prop('checked', false); 
+					$('#riskCheck').prop('checked', false);
 			}
 			else{
 
@@ -341,16 +341,7 @@ $(document).ready(function(){
 				//all the values goes here
 				var formInput = {jobNumber: jobNo, jobs:jobs, jobCard: newJob};
 
-<<<<<<< HEAD
-			//onsuccess
-			request.onsuccess = function(e){
-				console.log("The form data was saved");
-				//window.location.href="emmapp.us.openode.io:81/www/index.html"
-			}
-=======
 				var request = store.add(formInput);
->>>>>>> b78f0d1cfe7a9458813c7747ca3741813065ced2
-
 				//onsuccess
 				request.onsuccess = function(e){
 					console.log("The form data was saved");
@@ -794,7 +785,7 @@ function getAllJobs(user, creator)
 							<div class="d-flex w-120 justify-content-between">
 								<h6 class="mb-1">${data[i].jobnumber}</h6>
 							</div>
-							
+
 							<div class="btn-group col-12" role="group" aria-label="Basic example">
 								<button type="button" class="btn btn-secondary userClosedCard" data-toggle="modal" data-target=".userViewCard" data-position="${i}">View Job</button>
 								${imgs}
