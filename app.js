@@ -23,18 +23,18 @@ var server = app.listen(80, function(){
 });
 
 
-app.use(function(req, res, next) {
-   var allowedOrigins = ['http://localhost:8080', 'http://localhost:81', 'http://localhost:8080', 'http://localhost:3000', 'http://192.168.43.54:3000', 'http://localhost:8080'];
-   var origin = req.headers.origin;
-   if(allowedOrigins.indexOf(origin) > -1){
-        res.setHeader('Access-Control-Allow-Origin', origin);
-   }
-   //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8080');
-   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-   res.header('Access-Control-Allow-Credentials', true);
-  return next();
-});
+// app.use(function(req, res, next) {
+//    var allowedOrigins = ['localhost:8080', 'localhost:81', 'localhost:8080', 'localhost:3000', 'http://192.168.43.54:3000', 'localhost:8080'];
+//    var origin = req.headers.origin;
+//    if(allowedOrigins.indexOf(origin) > -1){
+//         res.setHeader('Access-Control-Allow-Origin', origin);
+//    }
+//    //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8080');
+//    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+//    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//    res.header('Access-Control-Allow-Credentials', true);
+//   return next();
+// });
 
 const user = require('./routes/user');
 const search = require('./routes/search');

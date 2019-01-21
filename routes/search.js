@@ -108,6 +108,18 @@ router.post('/getalljobs', function(req, res){
     .catch(error => { console.log(error); })
     
 });
+
+router.post('/getallusers', function(req, res){
+    console.log(req.body);
+    User.find({"creator": { "$regex": req.body.creator, "$options": "i"}})
+    .then(users => {
+            console.log('getting jobs');
+            res.send(users);
+        })
+    .catch(error => { console.log(error); })
+    
+});
+
 router.post('/getonecard', function(req, res){
     console.log(req.body);
     JobSave.find({"jobCardNumber": { "$regex": req.body.jobNumber, "$options": "i"}})
