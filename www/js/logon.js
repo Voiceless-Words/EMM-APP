@@ -23,7 +23,7 @@ $(document).ready(function(){
 	}
 
 
-	var request = indexedDB.open('formInputs', 1);
+	var request = window.indexedDB.open('formInputs', 1);
 
 	request.onupgradeneeded = function(event){
 		var db = event.target.result;
@@ -328,7 +328,7 @@ $(document).ready(function(){
 					imagesList = [];
 					cableCount = 0;
 					$('#asset_location').html('');
-					$('#riskCheck').prop('checked', false); 
+					$('#riskCheck').prop('checked', false);
 			}
 			else{
 
@@ -342,7 +342,6 @@ $(document).ready(function(){
 				var formInput = {jobNumber: jobNo, jobs:jobs, jobCard: newJob};
 
 				var request = store.add(formInput);
-
 				//onsuccess
 				request.onsuccess = function(e){
 					console.log("The form data was saved");
@@ -786,7 +785,7 @@ function getAllJobs(user, creator)
 							<div class="d-flex w-120 justify-content-between">
 								<h6 class="mb-1">${data[i].jobnumber}</h6>
 							</div>
-							
+
 							<div class="btn-group col-12" role="group" aria-label="Basic example">
 								<button type="button" class="btn btn-secondary userClosedCard" data-toggle="modal" data-target=".userViewCard" data-position="${i}">View Job</button>
 								${imgs}
