@@ -111,7 +111,9 @@ router.post('/getalljobs', function(req, res){
 
 router.post('/getallusers', function(req, res){
     console.log(req.body);
-    User.find({"creator": { "$regex": req.body.creator, "$options": "i"}})
+    let value = (req.body.user == 000000) ? "" : req.body.user;
+    console.log(value + ' < value');
+    User.find({"creator": { "$regex": value, "$options": "i"}})
     .then(users => {
             console.log('getting jobs');
             res.send(users);
@@ -119,6 +121,7 @@ router.post('/getallusers', function(req, res){
     .catch(error => { console.log(error); })
     
 });
+
 
 router.post('/getonecard', function(req, res){
     console.log(req.body);
