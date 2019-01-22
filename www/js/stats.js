@@ -17,6 +17,8 @@ $(document).ready(function(){
         userClosedJobs();
     });
 
+    countJobs(getUser('creator'));
+
     countUsers(getUser('creator'));
 });
 
@@ -56,6 +58,19 @@ function viewUserData(i){
             $('.displayUserData').html(userData);
         }
     });
+}
+
+function countJobs(user){
+  $.ajax({
+  type : "POST",
+  url : "http://emmapp.us.openode.io/getalljobs",
+  data :{
+    user : user,
+  },
+  success : function(data) {
+          $('.countJobs').text(data.length);
+      }
+  });
 }
 
 function countUsers(creator)

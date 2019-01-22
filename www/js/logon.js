@@ -151,7 +151,7 @@ $(document).ready(function(){
 	type : "POST",
 	url : "http://emmapp.us.openode.io/getallareas",
 	data :{
-		user: user.employee_id
+		user: "nothing"
 	},
 	success : function(data) {
 					var i = 0;

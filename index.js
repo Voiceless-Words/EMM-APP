@@ -101,6 +101,14 @@ app.post('/getallareas', function(req, res){
   });
 });
 
+app.post('/getalljobs', function(req, res){
+  Forms.find({}, function(err, forms){
+    if (err) throw err;
+
+    res.send(forms);
+  });
+});
+
 
 app.get('/dashboarda', function(req, res) {
 
