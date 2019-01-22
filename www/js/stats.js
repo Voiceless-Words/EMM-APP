@@ -28,7 +28,7 @@ function viewUserData(i){
     var user = users[i];
     $.ajax({
 		type : "POST",
-		url : "http://localhost:8080/search/getalljobs",
+		url : "http://emmapp.us.openode.io/search/getalljobs",
 		data :{
 			user: user.employee_id
 		},
@@ -62,7 +62,7 @@ function countUsers(creator)
 {
     $.ajax({
 		type : "POST",
-		url : "http://localhost:8080/search/getallusers",
+		url : "http://emmapp.us.openode.io/search/getallusers",
 		data :{
 			user : user,
 			creator : creator
@@ -107,7 +107,7 @@ function getAllUsers(creator)
     console.log('users');
     $.ajax({
 		type : "POST",
-		url : "http://localhost:8080/search/getallusers",
+		url : "http://emmapp.us.openode.io/search/getallusers",
 		data :{
 			user : user,
 			creator : creator
