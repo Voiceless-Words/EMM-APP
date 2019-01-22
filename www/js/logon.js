@@ -147,6 +147,25 @@ $(document).ready(function(){
 		window.location.href = "adminDash.html";
 	});
 
+	$.ajax({
+	type : "POST",
+	url : "http://emmapp.us.openode.io/getallareas",
+	data :{
+		user: user.employee_id
+	},
+	success : function(data) {
+					var i = 0;
+					var place = data;
+					console.log(place);
+					var userData = `<option value="">--Please Select Area--</option>`;
+								while (i < place.length) {
+									userData = userData + `<option value="${place[i].value}">${place[i].name}</option>`;
+									i++;
+								}
+					$('.place').html(userData);
+			}
+	});
+
 	$('.dashboardUserButton').click(function(){
 		$('.top_nav').hide();
 		$('#sidebarUser').removeClass('active');  //close side bar

@@ -101,13 +101,15 @@ function createjobcardno() {
     var prefix = '';
     console.log(new Date());
 
-    if (area == 'Buurendal') {
+    prefix = area;
+    alert("here in the jobcard create");
+    /*if (area == 'Buurendal') {
         prefix = 'BDL';
     } else if (area == 'Highway Garden') {
         prefix = 'HG';
     } else if (area == 'Harmelia') {
         prefix = 'HR';
-    }
+    }*/
 
     document.getElementById('addJob-jobCardNumber').value = (prefix + cardNumber);
     document.getElementById('usersJobCard').dataset.jobNumber = (prefix + cardNumber);

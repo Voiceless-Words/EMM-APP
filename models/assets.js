@@ -3,11 +3,7 @@ var mongoose = require('mongoose'),
 
 var assetsSchema = new Schema({
     name: { type: String, required: true },
-    description: { type: String, required: true },
-    location: { type: String, required: true },
-    east: { type: Number, default: 0 },
-    south: { type: Number, default: 0 },
-    time : { type : Date, default: Date.now }
+    value: { type: String, required: true }
 });
 
 module.exports = mongoose.model('Assets', assetsSchema);

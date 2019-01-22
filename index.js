@@ -31,7 +31,7 @@ app.use(cors());
  });
 
 
-var server = app.listen(8080, function(){
+var server = app.listen(80, function(){
     console.log("server started port 8080");
 });
 
@@ -92,6 +92,14 @@ app.get('/logout', function(req, res){
 });
 
 
+
+app.post('/getallareas', function(req, res){
+  Asset.find({}, function(err, assets){
+    if (err) throw err;
+
+    res.send(assets);
+  });
+});
 
 
 app.get('/dashboarda', function(req, res) {
