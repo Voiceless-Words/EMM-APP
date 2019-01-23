@@ -234,3 +234,57 @@ input[type='text'], input[type='password'], input[type='email'], input[type='dat
 
     background-color: black;
 }
+
+/* loader lite */
+.lds-dual-ring {
+  /* display: inline-block; */
+  margin: auto;
+  width: 34px;
+  height: 34px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* loader dark */
+.Blds-dual-ring {
+  /* display: inline-block; */
+  margin: auto;
+  width: 34px;
+  height: 34px;
+}
+.Blds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 3px solid #000;
+  border-color: #000 transparent #000 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -4,16 +4,19 @@ $(document).ready(function(){
     });
 
     $('.listUsers').click(function(){
+        $('.statsDisplay').html(`<div class="lds-dual-ring py-4"></div>`);
         getAllUsers(getUser('creator'));
     });
 
     $('.listJobs').click(function (){
-        userClosedJobs(allJobs);
+        if (allJobs)
+            userClosedJobs(allJobs);
         console.log('clicked');
         console.log(allJobs);
      })
 
     $(document).on('click', ".selectUser", function(){
+        $('.displayUserData').html(`<div class="Blds-dual-ring"></div>`);
         viewUserData($(this).attr("data-loc"));
     });
 
@@ -32,7 +35,6 @@ var users = [];
 var jobs = [];
 
 function viewUserData(i){
-    $('.displayUserData').html(`<div class="text-center">Loading...</div>`);
     var user = users[i];
     $.ajax({
 		type : "POST",
@@ -76,7 +78,7 @@ function countJobs(user){
     user : user,
   },
   success : function(data) {
-          $('.countJobs').text(data.length);
+          $('.loadingCountJobs').html(`<div class="text-center"><span class="badge badge-secondary countJobs">${data.length}</span></div>`);
           allJobs = data;
       }
   });
@@ -92,7 +94,7 @@ function countUsers(creator)
 			creator : creator
 		},
 		success : function(data) {
-            $('.countUsers').text(data.length);
+            $('.loadingCountUsers').html(`<div class="text-center"><span class="badge badge-secondary countUsers">${data.length}</span></div>`);
         }
     });
 }
@@ -100,8 +102,8 @@ function countUsers(creator)
 function userClosedJobs(jobList)
 {
     console.log(jobList);
-     var jobsList = `<div class="mt-4 row text-center">
-                            <h3>Closed Jobs</h3>
+     var jobsList = `<div>
+                            <h3 class="mt-4 row d-block text-center">Closed Jobs</h3>
                         </div>
                         <table class="table table-sm table-hover my-4">
                         <thead class="thead-dark">
