@@ -33,3 +33,39 @@ let app = {
     }
 };
 document.addEventListener('deviceready', app.init);
+
+let profile = {
+    init: function(){
+        document.getElementById('btn-profile').addEventListener('click', profile.takephoto);
+    },
+    takephoto: function(){
+
+        if (jobcardnumber == '')
+        {
+            alert('Please start a job first');
+        }
+        else {
+          let opts = {
+              quality:  80,
+              destinationType: Camera.DestinationType.DATA_URL,
+              sourceType: Camera.PictureSourceType.CAMERA,
+              mediaType: Camera.MediaType.PICTURE,
+              encodingType: Camera.EncodingType.JPEG,
+              cameraDirection: Camera.Direction.BACK,
+              targetWidth: 300,
+              targetHeight: 400
+          };
+          navigator.camera.getPicture(profile.success1, profile.failure, opts);
+        }
+    },
+    success1: function(imgURI){
+        /*document.getElementById('photo').src = "data:image/jpeg;base64," + imgURI;
+        var imgs = "data:image/jpeg;base64," + imgURI;
+        imagesList.push(imgs);*/
+        alert("picture taken");
+    },
+    failure: function(msg){
+        console.log(msg);
+    }
+};
+document.addEventListener('deviceready', profile.init);
