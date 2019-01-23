@@ -17,6 +17,7 @@
     <body>
 
 
+
      <div id="content" class="col-12">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
@@ -118,11 +119,16 @@
                         <div class="row no-margin">
                             <div class="col-6 col-md-4  border p-4 listJobs">
                                 <div class="text-center"><strong>Completed<br>Jobs</strong></div>
-                                <div class="text-center"><span class="badge badge-secondary countJobs">0</span></div>
+                                <div class="col-12 loadingCountJobs">
+                                    <div class="lds-dual-ring"></div>
+                                </div>
                             </div>
                             <div class="col-6 col-md-4 border p-4 listUsers">
                                 <div class="text-center"><strong>Registered<br>Users</strong></div>
-                                <div class="text-center"><span class="badge badge-secondary countUsers">0</span></div>
+                                <div class="col-12 loadingCountUsers">
+                                    <div class="lds-dual-ring"></div>
+
+                                </div>
                             </div>
                             <div class="col-6 col-md-4  border p-4">
                                 <div class="text-center"><strong>Search<br>Jobs</strong></div>
@@ -152,14 +158,6 @@
       </div>
       <div class="modal-body">
         <div class="row displayUserData">
-            <div class="col-12 col-md-6 offset-md-3">
-                <div class="col-12 profile_picture"></div>
-            </div>
-            <div class="col-12">
-                <small>First Name:</small> Summer Wonder<br>
-                <small>First Name:</small> Summer Wonder<br>
-
-            </div>
         </div>
       </div>
       <div class="modal-footer">
