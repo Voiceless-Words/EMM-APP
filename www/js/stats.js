@@ -7,6 +7,12 @@ $(document).ready(function(){
         getAllUsers(getUser('creator'));
     });
 
+    $('.listJobs').click(function (){
+        userClosedJobs(allJobs);
+        console.log('clicked');
+        console.log(allJobs);
+     })
+
     $(document).on('click', ".selectUser", function(){
         viewUserData($(this).attr("data-loc"));
     });
@@ -14,7 +20,7 @@ $(document).ready(function(){
     $(document).on('click', ".jobList", function(){
         console.log("close modal and show list");
         $('.closeModal').click();
-        userClosedJobs();
+        userClosedJobs(jobs);
     });
 
     countJobs(getUser('creator'));
@@ -60,6 +66,8 @@ function viewUserData(i){
     });
 }
 
+var allJobs;
+
 function countJobs(user){
   $.ajax({
   type : "POST",
@@ -69,6 +77,7 @@ function countJobs(user){
   },
   success : function(data) {
           $('.countJobs').text(data.length);
+          allJobs = data;
       }
   });
 }
@@ -88,11 +97,11 @@ function countUsers(creator)
     });
 }
 
-function userClosedJobs()
+function userClosedJobs(jobList)
 {
-    console.log(jobs);
+    console.log(jobList);
      var jobsList = `<div class="mt-4 row text-center">
-                            <h3>User Closed Jobs</h3>
+                            <h3>Closed Jobs</h3>
                         </div>
                         <table class="table table-sm table-hover my-4">
                         <thead class="thead-dark">
@@ -104,12 +113,12 @@ function userClosedJobs()
                         <tbody>`;
             var line = ``;
             // var color;
-            for (let i = 0; i < jobs.length; i++)
+            for (let i = 0; i < jobList.length; i++)
             {
                 // color = (data[i].admin == 1)? 'tomato' : 'black';
                 line += `<tr class="selectJob" data-loc=${i}>
                             <th scope="row">${i + 1}</th>
-                            <td>${jobs[i].jobnumber}</td>
+                            <td>${jobList[i].jobnumber}</td>
                         </tr>`;
             }
             jobsList += line;
