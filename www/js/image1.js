@@ -1,9 +1,9 @@
 let profile = {
-    init1: function(){
-        document.getElementById('profile').addEventListener('click', profile.takephoto1);
+    inits: function(){
+        document.getElementById('profile').addEventListener('click', profile.takephotos);
     },
-    takephoto1: function(){
-        let opts1 = {
+    takephotos: function(){
+        let optss = {
             quality:  80,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.CAMERA,
@@ -13,16 +13,16 @@ let profile = {
             targetWidth: 300,
             targetHeight: 400
         };
-        navigator.camera.getPicture(profile.success2, profile.failure1, opts1);
+        navigator.camera.getPicture(profile.successs, profile.failures, optss);
     },
-    success2: function(imgURI){
+    successs: function(imgURI){
         /*document.getElementById('photo').src = "data:image/jpeg;base64," + imgURI;
         var imgs = "data:image/jpeg;base64," + imgURI;
         imagesList.push(imgs);*/
         alert("picture taken");
     },
-    failure1: function(msg){
+    failures: function(msg){
         console.log(msg);
     }
 };
-document.addEventListener('deviceready', profile.init1);
+document.addEventListener('deviceready', profile.inits);

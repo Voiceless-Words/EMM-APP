@@ -2,6 +2,21 @@ var imagesList = [];
 let app = {
     init: function(){
         document.getElementById('btn').addEventListener('click', app.takephoto);
+        document.getElementById("profile").addEventListener('click', app.takephoto1);
+    },
+    takephoto1: function(){
+
+          let opts1 = {
+              quality:  80,
+              destinationType: Camera.DestinationType.DATA_URL,
+              sourceType: Camera.PictureSourceType.CAMERA,
+              mediaType: Camera.MediaType.PICTURE,
+              encodingType: Camera.EncodingType.JPEG,
+              cameraDirection: Camera.Direction.BACK,
+              targetWidth: 300,
+              targetHeight: 400
+          };
+          navigator.camera.getPicture(app.success2, app.failure2, opts1);
     },
     takephoto: function(){
 
@@ -30,35 +45,15 @@ let app = {
     },
     failure: function(msg){
         console.log(msg);
-    }
-};
-
-let profile = {
-    init: function(){
-        document.getElementById('btn-profile').addEventListener('click', profile.takephoto);
     },
-    takephoto: function(){
-      let opts = {
-          quality:  80,
-          destinationType: Camera.DestinationType.DATA_URL,
-          sourceType: Camera.PictureSourceType.CAMERA,
-          mediaType: Camera.MediaType.PICTURE,
-          encodingType: Camera.EncodingType.JPEG,
-          cameraDirection: Camera.Direction.BACK,
-          targetWidth: 300,
-          targetHeight: 400
-      };
-      navigator.camera.getPicture(profile.success1, profile.failure, opts);
-    },
-    success1: function(imgURI){
+    success2: function(imgURI){
         /*document.getElementById('photo').src = "data:image/jpeg;base64," + imgURI;
         var imgs = "data:image/jpeg;base64," + imgURI;
         imagesList.push(imgs);*/
-        alert("picture taken");
+        console.log("Picture saved");
     },
-    failure: function(msg){
-        console.log(msg);
+    failure2: function(msg){
+      console.log(msg);
     }
 };
-
-document.addEventListener('deviceready', app.init,  profile.init);
+document.addEventListener('deviceready', app.init);
