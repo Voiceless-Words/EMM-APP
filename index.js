@@ -17,7 +17,7 @@ var app = express();
 app.use(cors());
 
  app.use(function(req, res, next) {
-    var allowedOrigins = ['http://127.0.0.1:8080','http://emmapp.us.openode.io', 'http://localhost:81', 'http://localhost:3000', 'http://192.168.43.54:3000', 'http://http://localhost:8080'];
+    var allowedOrigins = ['http://127.0.0.1:8080','http://emmapp.openode.io', 'http://localhost:81', 'http://localhost:3000', 'http://192.168.43.54:3000', 'http://http://localhost:8080'];
     var origin = req.headers.origin;
     if(allowedOrigins.indexOf(origin) > -1){
          res.setHeader('Access-Control-Allow-Origin', origin);
@@ -64,8 +64,14 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 //body parser middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json({
+  limit: '5mb'
+}));
+app.use(bodyParser.urlencoded({
+  limit: '5mb',
+  parameterLimit: 100000,
+  extended:false
+}));
 
 //ser static path
 app.use(express.static(path.join(__dirname, 'public')));
@@ -283,7 +289,7 @@ app.post('/form_save', function(req, res){
 app.post('/profilePic', function(req, res){
   console.log(req.body.image);
   console.log(req.body.employeeNumber);
-  User.findOneAndUpdate({employee_id: req.body.employeeNumber}, {$set:{image: "myimage"}}, {new: true, upsert: true}, function (err, doc) {
+  User.findOneAndUpdate({employee_id: req.body.employeeNumber}, {$set:{image: req.body.image }}, {new: true, upsert: true}, function (err, doc) {
     if (err) {
       throw err;
       console.log(err);

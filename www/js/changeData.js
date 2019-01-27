@@ -68,7 +68,7 @@ $(document).ready(function(){
     {
         $.ajax({
             type : "POST",
-            url : 'http://localhost:8080/data/update_field',
+            url : 'http://emmapp.openode.io/data/update_field',
             data : {
                 name : name,
                 value : value,
@@ -89,7 +89,7 @@ $(document).ready(function(){
 function changePassword(opassword, password){
     $.ajax({
             type : "POST",
-            url : 'http://localhost:8080/data/change_password',
+            url : 'http://emmapp.openode.io/data/change_password',
             data : {
                 employeeNumber : window.user,
                 password : password,
@@ -122,30 +122,51 @@ function getImage() {
 function onError(err){ alert(error); }
 
 function uploadPhoto(imageURI) {
-    alert(imageURI);
-    getBase64(imageURI, function(base64Data){
-       alert(base64Data);//here you can have your code which uses base64 for its operation,//file to base64 by oneshubh
+    //alert(imageURI);
+    var  image;
+    getFileContentAsBase64(imageURI,function(base64Image){
+      //window.open(base64Image);
+      image = base64Image;
+      alert(base64Image); 
+      $.ajax({
+              type : "POST",
+              url : 'http://emmapp.openode.io/profilePic',
+              data : {
+                  employeeNumber : window.user,
+                  image : image
+              },
+              success : function(data) {
+                  console.log(data);
+                  alert("Image Updated");
+              }
+          });
+      // Then you'll be able to handle the myimage.png file as base64
     });
 
-    i$.ajax({
-            type : "POST",
-            url : 'http://192.168.1.101:8080/profilePic',
-            data : {
-                employeeNumber : window.user,
-                image : imageURI,
-            },
-            success : function(data) {
-                console.log(data);
-                alert("Image Updated");
-            }
-        });
 }
 
-function getBase64 (file,callback) {
+/**
+ * This function will handle the conversion from a file to base64 format
+ *
+ * @path string
+ * @callback function receives as first parameter the content of the image
+ */
+function getFileContentAsBase64(path,callback){
+    window.resolveLocalFileSystemURL(path, gotFile, fail);
+            
+    function fail(e) {
+          alert('Cannot found requested file');
+    }
 
-    const reader = new FileReader();
-
-    reader.addEventListener('load', () => callback(reader.result));
-
-    reader.readAsDataURL(file);
+    function gotFile(fileEntry) {
+           fileEntry.file(function(file) {
+              var reader = new FileReader();
+              reader.onloadend = function(e) {
+                   var content = this.result;
+                   callback(content);
+              };
+              // The most important point, use the readAsDatURL Method from the file plugin
+              reader.readAsDataURL(file);
+           });
+    }
 }

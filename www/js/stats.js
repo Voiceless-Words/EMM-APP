@@ -61,7 +61,7 @@ $(document).ready(function(){
                 $('.companiesOption').html(companies);
             }
         }
-        
+
 
         $('.searchTab').show();
      });
@@ -77,7 +77,7 @@ $(document).ready(function(){
         $('.closeModal').click();
         userClosedJobs(jobs);
     });
-    
+
     $('#searchForm').submit(function(e){
         e.preventDefault();
         $('.statsDisplay').html(`<div class="lds-dual-ring py-4"></div>`);
@@ -107,7 +107,7 @@ function viewUserData(i){
     var user = users[i];
     $.ajax({
 		type : "POST",
-		url : "http://localhost:8080/search/getalljobs",
+		url : "http://emmapp.openode.io/search/getalljobs",
 		data :{
 			user: user.employee_id
 		},
@@ -143,12 +143,12 @@ function returnSearch(query){
     console.log(query);
     $.ajax({
         type : "POST",
-        url : "http://localhost:8080/search/statSearch",
+        url : "http://emmapp.openode.io/search/statSearch",
         data :query,
         success : function(data) {
             if (data.length == 0)
                 $('.statsDisplay').html(`<p class='text-center'>0 results Found</p>`);
-            else 
+            else
             {
                 if (query.options == 'users')
                 {
@@ -214,7 +214,7 @@ function returnSearch(query){
                     $('.statsDisplay').html(jobsList);
                 }
             }
-            
+
         }
     });
 
@@ -224,7 +224,7 @@ function returnCompanies(query){
     console.log(query);
     $.ajax({
         type : "POST",
-        url : "http://localhost:8080/search/listCompanies",
+        url : "http://emmapp.openode.io/search/listCompanies",
         data :query,
         success : function(data) {
             console.log(data);
@@ -236,7 +236,7 @@ function returnCompanies(query){
 function countJobs(user){
   $.ajax({
   type : "POST",
-  url : "http://localhost:8080/getalljobs",
+  url : "http://emmapp.openode.io/getalljobs",
   data :{
     user : user,
   },
@@ -252,7 +252,7 @@ function countUsers(creator)
 {
     $.ajax({
 		type : "POST",
-		url : "http://localhost:8080/search/getallusers",
+		url : "http://emmapp.openode.io/search/getallusers",
 		data :{
 			user : user,
 			creator : creator
@@ -297,7 +297,7 @@ function getAllUsers(creator)
     console.log('users');
     $.ajax({
 		type : "POST",
-		url : "http://localhost:8080/search/getallusers",
+		url : "http://emmapp.openode.io/search/getallusers",
 		data :{
 			user : user,
 			creator : creator
