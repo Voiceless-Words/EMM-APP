@@ -22,7 +22,10 @@ $(document).ready(function(){
 		}
 	}
 
-
+	if (getUser('employee_id') == '0000000')
+	{
+		returnCompanies();
+	}
 	var request = window.indexedDB.open('formInputs', 1);
 
 	request.onupgradeneeded = function(event){
@@ -71,7 +74,7 @@ $(document).ready(function(){
 					console.log(stringD);
 					console.log(key4);
 					$.ajax({
-						url:"http://emmapp.us.openode.io/form_save",
+						url:"http://localhost:8080/form_save",
 						data:{
 							jobNo: jobNum,
 							form:stringF,
@@ -86,7 +89,7 @@ $(document).ready(function(){
 					});
 					$.ajax({
 						type : "POST",
-						url : "http://emmapp.us.openode.io/jobcard_save",
+						url : "http://localhost:8080/jobcard_save",
 						data : stringD,
 						success : function(data) {
 							console.log(data);
@@ -149,7 +152,7 @@ $(document).ready(function(){
 
 	$.ajax({
 	type : "POST",
-	url : "http://emmapp.us.openode.io/getallareas",
+	url : "http://localhost:8080/getallareas",
 	data :{
 		user: "nothing"
 	},
@@ -312,13 +315,14 @@ $(document).ready(function(){
 			jobs['status'] = 1;
 			jobs[jobNumber]['cables'] = cablesObj;
 			jobs[jobNumber]['images'] = imagesList;
+			jobs.company = (getUser('creator') == '0000000') ? getUser('employee_id') : getUser('creator');
 
 			console.log(jobs);
 
 			if(navigator.onLine){
 					$.ajax({
 						type : "POST",
-						url : "http://emmapp.us.openode.io/jobcard_save",
+						url : "http://localhost:8080/jobcard_save",
 						data : newJob,
 						success : function(data) {
 							console.log(data);
@@ -330,7 +334,7 @@ $(document).ready(function(){
 					console.log(jobNo);
 					var stringD = JSON.stringify(jobs);
 					$.ajax({
-						url:"http://emmapp.us.openode.io/form_save",
+						url:"http://localhost:8080/form_save",
 						data:{
 							jobNo: jobNo,
 							form:stringD,
@@ -581,7 +585,7 @@ var selectedCable = -1;
 			username : $("#employeeNumber").val(),
             password : $("#loginPassword").val()
 		};
-		check_data(user,  "http://emmapp.us.openode.io/user/login");
+		check_data(user,  "http://localhost:8080/user/login");
     });
 
 	$("#registerForm").submit(function (e) {
@@ -598,7 +602,7 @@ var selectedCable = -1;
 			admin: $('#adminSetting').is(':checked') ? 1 : 0
 		};
 		console.log(user);
-		check_data(user,  "http://emmapp.us.openode.io/user/register");
+		check_data(user,  "http://localhost:8080/user/register");
     });
 
 	$("#createPasswordForm").submit(function (e) {
@@ -610,7 +614,7 @@ var selectedCable = -1;
             cpassword : $("#loginPassword_create").val(),
             ccpassword : $("#cloginPassword_create").val(),
 		};
-		check_data(user,  "http://emmapp.us.openode.io/user/login");
+		check_data(user,  "http://localhost:8080/user/login");
     });
 	$(document).on('click', ".userClosedCard", function(){
         userClosedCard($(this).attr("data-position"));
@@ -731,7 +735,7 @@ var selectedCable = -1;
 					$('.lastName').text(getUser('last_name'));
 					window.location.href = "adminDash.html";
 				}
-				if (path === "http://emmapp.us.openode.io/user/register")
+				if (path === "http://localhost:8080/user/register")
 					$("#registerForm")[0].reset();
             }
         });
@@ -741,7 +745,7 @@ var selectedCable = -1;
     {
         $.ajax({
             type : "POST",
-            url : "http://emmapp.us.openode.io/user/update",
+            url : "http://localhost:8080/user/update",
             data :{
 				user : user.username,
 				value : user.password
@@ -780,7 +784,7 @@ function getAllJobs(user, creator)
 {
 	$.ajax({
 		type : "POST",
-		url : "http://emmapp.us.openode.io/search/getalljobs",
+		url : "http://localhost:8080/search/getalljobs",
 		data :{
 			user : user,
 			creator : creator
@@ -823,7 +827,7 @@ function userClosedCard(pos) {
 	console.log(completedJobs[pos]);
 	$.ajax({
 		type : "POST",
-		url : "http://emmapp.us.openode.io/search/getonecard",
+		url : "http://localhost:8080/search/getonecard",
 		data :{
 			jobNumber : completedJobs[pos].jobnumber,
 		},

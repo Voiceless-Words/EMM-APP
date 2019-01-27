@@ -134,4 +134,99 @@ router.post('/getonecard', function(req, res){
     
 });
 
+router.post('/statSearch', function(req, res){
+    console.log(req.body);
+    if (req.body.options == 'users')
+    {
+         User.find({
+             $and: [
+                    { $or: [
+                            {"employee_id": { "$regex": req.body.queryTerm, "$options": "i"}},
+                            {"first_name": { "$regex": req.body.queryTerm, "$options": "i"}},
+                            {"last_name": { "$regex": req.body.queryTerm, "$options": "i"}}
+                        ]
+                    },
+                    {"creator": { "$regex": req.body.company, "$options": "i"}}
+                ]}
+         )
+        .then(users => {
+                console.log('getting jobs');
+                res.send(users);
+            })
+        .catch(error => { console.log(error); })
+    }
+    else if (req.body.options == 'jobs')
+    {
+
+        var start;
+        var end;
+        console.log(req.body.startDate);
+        console.log(req.body.endDate);
+
+        if (req.body.startDate == '')
+            start= new Date(2018, 11, 31);
+        else if (req.body.startDate)
+        {
+            let str = req.body.startDate.split('-');
+            start = new Date(str[0], +str[1] - 1, str[2]);
+        }
+            console.log('SETTING END DATE B');
+        if (req.body.endDate == '')
+        {
+            end = new Date();
+        }
+        else if (req.body.endDate)
+        {
+            let str = req.body.endDate.split('-');
+            end = new Date(str[0], +str[1] - 1, +str[2] + 1);
+        }
+        console.log(start);
+        console.log(end);
+
+        Forms.find({
+             $and: [
+                    { $or: [
+                            {"jobnumber": { "$regex": req.body.queryTerm, "$options": "i"}},
+                            {"completedby": { "$regex": req.body.queryTerm, "$options": "i"}},
+                            {"company": { "$regex": req.body.queryTerm, "$options": "i"}}
+                        ]
+                    },
+                    {"jobnumber": { "$regex": req.body.company, "$options": "i"}},
+                    {time: {
+                        $gte: start,
+                        $lte: end
+                    }}
+                ]}
+         )
+        .then(users => {
+                console.log('getting jobs');
+                res.send(users);
+            })
+        .catch(error => { console.log(error); })
+    }
+});
+
+router.post('/listCompanies', function(req, res){
+    console.log(req.body);
+    User.find({"creator": { "$regex": '0000000', "$options": "i"}
+    })
+    .then(users => {
+            console.log(users);
+            var response = {
+                count : users.length,
+                data : users.map(function(users){
+                    return {
+                        first_name : users.first_name,
+                        last_name : users.last_name,
+                        employee_id : users.employee_id,
+                        contact : users.contact,
+                        date : users.date
+                    };
+                })
+            };
+            res.send(response);
+        })
+    .catch(error => { console.log(error); })
+});
+
 module.exports = router;

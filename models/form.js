@@ -37,6 +37,7 @@ var formSchema = new Schema({
     images: [],
     reviewStatus: {type: Number},
     completedby:{type: String},
+    company:{type: String},
     time : { type : Date, default: Date.now }
 });
 

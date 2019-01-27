@@ -1,4 +1,10 @@
+
+
 $(document).ready(function(){
+
+    console.log(new Date());
+    console.log(new Date(2019, 0, 27));
+
     $('.statistics').click(function(){
 		window.location.href = "statistics.html";
     });
@@ -15,6 +21,49 @@ $(document).ready(function(){
         console.log(allJobs);
      })
 
+    $('#searchOptions').on('change', function() {
+        console.log( this.value );
+        if (this.value === 'jobs')
+        {
+            //reset dates and disable fields
+            $("#startDate").prop('disabled', false);
+            $("#endDate").prop('disabled', false);
+        }
+        else if (this.value === 'users')
+        {
+            $("#startDate").val('');
+            $("#endDate").val('');
+            $("#startDate").prop('disabled', true);
+            $("#endDate").prop('disabled', true);
+            //enable date fields
+        }
+    });
+
+     $('.searchEngine').click(function (){
+         var companies = ``;
+        if (getUser('employee_id') == '0000000')
+        {
+            var list;
+            returnCompanies();
+            list = JSON.parse(localStorage.getItem('listCompanies'));
+            console.log(list);
+            if (list)
+            {
+                companies +=    `<label for="quality">Company</label>
+                                <select class="form-control" id="companySelect">`;
+                for (company in list)
+                {
+                    companies += `<option value="${list[company].employee_id}">${list[company].first_name} ${list[company].last_name}</option>`;
+                }
+                companies += `</select>`;
+                $('.companiesOption').html(companies);
+            }
+        }
+        
+
+        $('.searchTab').show();
+     });
+
     $(document).on('click', ".selectUser", function(){
         $('.displayUserData').html(`<div class="Blds-dual-ring"></div>`);
         viewUserData($(this).attr("data-loc"));
@@ -24,6 +73,23 @@ $(document).ready(function(){
         console.log("close modal and show list");
         $('.closeModal').click();
         userClosedJobs(jobs);
+    });
+    
+    $('#searchForm').submit(function(e){
+        e.preventDefault();
+        $('.statsDisplay').html(`<div class="lds-dual-ring py-4"></div>`);
+
+        var querySearch = {
+            queryTerm : $('#search').val(),
+            startDate : $('#startDate').val(),
+            endDate : $('#endDate').val(),
+			company : (getUser('employee_id') == '0000000') ? $('#companySelect :selected').val() : getUser('creator'),
+			options : $('#searchOptions :selected').val(),
+            user : getUser('employee_id'),
+            userCompany : getUser('creator')
+        };
+        querySearch.company = (querySearch.company == '0000000') ? getUser('employee_id') : querySearch.company;
+        returnSearch(querySearch);
     });
 
     countJobs(getUser('creator'));
@@ -38,7 +104,7 @@ function viewUserData(i){
     var user = users[i];
     $.ajax({
 		type : "POST",
-		url : "http://emmapp.us.openode.io/search/getalljobs",
+		url : "http://localhost:8080/search/getalljobs",
 		data :{
 			user: user.employee_id
 		},
@@ -70,10 +136,37 @@ function viewUserData(i){
 
 var allJobs;
 
+function returnSearch(query){
+    console.log(query);
+    $.ajax({
+        type : "POST",
+        url : "http://localhost:8080/search/statSearch",
+        data :query,
+        success : function(data) {
+            console.log(data);
+            
+        }
+    });
+
+}
+
+function returnCompanies(query){
+    console.log(query);
+    $.ajax({
+        type : "POST",
+        url : "http://localhost:8080/search/listCompanies",
+        data :query,
+        success : function(data) {
+            console.log(data);
+            localStorage.setItem('listCompanies', JSON.stringify(data.data));
+        }
+    });
+}
+
 function countJobs(user){
   $.ajax({
   type : "POST",
-  url : "http://emmapp.us.openode.io/getalljobs",
+  url : "http://localhost:8080/getalljobs",
   data :{
     user : user,
   },
@@ -84,11 +177,12 @@ function countJobs(user){
   });
 }
 
+
 function countUsers(creator)
 {
     $.ajax({
 		type : "POST",
-		url : "http://emmapp.us.openode.io/search/getallusers",
+		url : "http://localhost:8080/search/getallusers",
 		data :{
 			user : user,
 			creator : creator
@@ -133,7 +227,7 @@ function getAllUsers(creator)
     console.log('users');
     $.ajax({
 		type : "POST",
-		url : "http://emmapp.us.openode.io/search/getallusers",
+		url : "http://localhost:8080/search/getallusers",
 		data :{
 			user : user,
 			creator : creator

@@ -68,7 +68,7 @@ $(document).ready(function(){
     {
         $.ajax({
             type : "POST",
-            url : 'http://emmapp.us.openode.io/data/update_field',
+            url : 'http://localhost:8080/data/update_field',
             data : {
                 name : name,
                 value : value,
@@ -89,7 +89,7 @@ $(document).ready(function(){
 function changePassword(opassword, password){
     $.ajax({
             type : "POST",
-            url : 'http://emmapp.us.openode.io/data/change_password',
+            url : 'http://localhost:8080/data/change_password',
             data : {
                 employeeNumber : window.user,
                 password : password,
