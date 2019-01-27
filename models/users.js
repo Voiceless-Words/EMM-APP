@@ -10,12 +10,8 @@ var UserSchema = new Schema({
     last_name: { type: String, required: true },
     contact: { type: String, required: true },
     creator: { type: String, required: true },
-<<<<<<< HEAD
     admin: { type: Number, required: true, default: 0 },
     image: {type:String, required: true, default: "none"},
-=======
-    admin: { type: String, required: true, default: '0' },
->>>>>>> dea078fdfebee3c8e582e9c4d2c6abbbfb459f14
     time : { type : Date, default: Date.now }
 });
 
