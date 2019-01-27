@@ -50,7 +50,7 @@ body {
     width: 100vw;
 }
 
-.top_nav, .usersJobCard {
+.top_nav, .usersJobCard, .searchTab {
     display: none;
 }
 
@@ -189,6 +189,9 @@ input[type='text'], input[type='password'], input[type='email'], input[type='dat
     font-size: 16px;
     border: 1px groove rgba(0, 0, 0, 0.1);
     text-align: center;
+}
+input[type='date'] {
+    font-size: 12px;
 }
 
 .lightT {

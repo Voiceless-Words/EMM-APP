@@ -30,7 +30,7 @@ router.post('/login', function(req, res){
 
         if (user)
         {
-            var status = user.admin + 1;
+            var status = +(user.admin) + 1;
             // console.log(user);
             user.comparePassword(req.body.password, function(err, isMatch) {
                 if (err){

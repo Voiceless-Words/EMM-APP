@@ -17,7 +17,6 @@
     <body>
 
 
-
      <div id="content" class="col-12">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
@@ -130,7 +129,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-6 col-md-4  border p-4">
+                            <div class="col-6 col-md-4  border p-4 searchEngine">
                                 <div class="text-center"><strong>Search<br>Jobs</strong></div>
                                 <div class="text-center"><span class="fa fa-search"></span></div>
                             </div>
@@ -138,6 +137,45 @@
                                 <div class="text-center"><strong>Create<br>Report</strong></div>
                                 <div class="text-center"><span class="fa fa-file-alt"></span></div>
                             </div>
+                            <div class="col-12 searchTab">
+                                <div class="row py-4">
+                                    <div class="col-12">
+                                        <form id='searchForm' class="form-horizontal" role="form">
+                                            <div id="main-search-fields pb-2 mb-4">
+                                                <div class="row py-4">
+                                                    <div class="col-12 mb-2">
+                                                        <input type="search" id="search" class="form-control" placeholder="Search Jobs...">
+                                                    </div>
+
+                                                    <div class="col-6 col-md-3 form-group">
+                                                        <label for="quality">Start Date</label>
+                                                        <input type="date" id="startDate">
+                                                    </div>
+                                                    <div class="col-6 col-md-3 form-group">
+                                                        <label for="quality">End Date</label>
+                                                        <input type="date" id="endDate">
+                                                    </div>
+                                                    <div class="col-6 col-md-3 form-group companiesOption">
+                                                    </div>
+                                                    <div class="col-6 col-md-3 form-group">
+                                                        <label for="quality">Options</label>
+                                                        <select class="form-control" id="searchOptions" required>
+								                            <option value="">-- Select one --</option>
+								                            <option value="users">Users</option>
+								                            <option value="jobs">Jobs</option>
+                                                        </select>
+                                                    </div>
+						
+                                                    <div class="ml-auto col-md-3 col-12">
+                                                        <button type="submit" class="btn btn-success btn-block searchButton"><i class="fa fa-search"></i> search</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                             <div class="col-12 statsDisplay"></div>
                         </div>
                 <div class="col-sm-2"></div>
