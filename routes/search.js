@@ -191,7 +191,7 @@ router.post('/statSearch', function(req, res){
                             {"company": { "$regex": req.body.queryTerm, "$options": "i"}}
                         ]
                     },
-                    {"jobnumber": { "$regex": req.body.company, "$options": "i"}},
+                    {"jobnumber": { "$regex": (req.body.company == '0000000') ? '' : req.body.company, "$options": "i"}},
                     {time: {
                         $gte: start,
                         $lte: end
