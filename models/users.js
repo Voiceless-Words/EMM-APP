@@ -11,6 +11,7 @@ var UserSchema = new Schema({
     contact: { type: String, required: true },
     creator: { type: String, required: true },
     admin: { type: Number, required: true, default: 0 },
+    image: {type:String, required: true, default: "none"},
     time : { type : Date, default: Date.now }
 });
 

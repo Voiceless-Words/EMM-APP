@@ -106,3 +106,46 @@ function changePassword(opassword, password){
             }
         });
 }
+var camearaOptions = {
+    quality: 80,
+    destinationType: Camera.DestinationType.DATA_URL,
+    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+    encodingType: Camera.EncodingType.JPEG,
+    mediaType: Camera.MediaType.PICTURE,
+    targetWidth: 300,
+    targetHeight: 400
+}
+function getImage() {
+    navigator.camera.getPicture(uploadPhoto, onError, camearaOptions);
+}
+
+function onError(err){ alert(error); }
+
+function uploadPhoto(imageURI) {
+    alert(imageURI);
+    getBase64(imageURI, function(base64Data){
+       alert(base64Data);//here you can have your code which uses base64 for its operation,//file to base64 by oneshubh
+    });
+
+    i$.ajax({
+            type : "POST",
+            url : 'http://192.168.1.101:8080/profilePic',
+            data : {
+                employeeNumber : window.user,
+                image : imageURI,
+            },
+            success : function(data) {
+                console.log(data);
+                alert("Image Updated");
+            }
+        });
+}
+
+function getBase64 (file,callback) {
+
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => callback(reader.result));
+
+    reader.readAsDataURL(file);
+}

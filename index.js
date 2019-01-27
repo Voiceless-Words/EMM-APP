@@ -17,15 +17,15 @@ var app = express();
 app.use(cors());
 
  app.use(function(req, res, next) {
-//    var allowedOrigins = ['http://127.0.0.1:8080', 'http://localhost:81', 'http://localhost:3000', 'http://192.168.43.54:3000', 'http://http://localhost:8080'];
-//    var origin = req.headers.origin;
-//    if(allowedOrigins.indexOf(origin) > -1){
-//         res.setHeader('Access-Control-Allow-Origin', origin);
-//    }
-//    res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8080');
-//    res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
-//    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//    res.header('Access-Control-Allow-Credentials', true);
+    var allowedOrigins = ['http://127.0.0.1:8080','http://emmapp.us.openode.io', 'http://localhost:81', 'http://localhost:3000', 'http://192.168.43.54:3000', 'http://http://localhost:8080'];
+    var origin = req.headers.origin;
+    if(allowedOrigins.indexOf(origin) > -1){
+         res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8080');
+    res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', true);
    console.log("next");
    return next();
  });
@@ -278,6 +278,18 @@ app.post('/form_save', function(req, res){
 });
 
   res.send("success");
+});
+
+app.post('/profilePic', function(req, res){
+  console.log(req.body.image);
+  console.log(req.body.employeeNumber);
+  User.findOneAndUpdate({employee_id: req.body.employeeNumber}, {$set:{image: "myimage"}}, {new: true, upsert: true}, function (err, doc) {
+    if (err) {
+      throw err;
+      console.log(err);
+    }
+    console.log(doc);
+  });
 });
 
 app.use(function(req, res) {
