@@ -127,7 +127,6 @@ function uploadPhoto(imageURI) {
     getFileContentAsBase64(imageURI,function(base64Image){
       //window.open(base64Image);
       image = base64Image;
-      alert(base64Image); 
       $.ajax({
               type : "POST",
               url : 'http://emmapp.openode.io/profilePic',
