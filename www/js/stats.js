@@ -146,6 +146,7 @@ function returnSearch(query){
         url : "http://localhost:8080/search/statSearch",
         data :query,
         success : function(data) {
+            users = data;
             if (data.length == 0)
                 $('.statsDisplay').html(`<p class='text-center'>0 results Found</p>`);
             else 
