@@ -166,6 +166,7 @@ function returnSearch(query){
                             <th scope="col">First</th>
                             <th scope="col">Last</th>
                             <th scope="col">Employee</th>
+                            <th scope="col" class='d-none d-md-block'>Contact</th>
                             </tr>
                         </thead>
                         <tbody>`;
@@ -179,6 +180,8 @@ function returnSearch(query){
                                 <td>${data[i].first_name}</td>
                                 <td>${data[i].last_name}</td>
                                 <td>${data[i].employee_id}</td>
+                                <td class='d-none d-md-block'>${data[i].contact}</td>
+
                                 </tr>`;
                     }
                     usersList += line;
@@ -197,6 +200,8 @@ function returnSearch(query){
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Job Number</th>
+                                <th scope="col" class='d-none d-sm-block'>Reviewed</th>
+                                <th scope="col" class='d-none d-sm-block'>Date</th>
                             </tr>
                         </thead>
                         <tbody>`;
@@ -208,6 +213,8 @@ function returnSearch(query){
                         line += `<tr class="selectJob" data-loc=${i}>
                                     <th scope="row">${i + 1}</th>
                                     <td>${data[i].jobnumber}</td>
+                                    <td class='d-none d-sm-block'>${(jobList[i].reviewStatus == 0) ? 'NO' : 'YES' }</td>
+                                    <td class='d-none d-sm-block'>${time[0]}</td>
                                 </tr>`;
                     }
                     jobsList += line;
@@ -215,7 +222,6 @@ function returnSearch(query){
                     $('.statsDisplay').html(jobsList);
                 }
             }
-            
         }
     });
 
@@ -275,6 +281,8 @@ function userClosedJobs(jobList)
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Job Number</th>
+                                <th scope="col" class='d-none d-sm-block'>Reviewed</th>
+                                <th scope="col" class='d-none d-sm-block'>Date</th>
                             </tr>
                         </thead>
                         <tbody>`;
@@ -283,9 +291,12 @@ function userClosedJobs(jobList)
             for (let i = 0; i < jobList.length; i++)
             {
                 // color = (data[i].admin == 1)? 'tomato' : 'black';
+                var time = jobList[i].time.split('T');
                 line += `<tr class="selectJob" data-loc=${i}>
                             <th scope="row">${i + 1}</th>
                             <td>${jobList[i].jobnumber}</td>
+                            <td class='d-none d-sm-block'>${(jobList[i].reviewStatus == 0) ? 'NO' : 'YES' }</td>
+                            <td class='d-none d-sm-block'>${time[0]}</td>
                         </tr>`;
             }
             jobsList += line;
@@ -317,6 +328,7 @@ function getAllUsers(creator)
                             <th scope="col">First</th>
                             <th scope="col">Last</th>
                             <th scope="col">Employee</th>
+                            <th scope="col" class='d-none d-md-block'>Contact</th>
                             </tr>
                         </thead>
                         <tbody>`;
@@ -330,6 +342,7 @@ function getAllUsers(creator)
                         <td>${data[i].first_name}</td>
                         <td>${data[i].last_name}</td>
                         <td>${data[i].employee_id}</td>
+                        <td class='d-none d-md-block'>${data[i].contact}</td>
                         </tr>`;
             }
             usersList += line;
