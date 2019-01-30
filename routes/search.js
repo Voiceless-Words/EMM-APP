@@ -229,4 +229,22 @@ router.post('/listCompanies', function(req, res){
     .catch(error => { console.log(error); })
 });
 
+router.post('/getJob', function(req, res){
+    console.log(req.body);
+    Forms.find({"jobnumber": { "$regex": req.body.jobNumber, "$options": "i"}})
+    .then(users => {
+            res.send(users);
+        })
+    .catch(error => { console.log(error); })
+});
+
+router.post('/getAsset', function(req, res){
+    console.log(req.body);
+    JobSave.find({"jobCardNumber": { "$regex": req.body.jobNumber, "$options": "i"}})
+    .then(users => {
+            res.send(users);
+        })
+    .catch(error => { console.log(error); })
+});
+
 module.exports = router;

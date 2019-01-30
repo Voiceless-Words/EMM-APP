@@ -21,7 +21,11 @@ $(document).ready(function(){
             userClosedJobs(allJobs);
         console.log('clicked');
         console.log(allJobs);
-     })
+     });
+
+    $(document).on('click', ".selectJob", function(){
+		window.location.href = "viewJob.html?job=" + $(this).attr('data-loc');
+     });
 
     $('#searchOptions').on('change', function() {
         console.log( this.value );
@@ -107,7 +111,7 @@ function viewUserData(i){
     var user = users[i];
     $.ajax({
 		type : "POST",
-		url : "http://emmapp.openode.io/search/getalljobs",
+		url : "http://localhost:8080/search/getalljobs",
 		data :{
 			user: user.employee_id
 		},
@@ -118,7 +122,7 @@ function viewUserData(i){
             var jobList = (data.length) ? "jobList" : '';
             console.log(user);
             var userData = ` <div class="col-12 col-md-6 offset-md-3 my-4">
-                                <div class="col-12 profile_picture"></div>
+                                <div class="col-12 profile_picture" style="background-image : url(${user.image})"></div>
                             </div>
                             <div class="col-12">
                                 <ul class="list-group list-group-flush">
@@ -143,7 +147,7 @@ function returnSearch(query){
     console.log(query);
     $.ajax({
         type : "POST",
-        url : "http://emmapp.openode.io/search/statSearch",
+        url : "http://localhost:8080/search/statSearch",
         data :query,
         success : function(data) {
             users = data;
@@ -210,10 +214,11 @@ function returnSearch(query){
                     for (let i = 0; i < data.length; i++)
                     {
                         // color = (data[i].admin == 1)? 'tomato' : 'black';
-                        line += `<tr class="selectJob" data-loc=${i}>
+                        var time = data[i].time.split('T');
+                        line += `<tr class="selectJob" data-loc=${data[i].jobnumber}>
                                     <th scope="row">${i + 1}</th>
                                     <td>${data[i].jobnumber}</td>
-                                    <td class='d-none d-sm-block'>${(jobList[i].reviewStatus == 0) ? 'NO' : 'YES' }</td>
+                                    <td class='d-none d-sm-block'>${(data[i].reviewStatus == 0) ? 'NO' : 'YES' }</td>
                                     <td class='d-none d-sm-block'>${time[0]}</td>
                                 </tr>`;
                     }
@@ -232,7 +237,7 @@ function returnCompanies(query){
     console.log(query);
     $.ajax({
         type : "POST",
-        url : "http://emmapp.openode.io/search/listCompanies",
+        url : "http://localhost:8080/search/listCompanies",
         data :query,
         success : function(data) {
             console.log(data);
@@ -244,7 +249,7 @@ function returnCompanies(query){
 function countJobs(user){
   $.ajax({
   type : "POST",
-  url : "http://emmapp.openode.io/getalljobs",
+  url : "http://localhost:8080/getalljobs",
   data :{
     user : user,
   },
@@ -260,7 +265,7 @@ function countUsers(creator)
 {
     $.ajax({
 		type : "POST",
-		url : "http://emmapp.openode.io/search/getallusers",
+		url : "http://localhost:8080/search/getallusers",
 		data :{
 			user : user,
 			creator : creator
@@ -293,7 +298,7 @@ function userClosedJobs(jobList)
             {
                 // color = (data[i].admin == 1)? 'tomato' : 'black';
                 var time = jobList[i].time.split('T');
-                line += `<tr class="selectJob" data-loc=${i}>
+                line += `<tr class="selectJob" data-loc=${jobList[i].jobnumber}>
                             <th scope="row">${i + 1}</th>
                             <td>${jobList[i].jobnumber}</td>
                             <td class='d-none d-sm-block'>${(jobList[i].reviewStatus == 0) ? 'NO' : 'YES' }</td>
@@ -310,7 +315,7 @@ function getAllUsers(creator)
     console.log('users');
     $.ajax({
 		type : "POST",
-		url : "http://emmapp.openode.io/search/getallusers",
+		url : "http://localhost:8080/search/getallusers",
 		data :{
 			user : user,
 			creator : creator

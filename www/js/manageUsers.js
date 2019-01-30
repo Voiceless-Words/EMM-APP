@@ -17,7 +17,7 @@
 //             password :123456
 // 		}
 //         // console.log(user);
-//         submit_data(user, "http://emmapp.openode.io/user/register");
+//         submit_data(user, "http://localhost:8080/user/register");
 //     });
 
 //     function submit_data(user, path)
@@ -50,10 +50,10 @@
 // 					$('#myModal').modal('show');
 // 				}
 // 				else if (data.status == 1)
-// 					window.location = "http://emmapp.openode.io/dashboardb";
+// 					window.location = "http://localhost:8080/dashboardb";
 // 				else if (data.status == 2)
-// 					window.location = "http://emmapp.openode.io/dashboarda";
-// 				if (path === "http://emmapp.openode.io/user/register")
+// 					window.location = "http://localhost:8080/dashboarda";
+// 				if (path === "http://localhost:8080/user/register")
 // 					$("#registerForm")[0].reset();
 //             }
 //         });
