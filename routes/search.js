@@ -146,7 +146,7 @@ router.post('/statSearch', function(req, res){
                             {"last_name": { "$regex": req.body.queryTerm, "$options": "i"}}
                         ]
                     },
-                    {"creator": { "$regex": req.body.company, "$options": "i"}}
+                    {"creator": { "$regex": (req.body.company == '0000000') ? '' : req.body.company, "$options": "i"}}
                 ]}
          )
         .then(users => {

@@ -46,6 +46,41 @@ $(document).ready(function () {
             <div class='row'>
                 <div class='col-12'>cable count : ${jobData[0].cables.length}</div>
             <div>`;
+            if (jobData[0].cables.length > 0)
+            {
+                var cables = `<table class="table table-sm table-hover my-4">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Correctly Placed</th>
+                                <th scope="col">Securely Placed</th>
+                                <th scope="col">Label Level</th>
+                                <th scope="col">Breaker Condition</th>
+                                <th scope="col">Breaker Secured</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Meters secured</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+                var line = ``;
+                for (var i = 0; i < jobData[0].cables.length; i++)
+                {
+                    line += `<tr class="selectJob" data-loc=${jobData[i].jobnumber}>
+                                <th scope="row">${i + 1}</th>
+                                <td>${jobData[0].cables[i].correct}</td>
+                                <td>${jobData[0].cables[i].tag}</td>
+                                <td>${(jobData[0].cables[i].label == 'Yes') ? 'Level' : 'Not level' }</td>
+                                <td>${jobData[0].cables[i].breaker}</td>
+                                <td>${(jobData[0].cables[i].fitted == 'Yes') ? 'Securely' : 'Hanging' }</td>
+                                <td>${jobData[0].cables[i].size}</td>
+                                <td>${jobData[0].cables[i].meter}</td>
+                            </tr>`;
+                }
+                cables += line;
+                cables += `</tbody></table>`;
+                build += cables;
+            }
+    // var cables = 
 
     $('.jobDetails').html(build);
 

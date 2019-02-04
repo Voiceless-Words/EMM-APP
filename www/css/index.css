@@ -31,7 +31,7 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-.emm-body, .loginBody {
+.loginBody {
     width: 100vh;
     min-height: 100vh;
     position: relative;
