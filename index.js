@@ -3,6 +3,7 @@ const dotenv = require('dotenv').config();
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const nodeMailer = require('nodemailer');
 const ejs = require('ejs');
 const cors = require('cors');
 
@@ -284,6 +285,33 @@ app.post('/form_save', function(req, res){
 });
 
   res.send("success");
+});
+
+app.post('/sendemail', function(req, res){
+    let transpoter = nodeMailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_EMAIL_SEPHIRI
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+  let mailOptions = {
+    from: '"Inspections" <pietthabiso@gmail.com>',
+    to: 'piet.ragolane@gmail.com',//the email goes here
+    subject: 'Report you requested',
+    html: '<p>Report </p>'//the html goes here
+  };
+  transpoter.sendMail(mailOptions, function(error, info){
+    if (error){
+      return console.log(error);
+    }
+    console.log("Message %s was sent %s", info.messageId, info.response);
+  });
 });
 
 app.post('/profilePic', function(req, res){
