@@ -31,7 +31,7 @@ $(document).ready(function () {
             <div class = "col-10 border-bottom">In a working condition?</div><div class="col-2 border-bottom">${jobData[0].conditionB[0].working}</div>
             <div class = "col-10 border-bottom">Remote Devices Working?</div><div class="col-2 border-bottom">${jobData[0].conditionB[0].remote}</div>
             </div>
-        
+
             `
     }
     build += electronics;
@@ -80,7 +80,7 @@ $(document).ready(function () {
                 cables += `</tbody></table>`;
                 build += cables;
             }
-    // var cables = 
+    // var cables =
 
     $('.jobDetails').html(build);
 
@@ -93,7 +93,7 @@ function getJob(job){
     $.ajax({
         type : "POST",
         async: false,
-		url : "http://localhost:8080/search/getJob",
+		url : "http://emmapp.openode.io/search/getJob",
 		data :jobObj,
 		success : function(data) {
             res = data;
@@ -109,7 +109,7 @@ function getAsset(job){
     $.ajax({
         type : "POST",
         async: false,
-		url : "http://localhost:8080/search/getAsset",
+		url : "http://emmapp.openode.io/search/getAsset",
 		data :jobObj,
 		success : function(data) {
             res = data;
