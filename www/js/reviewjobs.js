@@ -6,7 +6,7 @@ function reviewjobs(){
     console.log(JSON.parse(reviewjobsarray));
   }
 }
-  xhttp.open("POST", "http://emmapp.openode.io/reviewjob", true);
+  xhttp.open("POST", "http://192.168.250.1:3000/reviewjob", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send('view=data&format=JSON');
 }

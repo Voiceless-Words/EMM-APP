@@ -74,7 +74,7 @@ $(document).ready(function(){
 					console.log(stringD);
 					console.log(key4);
 					$.ajax({
-						url:"http://emmapp.openode.io/form_save",
+						url:"http://192.168.250.1:3000/form_save",
 						data:{
 							jobNo: jobNum,
 							form:stringF,
@@ -89,7 +89,7 @@ $(document).ready(function(){
 					});
 					$.ajax({
 						type : "POST",
-						url : "http://emmapp.openode.io/jobcard_save",
+						url : "http://192.168.250.1:3000/jobcard_save",
 						data : stringD,
 						success : function(data) {
 							console.log(data);
@@ -152,7 +152,7 @@ $(document).ready(function(){
 
 	$.ajax({
 	type : "POST",
-	url : "http://emmapp.openode.io/getallareas",
+	url : "http://192.168.250.1:3000/getallareas",
 	data :{
 		user: "nothing"
 	},
@@ -322,7 +322,7 @@ $(document).ready(function(){
 			if(navigator.onLine){
 					$.ajax({
 						type : "POST",
-						url : "http://emmapp.openode.io/jobcard_save",
+						url : "http://192.168.250.1:3000/jobcard_save",
 						data : newJob,
 						success : function(data) {
 							console.log(data);
@@ -334,7 +334,7 @@ $(document).ready(function(){
 					console.log(jobNo);
 					var stringD = JSON.stringify(jobs);
 					$.ajax({
-						url:"http://emmapp.openode.io/form_save",
+						url:"http://192.168.250.1:3000/form_save",
 						data:{
 							jobNo: jobNo,
 							form:stringD,
@@ -585,7 +585,7 @@ var selectedCable = -1;
 			username : $("#employeeNumber").val(),
             password : $("#loginPassword").val()
 		};
-		check_data(user,  "http://emmapp.openode.io/user/login");
+		check_data(user,  "http://192.168.250.1:3000/user/login");
     });
 
 	$("#registerForm").submit(function (e) {
@@ -602,7 +602,7 @@ var selectedCable = -1;
 			admin: $('#adminSetting').is(':checked') ? 1 : 0
 		};
 		console.log(user);
-		check_data(user,  "http://emmapp.openode.io/user/register");
+		check_data(user,  "http://192.168.250.1:3000/user/register");
     });
 
 	$("#createPasswordForm").submit(function (e) {
@@ -614,7 +614,7 @@ var selectedCable = -1;
             cpassword : $("#loginPassword_create").val(),
             ccpassword : $("#cloginPassword_create").val(),
 		};
-		check_data(user,  "http://emmapp.openode.io/user/login");
+		check_data(user,  "http://192.168.250.1:3000/user/login");
     });
 	$(document).on('click', ".userClosedCard", function(){
         userClosedCard($(this).attr("data-position"));
@@ -735,7 +735,7 @@ var selectedCable = -1;
 					$('.lastName').text(getUser('last_name'));
 					window.location.href = "adminDash.html";
 				}
-				if (path === "http://emmapp.openode.io/user/register")
+				if (path === "http://192.168.250.1:3000/user/register")
 					$("#registerForm")[0].reset();
             }
         });
@@ -745,7 +745,7 @@ var selectedCable = -1;
     {
         $.ajax({
             type : "POST",
-            url : "http://emmapp.openode.io/user/update",
+            url : "http://192.168.250.1:3000/user/update",
             data :{
 				user : user.username,
 				value : user.password
@@ -784,7 +784,7 @@ function getAllJobs(user, creator)
 {
 	$.ajax({
 		type : "POST",
-		url : "http://emmapp.openode.io/search/getalljobs",
+		url : "http://192.168.250.1:3000/search/getalljobs",
 		data :{
 			user : user,
 			creator : creator
@@ -827,7 +827,7 @@ function userClosedCard(pos) {
 	console.log(completedJobs[pos]);
 	$.ajax({
 		type : "POST",
-		url : "http://emmapp.openode.io/search/getonecard",
+		url : "http://192.168.250.1:3000/search/getonecard",
 		data :{
 			jobNumber : completedJobs[pos].jobnumber,
 		},

@@ -24,7 +24,7 @@ var server = app.listen(80, function(){
 
 
 // app.use(function(req, res, next) {
-//    var allowedOrigins = ['localhost:8080', 'localhost:81', 'localhost:8080', 'localhost:3000', 'http://192.168.43.54:3000', 'localhost:8080'];
+//    var allowedOrigins = ['localhost:8080', 'localhost:81', 'localhost:8080', '192.168.250.1:3000', 'http://192.168.43.54:3000', 'localhost:8080'];
 //    var origin = req.headers.origin;
 //    if(allowedOrigins.indexOf(origin) > -1){
 //         res.setHeader('Access-Control-Allow-Origin', origin);

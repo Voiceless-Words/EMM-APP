@@ -99,10 +99,12 @@ router.post('/reviewJob', function(req, res){
 });
 
 router.post('/getalljobs', function(req, res){
-    console.log(req.body);
+    console.log('getting all jobs');
+    console.log(req.body.user);
     Forms.find({"jobnumber": { "$regex": req.body.user, "$options": "i"}})
     .then(users => {
             console.log('getting jobs');
+            console.log(users);
             res.send(users);
         })
     .catch(error => { console.log(error); })
@@ -110,10 +112,10 @@ router.post('/getalljobs', function(req, res){
 });
 
 router.post('/getallusers', function(req, res){
-    console.log(req.body);
+    console.log('getting all users ->');
     let value = (req.body.user == 000000) ? "" : req.body.user;
     console.log(value + ' < value');
-    User.find({"creator": { "$regex": value, "$options": "i"}})
+    User.find({"creator": value})
     .then(users => {
             console.log('getting jobs');
             res.send(users);
@@ -228,21 +230,16 @@ router.post('/listCompanies', function(req, res){
         })
     .catch(error => { console.log(error); })
 });
-
-router.post('/getJob', function(req, res){
+//make one call, not two
+router.post('/getJobAndAsset', function(req, res){
     console.log(req.body);
-    Forms.find({"jobnumber": { "$regex": req.body.jobNumber, "$options": "i"}})
-    .then(users => {
-            res.send(users);
-        })
-    .catch(error => { console.log(error); })
-});
-
-router.post('/getAsset', function(req, res){
-    console.log(req.body);
-    JobSave.find({"jobCardNumber": { "$regex": req.body.jobNumber, "$options": "i"}})
-    .then(users => {
-            res.send(users);
+    Forms.findOne({"jobnumber": { "$regex": req.body.jobNumber, "$options": "i"}})
+    .then(job => {
+        JobSave.findOne({"jobCardNumber": { "$regex": req.body.jobNumber, "$options": "i"}})
+        .then(asset => {
+            res.send([job, asset]);
+            })
+        .catch(error => { console.log(error); })
         })
     .catch(error => { console.log(error); })
 });
