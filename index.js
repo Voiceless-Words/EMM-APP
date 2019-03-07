@@ -302,15 +302,15 @@ app.post('/sendemail', function(req, res){
   });
   let mailOptions = {
     from: '"Inspections" <pietthabiso@gmail.com>',
-    to: 'piet.ragolane@gmail.com',//the email goes here
+    to: req.body.email,//the email goes here
     subject: 'Report you requested',
-    html: '<p>Report </p>'//the html goes here
+    html: req.body.report//the html goes here
   };
   transpoter.sendMail(mailOptions, function(error, info){
     if (error){
-      return console.log(error);
-    }
-    console.log("Message %s was sent %s", info.messageId, info.response);
+      res.json({status : 300});
+    } else
+      res.json({status : 200});
   });
 });
 

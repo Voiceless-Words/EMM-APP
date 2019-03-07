@@ -22,8 +22,16 @@ body {
   display: none;
 }
 
+#reportForm {
+    display: none;
+}
+
 .fullwidth {
     width: 100vw;
+}
+
+.statsDisplay {
+    overflow: scroll;
 }
 
 @keyframes spin {

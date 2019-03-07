@@ -28,6 +28,24 @@ $(document).ready(function(){
 		window.location.href = "viewJob.html?job=" + $(this).attr('data-loc');
      });
 
+     $('#reportCheck').change(function() {
+        if(this.checked) {
+            $('#reportForm').show();
+        } else {
+            $('#reportForm').hide();
+        }       
+    });
+
+    $('#reportForm').submit(function (e) { 
+        e.preventDefault();
+        if ($('.statsDisplay').html() === '' || $('.statsDisplay').html() === '<div class="lds-dual-ring py-4"></div>')
+            console.log('you cant sent empty report');
+        else {
+            let report = $('.statsDisplay').html();
+            sendReport(report, $('#reportEmail').val());
+        }
+    });
+
     $('#searchOptions').on('change', function() {
         console.log( this.value );
         if (this.value === 'jobs')
@@ -158,98 +176,36 @@ function returnSearch(query){
         data :query,
         success : function(data) {
             users = data;
-
-            var result = data.map(job => ({
-                'Job Number': job.jobnumber,
-                'Reviewed' : job.reviewStatus,
-                Date: (job.time.split('T'))[0]
-            }));
-            data = result;
+            var linking = (query.options == 'users') ? 'users' : 'jobs';
+            
+            if (query.options == 'users'){
+                var result = data.map(user => ({
+                    'First Name': user.first_name,
+                    'Last Name': user.last_name,
+                    'Admin': `${(user.admin == 1) ? 'Yes': 'No'}`,
+                    'Employee ID': user.employee_id,
+                    'Company ID': user.creator,
+                    'Contact NO': user.contact,
+                    Date: (user.time.split('T'))[0]
+                }));
+                data = result;
+            } else {
+                var result = data.map(job => ({
+                    'Job Number': job.jobnumber,
+                    'Reviewed' : job.reviewStatus,
+                    'Cable count' : job.cables.length,
+                    // 'Electronics' : job.conditionB[0].electronic,
+                    Date: (job.time.split('T'))[0]
+                }));
+                data = result;
+            }
             if (data.length == 0)
                 $('.statsDisplay').html(`<p class='text-center'>0 results Found</p>`);
             else
             {
-                // var paramObj = {
-                //     name : 'Igama',
-                //     surname : 'Isibongo',
-                //     age : 'Age',
-                //     dateOfBirth : 'Date of Birth',
-                //     favColor : 'Favourite Color'
-                // }
+                console.log('users ===>');
                 var newObj = onlyPrint(data);
-                $('.statsDisplay').html(tabulateData(newObj));
-
-                // if (query.options == 'users')
-                // {
-                //     var usersList = `
-                //         <p class='text-center'>${data.length} ${(data.length > 1) ? 'Users' : 'User'} Found</p>
-                //         <div class="mt-4 row text-center">
-                //             <div class="col-6"><i class="fa fa-circle tomato"></i> admin</div>
-                //             <div class="col-6"><i class="fa fa-circle black"></i> user</div>
-                //         </div>
-                //         <table class="table table-sm table-hover my-4">
-                //         <thead class="thead-dark">
-                //             <tr>
-                //             <th scope="col">#</th>
-                //             <th scope="col">First</th>
-                //             <th scope="col">Last</th>
-                //             <th scope="col">Employee</th>
-                //             <th scope="col" class='d-none d-md-block'>Contact</th>
-                //             </tr>
-                //         </thead>
-                //         <tbody>`;
-                //     var line = ``;
-                //     var color;
-                //     for (let i = 0; i < data.length; i++)
-                //     {
-                //         color = (data[i].admin == 1)? 'tomato' : 'black';
-                //         line += `<tr class="${color} selectUser" data-loc=${i} data-toggle="modal" data-target="#userData">
-                //                 <th scope="row">${i + 1}</th>
-                //                 <td>${data[i].first_name}</td>
-                //                 <td>${data[i].last_name}</td>
-                //                 <td>${data[i].employee_id}</td>
-                //                 <td class='d-none d-md-block'>${data[i].contact}</td>
-
-                //                 </tr>`;
-                //     }
-                //     usersList += line;
-                //     usersList += `</tbody></table>`;
-                //     $('.statsDisplay').html(usersList);
-                // }
-                // else
-                // {
-                //     var jobsList = `
-                //         <p class='text-center'>${data.length} ${(data.length > 1) ? 'Jobs' : 'Job'} Found</p>
-                //         <div>
-                //             <h3 class="mt-4 row d-block text-center">Closed Jobs</h3>
-                //         </div>
-                //         <table class="table table-sm table-hover my-4">
-                //         <thead class="thead-dark">
-                //             <tr>
-                //                 <th scope="col">#</th>
-                //                 <th scope="col">Job Number</th>
-                //                 <th scope="col" class='d-none d-sm-block'>Reviewed</th>
-                //                 <th scope="col" class='d-none d-sm-block'>Date</th>
-                //             </tr>
-                //         </thead>
-                //         <tbody>`;
-                //     var line = ``;
-                //     // var color;
-                //     for (let i = 0; i < data.length; i++)
-                //     {
-                //         // color = (data[i].admin == 1)? 'tomato' : 'black';
-                //         var time = data[i].time.split('T');
-                //         line += `<tr class="selectJob" data-loc=${data[i].jobnumber}>
-                //                     <th scope="row">${i + 1}</th>
-                //                     <td>${data[i].jobnumber}</td>
-                //                     <td class='d-none d-sm-block'>${(data[i].reviewStatus == 0) ? 'NO' : 'YES' }</td>
-                //                     <td class='d-none d-sm-block'>${time[0]}</td>
-                //                 </tr>`;
-                //     }
-                //     jobsList += line;
-                //     jobsList += `</tbody></table>`;
-                //     $('.statsDisplay').html(jobsList);
-                // }
+                $('.statsDisplay').html(tabulateData(newObj,linking));
             }
 
         }
@@ -407,7 +363,7 @@ function onlyPrint(dataObj, paramObj = null) {
 	return newObj;
 }
 
-function tabulateData(data) {
+function tabulateData(data, linking) {
 	console.log(data);
 	var table = ``;
 	if (Array.isArray(data) && (Object.prototype.toString.call(data[0]) === '[object Object]')){
@@ -462,11 +418,17 @@ function tabulateData(data) {
 						border-color: #32383e;	
 					'>${keys[j]}</th>`;
 		}
-		table += `</tr>`;
+        table += `</tr>`;
+        var line;
 		`<caption style='background-color:#ffffff;color:#1f2240;
 		,margin-bottom:1em;font-size:18pt;width:100%;border:0'></caption><tbody>`
 		for (var i = 0; i < data.length; i++){
-			table += `<tr class="selectUser"><td
+                // console.log(data[i]);
+            // data-loc="HG999999915475328078080800" selectJob
+            // <tr class="black selectUser" data-loc="0" data-toggle="modal" data-target="#userData">
+            line = `${(linking === "users") ? '<tr class="selectUser" data-loc="'+i+'" data-toggle="modal" data-target="#userData">' : '<tr class="selectJob" data-loc="'+data[i]["Job Number"]+'">' }`;
+            table += line;
+            table += `<td
                         style='
                         border: 1px solid #ddd;
                         padding: 8px;	
@@ -486,4 +448,22 @@ function tabulateData(data) {
 		table = `The functions expects an array of Objects`;
 	}
 	return(table);
+}
+function sendReport(report, email) {
+    
+    $.ajax({
+        type : "POST",
+        url : "http://192.168.250.1:3000/sendemail",
+        data :{
+            report : report,
+            email : email
+        },
+        success : function(data) {
+            console.log(data);
+            if (data.status == 200)
+                alert("Report sent successfuly!");
+            else if (data.status == 300)
+                alert('Report failed to send!, please double check the email and try again');
+        }
+    });
 }

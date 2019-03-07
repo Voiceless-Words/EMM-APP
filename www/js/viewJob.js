@@ -57,10 +57,10 @@ function build(data) {
     build += `<div class = "col-12"><h3 class='text-center'>Cable Information</h3></div>
             <div class='row'>
                 <div class='col-12'>cable count : ${jobData.cables.length}</div>
-            <div>`;
+            `;
             if (jobData.cables.length > 0)
             {
-                var cables = `<table class="table table-sm table-hover my-4">
+                var cables = `<div class='statsDisplay col-12'><table class="table table-sm table-hover my-4">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
@@ -91,7 +91,7 @@ function build(data) {
                             </tr>`;
                 }
                 cables += line;
-                cables += `</tbody></table>`;
+                cables += `</tbody></table></div><div>`;
                 build += cables;
             }
     // var cables =
