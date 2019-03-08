@@ -75,6 +75,7 @@ $(document).ready(function(){
 					console.log(key4);
 					$.ajax({
 						url:"http://localhost:3000/form_save",
+
 						data:{
 							jobNo: jobNum,
 							form:stringF,
@@ -90,6 +91,7 @@ $(document).ready(function(){
 					$.ajax({
 						type : "POST",
 						url : "http://localhost:3000/jobcard_save",
+
 						data : stringD,
 						success : function(data) {
 							console.log(data);
@@ -153,6 +155,7 @@ $(document).ready(function(){
 	$.ajax({
 	type : "POST",
 	url : "http://localhost:3000/getallareas",
+
 	data :{
 		user: "nothing"
 	},
@@ -323,6 +326,7 @@ $(document).ready(function(){
 					$.ajax({
 						type : "POST",
 						url : "http://localhost:3000/jobcard_save",
+
 						data : newJob,
 						success : function(data) {
 							console.log(data);
@@ -335,6 +339,7 @@ $(document).ready(function(){
 					var stringD = JSON.stringify(jobs);
 					$.ajax({
 						url:"http://localhost:3000/form_save",
+
 						data:{
 							jobNo: jobNo,
 							form:stringD,
@@ -469,6 +474,12 @@ var jobNumber = 0;
 		//cablesObj['cableCount'] = cableCount;
 		if (selectedCable > -1)
 		{
+			if($('#size :selected').text() == 'Other')
+			{
+				var size = $('#sizeOther').val();
+			}else {
+				size = $('#size :selected').text();
+			}
 			cablesObj[selectedCable] = {
 				name: "cable"+cableCount,
 				correct : $('#correct :selected').text(),
@@ -603,6 +614,7 @@ var selectedCable = -1;
 		};
 		console.log(user);
 		check_data(user,  "http://localhost:3000/user/register");
+
     });
 
 	$("#createPasswordForm").submit(function (e) {
@@ -615,6 +627,7 @@ var selectedCable = -1;
             ccpassword : $("#cloginPassword_create").val(),
 		};
 		check_data(user,  "http://localhost:3000/user/login");
+
     });
 	$(document).on('click', ".userClosedCard", function(){
         userClosedCard($(this).attr("data-position"));
@@ -736,6 +749,7 @@ var selectedCable = -1;
 					window.location.href = "adminDash.html";
 				}
 				if (path === "http://localhost:3000/user/register")
+
 					$("#registerForm")[0].reset();
             }
         });
@@ -746,6 +760,7 @@ var selectedCable = -1;
         $.ajax({
             type : "POST",
             url : "http://localhost:3000/user/update",
+
             data :{
 				user : user.username,
 				value : user.password
@@ -785,6 +800,7 @@ function getAllJobs(user, creator)
 	$.ajax({
 		type : "POST",
 		url : "http://localhost:3000/search/getalljobs",
+
 		data :{
 			user : user,
 			creator : creator
@@ -827,7 +843,9 @@ function userClosedCard(pos) {
 	console.log(completedJobs[pos]);
 	$.ajax({
 		type : "POST",
+
 		url : "http://localhost:3000/search/getonecard",
+
 		data :{
 			jobNumber : completedJobs[pos].jobnumber,
 		},

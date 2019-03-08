@@ -33,10 +33,10 @@ $(document).ready(function(){
             $('#reportForm').show();
         } else {
             $('#reportForm').hide();
-        }       
+        }
     });
 
-    $('#reportForm').submit(function (e) { 
+    $('#reportForm').submit(function (e) {
         e.preventDefault();
         if ($('.statsDisplay').html() === '' || $('.statsDisplay').html() === '<div class="lds-dual-ring py-4"></div>')
             console.log('you cant sent empty report');
@@ -136,7 +136,7 @@ function viewUserData(i){
     var user = users[i];
     $.ajax({
 		type : "POST",
-		url : "http://192.168.250.1:3000/search/getalljobs",
+		url : "http://192.168.1.10:8080/search/getalljobs",
 		data :{
 			user: user.employee_id
 		},
@@ -172,12 +172,12 @@ function returnSearch(query){
     console.log(query);
     $.ajax({
         type : "POST",
-        url : "http://192.168.250.1:3000/search/statSearch",
+        url : "http://192.168.1.10:8080/search/statSearch",
         data :query,
         success : function(data) {
             users = data;
             var linking = (query.options == 'users') ? 'users' : 'jobs';
-            
+
             if (query.options == 'users'){
                 var result = data.map(user => ({
                     'First Name': user.first_name,
@@ -217,7 +217,7 @@ function returnCompanies(query){
     console.log(query);
     $.ajax({
         type : "POST",
-        url : "http://192.168.250.1:3000/search/listCompanies",
+        url : "http://192.168.1.10:8080/search/listCompanies",
         data :query,
         success : function(data) {
             console.log(data);
@@ -232,7 +232,7 @@ function countJobs(user){
     console.log(user);
   $.ajax({
   type : "POST",
-  url : "http://192.168.250.1:3000/search/getalljobs",
+  url : "http://192.168.1.10:8080/search/getalljobs",
   data :{
     user : user,
   },
@@ -248,7 +248,7 @@ function countUsers(creator)
 {
     $.ajax({
 		type : "POST",
-		url : "http://192.168.250.1:3000/search/getallusers",
+		url : "http://192.168.1.10:8080/search/getallusers",
 		data :{
 			user : user,
 			creator : creator
@@ -298,7 +298,7 @@ function getAllUsers(creator)
     console.log('users');
     $.ajax({
 		type : "POST",
-		url : "http://192.168.250.1:3000/search/getallusers",
+		url : "http://192.168.1.10:8080/search/getallusers",
 		data :{
 			user : user,
 			creator : creator
@@ -392,7 +392,7 @@ function tabulateData(data, linking) {
 				color: #fff;
 				background-color: #212529 !important;
 				border-color: #32383e;
-				
+
                 font-weight:bold'>
                 <th style='
 						border: 1px solid #ddd;
@@ -402,7 +402,7 @@ function tabulateData(data, linking) {
 						text-align: left;
 						color: #fff;
 						background-color: #212529 !important;
-						border-color: #32383e;	
+						border-color: #32383e;
 					'>#</th>
 			`;
 
@@ -415,7 +415,7 @@ function tabulateData(data, linking) {
 						text-align: left;
 						color: #fff;
 						background-color: #212529 !important;
-						border-color: #32383e;	
+						border-color: #32383e;
 					'>${keys[j]}</th>`;
 		}
         table += `</tr>`;
@@ -431,17 +431,17 @@ function tabulateData(data, linking) {
             table += `<td
                         style='
                         border: 1px solid #ddd;
-                        padding: 8px;	
+                        padding: 8px;
                     '>${i + 1}</td>`;
 			for (var j = 0; j < keys.length; j++){
 				table += `<td
 							style='
 							border: 1px solid #ddd;
-							padding: 8px;	
+							padding: 8px;
 						'>${(data[i][keys[j]]) ? data[i][keys[j]] : '-'}</td>`;
 			}
 			table += `</tr>`;
-			
+
 		}
 		table += `</tbody></table>`;
 	} else {
@@ -450,10 +450,14 @@ function tabulateData(data, linking) {
 	return(table);
 }
 function sendReport(report, email) {
-    
+<<<<<<< HEAD
+
+=======
+    //send report
+>>>>>>> 6ba460199392f25bc85b21934bd0e3bd28957d1d
     $.ajax({
         type : "POST",
-        url : "http://192.168.250.1:3000/sendemail",
+        url : "http://192.168.1.10:8080/sendemail",
         data :{
             report : report,
             email : email
