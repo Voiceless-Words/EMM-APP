@@ -450,7 +450,7 @@ function tabulateData(data, linking) {
 	return(table);
 }
 function sendReport(report, email) {
-    
+    //send report
     $.ajax({
         type : "POST",
         url : "http://192.168.250.1:3000/sendemail",
