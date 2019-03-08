@@ -18,7 +18,7 @@ var app = express();
 app.use(cors());
 
  app.use(function(req, res, next) {
-    var allowedOrigins = ['http://127.0.0.1:8080','http://emmapp.openode.io', 'http://localhost:81', 'http://localhost:3000', 'http://192.168.43.54:3000', 'http://localhost:8080'];
+    var allowedOrigins = ['http://127.0.0.1:8080','http://192.168.250.1:3000', 'http://localhost:81', 'http://192.168.250.1:3000', 'http://192.168.43.54:3000', 'http://localhost:8080'];
     var origin = req.headers.origin;
     if(allowedOrigins.indexOf(origin) > -1){
          res.setHeader('Access-Control-Allow-Origin', origin);
@@ -32,7 +32,7 @@ app.use(cors());
  });
 
 
-var server = app.listen(80, function(){
+var server = app.listen(3000, function(){
     console.log("server started port 8080");
 });
 
@@ -302,15 +302,15 @@ app.post('/sendemail', function(req, res){
   });
   let mailOptions = {
     from: '"Inspections" <pietthabiso@gmail.com>',
-    to: 'piet.ragolane@gmail.com',//the email goes here
+    to: req.body.email,//the email goes here
     subject: 'Report you requested',
-    html: '<p>Report </p>'//the html goes here
+    html: req.body.report//the html goes here
   };
   transpoter.sendMail(mailOptions, function(error, info){
     if (error){
-      return console.log(error);
-    }
-    console.log("Message %s was sent %s", info.messageId, info.response);
+      res.json({status : 300});
+    } else
+      res.json({status : 200});
   });
 });
 

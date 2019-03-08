@@ -68,7 +68,7 @@ $(document).ready(function(){
     {
         $.ajax({
             type : "POST",
-            url : 'http://emmapp.openode.io/data/update_field',
+            url : 'http://192.168.250.1:3000/data/update_field',
             data : {
                 name : name,
                 value : value,
@@ -89,7 +89,7 @@ $(document).ready(function(){
 function changePassword(opassword, password){
     $.ajax({
             type : "POST",
-            url : 'http://emmapp.openode.io/data/change_password',
+            url : 'http://192.168.250.1:3000/data/change_password',
             data : {
                 employeeNumber : window.user,
                 password : password,
@@ -129,7 +129,7 @@ function uploadPhoto(imageURI) {
       image = base64Image;
       $.ajax({
               type : "POST",
-              url : 'http://emmapp.openode.io/profilePic',
+              url : 'http://192.168.250.1:3000/profilePic',
               data : {
                   employeeNumber : window.user,
                   image : image
