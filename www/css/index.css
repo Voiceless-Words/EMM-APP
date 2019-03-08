@@ -54,7 +54,7 @@ body {
     background-size: cover;
 }
 
-#dashboardBody, #loginBody, #accountsBody, #jobCardBody, #helpBody,#dashboardBodyUser, #assignedJobsBody, #createPasswordBody, #adminProfile {
+#dashboardBody, #loginBody,.emm-body, #accountsBody, #jobCardBody, #helpBody,#dashboardBodyUser, #assignedJobsBody, #createPasswordBody, #adminProfile {
     width: 100vw;
 }
 
