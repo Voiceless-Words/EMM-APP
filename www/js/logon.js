@@ -469,6 +469,12 @@ var jobNumber = 0;
 		//cablesObj['cableCount'] = cableCount;
 		if (selectedCable > -1)
 		{
+			if($('#size :selected').text() == 'Other')
+			{
+				var size = $('#sizeOther').val();
+			}else {
+				size = $('#size :selected').text();
+			}
 			cablesObj[selectedCable] = {
 				name: "cable"+cableCount,
 				correct : $('#correct :selected').text(),
