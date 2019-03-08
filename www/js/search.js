@@ -107,7 +107,7 @@ $(document).ready(function(){
         $('.jobSearchResults').html(output);
          $.ajax({
             type : "POST",
-            url : 'http://192.168.250.1:3000/search/reviewJob',
+            url : 'http://192.168.1.10:8080/search/reviewJob',
             data : filters,
             success : function(data) {
                 // console.log(data[0]['jobnumber']);
