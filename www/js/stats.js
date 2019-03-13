@@ -175,6 +175,7 @@ function returnSearch(query){
         url : "http://emmapp.openode.io/search/statSearch",
         data :query,
         success : function(data) {
+            console.log(data);
             users = data;
             var linking = (query.options == 'users') ? 'users' : 'jobs';
 
@@ -194,6 +195,9 @@ function returnSearch(query){
                     'Job Number': job.jobnumber,
                     'Reviewed' : job.reviewStatus,
                     'Cable count' : job.cables.length,
+                    'Asset Location' : job.conditionA[0].standConnectedBox,
+                    // 'Condition' : job.conditionA[0].standConnectedBox,
+                    'Employee No' : job.jobnumber.slice(-7),
                     // 'Electronics' : job.conditionB[0].electronic,
                     Date: (job.time.split('T'))[0]
                 }));

@@ -4,7 +4,7 @@ var people_list = [];
 var asset_lati = '';
 var asset_long = '';
 var jobcardnumber = '';
-
+var job_location;
 var newJob;
 
 
@@ -17,7 +17,7 @@ $(document).ready(function(){
             permitNumber : $('#addJob-jobPermitNumber').val(),
             jobAssetsType : $('#addJob-assets-Type :selected').text(),
             assetsMaterial : $('#addJob-assets-Mat :selected').text(),
-            jobLocation : $('#addJob-jobLocation :selected').text(),
+            jobLocation : job_location,//$('#addJob-jobLocation :selected').text(),
             jobActivity : $('#addJob-activity').text(),
             asset_lati : asset_lati,//$('.asset_lati').text(),
             asset_long : asset_long,// $('.asset_long').text(),
@@ -54,7 +54,7 @@ $(document).ready(function(){
 });
 var x = document.getElementById("asset_location");
 
-// onSuccess Callback
+//   onSuccess Callback
 //   This method accepts a `Position` object, which contains
 //   the current GPS coordinates
 //
@@ -62,15 +62,53 @@ var onSuccess = function(position) {
     $('#loader_id').hide();
      asset_lati = position.coords.latitude;
      asset_long = position.coords.longitude;
+
     x.innerHTML = 'Latitude: '  + position.coords.latitude          + '\n' +
-          'Longitude: '         + position.coords.longitude         + '\n' +
-          'Altitude: '          + position.coords.altitude          + '\n' +
-          'Accuracy: '          + position.coords.accuracy          + '\n' +
-          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-          'Heading: '           + position.coords.heading           + '\n' +
-          'Speed: '             + position.coords.speed             + '\n' +
-          'Timestamp: '         + new Date(position.timestamp)      + '\n';
+          'Longitude: '         + position.coords.longitude         + '\n';
+//          'Altitude: '          + position.coords.altitude          + '\n' +
+//          'Accuracy: '          + position.coords.accuracy          + '\n' +
+//          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+//          'Heading: '           + position.coords.heading           + '\n' +
+//          'Speed: '             + position.coords.speed             + '\n' +
+//          'Timestamp: '         + new Date(position.timestamp)      + '\n';
+
+    showPosition(position);
 };
+
+
+function showPosition(position) {
+   var xhttp = new XMLHttpRequest();
+
+   var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://us1.locationiq.com/v1/reverse.php?key=dfe0682ca973a1&lat="+
+    position.coords.latitude+"&lon="+position.coords.longitude+"&format=json",
+    "method": "GET"
+   }
+
+   $.ajax(settings).done(function (response) {
+      var x_location = document.getElementById('x_location');
+      var region = response.address.city;
+      if (!region)
+        region = response.address.town;
+
+
+    x_location.innerHTML = "You are near "
+
+      +"<br>Street : "+response.address.road
+      +"<br>Area : "+response.address.suburb
+      +"<br>City : "+region
+      +"<br>County : "+response.address.county
+      +"<br>Postcode : "+response.address.postcode
+      +"<br>State : "+response.address.state;
+
+    createjobcardno(response.address.suburb);
+    job_location = response.address.suburb;
+
+   });
+
+}
 
 // onError Callback receives a PositionError object
 //
@@ -92,24 +130,17 @@ console.log('clicked');
 
 }
 
-function createjobcardno() {
+function createjobcardno(area) {
     var date = new Date();
     var creator = getUser('creator');
     var seconds = Math.round(Number(date.getTime()) / 1000);
     var cardNumber = creator+seconds+window.user;
-    var area = document.getElementById('addJob-jobLocation').value;
+    //var area = document.getElementById('addJob-jobLocation').value;
     var prefix = '';
     console.log(new Date());
 
-    prefix = area;
-    alert("here in the jobcard create");
-    /*if (area == 'Buurendal') {
-        prefix = 'BDL';
-    } else if (area == 'Highway Garden') {
-        prefix = 'HG';
-    } else if (area == 'Harmelia') {
-        prefix = 'HR';
-    }*/
+    prefix = area.replace(/\s/g,'');
+//    alert("here in the jobcard create");
 
     document.getElementById('addJob-jobCardNumber').value = (prefix + cardNumber);
     document.getElementById('usersJobCard').dataset.jobNumber = (prefix + cardNumber);
