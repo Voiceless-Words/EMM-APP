@@ -42,7 +42,7 @@ $(document).ready(function(){
 
         //      }
         //  }
-        //  xhttp.open("POST", "http://192.168.1.10:8080/jobcard_save", true);
+        //  xhttp.open("POST", "http://emmapp.openode.io/jobcard_save", true);
         //  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         //  xhttp.send('newjob='+JSON.stringify(newJob));
 

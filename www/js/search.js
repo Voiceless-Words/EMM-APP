@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 $(document).ready(function(){
     // searchReview
     $("#jobCardSearch").on("input", function () {
@@ -66,7 +66,7 @@ $(document).ready(function(){
         });
     }
 });
-=======
+
 $(document).ready(function(){
     // searchReview
     $("#jobCardSearch").on("input", function () {
@@ -107,7 +107,7 @@ $(document).ready(function(){
         $('.jobSearchResults').html(output);
          $.ajax({
             type : "POST",
-            url : 'http://192.168.1.10:8080/search/reviewJob',
+            url : 'http://emmapp.openode.io/search/reviewJob',
             data : filters,
             success : function(data) {
                 // console.log(data[0]['jobnumber']);
@@ -134,4 +134,3 @@ $(document).ready(function(){
         });
     }
 });
->>>>>>> 14232f0990eb49ccd6e436ce3e21ad7b0669f095

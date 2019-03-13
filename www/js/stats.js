@@ -136,7 +136,7 @@ function viewUserData(i){
     var user = users[i];
     $.ajax({
 		type : "POST",
-		url : "http://192.168.1.10:8080/search/getalljobs",
+		url : "http://emmapp.openode.io/search/getalljobs",
 		data :{
 			user: user.employee_id
 		},
@@ -172,7 +172,7 @@ function returnSearch(query){
     console.log(query);
     $.ajax({
         type : "POST",
-        url : "http://192.168.1.10:8080/search/statSearch",
+        url : "http://emmapp.openode.io/search/statSearch",
         data :query,
         success : function(data) {
             users = data;
@@ -217,7 +217,7 @@ function returnCompanies(query){
     console.log(query);
     $.ajax({
         type : "POST",
-        url : "http://192.168.1.10:8080/search/listCompanies",
+        url : "http://emmapp.openode.io/search/listCompanies",
         data :query,
         success : function(data) {
             console.log(data);
@@ -232,7 +232,7 @@ function countJobs(user){
     console.log(user);
   $.ajax({
   type : "POST",
-  url : "http://192.168.1.10:8080/search/getalljobs",
+  url : "http://emmapp.openode.io/search/getalljobs",
   data :{
     user : user,
   },
@@ -248,7 +248,7 @@ function countUsers(creator)
 {
     $.ajax({
 		type : "POST",
-		url : "http://192.168.1.10:8080/search/getallusers",
+		url : "http://emmapp.openode.io/search/getallusers",
 		data :{
 			user : user,
 			creator : creator
@@ -298,7 +298,7 @@ function getAllUsers(creator)
     console.log('users');
     $.ajax({
 		type : "POST",
-		url : "http://192.168.1.10:8080/search/getallusers",
+		url : "http://emmapp.openode.io/search/getallusers",
 		data :{
 			user : user,
 			creator : creator
@@ -450,14 +450,9 @@ function tabulateData(data, linking) {
 	return(table);
 }
 function sendReport(report, email) {
-<<<<<<< HEAD
-
-=======
-    //send report
->>>>>>> 6ba460199392f25bc85b21934bd0e3bd28957d1d
     $.ajax({
         type : "POST",
-        url : "http://192.168.1.10:8080/sendemail",
+        url : "http://emmapp.openode.io/sendemail",
         data :{
             report : report,
             email : email

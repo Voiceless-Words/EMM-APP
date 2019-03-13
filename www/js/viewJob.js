@@ -107,7 +107,7 @@ function getJobAndAsset(job){
     var res;
     var getJobFunc = $.ajax({
         type : "POST",
-		url : "http://192.168.1.10:8080/search/getJobAndAsset",
+		url : "http://emmapp.openode.io/search/getJobAndAsset",
 		data :jobObj,
 		success : function(data) {
            console.log(data);
