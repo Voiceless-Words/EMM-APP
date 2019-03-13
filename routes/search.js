@@ -20,7 +20,7 @@ router.use(function(req, res, next){
 
 router.post('/search', function(req, res){
     var lookFor = req.body.search;
-    console.log(req.body);
+    // console.log(req.body);
 
     // User.find({
     //     $or: [
@@ -56,7 +56,7 @@ router.post('/all', function(req, res){
 
     User.find({"employee_id": { "$regex": req.body.user, "$options": "i"}})
     .then(users => {
-            console.log(users);
+            // console.log(users);
             var response = {
                 count : users.length,
                 data : users.map(function(users){
@@ -79,8 +79,8 @@ router.post('/reviewJob', function(req, res){
     var start = req.body.start.split("-");
     var end = req.body.end.split("-");
     start = (new Date(start[0],String(parseInt(start[1]) - 1),start[2]));
-    console.log(req.body);
-    console.log(start);
+    // console.log(req.body);
+    // console.log(start);
     // Forms.find({
     //     $or: [
     //             {"jobnumber": { "$regex": lookFor, "$options": "i"}},
@@ -99,12 +99,12 @@ router.post('/reviewJob', function(req, res){
 });
 
 router.post('/getalljobs', function(req, res){
-    console.log('getting all jobs');
-    console.log(req.body.user);
+    // console.log('getting all jobs');
+    // console.log(req.body.user);
     Forms.find({"jobnumber": { "$regex": req.body.user, "$options": "i"}})
     .then(users => {
-            console.log('getting jobs');
-            console.log(users);
+            // console.log('getting jobs');
+            // console.log(users);
             res.send(users);
         })
     .catch(error => { console.log(error); })
@@ -112,12 +112,12 @@ router.post('/getalljobs', function(req, res){
 });
 
 router.post('/getallusers', function(req, res){
-    console.log('getting all users ->');
+    // console.log('getting all users ->');
     let value = (req.body.user == 000000) ? "" : req.body.user;
-    console.log(value + ' < value');
+    // console.log(value + ' < value');
     User.find({"creator": value})
     .then(users => {
-            console.log('getting jobs');
+            // console.log('getting jobs');
             res.send(users);
         })
     .catch(error => { console.log(error); })
@@ -126,10 +126,10 @@ router.post('/getallusers', function(req, res){
 
 
 router.post('/getonecard', function(req, res){
-    console.log(req.body);
+    // console.log(req.body);
     JobSave.find({"jobCardNumber": { "$regex": req.body.jobNumber, "$options": "i"}})
     .then(users => {
-            console.log('getting jobs');
+            // console.log('getting jobs');
             res.send(users);
         })
     .catch(error => { console.log(error); })
@@ -137,7 +137,7 @@ router.post('/getonecard', function(req, res){
 });
 
 router.post('/statSearch', function(req, res){
-    console.log(req.body);
+    // console.log(req.body);
     if (req.body.options == 'users')
     {
          User.find({
@@ -152,7 +152,7 @@ router.post('/statSearch', function(req, res){
                 ]}
          )
         .then(users => {
-                console.log('getting jobs');
+                // console.log('getting jobs');
                 res.send(users);
             })
         .catch(error => { console.log(error); })
@@ -162,8 +162,8 @@ router.post('/statSearch', function(req, res){
 
         var start;
         var end;
-        console.log(req.body.startDate);
-        console.log(req.body.endDate);
+        // console.log(req.body.startDate);
+        // console.log(req.body.endDate);
 
         if (req.body.startDate == '')
             start= new Date(2018, 11, 31);
@@ -182,8 +182,8 @@ router.post('/statSearch', function(req, res){
             let str = req.body.endDate.split('-');
             end = new Date(str[0], +str[1] - 1, +str[2] + 1);
         }
-        console.log(start);
-        console.log(end);
+        // console.log(start);
+        // console.log(end);
 
         Forms.find({
              $and: [
@@ -201,9 +201,40 @@ router.post('/statSearch', function(req, res){
                 ]}
          )
         .then(users => {
-                console.log('getting jobs');
-                res.send(users);
-            })
+            return Promise.all(users.map(user => { // 2, 3
+                return (JobSave.findOne({"jobCardNumber": { "$regex": user.jobnumber, "$options": "i"}})
+                    .then(job => { // 4
+                        // if (job){
+                            console.log('returning a job');
+
+    //                         jobCardNumber: { type: String},
+    // permitNumber : { type: String},
+    // assetType: { type: String},
+    // assetsMaterial: { type: String},
+    // jobActivity : { type: String},
+    // jobLocation : { type: String},
+    // created_by: { type: String},
+    // gps_lati : { type: String},
+    // gps_long : { type: String},
+    // time : { type : Date, default: Date.now }
+
+
+                            user.conditionA.push(job.jobCardNumber);
+                            user.conditionA.push(job.permitNumber);
+                            user.conditionA.push(job.assetType);
+                            // console.log(job);
+
+                            return user;
+                        // } else
+
+                    }).catch(error => { console.log(error); })
+                )
+            }))
+        })
+        .then(final => {
+            console.log('final');
+            res.send(final);
+        }) 
         .catch(error => { console.log(error); })
     }
 });
@@ -213,7 +244,7 @@ router.post('/listCompanies', function(req, res){
     User.find({"creator": { "$regex": '0000000', "$options": "i"}
     })
     .then(users => {
-            console.log(users);
+            // console.log(users);
             var response = {
                 count : users.length,
                 data : users.map(function(users){
@@ -243,5 +274,25 @@ router.post('/getJobAndAsset', function(req, res){
         })
     .catch(error => { console.log(error); })
 });
+
+function logItem(job) {
+    return (JobSave.findOne({"jobCardNumber": { "$regex": job.jobnumber, "$options": "i"}})
+                .then(asset => {
+                    job.asset = asset;
+                    // console.log(asset);
+                    return (job.asset);
+                })
+                .catch(error => { console.log(error); })
+            );
+}
+
+
+function forEachPromise(items, fn) {
+    return items.reduce(function (promise, item) {
+        return promise.then(function () {
+            return fn(item);
+        });
+    }, Promise.resolve());
+}
 
 module.exports = router;
