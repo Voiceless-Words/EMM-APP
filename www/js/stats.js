@@ -178,7 +178,7 @@ function returnSearch(query){
             console.log(data);
             users = data;
             var linking = (query.options == 'users') ? 'users' : 'jobs';
-
+            console.log('first', data[0])
             if (query.options == 'users'){
                 var result = data.map(user => ({
                     'First Name': user.first_name,
@@ -191,15 +191,22 @@ function returnSearch(query){
                 }));
                 data = result;
             } else {
+            console.log('first', data[0].jobnumber)
+            // console.log(data);
+                for (var i = 0; i < data.length; i++){
+                    console.log(i,data[i].jobnumber);
+                }
+
+
                 var result = data.map(job => ({
-                    'Job Number': job.jobnumber,
-                    'Reviewed' : job.reviewStatus,
-                    'Cable count' : job.cables.length,
-                    'Asset Location' : job.conditionA[0].standConnectedBox,
+                    'Job Number': (job) ? job.jobnumber : 0,
+                    'Reviewed' : (job.reviewStatus) ? job.reviewStatus : 0,
+                    'Cable count' : (job.cables.length) ? job.cables.length : 0,
+                    'Asset Location' : (job.conditionA[0].standConnectedBox) ? job.conditionA[0].standConnectedBox : 0,
                     // 'Condition' : job.conditionA[0].standConnectedBox,
-                    'Employee No' : job.jobnumber.slice(-7),
-                    // 'Electronics' : job.conditionB[0].electronic,
-                    Date: (job.time.split('T'))[0]
+                    // 'Employee No' : job.jobnumber.slice(-7),
+                    // // 'Electronics' : job.conditionB[0].electronic,
+                    // Date: (job.time.split('T'))[0]
                 }));
                 data = result;
             }

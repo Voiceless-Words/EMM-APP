@@ -99,9 +99,9 @@ router.post('/reviewJob', function(req, res){
 });
 
 router.post('/getalljobs', function(req, res){
-    // console.log('getting all jobs');
-    // console.log(req.body.user);
-    Forms.find({"jobnumber": { "$regex": req.body.user, "$options": "i"}})
+    console.log('getting all jobs');
+    console.log(req.body.user);
+    Forms.find({"jobnumber": { "$regex": (req.body.user == 0000000) ? '' : req.body.user, "$options": "i"}})
     .then(users => {
             // console.log('getting jobs');
             // console.log(users);
@@ -112,10 +112,7 @@ router.post('/getalljobs', function(req, res){
 });
 
 router.post('/getallusers', function(req, res){
-    // console.log('getting all users ->');
-    let value = (req.body.user == 000000) ? "" : req.body.user;
-    // console.log(value + ' < value');
-    User.find({"creator": value})
+    User.find({"creator": { "$regex": (req.body.user == 0000000) ? '' : req.body.user, "$options": "i"}})
     .then(users => {
             // console.log('getting jobs');
             res.send(users);
