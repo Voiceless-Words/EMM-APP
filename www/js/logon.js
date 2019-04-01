@@ -1,4 +1,5 @@
 var tempUser;
+
 $(document).ready(function(){
 	$('#loginBody').show().siblings().hide();
 	if (getUser('employee_id'))
@@ -152,17 +153,20 @@ $(document).ready(function(){
 
 	$.ajax({
 	type : "POST",
-	url : "http://emmapp.openode.io/getallareas",
+	url : "http://localhost:8080/getallareas",
 	data :{
 		user: "nothing"
 	},
 	success : function(data) {
 					var i = 0;
 					var place = data;
+
+
 					console.log(place);
+
 					var userData = `<option value="">--Please Select Area--</option>`;
 								while (i < place.length) {
-									userData = userData + `<option value="${place[i].value}">${place[i].name}</option>`;
+									userData = userData + `<option value="${place[i].name.replace(/\s/g,'')}">${place[i].name}</option>`;
 									i++;
 								}
 					$('.place').html(userData);

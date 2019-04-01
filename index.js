@@ -32,7 +32,7 @@ app.use(cors());
  });
 
 
-var server = app.listen(80, function(){
+var server = app.listen(8080, function(){
     console.log("server started port 8080");
 });
 
@@ -42,6 +42,8 @@ const data = require('./routes/data');
 //const dashboarda = require('./routes/dashboarda');
 
 const Asset = require('./models/assets');
+const Area = require('./models/areas');
+const Street = require('./models/streets');
 
 const User = require('./models/users');
 
@@ -99,13 +101,14 @@ app.get('/logout', function(req, res){
 });
 
 
-
 app.post('/getallareas', function(req, res){
-  Asset.find({}, function(err, assets){
+
+  Area.find({}, function(err, areas){
     if (err) throw err;
 
-    res.send(assets);
-  });
+    res.send(areas);
+    
+  }); 
 });
 
 app.post('/getalljobs', function(req, res){

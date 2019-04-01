@@ -18,7 +18,7 @@ var app = express();
 app.use(cors());
 
 
-var server = app.listen(80, function(){
+var server = app.listen(8080, function(){
     console.log("server started port 8080");
 });
 
@@ -311,7 +311,48 @@ app.use(function(req, res) {
     res.send("what are you trying to do" + req.url);
 });
 
+app.get('/getallareas', function(req, res){
 
+ // db.runCommand ( { distinct: "inventory", key: "dept" } )
+/*  Street.find({ distinct: "town/0", key: "town/0" }, function(err, assets){
+    if (err) throw err;
+
+    res.send(assets);
+
+  });
+
+  Asset.find({}, function(err, assets){
+    if (err) throw err;
+
+    res.send(assets);
+  }); */
+
+  var assets = [{name : 'help'}];
+  res.send(assets);
+
+});
+
+
+app.post('/getallareas', function(req, res){
+
+ // db.runCommand ( { distinct: "inventory", key: "dept" } )
+/*  Street.find({ distinct: "town/0", key: "town/0" }, function(err, assets){
+    if (err) throw err;
+
+    res.send(assets);
+
+  });
+
+  Asset.find({}, function(err, assets){
+    if (err) throw err;
+
+    res.send(assets);
+  }); */
+
+  var assets = [{'help' : 'help'}];
+  res.send(assets);
+
+});
 
 
 function isAdmin(req, res, next){
